@@ -5,7 +5,9 @@ import { register } from '../services';
 export const Register = ()=> {
     const [newUser,setNewUser] = useState({
         email: "",
-        password: ""
+        password: "",
+        firstName: "", // dodati input polje
+        lastName: "" // dodati input polje
       })
     
       const handleUserInput = (e) => {
