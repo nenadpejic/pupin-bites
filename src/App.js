@@ -14,8 +14,10 @@ function App() {
   useEffect(()=>{
     //zakucan login za admin ...treba napraviti formu za login
     login({
-      username: "admin@hungryherceg.com",
-      password: "123"
+      username: "neko@neko.com",
+      password: "123",
+      firstName:'Bojan',
+      lastName:'Majmunovic'
     }).then(res=>{
       console.log(res.data)
       localStorage.setItem("Token", JSON.stringify(res.data.access_token));
