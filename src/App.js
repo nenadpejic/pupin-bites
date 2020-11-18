@@ -81,14 +81,17 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <h1>Test</h1>
+
         <Route exact path="/login">
           <Register />
         </Route>
-        <Route exact path="/"></Route>
+        <Route exact path="/">
+          <h1>Test</h1>
+        </Route>
         <Route exact path="/create-poll">
           <CreatePoll token={token} restaurants={restaurants} />
         </Route>
+
       </Router>
 
     </div>

@@ -5,34 +5,44 @@ const CreatePoll = ({ token, restaurants }) => {
     const [filter, setFilter] = useState([])
     const [selected, setSelected] = useState([])
 
+    // Handeling change in input
     const handleChange = (e) => {
         setChange(e.target.value)
         setFilter(restaurants.filter(el => el.name.toLowerCase().includes(change)))
     }
-
+    // Add button
+    const handleClickAdd = (restaurant) => {
+        return selected.map(restaurant => restaurant.id).includes(restaurant.id) ? null : setSelected(selected.concat(restaurant))
+    }
+    // Remove button
+    const handleClickRemove = (i) => {
+        return setSelected(selected.filter((el, selectedIndex) => selectedIndex !== i))
+    }
 
     return (
-        <>
+        <main>
             <section>
                 <h3>Create Poll</h3>
-                <input type="text" />
+                <input type="text" placeholder="Poll Name" />
                 <div>
-                    <label>Hours:</label>
-                    <input type="number" />
-                    <label>Minutes</label>
-                    <input type="number" />
+                    <input type="number" placeholder="Hours" />
+                    <input type="number" placeholder="Minutes" />
                 </div>
+
                 <label>Search Restaurants<br /></label>
-                <input type="text" onChange={handleChange} />
-                {change.length === +'' ? restaurants.map(restaurant =>
+                <input type="text" placeholder="..search" onChange={handleChange} />
+
+                {change.length === 0 ? restaurants.slice(1, 10).map(restaurant =>
+                    //Complete list
                     <div key={restaurant.id}>
                         <div>{restaurant.name}</div>
-                        <button onClick={() => selected.map(restaurant => restaurant.id).includes(restaurant.id) ? null : setSelected(selected.concat(restaurant))}>Add Restaurant</button>
+                        <button onClick={() => handleClickAdd(restaurant)}>Add Restaurant</button>
                     </div>)
-                    : filter.map(restaurant =>
+                    : filter.slice(1, 10).map(restaurant =>
+                        //Filtered list
                         <div key={restaurant.id}>
                             <div>{restaurant.name}</div>
-                            <button onClick={() => selected.map(restaurant => restaurant.id).includes(restaurant.id) ? null : setSelected(selected.concat(restaurant))}>Add Restaurant</button>
+                            <button onClick={() => handleClickAdd(restaurant)}>Add Restaurant</button>
                         </div>)}
             </section>
 
@@ -41,10 +51,10 @@ const CreatePoll = ({ token, restaurants }) => {
                 {selected.map((restaurant, i) =>
                     <div key={restaurant.id}>
                         <div>{restaurant.name}</div>
-                        <button onClick={() => setSelected(selected.filter((el, i2) => i2 !== i))}> X</button>
+                        <button onClick={() => handleClickRemove(i)}>X</button>
                     </div>)}
             </section>
-        </>
+        </main>
     )
 }
 export default CreatePoll
