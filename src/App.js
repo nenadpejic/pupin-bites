@@ -11,61 +11,6 @@ import { AuthContextProvider } from "./contexts/AuthContext"
 const App = () => {
   const [redirect, setRedirect] = useState(false);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <AuthContextProvider>
       <Router>
@@ -84,6 +29,39 @@ const App = () => {
         <PrivateRoute path="/home" redirect={redirect}>
           <Home />
         </PrivateRoute>
+
+        <Route exact path="/create-poll">
+          <CreatePoll token={token} restaurants={restaurants} />
+        </Route>
+
+        <Route exact path="/settings">
+          {/* <Settings /> */}
+        </Route>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </Router>
     </AuthContextProvider>
   );
