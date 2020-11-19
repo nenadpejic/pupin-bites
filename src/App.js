@@ -7,6 +7,7 @@ import { createPoll, createRestourant, createVote, getAllPolls, getAllRestaurant
 // Components
 import { Register } from './components/Register';
 import CreatePoll from './components/CreatePoll';
+import { Settings } from './components/settings/Settings';
 
 
 
@@ -43,7 +44,7 @@ function App() {
 
     //vraca niz svih anketa
     getAllPolls(token).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
     })
 
     //data je array Id-ova restorana za koje se glasa(prvo getujemo restorane uzimamo id za svakog) i label( neki naslov ankete - pokupiti iz inputa)
@@ -74,7 +75,7 @@ function App() {
     //zakucan id od jednog polla
     // vraca datum , id ,label,active(true,false)
     getOnePoll(`a7daf06d-23e0-40fb-97ab-4bca3b527550`).then(res => {
-      console.log(res)
+      // console.log(res)
     })
   }, [])
 
@@ -91,7 +92,9 @@ function App() {
         <Route exact path="/create-poll">
           <CreatePoll token={token} restaurants={restaurants} />
         </Route>
-
+        <Route exact path="/settings">
+          <Settings/>
+        </Route>
       </Router>
 
     </div>
