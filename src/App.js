@@ -19,9 +19,16 @@ const App = () => {
           <Welcome />
         </Route>
 
+<<<<<<< HEAD
+// Components
+import { Register } from './components/Register';
+import CreatePoll from './components/CreatePoll';
+import { Settings } from './components/settings/Settings';
+=======
         <Route path="/signup">
           <Signup />
         </Route>
+>>>>>>> 7a773fde841a6a54efebc91dc9ebd3398426d0e4
 
         <Route path="/login">
           <Login />
@@ -44,6 +51,13 @@ const App = () => {
 
 
 
+<<<<<<< HEAD
+    //vraca niz svih anketa
+    getAllPolls(token).then(res => {
+      // console.log(res.data)
+    })
+=======
+>>>>>>> 7a773fde841a6a54efebc91dc9ebd3398426d0e4
 
 
 
@@ -53,9 +67,34 @@ const App = () => {
 
 
 
+<<<<<<< HEAD
+    //zakucan id od jednog polla
+    // vraca datum , id ,label,active(true,false)
+    getOnePoll(`a7daf06d-23e0-40fb-97ab-4bca3b527550`).then(res => {
+      // console.log(res)
+    })
+  }, [])
+=======
+>>>>>>> 7a773fde841a6a54efebc91dc9ebd3398426d0e4
 
 
+<<<<<<< HEAD
+        <Route exact path="/login">
+          <Register />
+        </Route>
+        <Route exact path="/">
+          <h1>Test</h1>
+        </Route>
+        <Route exact path="/create-poll">
+          <CreatePoll token={token} restaurants={restaurants} />
+        </Route>
+        <Route exact path="/settings">
+          <Settings/>
+        </Route>
+      </Router>
+=======
 
+>>>>>>> 7a773fde841a6a54efebc91dc9ebd3398426d0e4
 
 
 

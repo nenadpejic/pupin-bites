@@ -224,3 +224,15 @@ export const getAllOrders = () => {
 
   return axios.get(`${baseUrl}/orders`, getToken())
 };
+
+// Delete requests
+
+export const deleteMeal = (restaurantID, mealID) => {
+
+  return axios.delete(`${baseUrl}/restaurants/${restaurantID}/meals/${mealID}`, getToken())
+};
+
+export const deleteRestaurant = (restaurantID) => {
+
+  return axios.delete(`${baseUrl}/restaurants/${restaurantID}`, getToken())
+};
