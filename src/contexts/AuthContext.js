@@ -1,15 +1,12 @@
-import React, { useState } from "react"
+import React from "react";
+import Auth from "../config/auth";
 
 export const AuthContext = React.createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [test, setTest] = useState();
-
-  // NOTE: no curlies required
   const value = {
-    test,
-    setTest
-  }
+    Auth
+  };
 
   return (
     <AuthContext.Provider value={value}>

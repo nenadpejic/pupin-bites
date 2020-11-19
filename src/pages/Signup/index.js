@@ -1,54 +1,80 @@
-import React, { useState, useRef } from "react"
-import { Link } from "react-router-dom"
+import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { register } from "../../services/services";
+import SignupComplete from "../../components/SignupComplete";
 
 const Signup = () => {
-  const nameRef = useRef("");
+  const [complete, setComplete] = useState(false);
+  const firstNameRef = useRef("");
+  const lastNameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const passwordConfirmRef = useRef("");
   const [error, setError] = useState("");
 
-  const signup = (name, email, password) => {
-    console.log(`Sign up! name: ${name}, email: ${email}, password: ${password}`)
-  }
-
   const handleSubmit = (e) => {
-    e.preventDefault()
-    // validation
-    const name = nameRef.current.value;
+    e.preventDefault();
+
+    const firstName = firstNameRef.current.value;
+    const lastName = lastNameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const passwordConfirm = passwordConfirmRef.current.value;
+    // validation
     if (password !== passwordConfirm) {
       setError("Passwords do not match");
+    } else {
+      // signup
+      const data = {
+        "email": `${email}`,
+        "password": `${password}`,
+        "firstName": `${firstName}`,
+        "lastName": `${lastName}`,
+      }
+      register(data)
+        .then(res => {
+          // console.log(res);
+          setComplete(true);
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
-    // signup
-    signup(name, email, password);
   }
 
   return (
     <div id="signup">
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <div id="name">
-          <label>Name</label>
-          <input ref={nameRef} type="text" required />
-        </div>
-        <div id="email">
-          <label>Email</label>
-          <input ref={emailRef} type="email" required />
-        </div>
-        <div id="password">
-          <label>Password</label>
-          <input ref={passwordRef} type="password" required />
-        </div>
-        <div id="password-confirm">
-          <label>Password Confirmation</label>
-          <input ref={passwordConfirmRef} type="password" required />
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-      <div>Already have an account? <Link to="/login">Log In</Link></div>
+      {complete
+        ? <SignupComplete />
+        : <>
+          <h1>Sign Up</h1>
+          <form onSubmit={handleSubmit}>
+            <div>{error}</div>
+            <div id="first-name">
+              <label>First Name</label>
+              <input ref={firstNameRef} type="text" required />
+            </div>
+            <div id="last-name">
+              <label>Last Name</label>
+              <input ref={lastNameRef} type="text" required />
+            </div>
+            <div id="email">
+              <label>Email</label>
+              <input ref={emailRef} type="email" required />
+            </div>
+            <div id="password">
+              <label>Password</label>
+              <input ref={passwordRef} type="password" required />
+            </div>
+            <div id="password-confirm">
+              <label>Password Confirmation</label>
+              <input ref={passwordConfirmRef} type="password" required />
+            </div>
+            <button type="submit">Sign Up</button>
+          </form>
+          <div>Already have an account? <Link to="/login">Log In</Link></div>
+        </>
+      }
     </div>
   );
 }

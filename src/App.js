@@ -5,12 +5,13 @@ import Welcome from "./pages/Welcome"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
 import Signup from "./pages/Signup"
+import CreatePoll from "./components/CreatePoll"
 // context
 import { AuthContextProvider } from "./contexts/AuthContext"
+// style
+import "./App.css"
 
 const App = () => {
-  const [redirect, setRedirect] = useState(false);
-
   return (
     <AuthContextProvider>
       <Router>
@@ -23,20 +24,21 @@ const App = () => {
         </Route>
 
         <Route path="/login">
-          <Login redirect={redirect} setRedirect={setRedirect} />
+          <Login />
         </Route>
 
-        <PrivateRoute path="/home" redirect={redirect}>
+        <PrivateRoute path="/home">
           <Home />
         </PrivateRoute>
 
         <Route exact path="/create-poll">
-          <CreatePoll token={token} restaurants={restaurants} />
+          <CreatePoll />
         </Route>
 
         <Route exact path="/settings">
           {/* <Settings /> */}
         </Route>
+
 
 
 
