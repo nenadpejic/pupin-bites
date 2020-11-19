@@ -3,7 +3,7 @@ import axios from "axios";
 const baseUrl = "https://hungryherceg.api.veljko.dev";
 
 const token = JSON.parse(localStorage.getItem("Token"));
-const getToken = () => ({ headers: {Authorization: `Bearer ${token}`}});
+const getToken = () => ({ headers: { Authorization: `Bearer ${token}` } });
 
 //Authorization
 
@@ -14,7 +14,7 @@ export const login = (data) => {
   //   "username": "john@hungryherceg.com",
   //   "password": "123"
   // }
- 
+
   return axios.post(`${baseUrl}/auth`, data)
 };
 
@@ -46,7 +46,7 @@ export const createRestaurant = (data) => {
   // "name": "Graficar",
   // "address": "Senjak BB"
   //}
- 
+
   return axios.post(`${baseUrl}/restaurants`, data, getToken())
 };
 
@@ -56,7 +56,7 @@ export const getManyRestaurants = (data) => {
   //let data = {
   // "name": "" // za search po imenu
   //}
- 
+
   return axios.put(`${baseUrl}/restaurants`, data, getToken())
 };
 
@@ -72,7 +72,7 @@ export const updateRestaurant = (restaurantID, data) => {
 };
 
 export const getAllRestaurants = () => {
-  
+
   return axios.get(`${baseUrl}/restaurants`, getToken())
 };
 
@@ -114,7 +114,7 @@ export const getManyPolls = (data, numPerPage, pageNum) => {
 };
 
 export const getAllPolls = () => {
-  
+
   return axios.get(`${baseUrl}/polls`, getToken())
 };
 
@@ -175,7 +175,7 @@ export const getOneOrder = (orderID) => {
 
 export const getOrderItems = (orderID) => {
 
-  return axios.get(`${baseUrl}/orders/${orderID}/items`, getToken()) 
+  return axios.get(`${baseUrl}/orders/${orderID}/items`, getToken())
 };
 
 export const addOrderItem = (data, orderID) => {
@@ -192,7 +192,7 @@ export const addOrderItem = (data, orderID) => {
   //   ]
   // }
 
-  return axios.post(`${baseUrl}/orders/${orderID}/items`, data, getToken())   
+  return axios.post(`${baseUrl}/orders/${orderID}/items`, data, getToken())
 };
 
 export const updateOrder = (data, orderID) => {
@@ -220,4 +220,16 @@ export const getManyOrders = (data, numPerPage, pageNum) => {
 export const getAllOrders = () => {
 
   return axios.get(`${baseUrl}/orders`, getToken())
+};
+
+// Delete requests
+
+export const deleteMeal = (restaurantID, mealID) => {
+
+  return axios.delete(`${baseUrl}/restaurants/${restaurantID}/meals/${mealID}`, getToken())
+};
+
+export const deleteRestaurant = (restaurantID) => {
+
+  return axios.delete(`${baseUrl}/restaurants/${restaurantID}`, getToken())
 };
