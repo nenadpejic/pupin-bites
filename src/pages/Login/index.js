@@ -32,22 +32,29 @@ const Login = ({ redirect, setRedirect }) => {
     }
   }
 
+  const handleSubmit = (e) => {
+    console.log(e)
+  }
+
   return (
     redirect
       ? <Redirect to="/home" />
       : (
         <div id="login">
           <h1>Login</h1>
-          <input onChange={handleUser} type="email" placeholder="Enter email" value={email} />
-          <input onChange={handleUser} type="password" placeholder="Enter password" value={password} />
-          <button onClick={handleLogin}>
-            <Link to="/home">
-              Log In
+          <form onSubmit={handleSubmit}>
+            <input onChange={handleUser} type="email" placeholder="Enter email" value={email} />
+            <input onChange={handleUser} type="password" placeholder="Enter password" value={password} />
+            {/* <button onClick={handleLogin}> */}
+            <button>
+              <Link to="/home">
+                Log In
           </Link>
-          </button>
-          <div>
-            Neead an account? <Link to="signup">Sign up.</Link>
-          </div>
+            </button>
+            <div>
+              Neead an account? <Link to="/signup">Sign up.</Link>
+            </div>
+          </form>
         </div>
       )
   );

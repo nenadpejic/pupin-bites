@@ -4,24 +4,88 @@ import PrivateRoute from "./components/PrivateRoute"
 import Welcome from "./pages/Welcome"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
+import Signup from "./pages/Signup"
+// context
+import { AuthContextProvider } from "./contexts/AuthContext"
 
 const App = () => {
   const [redirect, setRedirect] = useState(false);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
-    <Router>
-      <Route exact path="/">
-        <Welcome />
-      </Route>
+    <AuthContextProvider>
+      <Router>
+        <Route exact path="/">
+          <Welcome />
+        </Route>
 
-      <Route path="/login">
-        <Login redirect={redirect} setRedirect={setRedirect} />
-      </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
 
-      <PrivateRoute path="/home" redirect={redirect}>
-        <Home />
-      </PrivateRoute>
-    </Router>
+        <Route path="/login">
+          <Login redirect={redirect} setRedirect={setRedirect} />
+        </Route>
+
+        <PrivateRoute path="/home" redirect={redirect}>
+          <Home />
+        </PrivateRoute>
+      </Router>
+    </AuthContextProvider>
   );
 }
 
