@@ -5,7 +5,7 @@ import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
-import CreatePoll from "./components/CreatePoll";
+import CreatePoll from "./components/CreatePoll/CreatePoll.jsx";
 import { Settings } from './components/settings/Settings';
 // context
 import { AuthContextProvider } from "./contexts/AuthContext";
@@ -33,7 +33,7 @@ const App = () => {
         </PrivateRoute>
 
         <Route exact path="/create-poll">
-          <CreatePoll token={token} restaurants={restaurants} />
+          <CreatePoll />
         </Route>
 
         <Route exact path="/settings">
