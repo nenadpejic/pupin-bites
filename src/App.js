@@ -1,88 +1,83 @@
+import React, { useState } from "react"
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import PrivateRoute from "./components/PrivateRoute"
+import Welcome from "./pages/Welcome"
+import Login from "./pages/Login"
+import Home from "./pages/Home"
+import Signup from "./pages/Signup"
+// context
+import { AuthContextProvider } from "./contexts/AuthContext"
 
-import { useEffect, useRef, useState } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './App.css';
-import { createPoll, createRestourant, createVote, getAllPolls, getAllRestaurants, getOnePoll, login, updateRestourant } from './services/services';
+const App = () => {
+  const [redirect, setRedirect] = useState(false);
 
+  return (
+    <AuthContextProvider>
+      <Router>
+        <Route exact path="/">
+          <Welcome />
+        </Route>
+
+<<<<<<< HEAD
 // Components
 import { Register } from './components/Register';
 import CreatePoll from './components/CreatePoll';
 import { Settings } from './components/settings/Settings';
+=======
+        <Route path="/signup">
+          <Signup />
+        </Route>
+>>>>>>> 7a773fde841a6a54efebc91dc9ebd3398426d0e4
+
+        <Route path="/login">
+          <Login redirect={redirect} setRedirect={setRedirect} />
+        </Route>
+
+        <PrivateRoute path="/home" redirect={redirect}>
+          <Home />
+        </PrivateRoute>
+
+        <Route exact path="/create-poll">
+          <CreatePoll token={token} restaurants={restaurants} />
+        </Route>
+
+        <Route exact path="/settings">
+          {/* <Settings /> */}
+        </Route>
 
 
 
-function App() {
-  const tokenRef = useRef(JSON.parse(localStorage.getItem("Token")))
-  const token = tokenRef.current
-  //token stavljen u ref da ne renderuje.
-  console.log(token)
-  const [restaurants, setRestaurants] = useState([])
-
-  useEffect(() => {
-    //zakucan login za admin ...treba napraviti formu za login
-    login({
-      username: "admin@hungryherceg.com",
-      password: "123"
-    }).then(res => {
-      console.log(res.data)
-      localStorage.setItem("Token", JSON.stringify(res.data.access_token));
-    })
-    // zakomentarisano da ne bi non stop kreirao restorane 
-    // createRestourant().then (res=>{
-    //   console.log(res)
-    // })
-
-    // updateRestourant().then(res=>{
-    //   console.log(res)
-    // })
 
 
-    //vraca niz svih restorana 
-    getAllRestaurants(token).then(res => {
-      setRestaurants(res.data)
-    })
 
+<<<<<<< HEAD
     //vraca niz svih anketa
     getAllPolls(token).then(res => {
       // console.log(res.data)
     })
-
-    //data je array Id-ova restorana za koje se glasa(prvo getujemo restorane uzimamo id za svakog) i label( neki naslov ankete - pokupiti iz inputa)
-    //zakucana dva id od restorana kao primer 
-    //vraca datum kreiranja / active(true,false) / id ankete / podatke restorana
-
-    //zakomentarisano da ne bih non stop pravio pollove :D
-
-    //   createPoll(token,{
-    //     "label": "Radna subota",
-    //     "restaurants": ["20ce30a6-fe28-4c75-a37a-5499851af079","40e2faaf-2ac7-4016-b935-7c917dbf86b5"]
-    // }).then(res=>{
-    //   console.log(res)
-    // })
+=======
+>>>>>>> 7a773fde841a6a54efebc91dc9ebd3398426d0e4
 
 
 
-    //Glasanje - prvi argument je pollID, drugi je Id restorana za koji se glasa iz tog polla
-    //vraca uvek 1 , logicno bi bilo da povecava za 1 svaki poziv ...pitacemo
-
-    //zakucan aktivan poll i glas za restoran sa tim id
-    createVote(`a7daf06d-23e0-40fb-97ab-4bca3b527550`, { restaurantId: "40e2faaf-2ac7-4016-b935-7c917dbf86b5" })
-      .then(res => {
-        // console.log(res.data)
-      })
 
 
+
+
+
+
+<<<<<<< HEAD
     //zakucan id od jednog polla
     // vraca datum , id ,label,active(true,false)
     getOnePoll(`a7daf06d-23e0-40fb-97ab-4bca3b527550`).then(res => {
       // console.log(res)
     })
   }, [])
+=======
+>>>>>>> 7a773fde841a6a54efebc91dc9ebd3398426d0e4
 
-  return (
-    <div className="App">
-      <Router>
 
+<<<<<<< HEAD
         <Route exact path="/login">
           <Register />
         </Route>
@@ -96,8 +91,18 @@ function App() {
           <Settings/>
         </Route>
       </Router>
+=======
 
-    </div>
+>>>>>>> 7a773fde841a6a54efebc91dc9ebd3398426d0e4
+
+
+
+
+
+
+
+      </Router>
+    </AuthContextProvider>
   );
 }
 
