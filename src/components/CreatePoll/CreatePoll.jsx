@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './CreatePoll.css'
+import { map, uniqBy } from 'lodash'
 
 // Services
 import { getAllRestaurants, createPoll } from '../../services/services.js'
@@ -16,12 +17,13 @@ const CreatePoll = () => {
     const [minutes, setMinutes] = useState(15)
     const [duration, setDuration] = useState(15)
     // Token
-    const tokenRef = useRef(JSON.parse(localStorage.getItem("Token")))
+    const tokenRef = useRef(localStorage.getItem("Token"))
     const token = tokenRef.current
 
     useEffect(() => {
         getAllRestaurants(token).then(res => {
-            setRestaurants(res.data)
+            let tmp = res.data
+            setRestaurants(map(uniqBy(tmp, 'name')))
         })
     }, [token])
 
@@ -41,19 +43,24 @@ const CreatePoll = () => {
     // Handeling input change
     const handleChange = (e) => {
         setChange(e.target.value)
-        setFilter(restaurants.filter(el => el.name.toLowerCase().includes(change)))
+        change <= 0 ? setFilter([]) : setFilter(restaurants.filter(el => el.name.toLowerCase().includes(change)))
+
     }
     // Add button
-    const handleClickAdd = (restaurant, i) => {
+    const handleClickAdd = (restaurant, e) => {
+        let id = e.target.id
         setSelected(selected.concat(restaurant))
-        filter.length === 0 ? setRestaurants(restaurants.filter((el, selectedIndex) => selectedIndex !== i)) :
-            setFilter(filter.filter((el, selectedIndex) => selectedIndex !== i))
+        setRestaurants(restaurants.filter(el => el.id !== id))
+        setFilter(filter.filter(el => el.id !== id))
+
     }
     // Remove button
-    const handleClickRemove = (restaurant, i) => {
-        setRestaurants(restaurants.concat(selected.filter((el, selectedIndex) => selectedIndex === i)))
-        filter.length === 0 ? setSelected(selected.filter((el, selectedIndex) => selectedIndex === i)) :
-            setFilter(filter.concat(selected.filter((el, selectedIndex) => selectedIndex !== i)))
+    const handleClickRemove = (restaurant, e) => {
+        let id = e.target.id
+        setSelected(selected.filter(el => el.id !== id))
+        setRestaurants(restaurants.concat(selected.filter(el => el.id === id)))
+        setFilter(filter.concat(selected.filter(el => el.id === id)))
+
     }
     // Submit button
     const handleSubmit = () => {
@@ -79,27 +86,28 @@ const CreatePoll = () => {
                 <label>Search Restaurants<br /></label>
                 <input type="text" placeholder="..search" onChange={handleChange} required />
 
-                {change.length === 0 ? restaurants.slice(1, 10).map((restaurant, i) =>
+                {change.length === 0 ? restaurants.map((restaurant) =>
                     //Complete list
                     <div key={restaurant.id}>
                         <div>{restaurant.name}</div>
-                        <button onClick={() => handleClickAdd(restaurant, i)}>Add Restaurant</button>
+                        <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>Add Restaurant</button>
                     </div>)
-                    : filter.slice(1, 10).map((restaurant, i) =>
+                    : filter.map((restaurant) =>
                         //Filtered list
                         <div key={restaurant.id}>
                             <div>{restaurant.name}</div>
-                            <button onClick={() => handleClickAdd(restaurant, i)}>Add Restaurant</button>
+                            <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>Add Restaurant</button>
                         </div>)}
             </div>
 
             <div>
                 <h3>Restaurants</h3>
-                {selected.map((restaurant, i) =>
-                    <div key={restaurant.id}>
+                {selected.map((restaurant) =>
+                    <div key={restaurant.id} >
                         <div>{restaurant.name}</div>
-                        <button onClick={() => handleClickRemove(i)}>X</button>
+                        <button onClick={(e) => handleClickRemove(restaurant, e)} id={restaurant.id}>X</button>
                     </div>)}
+
             </div>
             <div>
                 <button type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
