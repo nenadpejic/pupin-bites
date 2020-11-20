@@ -3,18 +3,25 @@ class Auth {
     this.isAuthenticated = false;
   }
 
-  login(cb) {
-    this.isAuthenticated = true;
-    cb();
+  // login(cb) {
+  //   this._isAuthenticated = true;
+  //   cb();
+  // }
+  login() {
+    this._isAuthenticated = true;
   }
 
-  logout(cb) {
-    this.isAuthenticated = false;
-    cb();
+  // logout(cb) {
+  //   this._isAuthenticated = false;
+  //   cb();
+  // }
+  logout() {
+    this._isAuthenticated = false;
   }
 
-  isAuthenticated() {
-    return this.isAuthenticated;
+  status() {
+    const token = localStorage.getItem("Token");
+    return token !== null && token !== "";
   }
 }
 

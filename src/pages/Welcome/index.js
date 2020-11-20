@@ -1,27 +1,23 @@
-import { useContext, useEffect } from "react";
-import { Link } from "react-router-dom"
-import { AuthContext } from "../../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 const Welcome = () => {
-  const data = useContext(AuthContext);
-
-  useEffect(() => {
-    console.log(data)
-  }, [])
-
-  return (<div id="welcome">
-    <h1>Welcome</h1>
-    <button>
-      <Link to="/login">
-        Log In
-      </Link>
-    </button>
-    <button>
-      <Link to="/signup">
-        Sign Up
-      </Link>
-    </button>
-  </div>);
+  return (
+    <div id="welcome">
+      <nav>
+        <button>
+          <Link to="/login">
+            Log In
+          </Link>
+        </button>
+        <button>
+          <Link to="/signup">
+            Sign Up
+          </Link>
+        </button>
+      </nav>
+      <h1>Welcome</h1>
+    </div>
+  );
 }
 
 export default Welcome;

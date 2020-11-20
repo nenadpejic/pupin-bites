@@ -2,8 +2,16 @@ import axios from "axios";
 
 const baseUrl = "https://hungryherceg.api.veljko.dev";
 
+<<<<<<< HEAD
 const getToken = () => {const token = localStorage.getItem("Token");
    return ({ headers: { Authorization: `Bearer ${token}` } })}
+=======
+const getToken = () => {
+  const token = localStorage.getItem("Token");
+  const data = { headers: { Authorization: `Bearer ${token}` } };
+  return data
+}
+>>>>>>> 922e30722786a12a340e392c766fec69719190cf
 
    //Authorization
 
@@ -22,7 +30,7 @@ export const register = (data) => {
 
   //Data example:
   // let data= {
-  //   "username": "john@hungryherceg.com",
+  //   "email": "john@hungryherceg.com",
   //   "password": "123",
   //   "firstName": "John",
   //   "lastName": "Smith",
