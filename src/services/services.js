@@ -2,10 +2,10 @@ import axios from "axios";
 
 const baseUrl = "https://hungryherceg.api.veljko.dev";
 
-const token = JSON.parse(localStorage.getItem("Token"));
-const getToken = () => ({ headers: { Authorization: `Bearer ${token}` } });
+const getToken = () => {const token = localStorage.getItem("Token");
+   return ({ headers: { Authorization: `Bearer ${token}` } })}
 
-//Authorization
+   //Authorization
 
 export const login = (data) => {
 

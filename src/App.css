@@ -1,6 +1,26 @@
 .App {
   text-align: center;
 }
+.Settings{
+  display:flex;
+  flex-direction: row;
+}
+.restaurantFilter{
+  padding-bottom: 1rem;
+  background-color: blanchedalmond;
+}
+
+.page-btn{
+  color: rgb(223, 255, 80);
+  background-color: deepskyblue;
+}
+.page-btn:hover{
+  background-color: rgb(6, 68, 88);
+}
+.page-btn-selected{
+  border: firebrick 1px solid;
+}
+
 
 .App-logo {
   height: 40vmin;
