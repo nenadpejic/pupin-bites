@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect,useState } from "react";
 import { createRestaurant, deleteRestaurant } from "../../services/services";
 import "../../App.css";
 import { paginate } from "../../utilities/utilities";
@@ -12,7 +12,7 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
   const [page, setPage] = useState(0);
   const [filterInput,setFilterInput] = useState("")
   const [filteredRestaurants,setFilteredRestaurants] = useState([])
-
+  
 
   useEffect(()=>{
     

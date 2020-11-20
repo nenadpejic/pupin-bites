@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../App.css";
 import { createMeal, deleteMeal, getMeals } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
-import { Restaurants } from "./Restaurants";
+
 
 export const Meals = ({ restaurants,submit,setSubmit }) => {
   const [restaurantInput, setRestaurantInput] = useState("");
@@ -96,7 +96,7 @@ export const Meals = ({ restaurants,submit,setSubmit }) => {
       <div className='restaurantFilter'>
         {restaurantInput.length !== 0 &&
           filterRestaurant.map((restaurant) => (
-            <div key={restaurant.id} onClick={() => getRestaurantInfo(restaurant.id,restaurant.name)}>
+            <div key={restaurant.id} onClick={() => getRestaurantInfo(restaurant.id,restaurant.name)}y>
               <div>{restaurant.name}</div>
               <hr />
             </div>

@@ -13,6 +13,7 @@ export const Settings = ()=>{
         getAllRestaurants().then(res=>{
             // console.log(res)
             setRestaurants(res.data)
+            
         })
 
     },[submit])
@@ -30,3 +31,4 @@ export const Settings = ()=>{
         </>
     )
 }
+

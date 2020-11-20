@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .App {
   text-align: center;
 }
@@ -26,11 +25,6 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-=======
-#root > div {
-  max-width: 400px;
-  margin: auto;
->>>>>>> 922e30722786a12a340e392c766fec69719190cf
 }
 
 h1 {
