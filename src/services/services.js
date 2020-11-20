@@ -3,7 +3,7 @@ import axios from "axios";
 const baseUrl = "https://hungryherceg.api.veljko.dev";
 
 const getToken = () => {
-  const token = JSON.parse(localStorage.getItem("Token"));
+  const token = localStorage.getItem("Token");
   const data = { headers: { Authorization: `Bearer ${token}` } };
   return data
 }
