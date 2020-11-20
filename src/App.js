@@ -41,6 +41,10 @@ const App = () => {
         <Home />
       </PrivateRoute>
 
+      <PrivateRoute path="/create-poll">
+        {/* <CreatePoll token={token} restaurants={restaurants} /> */}
+      </PrivateRoute>
+
       <Route exact path="/create-poll">
         {/* <CreatePoll token={token} restaurants={restaurants} /> */}
       </Route>
