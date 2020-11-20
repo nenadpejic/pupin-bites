@@ -20,7 +20,8 @@ class Auth {
   }
 
   status() {
-    return this._isAuthenticated;
+    const token = localStorage.getItem("Token");
+    return token !== null && token !== "";
   }
 }
 

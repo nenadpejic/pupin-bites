@@ -1,10 +1,8 @@
-import React, { useState, useContext } from "react"
-import { Link, Redirect, useHistory } from "react-router-dom"
+import React, { useState } from "react"
+import { Link, useHistory } from "react-router-dom"
 import { login } from "../../services/services.js"
-import { AuthContext } from "../../contexts/AuthContext"
 
 const Login = () => {
-  const value = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
@@ -34,7 +32,6 @@ const Login = () => {
       .then(res => {
         const token = res.data.access_token;
         localStorage.setItem("Token", token);
-        value.Auth.login();
         history.push("/home");
       })
       .catch(err => {
@@ -44,9 +41,6 @@ const Login = () => {
   }
 
   return (
-    // value.Auth.status()
-    //   ? <Redirect to="/home" />
-    //   : <>
     <div id="login">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
@@ -59,13 +53,12 @@ const Login = () => {
         </div>
         <button type="submit">
           Log In
-            </button>
+        </button>
         <div>
           Neead an account? <Link to="/signup">Sign Up</Link>
         </div>
       </form>
     </div>
-    // </>
   );
 }
 
