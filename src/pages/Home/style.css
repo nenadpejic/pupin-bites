@@ -1,0 +1,31 @@
+nav {
+  background: rgb(230, 226, 226);
+}
+
+ul {
+  width: 600px;
+  margin: 20px auto 10px auto;
+  height: 500px;
+  overflow-y: scroll;
+  background: rgb(223, 204, 204);
+}
+
+li {
+  list-style-type: none;
+  border: 5px solid black;
+  max-width: 500px;
+  margin: 0 0 20px 0;
+  cursor: pointer;
+}
+
+li > p {
+  border: 1px solid black;
+  padding: 0.5em;
+  text-align: left;
+  margin: 0;
+}
+
+p > span {
+  font-weight: 800;
+  margin-right: 10px;
+}

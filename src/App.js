@@ -6,7 +6,8 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import CreatePoll from "./components/CreatePoll/CreatePoll.jsx";
-import { Settings } from './components/settings/Settings';
+import { Settings } from "./components/settings/Settings";
+import PollVote from "./pages/PollVote";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
@@ -17,40 +18,42 @@ const App = () => {
 
   return (
     <Router>
-      <Route exact path="/" render={() => {
-        return (
-          value.Auth.status()
-            ? <Redirect to="/home" />
-            : <Welcome />
-        )
-      }} />
+      <Route
+        exact
+        path="/"
+        render={() => {
+          return value.Auth.status() ? <Redirect to="/home" /> : <Welcome />;
+        }}
+      />
 
       <Route path="/signup">
         <Signup />
       </Route>
 
-      <Route path="/login" render={() => {
-        return (
-          value.Auth.status()
-            ? <Redirect to="/home" />
-            : <Login />
-        )
-      }} />
+      <Route
+        path="/login"
+        render={() => {
+          return value.Auth.status() ? <Redirect to="/home" /> : <Login />;
+        }}
+      />
 
       <PrivateRoute path="/home">
         <Home />
       </PrivateRoute>
 
-      <Route exact path="/create-poll">
+      <PrivateRoute exact path="/create-poll">
         <CreatePoll />
-      </Route>
+      </PrivateRoute>
 
-      <Route exact path="/settings">
+      <PrivateRoute exact path="/settings">
         <Settings />
-      </Route>
+      </PrivateRoute>
 
-    </Router >
+      <PrivateRoute path="/poll-vote/:slug">
+        <PollVote />
+      </PrivateRoute>
+    </Router>
   );
-}
+};
 
 export default App;
