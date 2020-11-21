@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import CreatePoll from "./components/CreatePoll/CreatePoll.jsx";
-// import { Settings } from './components/settings/Settings';
+import { Settings } from './components/settings/Settings';
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
@@ -46,7 +46,7 @@ const App = () => {
       </Route>
 
       <Route exact path="/settings">
-        {/* <Settings /> */}
+        <Settings />
       </Route>
 
     </Router >
