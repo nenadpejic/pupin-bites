@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div id="home">
       <nav>
-        <span>{user}</span>
+        <span>User: {user}</span>
       </nav>
       <h1>Home</h1>
     </div>
