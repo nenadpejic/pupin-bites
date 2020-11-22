@@ -10,14 +10,14 @@ const SingleOrderCreate = () => {
   useEffect(() => {
     getOneOrder(slug)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const data = res.data;
         setOrder(data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [slug]);
 
   return (
     <div id="single-order-create">

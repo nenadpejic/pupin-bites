@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -16,7 +16,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import "./App.css";
 
 const App = () => {
-  const value = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
   return (
     <Router>
@@ -24,7 +24,7 @@ const App = () => {
         exact
         path="/"
         render={() => {
-          return value.Auth.status() ? <Redirect to="/home" /> : <Welcome />;
+          return auth.isAuth() ? <Redirect to="/home" /> : <Welcome />;
         }}
       />
 
@@ -35,7 +35,7 @@ const App = () => {
       <Route
         path="/login"
         render={() => {
-          return value.Auth.status() ? <Redirect to="/home" /> : <Login />;
+          return auth.isAuth() ? <Redirect to="/home" /> : <Login />;
         }}
       />
 

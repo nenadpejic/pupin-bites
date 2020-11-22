@@ -1,15 +1,18 @@
 import React from "react";
-import Auth from "../config/auth";
 
 export const AuthContext = React.createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const value = {
-    Auth
+  const isAuth = () => {
+    const token = localStorage.getItem("Token");
+    return token !== null && token !== "";
+  }
+  const auth = {
+    isAuth
   };
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={auth}>
       {children}
     </AuthContext.Provider>
   )

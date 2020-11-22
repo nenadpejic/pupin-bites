@@ -33,7 +33,7 @@ const Home = () => {
   useEffect(() => {
     getAllPolls()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const data = res.data;
         setPolls(data);
       })
@@ -46,7 +46,7 @@ const Home = () => {
   useEffect(() => {
     getManyOrders()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const data = res.data.data;
         setActiveOrders(data);
       })
