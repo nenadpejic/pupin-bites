@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getOnePoll } from "../../services/services";
+import Navigation from "../../components/Navigation";
+import Main from "../../components/Main";
+import PollInfo from "../../components/PollInfo";
 
 const PollVote = () => {
   const [poll, setPoll] = useState({});
@@ -19,13 +22,12 @@ const PollVote = () => {
   }, []);
 
   return (
-    <div id="poll-vote">
+    <> 
+    <Main>
       <h1>PollVote</h1>
-      <p>Label: {poll.label}</p>
-      <p>ID: {poll.id}</p>
-      <p>Created: {poll.created}</p>
-      <p>Active: {poll.active}</p>
-    </div>
+      < PollInfo pollName={poll.label} pollCreated={poll.created} pollEnds={poll.active}/>
+    </Main>
+    </>
   );
 };
 

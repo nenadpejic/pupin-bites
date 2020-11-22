@@ -52,7 +52,7 @@ const Login = () => {
       <input onChange={handleUser} type="password" placeholder="Enter password" value={password} />
       <button type="submit">Login</button>
     </form> 
-    <span>Need an account? <Link to="/signup">Sign Up</Link></span>
+    <span>Need an account? <br></br><Link to="/signup">Sign Up</Link></span>
   </LoginTab>
   );
 }

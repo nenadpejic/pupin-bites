@@ -2,7 +2,7 @@
 	margin:0;
 	padding:0; 
 }
-a:hover{
+a{
     color:blue;
 }
 .wrapper{ 
@@ -16,7 +16,7 @@ a:hover{
     font-family: arial; 
 }
 .loginTab{
-    padding-top: 40px;
+    padding-top:40px;
 	width:400px;
 	min-height:350px; 
 	position:relative;
@@ -26,8 +26,9 @@ a:hover{
 	border:1px solid;
 	border-color:transparent;
 	border-radius:10px 10px 10px 10px;
-    font-family:arial;
-    background-color:white ;
+	font-family:arial; 
+	background-color:rgb(247,247,247);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .loginTab>img{
@@ -35,7 +36,7 @@ a:hover{
 	height:120px;
 	position:absolute;
 	left:33%;
-	margin-top:-110px;
+	margin-top:-110px; 
 }
 
 .loginTab p{
@@ -43,7 +44,7 @@ a:hover{
 	font-size:17px;
 	font-weight:600; 
 	margin-left:120px;
-	margin-top:20px; 
+	margin-top:25px; 
 	margin-bottom:20px;
 	width: 160px; 
 }
@@ -97,14 +98,10 @@ a:hover{
     background-color:rgb(86,188,64);
 
 }
-.loginTab{ 
-    background-color:white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 
 @media screen and (max-width:600px){
 	.wrapper { 
-        background-color: #F9FAFC  !important; 
+        background-color: #F9FAFC ; 
 	}
 	.loginTab{
         background-color:white;

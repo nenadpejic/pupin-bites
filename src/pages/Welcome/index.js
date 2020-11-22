@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Navigation from "../../components/Navigation";
+import Footer from "../../components/Footer";
 import './style.css'; 
 
 const Welcome = () => {
-  const year=new Date().getFullYear();   
   return (
     <div className="wrapper">
       <Navigation/> 
@@ -60,9 +60,7 @@ const Welcome = () => {
         </div>
 
       </div>
-      <div className="footer">
-        <small>&copy; Copyright {year}, Pupin Team</small>
-      </div>
+      <Footer/>
     </div> 
   )
 }
