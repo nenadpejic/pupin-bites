@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { register } from "../../services/services";
 import SignupComplete from "../../components/SignupComplete";
+import LoginTab from "../../components/LoginTab";
 
 const Signup = () => {
   const [complete, setComplete] = useState(false);
@@ -47,7 +48,9 @@ const Signup = () => {
       {complete
         ? <SignupComplete />
         : <>
-          <h1>Sign Up</h1>
+
+           
+          <h1>Sign Up</h1>  
           <form onSubmit={handleSubmit}>
             <div>{error}</div>
             <div id="first-name">
@@ -73,6 +76,7 @@ const Signup = () => {
             <button type="submit">Sign Up</button>
           </form>
           <div>Already have an account? <Link to="/login">Log In</Link></div>
+          
         </>
       }
     </div>
