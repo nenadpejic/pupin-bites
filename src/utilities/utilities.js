@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+
 
 export const paginate = (fullArray) => {
     const itemsPerPage = 4;
