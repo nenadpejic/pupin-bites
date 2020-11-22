@@ -49,14 +49,13 @@ const Signup = () => {
         ? <SignupComplete />
         : <>
         <LoginTab>
-          <p>Sing up to application</p>
-          <div>{error}</div>
+          <p>Sing up to application</p> 
           <form onSubmit={handleSubmit}>
             <input type="text" ref={firstNameRef} placeholder="Email or User" required/>
             <input type="text" ref={lastNameRef} placeholder="Full Name" required />
             <input type="email" ref={emailRef}  placeholder="Email" required />
             <input type="password" ref={passwordRef} placeholder="Password" required />
-            <input type="password" ref={passwordConfirmRef} placeholder="Password" required />
+            <input type="password" ref={passwordConfirmRef} placeholder="Confirm Password" required />
             <button type="submit">Sign Up</button>
           </form>
         </LoginTab>                    
