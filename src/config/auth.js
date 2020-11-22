@@ -5,19 +5,17 @@ class Auth {
 
   // login(cb) {
   //   this._isAuthenticated = true;
-  //   cb();
+  //   cb;
   // }
-  login() {
-    this._isAuthenticated = true;
-  }
 
   // logout(cb) {
   //   this._isAuthenticated = false;
-  //   cb();
+  //   cb;
   // }
-  logout() {
-    this._isAuthenticated = false;
-  }
+
+  // isAuth() {
+  //   return this._isAuthenticated;
+  // }
 
   status() {
     const token = localStorage.getItem("Token");
