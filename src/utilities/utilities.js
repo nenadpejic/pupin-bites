@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const paginate = (fullArray) => {
   const itemsPerPage = 4;
   const numberOfPages = Math.ceil(fullArray.length / itemsPerPage);

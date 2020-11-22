@@ -5,10 +5,11 @@ import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
-import CreatePoll from "./components/CreatePoll/CreatePoll.jsx";
+import CreatePoll from "./components/CreatePoll/CreatePoll";
 import { Settings } from "./components/settings/Settings";
-import PollVote from "./pages/PollVote";
+// import PollVote from "./pages/PollVote";
 import SingleOrderCreate from "./pages/SingleOrderCreate";
+import PollVote from "./components/PollVote/PollVote";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style

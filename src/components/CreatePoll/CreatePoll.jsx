@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import './CreatePoll.css'
 import { map, uniqBy } from 'lodash'
+//Css
+import './CreatePoll.css'
 
 // Services
 import { getAllRestaurants, createPoll } from '../../services/services.js'
@@ -55,7 +56,7 @@ const CreatePoll = () => {
 
     }
     // Remove button
-    const handleClickRemove = (restaurant, e) => {
+    const handleClickRemove = (e) => {
         let id = e.target.id
         setSelected(selected.filter(el => el.id !== id))
         setRestaurants(restaurants.concat(selected.filter(el => el.id === id)))
@@ -84,7 +85,7 @@ const CreatePoll = () => {
                 </div>
 
                 <label>Search Restaurants<br /></label>
-                <input type="text" placeholder="..search" onChange={handleChange} required />
+                <input type="text" placeholder="..search" onChange={handleChange} />
 
                 {change.length === 0 ? restaurants.map((restaurant) =>
                     //Complete list
@@ -105,7 +106,7 @@ const CreatePoll = () => {
                 {selected.map((restaurant) =>
                     <div key={restaurant.id} >
                         <div>{restaurant.name}</div>
-                        <button onClick={(e) => handleClickRemove(restaurant, e)} id={restaurant.id}>X</button>
+                        <button onClick={(e) => handleClickRemove(e)} id={restaurant.id}>X</button>
                     </div>)}
 
             </div>
