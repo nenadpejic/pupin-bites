@@ -45,7 +45,6 @@ const Login = () => {
 
   return (
 
-
   <LoginTab>
     <p>Log in to OrderApp</p>
     <form onSubmit={handleSubmit}>
@@ -53,7 +52,7 @@ const Login = () => {
       <input onChange={handleUser} type="password" placeholder="Enter password" value={password} />
       <button type="submit">Login</button>
     </form> 
-    <span>Neead an account? <Link to="/signup">Sign Up</Link></span>
+    <span>Need an account? <Link to="/signup">Sign Up</Link></span>
   </LoginTab>
   );
 }

@@ -22,28 +22,28 @@ const Welcome = () => {
             <div className="gallery">
                 <div>
                   <img src="/img/restaurants/McDonalds.webp"/>
-                  <div class="text">
+                  <div className="text">
                     <h4>McDonalds</h4>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem similique recusandae</p>
                   </div>
                 </div>
                 <div>
                   <img src="/img/restaurants/KFC.webp"/>
-                  <div class="text">
+                  <div className="text">
                     <h4>KFC</h4>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem similique recusandae</p>
                   </div>  
                 </div>
                 <div>
                   <img src="/img/restaurants/FishChips.webp"/>
-                  <div class="text">
+                  <div className="text">
                     <h4>FishChips</h4>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem similique recusandae</p>
                   </div>
                 </div>
                 <div>
                   <img src="/img/restaurants/japanese.webp"/>
-                  <div class="text">
+                  <div className="text">
                     <h4>Chinese</h4>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem similique recusandae</p>
                   </div>

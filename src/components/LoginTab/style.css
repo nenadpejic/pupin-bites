@@ -16,7 +16,7 @@ a:hover{
     font-family: arial; 
 }
 .loginTab{
-    padding-top: 50px;
+    padding-top: 40px;
 	width:400px;
 	min-height:350px; 
 	position:relative;
@@ -35,7 +35,7 @@ a:hover{
 	height:120px;
 	position:absolute;
 	left:33%;
-	margin-top:-120px;
+	margin-top:-110px;
 }
 
 .loginTab p{
@@ -43,8 +43,8 @@ a:hover{
 	font-size:17px;
 	font-weight:600; 
 	margin-left:120px;
-	margin-top:5px; 
-	margin-bottom: 40px;
+	margin-top:20px; 
+	margin-bottom:20px;
 	width: 160px; 
 }
 
@@ -79,10 +79,6 @@ a:hover{
 	border-color: lightblue;
 }
 
-.loginTab form>input[type="password"]{
-	margin-top:30px;
-}
-
 .loginTab form>button{
 	display:block;
 	width:75%;
@@ -91,6 +87,7 @@ a:hover{
 	border:1px solid grey;
 	margin:auto;
 	margin-top:40px;
+	margin-bottom:40px;
 	color:white;
 	font-size:22px;
 	cursor:pointer;
