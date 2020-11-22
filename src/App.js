@@ -1,20 +1,22 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
-import CreatePoll from "./components/CreatePoll/CreatePoll.jsx";
+import CreatePoll from "./components/CreatePoll/CreatePoll";
 import { Settings } from "./components/settings/Settings";
-import PollVote from "./pages/PollVote";
+// import PollVote from "./pages/PollVote";
+import SingleOrderCreate from "./pages/SingleOrderCreate";
+import PollVote from "./components/PollVote/PollVote";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
 import "./App.css";
 
 const App = () => {
-  const value = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
   return (
     <Router>
@@ -22,7 +24,7 @@ const App = () => {
         exact
         path="/"
         render={() => {
-          return value.Auth.status() ? <Redirect to="/home" /> : <Welcome />;
+          return auth.isAuth() ? <Redirect to="/home" /> : <Welcome />;
         }}
       />
 
@@ -33,7 +35,7 @@ const App = () => {
       <Route
         path="/login"
         render={() => {
-          return value.Auth.status() ? <Redirect to="/home" /> : <Login />;
+          return auth.isAuth() ? <Redirect to="/home" /> : <Login />;
         }}
       />
 
@@ -51,6 +53,10 @@ const App = () => {
 
       <PrivateRoute path="/poll-vote/:slug">
         <PollVote />
+      </PrivateRoute>
+
+      <PrivateRoute path="/single-order-create/:slug">
+        <SingleOrderCreate />
       </PrivateRoute>
     </Router>
   );
