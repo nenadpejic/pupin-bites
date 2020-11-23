@@ -1,10 +1,6 @@
 body {
   text-align: center;
 }
-input[type="text"],
-input[type="number"] {
-  width: 200px;
-}
 .poll {
   width: 300px;
   height: 70px;

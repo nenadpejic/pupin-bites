@@ -10,6 +10,7 @@ import { Settings } from "./components/settings/Settings";
 // import PollVote from "./pages/PollVote";
 import SingleOrderCreate from "./pages/SingleOrderCreate";
 import PollVote from "./components/PollVote/PollVote";
+import PollInProgress from "./components/PollInProgress/PollInProgress";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
@@ -53,6 +54,10 @@ const App = () => {
 
       <PrivateRoute path="/poll-vote/:slug">
         <PollVote />
+      </PrivateRoute>
+
+      <PrivateRoute path="/poll-in-progress/:slug">
+        <PollInProgress />
       </PrivateRoute>
 
       <PrivateRoute path="/single-order-create/:slug">
