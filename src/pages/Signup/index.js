@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { register } from "../../services/services";
 import SignupComplete from "../../components/SignupComplete";
+import LoginTab from "../../components/LoginTab";
 
 const Signup = () => {
   const [complete, setComplete] = useState(false);
@@ -47,32 +48,18 @@ const Signup = () => {
       {complete
         ? <SignupComplete />
         : <>
-          <h1>Sign Up</h1>
-          <form onSubmit={handleSubmit}>
-            <div>{error}</div>
-            <div id="first-name">
-              <label>First Name</label>
-              <input ref={firstNameRef} type="text" required />
-            </div>
-            <div id="last-name">
-              <label>Last Name</label>
-              <input ref={lastNameRef} type="text" required />
-            </div>
-            <div id="email">
-              <label>Email</label>
-              <input ref={emailRef} type="email" required />
-            </div>
-            <div id="password">
-              <label>Password</label>
-              <input ref={passwordRef} type="password" required />
-            </div>
-            <div id="password-confirm">
-              <label>Password Confirmation</label>
-              <input ref={passwordConfirmRef} type="password" required />
-            </div>
-            <button type="submit">Sign Up</button>
-          </form>
-          <div>Already have an account? <Link to="/login">Log In</Link></div>
+          <LoginTab>
+            <p>Sing up to application</p>
+            <form onSubmit={handleSubmit}>
+              <div className="err">{error}</div>
+              <input type="text" ref={firstNameRef} placeholder="Email or User" required />
+              <input type="text" ref={lastNameRef} placeholder="Full Name" required />
+              <input type="email" ref={emailRef} placeholder="Email" required />
+              <input type="password" ref={passwordRef} placeholder="Password" required />
+              <input type="password" ref={passwordConfirmRef} placeholder="Confirm Password" required />
+              <button className="bigButton" type="submit">Sign Up</button>
+            </form>
+          </LoginTab>
         </>
       }
     </div>
