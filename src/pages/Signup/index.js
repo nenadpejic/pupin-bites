@@ -48,22 +48,22 @@ const Signup = () => {
       {complete
         ? <SignupComplete />
         : <>
-        <LoginTab>
-          <p>Sing up to application</p> 
-          <form onSubmit={handleSubmit}>
-            <input type="text" ref={firstNameRef} placeholder="Email or User" required/>
-            <input type="text" ref={lastNameRef} placeholder="Full Name" required />
-            <input type="email" ref={emailRef}  placeholder="Email" required />
-            <input type="password" ref={passwordRef} placeholder="Password" required />
-            <input type="password" ref={passwordConfirmRef} placeholder="Confirm Password" required />
-            <button className="bigButton" type="submit">Sign Up</button>
-          </form>
-        </LoginTab>                    
-          
+          <LoginTab>
+            <p>Sing up to application</p>
+            <form onSubmit={handleSubmit}>
+              <div className="err">{error}</div>
+              <input type="text" ref={firstNameRef} placeholder="Email or User" required />
+              <input type="text" ref={lastNameRef} placeholder="Full Name" required />
+              <input type="email" ref={emailRef} placeholder="Email" required />
+              <input type="password" ref={passwordRef} placeholder="Password" required />
+              <input type="password" ref={passwordConfirmRef} placeholder="Confirm Password" required />
+              <button className="bigButton" type="submit">Sign Up</button>
+            </form>
+          </LoginTab>
         </>
       }
     </div>
-  ); 
+  );
 }
 
 export default Signup;

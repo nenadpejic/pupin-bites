@@ -12,7 +12,7 @@ const NavBar = () => {
       .then((res) => {
         const data = res.data;
         setUser(data);
-        console.log(data);
+        // console.log(data);
       })
       .catch((err) => {
         console.log(err);
@@ -37,16 +37,16 @@ const NavBar = () => {
           <button onClick={handleClick}>Logout</button>
         </>
       ) : (
-        <>
-          <p>Logo</p>
-          <button>
-            <Link to="/login">Log In</Link>
-          </button>
-          <button>
-            <Link to="/signup">Sign Up</Link>
-          </button>
-        </>
-      )}
+          <>
+            <p>Logo</p>
+            <button>
+              <Link to="/login">Log In</Link>
+            </button>
+            <button>
+              <Link to="/signup">Sign Up</Link>
+            </button>
+          </>
+        )}
     </nav>
   );
 };

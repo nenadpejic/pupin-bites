@@ -1,16 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { map, uniqBy } from 'lodash'
-import Navigation from '../../components/Navigation'
 import Main from '../../components/Main'
 import Footer from '../../components/Footer'
 
 //Css
-import './CreatePoll.css'
+import './PollCreate.css'
 
 // Services
 import { getAllRestaurants, createPoll } from '../../services/services.js'
 
-const CreatePoll = () => {
+const PollCreate = () => {
     const [change, setChange] = useState('')
     const [filter, setFilter] = useState([])
     const [selected, setSelected] = useState([])
@@ -23,7 +22,7 @@ const CreatePoll = () => {
     const [duration, setDuration] = useState(15)
     // Token
     const tokenRef = useRef(localStorage.getItem("Token"))
-    const token = tokenRef.current 
+    const token = tokenRef.current
 
     useEffect(() => {
         getAllRestaurants(token).then(res => {
@@ -44,14 +43,11 @@ const CreatePoll = () => {
             value > 59 ? setMinutes(e.target.value) : setMinutes(value)
         }
         setDuration(Number(hours) * 60 + Number(minutes))
-
-     
     }
     // Handeling input change
     const handleChange = (e) => {
         setChange(e.target.value)
         change <= 0 ? setFilter([]) : setFilter(restaurants.filter(el => el.name.toLowerCase().includes(change)))
-
     }
     // Add button
     const handleClickAdd = (restaurant, e) => {
@@ -59,7 +55,6 @@ const CreatePoll = () => {
         setSelected(selected.concat(restaurant))
         setRestaurants(restaurants.filter(el => el.id !== id))
         setFilter(filter.filter(el => el.id !== id))
-
     }
     // Remove button
     const handleClickRemove = (e) => {
@@ -67,7 +62,6 @@ const CreatePoll = () => {
         setSelected(selected.filter(el => el.id !== id))
         setRestaurants(restaurants.concat(selected.filter(el => el.id === id)))
         setFilter(filter.concat(selected.filter(el => el.id === id)))
-
     }
     // Submit button
     const handleSubmit = () => {
@@ -82,52 +76,52 @@ const CreatePoll = () => {
 
     return (
         <>
-        <Main>
-            <div> 
-                <h3>Create Poll</h3>
-                <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required />
-                <div class="pollDuration"> 
-                    <div class="title">Set Duration</div>
-                    <div class="hours"> 
-                        <input type="number" placeholder="h" name="hours"  min="0" max="24" onChange={(e) => handleTime(e)} required />
+            <Main>
+                <div>
+                    <h3>Create Poll</h3>
+                    <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required />
+                    <div className="pollDuration">
+                        <div className="title">Set Duration</div>
+                        <div className="hours">
+                            <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={(e) => handleTime(e)} required />
+                        </div>
+                        <div className="between">:</div>
+                        <div className="minutes">
+                            <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={(e) => handleTime(e)} required />
+                        </div>
                     </div>
-                    <div class="between">:</div>
-                    <div class="minutes">
-                        <input type="number" placeholder="m" name="minutes"   min="10" max="59" size="100" onChange={(e) => handleTime(e)} required /> 
-                    </div>
-                </div>
 
-                <label>Search Restaurants<br /></label>
-                <input type="text" placeholder="..search" onChange={handleChange} />
+                    <label>Search Restaurants<br /></label>
+                    <input type="text" placeholder="..search" onChange={handleChange} />
 
-                {change.length === 0 ? restaurants.map((restaurant) =>
-                    //Complete list
-                    <div key={restaurant.id}>
-                        <div>{restaurant.name}</div>
-                        <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>Add Restaurant</button>
-                    </div>)
-                    : filter.map((restaurant) =>
-                        //Filtered list
+                    {change.length === 0 ? restaurants.map((restaurant) =>
+                        //Complete list
                         <div key={restaurant.id}>
                             <div>{restaurant.name}</div>
                             <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>Add Restaurant</button>
+                        </div>)
+                        : filter.map((restaurant) =>
+                            //Filtered list
+                            <div key={restaurant.id}>
+                                <div>{restaurant.name}</div>
+                                <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>Add Restaurant</button>
+                            </div>)}
+                </div>
+
+                <div>
+                    <h3>Restaurants</h3>
+                    {selected.map((restaurant) =>
+                        <div key={restaurant.id} >
+                            <div>{restaurant.name}</div>
+                            <button onClick={(e) => handleClickRemove(e)} id={restaurant.id}>X</button>
                         </div>)}
-            </div>
 
-            <div>
-                <h3>Restaurants</h3>
-                {selected.map((restaurant) =>
-                    <div key={restaurant.id} >
-                        <div>{restaurant.name}</div>
-                        <button onClick={(e) => handleClickRemove(e)} id={restaurant.id}>X</button>
-                    </div>)}
-
-            </div>
-            <div>
-                <button type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
-            </div>
-        </Main>
-     </>
+                </div>
+                <div>
+                    <button type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
+                </div>
+            </Main>
+        </>
     )
 }
-export default CreatePoll
+export default PollCreate

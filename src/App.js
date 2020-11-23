@@ -5,17 +5,15 @@ import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
-import CreatePoll from "./components/CreatePoll/CreatePoll";
+import PollCreate from "./pages/PollCreate/PollCreate";
 import { Settings } from "./pages/Settings/Settings";
-// import PollVote from "./pages/PollVote";
-import SingleOrderCreate from "./pages/SingleOrderCreate";
-import PollVote from "./components/PollVote/PollVote";
-import PollInProgress from "./components/PollInProgress/PollInProgress";
+import SingleOrderCreate from "./pages/SingleOrderAdd";
+import PollVote from "./pages/PollVote/PollVote";
+import PollComplete from "./pages/PollComplete/PollComplete";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
-import "./App.css"; 
-
+import "./App.css";
 
 const App = () => {
   const auth = useContext(AuthContext);
@@ -45,8 +43,8 @@ const App = () => {
         <Home />
       </PrivateRoute>
 
-      <PrivateRoute exact path="/create-poll">
-        <CreatePoll />
+      <PrivateRoute exact path="/poll-create">
+        <PollCreate />
       </PrivateRoute>
 
       <PrivateRoute exact path="/settings">
@@ -57,8 +55,8 @@ const App = () => {
         <PollVote />
       </PrivateRoute>
 
-      <PrivateRoute path="/poll-in-progress/:slug">
-        <PollInProgress />
+      <PrivateRoute path="/poll-complete/:slug">
+        <PollComplete />
       </PrivateRoute>
 
       <PrivateRoute path="/single-order-create/:slug">
