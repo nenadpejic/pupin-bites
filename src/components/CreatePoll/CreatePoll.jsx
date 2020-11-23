@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { map, uniqBy } from 'lodash'
+import Navigation from '../../components/Navigation'
+import Main from '../../components/Main'
+import Footer from '../../components/Footer'
+
 //Css
 import './CreatePoll.css'
 
@@ -19,7 +23,7 @@ const CreatePoll = () => {
     const [duration, setDuration] = useState(15)
     // Token
     const tokenRef = useRef(localStorage.getItem("Token"))
-    const token = tokenRef.current
+    const token = tokenRef.current 
 
     useEffect(() => {
         getAllRestaurants(token).then(res => {
@@ -40,6 +44,8 @@ const CreatePoll = () => {
             value > 59 ? setMinutes(e.target.value) : setMinutes(value)
         }
         setDuration(Number(hours) * 60 + Number(minutes))
+
+     
     }
     // Handeling input change
     const handleChange = (e) => {
@@ -75,13 +81,20 @@ const CreatePoll = () => {
     }
 
     return (
-        <section>
-            <div>
+        <>
+        <Main>
+            <div> 
                 <h3>Create Poll</h3>
                 <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required />
-                <div>
-                    <input type="number" placeholder="Hours" name="hours" defaultValue="0" min="0" max="24" onChange={(e) => handleTime(e)} required />
-                    <input type="number" placeholder="Minutes" name="minutes" defaultValue="15" min="10" max="59" onChange={(e) => handleTime(e)} required />
+                <div class="pollDuration"> 
+                    <div class="title">Set Duration</div>
+                    <div class="hours"> 
+                        <input type="number" placeholder="h" name="hours"  min="0" max="24" onChange={(e) => handleTime(e)} required />
+                    </div>
+                    <div class="between">:</div>
+                    <div class="minutes">
+                        <input type="number" placeholder="m" name="minutes"   min="10" max="59" size="100" onChange={(e) => handleTime(e)} required /> 
+                    </div>
                 </div>
 
                 <label>Search Restaurants<br /></label>
@@ -113,7 +126,8 @@ const CreatePoll = () => {
             <div>
                 <button type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
             </div>
-        </section>
+        </Main>
+     </>
     )
 }
 export default CreatePoll
