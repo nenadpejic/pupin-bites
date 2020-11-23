@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import CreatePoll from "./components/CreatePoll/CreatePoll";
-import { Settings } from "./components/settings/Settings";
+import { Settings } from "./pages/Settings/Settings";
 // import PollVote from "./pages/PollVote";
 import SingleOrderCreate from "./pages/SingleOrderCreate";
 import PollVote from "./components/PollVote/PollVote";
