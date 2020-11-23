@@ -14,6 +14,7 @@ import PollVote from "./components/PollVote/PollVote";
 import { AuthContext } from "./contexts/AuthContext";
 // style
 import "./App.css";
+import { CreateOrder } from "./components/CreateOrder/CreateOrder";
 
 const App = () => {
   const auth = useContext(AuthContext);
@@ -57,6 +58,9 @@ const App = () => {
 
       <PrivateRoute path="/single-order-create/:slug">
         <SingleOrderCreate />
+      </PrivateRoute>
+      <PrivateRoute path='/create-order'>
+        <CreateOrder/>
       </PrivateRoute>
     </Router>
   );
