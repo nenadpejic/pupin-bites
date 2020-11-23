@@ -10,16 +10,16 @@ import "./PollVote.css"
 
 const PollVote = () => {
     const [poll, setPoll] = useState([])
-
+    const [voted, setVoted] = useState(false)
     const [restaurants, setRestaurants] = useState([]) 
     const [votes, SetVotes] = useState([])
     const [tmp, setTmp] = useState(0)
-    const { slug } = useParams()
+    const {slug } = useParams()
     const [selectedRestaurant, setSelectedRestaurants] = useState(null);
     const [id, setId] = useState('')
 
     useEffect(() => {
-        getOnePoll(pollId).then(res => {
+        getOnePoll(slug).then(res => {
              
             setPoll(res.data)
             setRestaurants(res.data.restaurants)
