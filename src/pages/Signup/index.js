@@ -56,7 +56,7 @@ const Signup = () => {
             <input type="email" ref={emailRef}  placeholder="Email" required />
             <input type="password" ref={passwordRef} placeholder="Password" required />
             <input type="password" ref={passwordConfirmRef} placeholder="Confirm Password" required />
-            <button type="submit">Sign Up</button>
+            <button className="bigButton" type="submit">Sign Up</button>
           </form>
         </LoginTab>                    
           

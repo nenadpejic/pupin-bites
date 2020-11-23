@@ -79,7 +79,7 @@ a{
 	background-color: rgb(255, 255, 255);
 	border-color: lightblue;
 }
-
+/*
 .loginTab form>button{
 	display:block;
 	width:75%;
@@ -98,6 +98,7 @@ a{
     background-color:rgb(86,188,64);
 
 }
+*/
 
 @media screen and (max-width:600px){
 	.wrapper { 

@@ -12,9 +12,10 @@ const PollInfo = (props)=>{
         return date + " " + time;
     }   
 
-    const pollName = props.pollName;
-    const pollCreated = props.pollCreated;
-    const pollEnds = props.pollEnds;
+    const poll = props.poll;
+    const pollName = poll.label;
+    const pollCreated = poll.created;
+    const pollEnds = props.active;
  
     return( 
         <table className="pollInfo">

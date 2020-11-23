@@ -4,14 +4,16 @@ import Footer from '../Footer'
 import './style.css';
 
 const Main = ({children}) => { 
-    return ( 
-        <div className="background" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
+    return (  
+        <>
             <Navigation/>
-            <div className="container">
-                {children}
+            <div className="container" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
+                <div className="children">
+                    {children}
+                </div>
             </div>
-            <Footer/>
-        </div>
+            <Footer/> 
+        </>
     )
 }
 

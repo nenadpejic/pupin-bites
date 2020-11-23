@@ -25,7 +25,7 @@ const PollVote = () => {
     <> 
     <Main>
       <h1>PollVote</h1>
-      < PollInfo pollName={poll.label} pollCreated={poll.created} pollEnds={poll.active}/>
+      < PollInfo poll={poll}/>
     </Main>
     </>
   );

@@ -50,7 +50,7 @@ const Login = () => {
     <form onSubmit={handleSubmit}>
       <input onChange={handleUser} type="email" placeholder="Enter email" value={email}/>
       <input onChange={handleUser} type="password" placeholder="Enter password" value={password} />
-      <button type="submit">Login</button>
+      <button className="bigButton" type="submit">Login</button>
     </form> 
     <span>Need an account? <br></br><Link to="/signup">Sign Up</Link></span>
   </LoginTab>

@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+button{
+  border:0px;
+  text-decoration: none;
+  background-color: transparent;
+  padding:0px;
+  margin: 0px;
+}
+button.bigButton{
+	display:block;
+	width:200px;
+	height:40px;
+	background-color:rgb(90,172,68);
+	border:1px solid grey;
+	margin:auto;
+	margin-top:40px;
+	margin-bottom:40px;
+	color:white;
+	font-size:22px;
+	cursor:pointer;
+}
+
+button.bigButton:hover{
+    background-color:rgb(86,188,64); 
+}
