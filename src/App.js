@@ -13,11 +13,7 @@ import PollVote from "./components/PollVote/PollVote";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
-import "./App.css";
-// FontAwesome icons 
-import { library } from '@fortawesome/fontawesome-svg-core' 
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
-library.add(faCheckSquare, faCoffee)
+import "./App.css"; 
 
 
 const App = () => {
