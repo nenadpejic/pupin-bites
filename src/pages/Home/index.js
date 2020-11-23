@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getProfile, getAllPolls } from "../../services/services";
+import { getAllPolls, getManyOrders } from "../../services/services";
 import { useHistory } from "react-router-dom";
+import PollsItem from "../../components/PollsItem";
+import ActiveOrderItem from "../../components/ActiveOrderItem";
+import NavBar from "../../components/NavBar";
 import "./style.css";
 
 const Home = () => {
-  const [user, setUser] = useState();
   const [polls, setPolls] = useState([]);
   const history = useHistory();
 
@@ -12,22 +14,10 @@ const Home = () => {
     history.push("/create-poll");
   };
 
-  const handlePollVote = (e) => {
-    history.push(`/poll-vote/${e}`);
-  };
-
+  //Hvatam listu anketa iz baze
   useEffect(() => {
-    getProfile()
-      .then((res) => {
-        setUser(res.data.firstName + " " + res.data.lastName);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    //Hvatam listu anketa iz baze
     getAllPolls()
       .then((res) => {
-        console.log(res);
         const data = res.data;
         setPolls(data);
       })
@@ -36,11 +26,21 @@ const Home = () => {
       });
   }, []);
 
+  //Hvatam aktivne ordere
+  useEffect(() => {
+    getManyOrders()
+      .then((res) => {
+        const data = res.data.data;
+        setActiveOrders(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div id="home">
-      <nav>
-        <span>User: {user}</span>
-      </nav>
+      <NavBar />
       <h1>Home</h1>
       <button onClick={handleCreatePoll}>Create Poll</button>
       <ul>

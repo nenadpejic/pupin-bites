@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import Navigation from "../../components/Navigation";
+import { Link } from "react-router-dom"; 
 import Footer from "../../components/Footer";
+import NavBar from "../../components/NavBar"
 import './style.css'; 
 
 const Welcome = () => {
   return (
     <div className="wrapper">
-      <Navigation/> 
+      <NavBar/> 
       <div className="welcome">
         <div className="section1">
             <div className="text">

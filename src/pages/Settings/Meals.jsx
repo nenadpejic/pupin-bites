@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from "react";
-import "../../App.css";
 import { createMeal, deleteMeal, getMeals } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
 
 export const Meals = ({ restaurants, submit, setSubmit }) => {
   const [restaurantInput, setRestaurantInput] = useState("");
-  const [filterRestaurant, setFilterRestaurants] = useState([]);
+  const [filteredRestaurant, setFilteredRestaurants] = useState([]);
   const [restaurantId, setRestaurantId] = useState(undefined);
   const [meals, setMeals] = useState([]);
   const [restaurantName, setRestaurantName] = useState(undefined);
-  const [page,setPage] = useState(0)
-  const [enableInput,setEnableInput] = useState(false)
+  const [page,setPage] = useState(0);
+  const [valid,setValid] = useState(true);
+  const [enableInput,setEnableInput] = useState(false);
   const [mealInput, setMealInput] = useState({
     name: "",
     price: 0,
     available: true,
   });
   
-  const toggleEnableInput = ()=>{
+  const toggleEnableInput = () => { //enables creating meal after choosing restaurant
     setEnableInput(!enableInput)
-  }
-  
+  };
 
+  const handlesValidation = () => {
+    mealInput.name.trim() !== "" || mealInput.price !== 0 ? setValid(true) : setValid(false);
+    setTimeout(() => {
+      setValid(true)
+    }, 2000);
+  };
+  
   const handleMealInput = (e) => {
     const { name, value } = e.target;
 
@@ -33,8 +39,16 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
     });
   };
 
+  const resetInput = () => {
+    setMealInput({
+      name: "",
+      price: 0,
+      available: true,
+    })
+  } 
+
   useEffect(() => {
-    setFilterRestaurants(
+    setFilteredRestaurants( //search for restaurant
       restaurants.filter((el) =>
         el.name.toLowerCase().includes(restaurantInput.toLowerCase())
       )
@@ -44,6 +58,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
   const handleFilter = (e) => {
     setRestaurantInput(e.target.value);
   };
+
   const getRestaurantInfo = (resId, resName) => {
     setRestaurantId(resId);
     setRestaurantName(resName);
@@ -52,7 +67,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
   const newMeal = (e) => {
     e.preventDefault();
 
-    if (mealInput.name.trim() !== "" && mealInput.price.trim() !== "") {
+    if (mealInput.name.trim() !== "" && mealInput.price !== 0) { //to check if input is valid
       mealInput.price = Number(mealInput.price);
       createMeal(mealInput, restaurantId)
         .then((res) => {
@@ -63,11 +78,14 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
           console.log("AXIOS ERROR: ", err);
         });
     }
+
+    resetInput();
+    handlesValidation();
   };
 
   useEffect(() => {
     if (restaurantId !== undefined) {
-      getMeals(restaurantId).then((res) => {
+      getMeals(restaurantId).then((res) => { //shows Menu
         setMeals(res.data);
       });
     }
@@ -79,7 +97,6 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
     });
   };
 
-  
   const changePage = (index) => {
     setPage(index);
   };
@@ -87,16 +104,16 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
   return (
     <div className="meals">
       <h1>Manage Meals</h1>
+      <label>Restaurant Name:</label>
       <input
         type="text"
-        placeholder="Enter Restaurant Name"
         name="name"
         value={restaurantInput}
         onChange={handleFilter}
       />
       <div className="restaurantFilter">
         {restaurantInput.length !== 0 &&
-          filterRestaurant.slice(0,6).map((restaurant) => (
+          filteredRestaurant.slice(0,6).map((restaurant) => (
             <div
               key={restaurant.id}
               onClick={() =>{ getRestaurantInfo(restaurant.id, restaurant.name);setRestaurantInput("");toggleEnableInput()}}
@@ -109,31 +126,31 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
       </div>
       <div>{restaurantName}</div>
       <form onSubmit={newMeal}>
+      <label>Meal Name:</label>
         <input
           type="text"
-          placeholder="Enter Meal Name"
           onChange={handleMealInput}
           value={mealInput.name}
           name="name"
           disabled={enableInput ===false ? 'disabled' : false}
         />
+        <label>Meal Price:</label>
         <input
           type="number"
-          placeholder="Enter Meal Price"
           onChange={handleMealInput}
           value={mealInput.price}
           name="price"
           disabled={enableInput ===false ?'disabled' : false  }
         />
-
-        <input type="submit" value="Add Meal" />
+        <input type="submit" value="Add Meal"/>
+        {valid ? null : <p>Please provide valid restaurant name and price.</p>}
       </form>
 
       {paginate(meals)[page]!==undefined && paginate(meals)[page].map((meal) => (
         <div key={meal.id}>
           <p>{meal.name}</p>
-          <p>{meal.price}</p>
-          <p>{meal.available ? "available" : "unavailable"}</p>
+          <p>{meal.price} USD</p>
+          <p>{meal.available ? "Available" : "Unavailable"}</p>
           <button onClick={() => mealDelete(restaurantId, meal.id)}>
             delete
           </button>
