@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import NavBar from "../../components/NavBar";
 import { getOneOrder } from "../../services/services";
 import { formatDate } from "../../utilities/utilities";
 
@@ -10,7 +11,6 @@ const SingleOrderCreate = () => {
   useEffect(() => {
     getOneOrder(slug)
       .then((res) => {
-        // console.log(res);
         const data = res.data;
         setOrder(data);
       })
@@ -21,6 +21,7 @@ const SingleOrderCreate = () => {
 
   return (
     <div id="single-order-create">
+      <NavBar />
       <h1>SingleOrderCreate</h1>
       <p>Label: {order.label}</p>
       <p>ID: {order.id}</p>

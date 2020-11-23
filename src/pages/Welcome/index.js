@@ -1,23 +1,12 @@
-import { Link } from "react-router-dom";
+import NavBar from "../../components/NavBar";
 
 const Welcome = () => {
   return (
     <div id="welcome">
-      <nav>
-        <button>
-          <Link to="/login">
-            Log In
-          </Link>
-        </button>
-        <button>
-          <Link to="/signup">
-            Sign Up
-          </Link>
-        </button>
-      </nav>
+      <NavBar />
       <h1>Welcome</h1>
     </div>
   );
-}
+};
 
 export default Welcome;
