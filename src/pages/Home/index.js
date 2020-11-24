@@ -9,6 +9,8 @@ import "./style.css";
 
 const Home = () => {
   const [polls, setPolls] = useState([]);
+  const [searchPolls, setSearchPolls] = useState([]);
+  const [pollSearch, setPollSearch] = useState("");
   const [activeOrders, setActiveOrders] = useState([]);
   const history = useHistory();
 
@@ -44,6 +46,11 @@ const Home = () => {
       });
   }, []);
 
+  const handlePollSearch = (e) => {
+    setPollSearch(e.target.value);
+    setSearchPolls(polls.filter(elem => elem.label.includes(e.target.value)));
+  }
+
   return (
     <div id="home">
       {/* Main */}
@@ -52,10 +59,15 @@ const Home = () => {
       <button onClick={handleCreatePoll}>Create Poll</button>
       <button onClick={handleCreateOrder}>Create Order</button>
       <h2>Polls</h2>
+      <input type="search" onChange={handlePollSearch} value={pollSearch} />
       <ul>
-        {polls.map((poll) => (
-          <PollsItem key={poll.id} data={poll} />
-        ))}
+        {!pollSearch.length
+          ? polls.map((poll) => (
+            <PollsItem key={poll.id} data={poll} />
+          ))
+          : searchPolls.map((poll) => (
+            <PollsItem key={poll.id} data={poll} />
+          ))}
       </ul>
       <h2>Active Orders</h2>
       <ul>
