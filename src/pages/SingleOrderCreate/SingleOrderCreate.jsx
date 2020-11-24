@@ -5,6 +5,7 @@ import {
   getOneRestaurant,
   getProfile,
   getAllRestaurants,
+  postCheckData,
 } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
@@ -37,6 +38,7 @@ export const SingleOrderCreate = () => {
       console.log(res);
       setRestaurants(res.data);
     });
+
   }, []);
 
   useEffect(() => {

@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 // import RestaurantItem from "../../components/RestaurantItem";
-import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/services";
+import {
+  addOrderItem,
+  getMeals,
+  getOneOrder,
+  getProfile,
+} from "../../services/services";
 import "./singleOrderAdd.css";
 // import { formatDate } from "../../utilities/utilities";
 
@@ -10,14 +15,18 @@ const SingleOrderAdd = () => {
   const [order, setOrder] = useState({});
   const [meals, setMeals] = useState(undefined);
   const [profile, setProfile] = useState(undefined);
-  const [payload,setPayload] = useState([])
-  const [payloadItem, setPayloadItem] = useState({ quantity: 0, mealId: "", note: "" });
-  const [orderedMeal,setOrderedMeal] = useState([])
+  const [payload, setPayload] = useState([]);
+  const [payloadItem, setPayloadItem] = useState({
+    quantity: 0,
+    mealId: "",
+    note: "",
+  });
+  const [orderedMeal, setOrderedMeal] = useState([]);
   // const [quantity,setQuantity] = useState(0)
   const { slug } = useParams();
   // const pollId = "001a1b51-6c18-47ca-a2c5-81a3c8d354ef";
   // const [restaurantId,setRestaurantId] = useState(undefined)
-  const restaurantId = order && order.restaurantId;
+  const restaurantId = order && order.restaurantId 
 
   //Hvatam jedan order
   useEffect(() => {
@@ -61,59 +70,55 @@ const SingleOrderAdd = () => {
     setPayloadItem({
       quantity: 0,
       mealId: "",
-      note: ""
+      note: "",
     });
   };
 
-  const addOrder = (mealId,mealName,mealPrice) => {
-   
-
-    if (payloadItem.quantity !== "0" && payloadItem.quantity !== "" && payload.quantity!==0) {
+  const addOrder = (mealId, mealName, mealPrice) => {
+    if (
+      payloadItem.quantity !== "0" &&
+      payloadItem.quantity !== "" &&
+      payload.quantity !== 0
+    ) {
       //to check if input is valid
       payloadItem.quantity = Number(payloadItem.quantity);
       payloadItem.mealId = mealId;
-      setPayload(prev=>{
-        return [
-          ...prev,
-          payloadItem
-      ]
-      })
-    }
+      setPayload((prev) => {
+        return [...prev, payloadItem];
+      });
+    } else
+      setPayload((prev) => {
+        return [...prev];
+      });
 
-    else setPayload(prev=>{
-      return[
-        ...prev
-      ]
-    })
-    
-    setOrderedMeal(prev=>{
+    setOrderedMeal((prev) => {
       return [
         ...prev,
-        {name:mealName,price:mealPrice,quantity:payloadItem.quantity}
-      ]
-    })
+        { name: mealName, price: mealPrice, quantity: payloadItem.quantity },
+      ];
+    });
   };
 
-  const addItemsToOrder = ()=>{
-      // Data example:
-  // let data = {
-  //  "consumer": "Veljko",
-  //  "payloads": [
-  //    {
-  //      "quantity": 1,
-  //      "mealId": "d53e202a-317c-4bad-99d5-1b7a446f9e26",
-  //      "note": "bez luka" 
-  //    }
-  //   ]
-  // }
-  const data = {
-    consumer: profile.firstName+' '+profile.lastName,
-    payloads:payload
-  }
-   addOrderItem(data,slug).then(res=>{
-     console.log(res)
-   })
-  }
+  const addItemsToOrder = () => {
+    // Data example:
+    // let data = {
+    //  "consumer": "Veljko",
+    //  "payloads": [
+    //    {
+    //      "quantity": 1,
+    //      "mealId": "d53e202a-317c-4bad-99d5-1b7a446f9e26",
+    //      "note": "bez luka"
+    //    }
+    //   ]
+    // }
+    const data = {
+      consumer: profile.firstName + " " + profile.lastName,
+      payloads: payload,
+    };
+    addOrderItem(data, slug).then((res) => {
+      console.log(res);
+    });
+  };
 
   return (
     <div id="single-order-create">
@@ -124,7 +129,7 @@ const SingleOrderAdd = () => {
             <div className="singleMeal" key={el.id}>
               <p>{el.name}</p>
               <p>{el.price} RSD </p>
-              <form >
+              <form>
                 <input
                   type="textBox"
                   onChange={handlePayload}
@@ -139,22 +144,23 @@ const SingleOrderAdd = () => {
                   name="quantity"
                   placeholder="Add quantity"
                 />
-                
               </form>
-              <button onClick={()=>addOrder(el.id,el.name,el.price)}>Add Item</button>
+              <button onClick={() => addOrder(el.id, el.name, el.price)}>
+                Add Item
+              </button>
             </div>
           ))}
       </div>
 
       <div>
-        {orderedMeal.map((el,idx)=>
-          <div className='orderedItems ' key={idx}>
+        {orderedMeal.map((el, idx) => (
+          <div className="orderedItems " key={idx}>
             <p>Name: {el.name}</p>
             <p>Price: {el.price}</p>
-        <p>Quantity: {el.quantity}</p>
-        <hr/>
+            <p>Quantity: {el.quantity}</p>
+            <hr />
           </div>
-        )}
+        ))}
       </div>
       <div>
         <button onClick={addItemsToOrder}>Make Your Order</button>
