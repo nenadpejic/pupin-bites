@@ -12,7 +12,7 @@ const PollsItem = ({ data }) => {
 
   useEffect(() => {
     setCreatedFormater(formatDate(data.created));
-  }, []);
+  }, [data.created]);
 
   return (
     <li key={data.id} prop={data.id} onClick={() => handlePollVote(data.id)}>

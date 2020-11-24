@@ -54,7 +54,7 @@ const PollVote = () => {
 
     return (
         <Main>
-            {createdVote[0].includes(slug) ? <Redirect to={`/poll-complete/${slug}`} /> : null}
+            {createdVote[0] ? (createdVote[0].includes(slug) ? <Redirect to={`/poll-complete/${slug}`} /> : null) : null}
             <h1>Poll Vote</h1>
             <PollInfo poll={poll} />
             <div className="restaurantList">
@@ -63,7 +63,7 @@ const PollVote = () => {
                         <label htmlFor={restaurant.id}>
                             <RestaurantItem restaurant={restaurant} />
                         </label>
-                        <input type="radio" name="chose" id={restaurant.id} onChange={handleChange} required />
+                        <input type="radio" name="chose" id={restaurant.id} onChange={handleChange} />
                     </div>
                 )}
             </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllPolls, getManyOrders } from "../../services/services";
+import { getAllPolls, getAllOrders } from "../../services/services";
 import { useHistory } from "react-router-dom";
 import PollsItem from "../../components/PollsItem";
 import ActiveOrderItem from "../../components/ActiveOrderItem";
@@ -9,6 +9,8 @@ import "./style.css";
 
 const Home = () => {
   const [polls, setPolls] = useState([]);
+  const [searchPolls, setSearchPolls] = useState([]);
+  const [pollSearch, setPollSearch] = useState("");
   const [activeOrders, setActiveOrders] = useState([]);
   const history = useHistory();
 
@@ -34,15 +36,20 @@ const Home = () => {
 
   //Hvatam aktivne ordere
   useEffect(() => {
-    getManyOrders()
+    getAllOrders()
       .then((res) => {
-        const data = res.data.data;
+        const data = res.data;
         setActiveOrders(data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  const handlePollSearch = (e) => {
+    setPollSearch(e.target.value);
+    setSearchPolls(polls.filter(elem => elem.label.includes(e.target.value)));
+  }
 
   return (
     <div id="home">
@@ -52,14 +59,19 @@ const Home = () => {
       <button onClick={handleCreatePoll}>Create Poll</button>
       <button onClick={handleCreateOrder}>Create Order</button>
       <h2>Polls</h2>
+      <input type="search" onChange={handlePollSearch} value={pollSearch} />
       <ul>
-        {polls.map((poll) => (
-          <PollsItem key={poll.id} data={poll} />
-        ))}
+        {!pollSearch.length
+          ? polls.map((poll) => (
+            <PollsItem key={poll.id} data={poll} />
+          ))
+          : searchPolls.map((poll) => (
+            <PollsItem key={poll.id} data={poll} />
+          ))}
       </ul>
       <h2>Active Orders</h2>
       <ul>
-        {activeOrders.map((order) => (
+        {activeOrders?.map((order) => (
           <ActiveOrderItem key={order.id} data={order} />
         ))}
       </ul>

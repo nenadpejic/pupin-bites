@@ -49,7 +49,7 @@ const PollInProgress = () => {
 
                 )}
             </div>
-            {createdPolls[0].includes(slug) ? <button onClick={handleClick}>Finish Poll</button> : null}
+            {createdPolls[0] ? (createdPolls[0].includes(slug) ? <button onClick={handleClick}>Finish Poll</button> : null) : null}
         </section>
     )
 }
