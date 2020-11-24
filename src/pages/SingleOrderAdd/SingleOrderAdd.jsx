@@ -20,6 +20,9 @@ const SingleOrderAdd = () => {
   // const pollId = "001a1b51-6c18-47ca-a2c5-81a3c8d354ef";
   // const [restaurantId,setRestaurantId] = useState(undefined)
   const restaurantId = order && order.restaurantId;
+  const [valid,setValid] = useState(true);
+  const [total,setTotal] = useState(0);
+
 
   //Hvatam jedan order
   useEffect(() => {
@@ -49,10 +52,18 @@ const SingleOrderAdd = () => {
     });
   }, []);
 
-  const deleteItem = (name, quantity, note) => {
+  const deleteItem = (name, quantity, note, price) => {
     let index = orderedMeal.findIndex(el => el.name === name && el.note === note && el.quantity === quantity);
-        orderedMeal.splice(index, 1);
-        console.log(orderedMeal)
+    orderedMeal.splice(index, 1);
+    setTotal(prev => prev - price * quantity);
+
+  };
+
+  const handlesValidation = () => {
+    setValid(false)
+    setTimeout(() => {
+      setValid(true)
+    }, 2000);
   };
 
   const handlePayload = (e) => {
@@ -65,7 +76,6 @@ const SingleOrderAdd = () => {
       };
     });
   };
-
 
   const resetInput = () => {
     setPayloadItem({
@@ -106,10 +116,12 @@ const SingleOrderAdd = () => {
     else {
       return [...prev]
     }})
+
     resetInput()
+    setTotal(prev => prev + payloadItem.quantity*mealPrice)
   };
 
-  const addItemsToOrder = ()=>{
+  const addItemsToOrder = () => {
       // Data example:
   // let data = {
   //  "consumer": "Veljko",
@@ -125,10 +137,11 @@ const SingleOrderAdd = () => {
     consumer: profile.firstName + ' ' + profile.lastName,
     payloads:payload
   }
-  
+  if(order.active === true) {
    addOrderItem(data,slug).then(res=>{
      console.log(res)
-   })
+   })}
+   else handlesValidation()
   }
 
   return (
@@ -140,18 +153,18 @@ const SingleOrderAdd = () => {
             <div className="singleMeal" key={el.id}>
               <p>{el.name}</p>
               <p>{el.price} USD </p>
-              <form >
+              <form>
+                <label>Add your note:</label>
                 <input
                   type="textBox"
                   onChange={handlePayload}
                   name="note"
-                  placeholder="Add your Note"
                 />
+                <label>Add quantity:</label>
                 <input
                   type="number"
                   onChange={handlePayload}
                   name="quantity"
-                  placeholder="Add quantity"
                   min="1"
                   step="1"
                 />
@@ -162,19 +175,25 @@ const SingleOrderAdd = () => {
       </div>
 
       <div>
-        {orderedMeal.map((el,idx)=>
+        {orderedMeal.map((el,idx) =>
           <div className='orderedItems ' key={idx}>
             <p>Name: {el.name}</p>
             <p>Price: {el.price} USD</p>
             <p>Quantity: {el.quantity}</p>
             <p>Note: {el.note}</p>
-            <button onClick={() => deleteItem(el.name, el.quantity, el.note)}>X</button>
+            <button onClick={() => deleteItem(el.name, el.quantity, el.note, el.price)}>X</button>
             <hr/>
           </div>
         )}
       </div>
       <div>
         <button onClick={addItemsToOrder}>Make Your Order</button>
+        {valid ? null : <p>This order is not active anymore.</p>}
+      </div>
+      <hr/>
+      <div>
+        <h2>Price:</h2>
+        <p>{total} USD</p>
       </div>
     </div>
   );
