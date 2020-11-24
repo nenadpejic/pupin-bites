@@ -1,3 +1,4 @@
+/*
 nav {
   background: rgb(230, 226, 226);
 }
@@ -28,4 +29,50 @@ li > p {
 p > span {
   font-weight: 800;
   margin-right: 10px;
+}
+*/
+
+/*SHOW TABS*/
+ /* Style the tab */
+ #home .tab {
+  overflow: hidden; 
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+#home .tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px; 
+} 
+
+#home .tab button.activeButton{
+  background-color:rgb(76,175,80);
+}
+
+/* Change background color of buttons on hover */
+#home .tab button:hover {
+  background-color:rgb(76,175,80);
+}
+
+/* Create an active/current tablink class */
+#home .tab button.active {
+  background-color:rgb(76,175,80);
+}
+
+/* Style the tab content */
+#home .tabcontent {
+  display: none; 
+  border: 1px solid #ccc;
+  border-top: none;
+} 
+
+
+
+/*******/
+#home .pollItem{
+  margin-bottom:15px;
 }
