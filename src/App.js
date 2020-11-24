@@ -2,19 +2,19 @@ import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import PrivateRoute from "./routes/PrivateRoute";
 import Welcome from "./pages/Welcome";
+import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import Signup from "./pages/Signup";
 import PollCreate from "./pages/PollCreate/PollCreate";
-import { Settings } from "./pages/Settings/Settings";
-import SingleOrderCreate from "./pages/SingleOrderAdd";
 import PollVote from "./pages/PollVote/PollVote";
 import PollComplete from "./pages/PollComplete/PollComplete";
+import { CreateOrder } from "./components/CreateOrder/CreateOrder";
+import SingleOrderCreate from "./pages/SingleOrderAdd";
+import { Settings } from "./pages/Settings/Settings";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
 import "./App.css";
-import { CreateOrder } from "./components/CreateOrder/CreateOrder";
 
 const App = () => {
   const auth = useContext(AuthContext);
@@ -48,10 +48,6 @@ const App = () => {
         <PollCreate />
       </PrivateRoute>
 
-      <PrivateRoute exact path="/settings">
-        <Settings />
-      </PrivateRoute>
-
       <PrivateRoute path="/poll-vote/:slug">
         <PollVote />
       </PrivateRoute>
@@ -63,8 +59,13 @@ const App = () => {
       <PrivateRoute path="/single-order-create/:slug">
         <SingleOrderCreate />
       </PrivateRoute>
+
       <PrivateRoute path='/create-order'>
-        <CreateOrder/>
+        <CreateOrder />
+      </PrivateRoute>
+
+      <PrivateRoute exact path="/settings">
+        <Settings />
       </PrivateRoute>
     </Router>
   );
