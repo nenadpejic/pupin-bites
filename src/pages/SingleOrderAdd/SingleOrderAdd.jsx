@@ -8,6 +8,7 @@ import {
   getOneOrder,
   getProfile,
 } from "../../services/services";
+import { SingleMeal } from "./SingleMeal";
 import "./singleOrderAdd.css";
 // import { formatDate } from "../../utilities/utilities";
 
@@ -35,7 +36,7 @@ const SingleOrderAdd = () => {
         const data = res.data;
         setOrder(data);
         console.log(res.data);
-        // setRestaurantId(order && order.restaurantId)
+        
       })
       .catch((err) => {
         console.log(err);
@@ -56,7 +57,7 @@ const SingleOrderAdd = () => {
     });
   }, []);
 
-  const handlePayload = (e) => {
+  const handlePayloadItem = (e) => {
     const { name, value } = e.target;
 
     setPayloadItem((prevRes) => {
@@ -94,7 +95,7 @@ const SingleOrderAdd = () => {
     setOrderedMeal((prev) => {
       return [
         ...prev,
-        { name: mealName, price: mealPrice, quantity: payloadItem.quantity },
+        { name: mealName, price: mealPrice, quantity: payloadItem.quantity }
       ];
     });
   };
@@ -127,19 +128,20 @@ const SingleOrderAdd = () => {
         {meals &&
           meals.map((el) => (
             <div className="singleMeal" key={el.id}>
-              <p>{el.name}</p>
+              <SingleMeal meal={el} setPayload={setPayload}/>
+              {/* <p>{el.name}</p>
               <p>{el.price} RSD </p>
               <form>
                 <input
                   type="textBox"
-                  onChange={handlePayload}
+                  onChange={handlePayloadItem}
                   // value={payloadItem.note}
                   name="note"
                   placeholder="Add your Note"
                 />
                 <input
                   type="number"
-                  onChange={handlePayload}
+                  onChange={handlePayloadItem}
                   // value={payloadItem.quantity}
                   name="quantity"
                   placeholder="Add quantity"
@@ -147,7 +149,7 @@ const SingleOrderAdd = () => {
               </form>
               <button onClick={() => addOrder(el.id, el.name, el.price)}>
                 Add Item
-              </button>
+              </button> */}
             </div>
           ))}
       </div>
