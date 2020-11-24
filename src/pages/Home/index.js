@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllPolls, getManyOrders } from "../../services/services";
+import { getAllPolls, getAllOrders } from "../../services/services";
 import { useHistory } from "react-router-dom";
 import PollsItem from "../../components/PollsItem";
 import ActiveOrderItem from "../../components/ActiveOrderItem";
@@ -34,9 +34,9 @@ const Home = () => {
 
   //Hvatam aktivne ordere
   useEffect(() => {
-    getManyOrders()
+    getAllOrders()
       .then((res) => {
-        const data = res.data.data;
+        const data = res.data;
         setActiveOrders(data);
       })
       .catch((err) => {
@@ -59,7 +59,7 @@ const Home = () => {
       </ul>
       <h2>Active Orders</h2>
       <ul>
-        {activeOrders.map((order) => (
+        {activeOrders?.map((order) => (
           <ActiveOrderItem key={order.id} data={order} />
         ))}
       </ul>
