@@ -20,7 +20,7 @@ const PollInfo = (props)=>{
     return( 
         <table className="pollInfo">
             <thead>
-            <tr><th colSpan="3" style={{textAlign:"center"}}>{pollName}</th></tr>
+            <tr style={{height:"2em"}}><th colSpan="3" style={{textAlign:"center"}}>{pollName}</th></tr>
             </thead>
             <tbody>
             <tr><th>Start</th><td colSpan="2">{showTime(pollCreated)} </td></tr>
