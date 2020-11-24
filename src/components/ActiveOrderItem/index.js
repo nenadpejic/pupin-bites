@@ -5,7 +5,7 @@ const ActiveOrderItem = ({ data }) => {
   const history = useHistory();
 
   const handleActiveOrder = (e) => {
-    history.push(`/single-order-create/${e}`);
+    history.push(`/single-order-add/${e}`);
   };
 
   return (

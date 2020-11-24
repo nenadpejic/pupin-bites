@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getOnePoll } from '../../services/services'
 
-
 const PollInProgress = () => {
     const [poll, setPoll] = useState([])
     const [restaurants, setRestaurants] = useState([])
@@ -39,7 +38,7 @@ const PollInProgress = () => {
 
                 )}
             </div>
-            {/* <button onClick={handleClick}>Glasaj</button> */}
+            {/* <button onClick={handleClick}>Finish Poll</button> */}
         </section>
     )
 }

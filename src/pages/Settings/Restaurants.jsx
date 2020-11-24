@@ -108,6 +108,7 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
         paginate(restaurants)[page] !== undefined ? (
           paginate(restaurants)[page].map((el) => (
             <div key={el.id} className="single-restaurant">
+              
               <p>{el.name}</p>
               <p>{el.address}</p>
               <button
@@ -123,6 +124,7 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
           <div className="restaurants-wrapper">
             {filteredRestaurants.slice(0, 4).map((el) => (
               <div key={el.id} className="single-restaurant">
+                
                 <p>{el.name}</p>
                 <p>{el.address}</p>
                 <button

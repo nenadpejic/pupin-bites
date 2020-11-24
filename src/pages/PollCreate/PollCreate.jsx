@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { map, uniqBy } from 'lodash'
 import Main from '../../components/Main' 
-
+import RestaurantItem from '../../components/RestaurantItem'
 //Css
-import './CreatePoll.css'
+import './PollCreate.css'
 
 // Services
 import { getAllRestaurants, createPoll } from '../../services/services.js'
-import RestaurantItem from '../RestaurantItem'
 
-const CreatePoll = () => {
+const PollCreate = () => {
     const [change, setChange] = useState('')
     const [filter, setFilter] = useState([])
     const [selected, setSelected] = useState([])
@@ -22,7 +21,7 @@ const CreatePoll = () => {
     const [duration, setDuration] = useState(15)
     // Token
     const tokenRef = useRef(localStorage.getItem("Token"))
-    const token = tokenRef.current 
+    const token = tokenRef.current
 
     useEffect(() => {
         getAllRestaurants(token).then(res => {
@@ -43,14 +42,11 @@ const CreatePoll = () => {
             value > 59 ? setMinutes(e.target.value) : setMinutes(value)
         }
         setDuration(Number(hours) * 60 + Number(minutes))
-
-     
     }
     // Handeling input change
     const handleChange = (e) => {
         setChange(e.target.value)
         change <= 0 ? setFilter([]) : setFilter(restaurants.filter(el => el.name.toLowerCase().includes(change)))
-
     }
     // Add button
     const handleClickAdd = (restaurant, e) => {
@@ -58,7 +54,6 @@ const CreatePoll = () => {
         setSelected(selected.concat(restaurant))
         setRestaurants(restaurants.filter(el => el.id !== id))
         setFilter(filter.filter(el => el.id !== id))
-
     }
     // Remove button
     const handleClickRemove = (e) => {
@@ -66,7 +61,6 @@ const CreatePoll = () => {
         setSelected(selected.filter(el => el.id !== id))
         setRestaurants(restaurants.concat(selected.filter(el => el.id === id)))
         setFilter(filter.concat(selected.filter(el => el.id === id)))
-
     }
     // Submit button
     const handleSubmit = () => {
@@ -133,4 +127,4 @@ const CreatePoll = () => {
      </>
     )
 }
-export default CreatePoll
+export default PollCreate

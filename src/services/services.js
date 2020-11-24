@@ -236,3 +236,31 @@ export const deleteRestaurant = (restaurantID) => {
 
   return axios.delete(`${baseUrl}/restaurants/${restaurantID}`, getToken())
 };
+
+const getApiKey = ()=>{
+  let config = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-apikey": "5f63daa75313511c55fc97b7",
+    }
+  };
+  return config
+}
+
+
+export const postCheckData = (checkData) => {
+
+  // Data example:
+  // {
+  // email:"email@something.com",
+  // poll:'PollId',
+  // date:"22.11.2020"
+  //}
+ let data = JSON.stringify(checkData)
+
+return axios.post('https://gamestorage-9cd1.restdb.io/rest/pupinbites',data,getApiKey());
+};
+
+export const getCheckData = ()=>{
+  return axios.get('https://gamestorage-9cd1.restdb.io/rest/pupinbites',getApiKey());
+}
