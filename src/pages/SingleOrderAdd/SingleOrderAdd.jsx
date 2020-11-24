@@ -147,7 +147,7 @@ const SingleOrderAdd = () => {
       </div>
 
       <div>
-        {orderedMeal.map(el,idx=>
+        {orderedMeal.map((el,idx)=>
           <div className='orderedItems ' key={idx}>
             <p>Name: {el.name}</p>
             <p>Price: {el.price}</p>
