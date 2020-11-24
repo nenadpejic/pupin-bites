@@ -4,7 +4,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Welcome from "./pages/Welcome";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
+// import Home from "./pages/Home";
 import PollCreate from "./pages/PollCreate/PollCreate";
 import PollVote from "./pages/PollVote/PollVote";
 import PollComplete from "./pages/PollComplete/PollComplete";
@@ -42,7 +42,7 @@ const App = () => {
       />
 
       <PrivateRoute path="/home">
-        <Home />
+        {/* <Home /> */}
       </PrivateRoute>
 
       <PrivateRoute exact path="/poll-create">

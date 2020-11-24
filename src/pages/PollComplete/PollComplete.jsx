@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { getOnePoll } from '../../services/services'
+import { getOnePoll, updatePoll } from '../../services/services'
 
 const PollInProgress = () => {
     const [poll, setPoll] = useState([])
@@ -28,6 +28,10 @@ const PollInProgress = () => {
     }, [slug, votes])
 
     const handleClick = () => {
+        let data = {
+            "active": false
+        }
+        updatePoll(slug, data)
         history.push(`/single-order-create/`)
     }
 

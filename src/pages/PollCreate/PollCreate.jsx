@@ -3,12 +3,13 @@ import { map, uniqBy } from 'lodash'
 import Main from '../../components/Main'
 import RestaurantItem from '../../components/RestaurantItem'
 import { getProfile, postCheckData } from '../../services/services'
+
 //Css
 import './PollCreate.css'
 
 // Services
 import { getAllRestaurants, createPoll } from '../../services/services.js'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const PollCreate = () => {
     const [change, setChange] = useState('')
@@ -20,8 +21,8 @@ const PollCreate = () => {
 
     // States for time calculation
     const [time, setTime] = useState('')
-    const [hours, setHours] = useState(0)
-    const [minutes, setMinutes] = useState(15)
+    const [hoursToEnd, setHoursToEnd] = useState(0)
+    const [minutesToEnd, setMinutesToEnd] = useState(15)
     const [duration, setDuration] = useState(15)
     // Token
     const tokenRef = useRef(localStorage.getItem("Token"))
@@ -42,17 +43,21 @@ const PollCreate = () => {
 
     // Handeling hours
     const handleTime = (e) => {
-        setTime(new Date().toString())
         let name = e.target.name
         let value = e.target.value
 
         if (name === 'hours') {
-            (value > 24) ? setHours(e.target.value) : setHours(value)
+            (value > 24) ? setHoursToEnd(e.target.value) : setHoursToEnd(value)
         }
         else if (name === 'minutes') {
-            value > 59 ? setMinutes(e.target.value) : setMinutes(value)
+            value > 59 ? setMinutesToEnd(e.target.value) : setMinutesToEnd(value)
         }
-        setDuration(Number(hours) * 60 + Number(minutes))
+        setDuration(Number(hoursToEnd) * 60 + Number(minutesToEnd))
+
+        let timer = new Date()
+        timer.setHours(timer.getHours() + parseInt(hoursToEnd))
+        timer.setMinutes(timer.getMinutes() + parseInt(minutesToEnd))
+        setTime(timer.toString(','))
     }
     // Handeling input change
     const handleChange = (e) => {
@@ -87,10 +92,6 @@ const PollCreate = () => {
             pollId.push(res.data.id)
             localStorage.setItem('createPoll', pollId)
 
-        })
-
-        //Redirect on click
-        setTimeout(() => {
             let info = {
                 'email': email,
                 'poll': currentPoll,
@@ -98,7 +99,11 @@ const PollCreate = () => {
             }
             postCheckData(info)
             return history.push(`/poll-vote/${currentPoll}`)
-        }, 1500)
+        })
+
+        // //Redirect on click
+        // setTimeout(() => {
+        // }, 1500)
     }
     const displayResults = selected.length === 0 ? "none" : "block";
 
