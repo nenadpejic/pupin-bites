@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { map, uniqBy } from 'lodash'
 import Main from '../../components/Main'
 import RestaurantItem from '../../components/RestaurantItem'
+import { getProfile, postCheckData } from '../../services/services'
 //Css
 import './PollCreate.css'
 
@@ -15,8 +16,10 @@ const PollCreate = () => {
     const [selected, setSelected] = useState([])
     const [restaurants, setRestaurants] = useState([])
     const [pollName, setPollName] = useState('')
+    const [email, setEmail] = useState('')
 
     // States for time calculation
+    const [time, setTime] = useState('')
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(15)
     const [duration, setDuration] = useState(15)
@@ -32,10 +35,14 @@ const PollCreate = () => {
             let tmp = res.data
             setRestaurants(map(uniqBy(tmp, 'name')))
         })
+        getProfile().then(res => {
+            setEmail(res.data.email)
+        })
     }, [token])
 
     // Handeling hours
     const handleTime = (e) => {
+        setTime(new Date().toString())
         let name = e.target.name
         let value = e.target.value
 
@@ -81,27 +88,33 @@ const PollCreate = () => {
             localStorage.setItem('createPoll', pollId)
 
         })
+
+        //Redirect on click
         setTimeout(() => {
+            let info = {
+                'email': email,
+                'poll': currentPoll,
+                'date': time
+            }
+            postCheckData(info)
             return history.push(`/poll-vote/${currentPoll}`)
-        }, 1000)
+        }, 1500)
     }
     const displayResults = selected.length === 0 ? "none" : "block";
-
 
     return (
         <>
             <Main>
                 <div>
-
                     <h1>Create Poll</h1>
                     <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required />
                     <div className="pollDuration">
                         <div className="title">Set Duration</div>
                         <div className="hours">
-                            <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={(e) => handleTime(e)} required />
+                            <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={handleTime} required />
                         </div>
                         <div className="minutes">
-                            <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={(e) => handleTime(e)} required />
+                            <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={handleTime} required />
                         </div>
                     </div>
                     <input type="text" placeholder="Search Restaurant" onChange={handleChange} />
@@ -134,8 +147,6 @@ const PollCreate = () => {
                         <button className="bigButton" type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
                     </div>
                 </div>
-
-
             </Main>
         </>
     )
