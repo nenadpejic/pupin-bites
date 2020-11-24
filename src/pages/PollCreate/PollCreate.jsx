@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { map, uniqBy } from 'lodash'
 import Main from '../../components/Main'
-import Footer from '../../components/Footer'
 
 //Css
 import './PollCreate.css'
 
 // Services
 import { getAllRestaurants, createPoll } from '../../services/services.js'
+import { Redirect, useHistory } from 'react-router-dom'
 
 const PollCreate = () => {
     const [change, setChange] = useState('')
@@ -23,6 +23,9 @@ const PollCreate = () => {
     // Token
     const tokenRef = useRef(localStorage.getItem("Token"))
     const token = tokenRef.current
+
+    // Redirect
+    const history = useHistory()
 
     useEffect(() => {
         getAllRestaurants(token).then(res => {
@@ -69,10 +72,20 @@ const PollCreate = () => {
             "label": pollName,
             "restaurants": selected.map(el => el.id)
         }
+        let currentPoll
         createPoll(data).then(res => {
-            console.log(res.data)
+            currentPoll = res.data.id
+            let pollId = []
+            pollId.push(localStorage.getItem('createPoll'))
+            pollId.push(res.data.id)
+            localStorage.setItem('createPoll', pollId)
+
         })
+        setTimeout(() => {
+            return history.push(`/poll-vote/${currentPoll}`)
+        }, 1000)
     }
+
 
     return (
         <>
