@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
-// import RestaurantItem from "../../components/RestaurantItem";
 import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/services";
 import "./singleOrderAdd.css";
 // import { formatDate } from "../../utilities/utilities";
+// import RestaurantItem from "../../components/RestaurantItem";
+
 
 const SingleOrderAdd = () => {
+
   const [order, setOrder] = useState({});
   const [meals, setMeals] = useState(undefined);
   const [profile, setProfile] = useState(undefined);
-  const [payload,setPayload] = useState([])
+  const [payload,setPayload] = useState([]);
   const [payloadItem, setPayloadItem] = useState({ quantity: 0, mealId: "", note: "" });
-  const [orderedMeal,setOrderedMeal] = useState([])
+  const [orderedMeal,setOrderedMeal] = useState([]);
   // const [quantity,setQuantity] = useState(0)
   const { slug } = useParams();
   // const pollId = "001a1b51-6c18-47ca-a2c5-81a3c8d354ef";
@@ -47,6 +49,12 @@ const SingleOrderAdd = () => {
     });
   }, []);
 
+  const deleteItem = (name, quantity, note) => {
+    let index = orderedMeal.findIndex(el => el.name === name && el.note === note && el.quantity === quantity);
+        orderedMeal.splice(index, 1);
+        console.log(orderedMeal)
+  };
+
   const handlePayload = (e) => {
     const { name, value } = e.target;
 
@@ -57,6 +65,8 @@ const SingleOrderAdd = () => {
       };
     });
   };
+
+
   const resetInput = () => {
     setPayloadItem({
       quantity: 0,
@@ -65,10 +75,9 @@ const SingleOrderAdd = () => {
     });
   };
 
-  const addOrder = (mealId,mealName,mealPrice) => {
+  const addItem = (mealId,mealName,mealPrice) => {
    
-
-    if (payloadItem.quantity !== "0" && payloadItem.quantity !== "" && payload.quantity!==0) {
+    if (payloadItem.quantity >= 1) {
       //to check if input is valid
       payloadItem.quantity = Number(payloadItem.quantity);
       payloadItem.mealId = mealId;
@@ -78,6 +87,7 @@ const SingleOrderAdd = () => {
           payloadItem
       ]
       })
+
     }
 
     else setPayload(prev=>{
@@ -87,11 +97,16 @@ const SingleOrderAdd = () => {
     })
     
     setOrderedMeal(prev=>{
+      if(payloadItem.quantity >= 1) {
       return [
         ...prev,
-        {name:mealName,price:mealPrice,quantity:payloadItem.quantity}
+        {name:mealName,price:mealPrice,quantity:payloadItem.quantity,note:payloadItem.note}
       ]
-    })
+    }
+    else {
+      return [...prev]
+    }})
+    resetInput()
   };
 
   const addItemsToOrder = ()=>{
@@ -107,9 +122,10 @@ const SingleOrderAdd = () => {
   //   ]
   // }
   const data = {
-    consumer: profile.firstName+' '+profile.lastName,
+    consumer: profile.firstName + ' ' + profile.lastName,
     payloads:payload
   }
+  
    addOrderItem(data,slug).then(res=>{
      console.log(res)
    })
@@ -123,25 +139,24 @@ const SingleOrderAdd = () => {
           meals.map((el) => (
             <div className="singleMeal" key={el.id}>
               <p>{el.name}</p>
-              <p>{el.price} RSD </p>
+              <p>{el.price} USD </p>
               <form >
                 <input
                   type="textBox"
                   onChange={handlePayload}
-                  // value={payloadItem.note}
                   name="note"
                   placeholder="Add your Note"
                 />
                 <input
                   type="number"
                   onChange={handlePayload}
-                  // value={payloadItem.quantity}
                   name="quantity"
                   placeholder="Add quantity"
+                  min="1"
+                  step="1"
                 />
-                
               </form>
-              <button onClick={()=>addOrder(el.id,el.name,el.price)}>Add Item</button>
+              <button onClick={()=>addItem(el.id,el.name,el.price,el.note)}>Add Item</button>
             </div>
           ))}
       </div>
@@ -150,9 +165,11 @@ const SingleOrderAdd = () => {
         {orderedMeal.map((el,idx)=>
           <div className='orderedItems ' key={idx}>
             <p>Name: {el.name}</p>
-            <p>Price: {el.price}</p>
-        <p>Quantity: {el.quantity}</p>
-        <hr/>
+            <p>Price: {el.price} USD</p>
+            <p>Quantity: {el.quantity}</p>
+            <p>Note: {el.note}</p>
+            <button onClick={() => deleteItem(el.name, el.quantity, el.note)}>X</button>
+            <hr/>
           </div>
         )}
       </div>
