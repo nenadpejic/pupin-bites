@@ -35,18 +35,21 @@ const NavBar = () => {
           </p>
           <span>User: {user?.firstName + " " + user?.lastName}</span>
           <button onClick={handleClick}>Logout</button>
+          <button>
+            <Link to="/settings">Settins</Link>
+          </button>
         </>
       ) : (
-          <>
-            <p>Logo</p>
-            <button>
-              <Link to="/login">Log In</Link>
-            </button>
-            <button>
-              <Link to="/signup">Sign Up</Link>
-            </button>
-          </>
-        )}
+        <>
+          <p>Logo</p>
+          <button>
+            <Link to="/login">Log In</Link>
+          </button>
+          <button>
+            <Link to="/signup">Sign Up</Link>
+          </button>
+        </>
+      )}
     </nav>
   );
 };

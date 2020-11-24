@@ -26,7 +26,7 @@ const PollsItem = ({ data }) => {
         <span>Created:</span> {createdFormater}
       </p>
       <p>
-        <span>Active:</span> {data.active}
+        <span>Active:</span> {data.active.toString()}
       </p>
     </li>
   );
