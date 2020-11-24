@@ -36,10 +36,7 @@ const PollVote = () => {
     // Handle change of poll id
     const handleChange = (e) => {
         setId(e.target.id)
-        if(id === ''){
-            alert("You didn't select a restaurant!");
-            return;
-        }
+        
         //let id = selectedRestaurant;
     }
     // Handle Submitt
@@ -63,7 +60,7 @@ const PollVote = () => {
                         <label for={restaurant.id}> 
                         <RestaurantItem restaurant={restaurant}/>
                         </label>
-                        <input type="radio" name="chose" id={restaurant.id} onChange={handleChange} />
+                        <input type="radio" name="choose" id={restaurant.id} onChange={handleChange} />
                     </div>
                 )}
             </div>

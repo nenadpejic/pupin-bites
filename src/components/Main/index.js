@@ -1,19 +1,17 @@
 import React from 'react'; 
-import Navigation from '../Navigation';
+import NavBar from '../NavBar';
 import Footer from '../Footer'
 import './style.css';
 
 const Main = ({children}) => { 
     return (  
-        <>
-            <Navigation/>
-            <div className="container" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
-                <div className="children">
-                    {children}
-                </div>
+        <div class="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
+            <NavBar/>
+            <div className="container" >
+                {children}
             </div>
-            <Footer/> 
-        </>
+            <Footer/>
+        </div>
     )
 }
 

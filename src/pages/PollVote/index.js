@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getOnePoll } from "../../services/services";
-import Navigation from "../../components/Navigation";
+import { getOnePoll } from "../../services/services"; 
 import Main from "../../components/Main";
 import PollInfo from "../../components/PollInfo";
 
