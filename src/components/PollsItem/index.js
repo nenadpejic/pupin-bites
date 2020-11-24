@@ -41,6 +41,20 @@ const PollsItem = ({ poll }) => {
 
 <tr key={poll.id} onClick={() => handlePollVote(poll.id)}><td>{poll.label}</td><td>{showTime(poll.created)}</td><td>{showTime(poll.actived)}</td></tr>
 
+    <li key={data.id} prop={data.id} onClick={() => handlePollVote(data.id)}>
+      <p>
+        <span>Label:</span> {data.label}
+      </p>
+      <p>
+        <span>ID:</span> {data.id}
+      </p>
+      <p>
+        <span>Created:</span> {createdFormater}
+      </p>
+      <p>
+        <span>Active:</span> {data.active.toString()}
+      </p>
+    </li>
   );
 };
 

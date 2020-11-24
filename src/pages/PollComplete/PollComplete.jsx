@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import { getOnePoll } from '../../services/services'
 
 const PollInProgress = () => {
@@ -7,6 +7,14 @@ const PollInProgress = () => {
     const [restaurants, setRestaurants] = useState([])
     const [votes, SetVotes] = useState([])
     const { slug } = useParams()
+
+    //Local Storige Ref
+    const createdPollsRef = useRef(localStorage.getItem("createPoll") ? localStorage.getItem("createPoll").split(',') : null)
+    const createdPolls = new Array(createdPollsRef.current)
+
+    // Redirect
+    const history = useHistory()
+
 
     useEffect(() => {
         getOnePoll(slug).then(res => {
@@ -19,9 +27,12 @@ const PollInProgress = () => {
         })
     }, [slug, votes])
 
+    const handleClick = () => {
+        history.push(`/single-order-create/`)
+    }
+
     return (
         <section>
-            {/* {voted ? <Redirect to={`/poll-in-progress/${slug}`} /> : null} */}
             <div key={poll.id}>
                 <h3>Poll Name: {poll.label}</h3>
                 <h3>Poll Created: {poll.created}</h3>
@@ -38,7 +49,7 @@ const PollInProgress = () => {
 
                 )}
             </div>
-            {/* <button onClick={handleClick}>Finish Poll</button> */}
+            {createdPolls[0] ? (createdPolls[0].includes(slug) ? <button onClick={handleClick}>Finish Poll</button> : null) : null}
         </section>
     )
 }

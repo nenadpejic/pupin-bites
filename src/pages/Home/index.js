@@ -8,9 +8,15 @@ import Main from "../../components/Main";
 import "./style.css";
 
 const Home = () => {
-  const [polls, setPolls] = useState([]);
-  const [activeOrders, setActiveOrders] = useState([]);
   const history = useHistory();
+  //Polls
+  const [polls, setPolls] = useState([]);
+  const [searchPolls, setSearchPolls] = useState([]);
+  const [pollSearch, setPollSearch] = useState("");
+  //Orders
+  const [activeOrders, setActiveOrders] = useState([]);
+  const [searchOrders, setSearchOrders] = useState([]);
+  const [orderSearch, setOrderSearch] = useState("");
   const [activeButton,setActiveButton] = useState(1);
   
   const handleCreatePoll = () => {
@@ -125,6 +131,55 @@ const Home = () => {
         </div>
       </Main>
 
+  const handlePollSearch = (e) => {
+    setPollSearch(e.target.value);
+    setSearchPolls(polls.filter((elem) => elem.label.includes(e.target.value)));
+  };
+
+  const handleOrderSearch = (e) => {
+    setOrderSearch(e.target.value);
+    setSearchOrders(
+      activeOrders.filter((elem) => elem.label.includes(e.target.value))
+    );
+  };
+
+  return (
+    <div id="home">
+      {/* Main */}
+      <NavBar />
+      <h1>Home</h1>
+      <button onClick={handleCreatePoll}>Create Poll</button>
+      <button onClick={handleCreateOrder}>Create Order</button>
+      <h2>Polls</h2>
+      <input
+        type="search"
+        onChange={handlePollSearch}
+        value={pollSearch}
+        placeholder="Search for poll..."
+      />
+      <ul>
+        {!pollSearch.length
+          ? polls.map((poll) => <PollsItem key={poll.id} data={poll} />)
+          : searchPolls.map((poll) => <PollsItem key={poll.id} data={poll} />)}
+      </ul>
+      <h2>Active Orders</h2>
+      <input
+        type="search"
+        onChange={handleOrderSearch}
+        vaule={orderSearch}
+        placeholder="Search for order..."
+      />
+      <ul>
+        {!orderSearch.length
+          ? activeOrders?.map((order) => (
+              <ActiveOrderItem key={order.id} data={order} />
+            ))
+          : searchOrders?.map((order) => (
+              <ActiveOrderItem key={order.id} data={order} />
+            ))}
+      </ul>
+      <Footer />
+    </div>
   );
 };
 export default Home;
