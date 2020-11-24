@@ -7,6 +7,7 @@ const PollInProgress = () => {
     const [restaurants, setRestaurants] = useState([])
     const [votes, SetVotes] = useState([])
     const { slug } = useParams()
+    const [winner, setWinner] = useState()
 
     //Local Storige Ref
     const createdPollsRef = useRef(localStorage.getItem("createPoll") ? localStorage.getItem("createPoll").split(',') : null)
@@ -21,7 +22,7 @@ const PollInProgress = () => {
             setPoll(res.data)
             SetVotes(res.data.votes)
             setRestaurants(res.data.restaurants.map(el => Object.assign(el, { vote: [...votes.filter(vote => vote.restaurantId === el.id)] })))
-
+            setWinner((restaurants.filter(el => Math.max(el.vote.length) ? el : null)))
         }).catch((err) => {
             console.log(err);
         })
@@ -32,6 +33,9 @@ const PollInProgress = () => {
             "active": false
         }
         updatePoll(slug, data)
+        let tmp = winner.map(el => el.id.toString())
+        localStorage.setItem('orderPollId', slug)
+        localStorage.setItem('orderRestaurantId', tmp.toString())
         history.push(`/single-order-create/`)
     }
 
@@ -48,7 +52,7 @@ const PollInProgress = () => {
                     <div key={restaurant.id} id={restaurant.id} className="poll">
                         <div>{restaurant.name}</div>
                         <div>{restaurant.address}</div>
-                        <div>Votes: {restaurant.vote.length}</div>
+                        <div value={restaurant.vote.length}>Votes: {restaurant.vote.length}</div>
                     </div>
 
                 )}
