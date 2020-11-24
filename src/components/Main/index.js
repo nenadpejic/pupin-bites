@@ -5,7 +5,7 @@ import './style.css';
 
 const Main = ({children}) => { 
     return (  
-        <div class="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
+        <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
             <NavBar/>
             <div className="container" >
                 {children}
