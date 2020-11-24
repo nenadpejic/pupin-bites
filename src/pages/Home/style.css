@@ -1,31 +1,49 @@
-nav {
-  background: rgb(230, 226, 226);
+/* SHOW TABS */
+/* Style the tab */
+ #home .tab {
+  overflow: hidden; 
+  background-color: #f1f1f1;
 }
 
-ul {
-  width: 600px;
-  margin: 20px auto 10px auto;
-  height: 500px;
-  overflow-y: scroll;
-  background: rgb(223, 204, 204);
-}
-
-li {
-  list-style-type: none;
-  border: 5px solid black;
-  max-width: 500px;
-  margin: 0 0 20px 0;
+/* Style the buttons that are used to open the tab content */
+#home .tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
   cursor: pointer;
+  padding: 14px 16px; 
+} 
+
+#home .tab button.activeButton{
+  background-color:rgb(76,175,80);
 }
 
-li > p {
-  border: 1px solid black;
-  padding: 0.5em;
-  text-align: left;
-  margin: 0;
+/* Change background color of buttons on hover */
+#home .tab button:hover {
+  background-color:rgb(76,175,80);
 }
 
-p > span {
-  font-weight: 800;
-  margin-right: 10px;
+/* Style the tab content */
+#home .tabcontent {
+  border: 1px solid #ccc;
+  border-top: none;
+} 
+
+/*******/
+#home .pollItem{
+  margin-bottom:15px;
+}
+
+#home input {
+  margin-top: 0.5rem;
+}
+
+#home > button {
+  padding: 1rem;
+  background-color: rgb(76,175,80);
+  margin-bottom: 1rem;
+}
+#home > button:not(:first-child) {
+  margin-left: 2rem;
 }

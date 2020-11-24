@@ -3,18 +3,18 @@ import { getAllPolls, getAllOrders } from "../../services/services";
 import { useHistory } from "react-router-dom";
 import PollsItem from "../../components/PollsItem";
 import ActiveOrderItem from "../../components/ActiveOrderItem";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
+import Main from "../../components/Main";
 import "./style.css";
 
 const Home = () => {
   const history = useHistory();
-  //Polls
+  const [activeButton, setActiveButton] = useState(0);
+  // Polls
   const [polls, setPolls] = useState([]);
   const [searchPolls, setSearchPolls] = useState([]);
   const [pollSearch, setPollSearch] = useState("");
-  //Orders
-  const [activeOrders, setActiveOrders] = useState([]);
+  // Orders
+  const [orders, setOrders] = useState([]);
   const [searchOrders, setSearchOrders] = useState([]);
   const [orderSearch, setOrderSearch] = useState("");
 
@@ -26,7 +26,7 @@ const Home = () => {
     history.push("/single-order-create");
   };
 
-  //Hvatam listu anketa iz baze
+  // Hvatam listu anketa iz baze
   useEffect(() => {
     getAllPolls()
       .then((res) => {
@@ -38,12 +38,12 @@ const Home = () => {
       });
   }, []);
 
-  //Hvatam aktivne ordere
+  // Hvatam listu ordere iz baze
   useEffect(() => {
     getAllOrders()
       .then((res) => {
         const data = res.data;
-        setActiveOrders(data);
+        setOrders(data);
       })
       .catch((err) => {
         console.log(err);
@@ -58,47 +58,71 @@ const Home = () => {
   const handleOrderSearch = (e) => {
     setOrderSearch(e.target.value);
     setSearchOrders(
-      activeOrders.filter((elem) => elem.label.includes(e.target.value))
+      orders.filter((elem) => elem.label.includes(e.target.value))
     );
   };
 
   return (
-    <div id="home">
-      {/* Main */}
-      <NavBar />
-      <h1>Home</h1>
-      <button onClick={handleCreatePoll}>Create Poll</button>
-      <button onClick={handleCreateOrder}>Create Order</button>
-      <h2>Polls</h2>
-      <input
-        type="search"
-        onChange={handlePollSearch}
-        value={pollSearch}
-        placeholder="Search for poll..."
-      />
-      <ul>
-        {!pollSearch.length
-          ? polls.map((poll) => <PollsItem key={poll.id} data={poll} />)
-          : searchPolls.map((poll) => <PollsItem key={poll.id} data={poll} />)}
-      </ul>
-      <h2>Active Orders</h2>
-      <input
-        type="search"
-        onChange={handleOrderSearch}
-        vaule={orderSearch}
-        placeholder="Search for order..."
-      />
-      <ul>
-        {!orderSearch.length
-          ? activeOrders?.map((order) => (
-              <ActiveOrderItem key={order.id} data={order} />
-            ))
-          : searchOrders?.map((order) => (
-              <ActiveOrderItem key={order.id} data={order} />
-            ))}
-      </ul>
-      <Footer />
-    </div>
-  );
+    <Main>
+      <div id="home">
+        <button onClick={handleCreatePoll}>Create Poll</button>
+        <button onClick={handleCreateOrder}>Create Order</button>
+
+        <div className="tab">
+          <button className={activeButton === 0 ? "activeButton" : ""}
+            onClick={() => {
+              setActiveButton(0)
+            }}>Active Polls</button>
+          <button className={activeButton === 1 ? "activeButton" : ""}
+            onClick={() => {
+              setActiveButton(1)
+            }}>Active Orders</button>
+        </div>
+        {!activeButton
+          ? <div id="Polls" className="tabcontent">
+            <div className="pollList" >
+              <input
+                type="search"
+                onChange={e => handlePollSearch(e)}
+                // value={pollSearch}
+                placeholder="Search for poll..."
+              />
+              <table>
+                <thead>
+                  <tr><th>Poll Name</th><th>Poll Start</th><th>Poll End</th></tr>
+                </thead>
+                <tbody>
+                  {!pollSearch.length
+                    ? polls.map((poll) => <PollsItem key={poll.id} poll={poll} />)
+                    : searchPolls.map((poll) => <PollsItem key={poll.id} poll={poll} />)}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          : <div id="Orders" className="tabcontent">
+            <div className="orders">
+              <input
+                type="search"
+                onChange={e => handleOrderSearch(e)}
+                // vaule={orderSearch}
+                placeholder="Search for order..."
+              />
+              <table>
+                <thead><tr><th>Status</th><th>Time</th><th>Poll Name</th></tr></thead>
+                <tbody>
+                  {!orderSearch.length
+                    ? orders?.map((order) => (
+                      <ActiveOrderItem key={order.id} order={order} />
+                    ))
+                    : searchOrders?.map((order) => (
+                      <ActiveOrderItem key={order.id} order={order} />
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>}
+      </div>
+    </Main>
+  )
 };
 export default Home;
