@@ -4,23 +4,26 @@ import {
   getCheckData,
   getOneRestaurant,
   getProfile,
-  getAllRestaurants
+  getAllRestaurants,
 } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
+import { useHistory } from "react-router-dom";
 
-export const CreateOrder = () => {
+export const SingleOrderCreate = () => {
+  const history = useHistory();
   const [restaurantInfo, setRestaurantInfo] = useState("");
   const [orderInput, setOrderInput] = useState("");
   const [profile, setProfile] = useState("");
-  const [pollCreator, setPollCreator] = useState(undefined);
+  const [pollCreator, setPollCreator] = useState(true);
   const [restaurants, setRestaurants] = useState([]);
-  const [selectedRestaurantId,setSelectedRestaurantId]= useState('')
+  const [selectedRestaurantId, setSelectedRestaurantId] = useState("");
+  const [selectedRestaurantName, setSelectedRestaurantName] = useState("");
   const [page, setPage] = useState(0);
   const [filterInput, setFilterInput] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const pollId = "001a1b51-6c18-47ca-a2c5-81a3c8d354e";
+  const pollId = "001a1b51-6c18-47ca-a2c5-81a3c8d354ef";
   const restaurantId = "07b560b2-4cab-4bc4-a04b-8c8190ae018d";
-  
+
   useEffect(() => {
     getOneRestaurant(restaurantId).then((res) => {
       console.log(res);
@@ -31,7 +34,7 @@ export const CreateOrder = () => {
       setProfile(res.data);
     });
     getAllRestaurants().then((res) => {
-      console.log(res)
+      console.log(res);
       setRestaurants(res.data);
     });
   }, []);
@@ -44,7 +47,9 @@ export const CreateOrder = () => {
           el.email === profile.email && el.poll === pollId;
         console.log(res.data.some(handleCheckData) + " done");
 
-        res.data.some(handleCheckData) && setPollCreator(true);
+        res.data.some(handleCheckData)
+          ? setPollCreator(true)
+          : setPollCreator(false);
       });
   }, [profile]);
 
@@ -64,22 +69,34 @@ export const CreateOrder = () => {
     setOrderInput(e.target.value);
   };
 
+  const changePage = (index) => {
+    setPage(index);
+  };
+  const handleRestaurantId = (restaurant) => {
+    setSelectedRestaurantId(restaurant.id);
+    setSelectedRestaurantName(restaurant.name);
+  };
+  const submitOrderCreateHome = (e) => {
+    e.preventDefault();
+    const data = { restaurantId: selectedRestaurantId, label: orderInput };
+    createOrder(data).then((res) => {
+      console.log(res.data.id);
+      // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
+      history.push(`/single-order-add/${res.data.id}`);
+    });
+  };
+
   const submitOrderCreate = (e) => {
     e.preventDefault();
     const data = { restaurantId: restaurantId, label: orderInput };
     createOrder(data).then((res) => {
       console.log(res);
+
+      history.push(`/single-order-add/${res.data.id}`);
     });
   };
 
-  const changePage = (index) => {
-    setPage(index);
-  };
-  const handleRestaurantId = (restaurant)=>{
-    setSelectedRestaurantId(restaurant.id)
-  }
   return (
-      
     <div>
       {pollCreator ? (
         <div>
@@ -96,7 +113,6 @@ export const CreateOrder = () => {
           </form>
         </div>
       ) : (
-          
         <div>
           <div>
             <form>
@@ -110,62 +126,68 @@ export const CreateOrder = () => {
               />
             </form>
             {filterInput.length === 0 &&
-        paginate(restaurants)[page] !== undefined ? (
-          paginate(restaurants)[page].map((el) => (
-            <div key={el.id} className="single-restaurant" onClick={()=>handleRestaurantId(el)}>
-              
-              <p>{el.name}</p>
-              <p>{el.address}</p>
-              
-              <hr />
-            </div>
-          ))
-        ) : (
-          <div className="restaurants-wrapper">
-            {filteredRestaurants.slice(0, 4).map((el) => (
-              <div key={el.id} className="single-restaurant" onClick={()=>handleRestaurantId(el)}>
-                
-                <p>{el.name}</p>
-                <p>{el.address}</p>
-            
-                <hr />
+            paginate(restaurants)[page] !== undefined ? (
+              paginate(restaurants)[page].map((el) => (
+                <div
+                  key={el.id}
+                  className="single-restaurant"
+                  onClick={() => handleRestaurantId(el)}
+                >
+                  <p>{el.name}</p>
+                  <p>{el.address}</p>
+
+                  <hr />
+                </div>
+              ))
+            ) : (
+              <div className="restaurants-wrapper">
+                {filteredRestaurants.slice(0, 4).map((el) => (
+                  <div
+                    key={el.id}
+                    className="single-restaurant"
+                    onClick={() => handleRestaurantId(el)}
+                  >
+                    <p>{el.name}</p>
+                    <p>{el.address}</p>
+
+                    <hr />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        )}
+            )}
           </div>
           <div>
-        {filterInput.length === 0 &&
-          paginate(restaurants)[page] !== undefined &&
-          paginate(restaurants).length > 1 && (
-            <div className="pagination-buttons">
-              {/* prev */}
-              {paginate(restaurants).map((_, idx) => {
-                return (
-                  <button
-                    onClick={() => changePage(idx)}
-                    key={idx}
-                    className={`page-btn ${
-                      page === idx && `page-btn-selected`
-                    }`}
-                  >
-                    {idx + 1}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-      </div>
+            {filterInput.length === 0 &&
+              paginate(restaurants)[page] !== undefined &&
+              paginate(restaurants).length > 1 && (
+                <div className="pagination-buttons">
+                  {/* prev */}
+                  {paginate(restaurants).map((_, idx) => {
+                    return (
+                      <button
+                        onClick={() => changePage(idx)}
+                        key={idx}
+                        className={`page-btn ${
+                          page === idx && `page-btn-selected`
+                        }`}
+                      >
+                        {idx + 1}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+          </div>
 
           <div>
-            <form onSubmit={submitOrderCreate}>
+            <div>{selectedRestaurantName}</div>
+            <form onSubmit={submitOrderCreateHome}>
               <input
                 type="text"
                 onChange={handleOrderInput}
                 value={orderInput.label}
                 autoComplete="on"
               />
-
               <input type="submit" />
             </form>
           </div>

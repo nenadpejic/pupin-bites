@@ -7,14 +7,16 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import PollCreate from "./pages/PollCreate/PollCreate";
 import { Settings } from "./pages/Settings/Settings";
-import SingleOrderCreate from "./pages/SingleOrderAdd";
+
 import PollVote from "./pages/PollVote/PollVote";
 import PollComplete from "./pages/PollComplete/PollComplete";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
 import "./App.css";
-import { CreateOrder } from "./components/CreateOrder/CreateOrder";
+import { SingleOrderCreate } from "./pages/SingleOrderCreate/SingleOrderCreate";
+import SingleOrderAdd from "./pages/SingleOrderAdd/SingleOrderAdd";
+
 
 const App = () => {
   const auth = useContext(AuthContext);
@@ -60,11 +62,11 @@ const App = () => {
         <PollComplete />
       </PrivateRoute>
 
-      <PrivateRoute path="/single-order-create/:slug">
-        <SingleOrderCreate />
+      <PrivateRoute path="/single-order-add/:slug">
+        <SingleOrderAdd/>
       </PrivateRoute>
-      <PrivateRoute path='/create-order'>
-        <CreateOrder/>
+      <PrivateRoute exact path='/single-order-create'>
+        <SingleOrderCreate/>
       </PrivateRoute>
     </Router>
   );
