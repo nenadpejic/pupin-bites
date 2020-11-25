@@ -48,14 +48,6 @@ const SingleOrderAdd = () => {
     
   }, []);
 
-  // const deleteItem = (name, quantity, note, price) => {
-  //   let index = orderedMeal.findIndex(
-  //     el => el.name === name 
-  //           && el.note === note 
-  //           && el.quantity === quantity);
-  //   orderedMeal.splice(index, 1);
-  //   setTotal(prev => prev - price * quantity);
-  // };
 
   const handlesValidation = () => {
     setValid(false)
@@ -63,60 +55,7 @@ const SingleOrderAdd = () => {
       setValid(true)
     }, 2000);
   };
-
-  // const handlePayload = (e) => {
-  //   const { name, value } = e.target;
-
-  //   setPayloadItem((prevRes) => {
-  //     return {
-  //       ...prevRes,
-  //       [name]: value,
-  //     };
-  //   });
-  // };
-
-  // const resetInput = () => {
-  //   setPayloadItem({
-  //     quantity: 0,
-  //     mealId: "",
-  //     note: "",
-  //   });
-  // };
-
-  // const addItem = (mealId,mealName,mealPrice) => {
-   
-  //   if (payloadItem.quantity >= 1) {
-  //     payloadItem.quantity = Number(payloadItem.quantity);
-  //     payloadItem.mealId = mealId;
-  //     setPayload(prev => {
-  //       return [
-  //         ...prev,
-  //         payloadItem
-  //       ]
-  //     });
-  //   }
-
-  //   else setPayload(prev=>{
-  //     return[
-  //       ...prev
-  //     ]
-  //   });
-    
-  //   setOrderedMeal(prev=>{
-  //     if(payloadItem.quantity >= 1) {
-  //     return [
-  //       ...prev,
-  //       {name:mealName,price:mealPrice,quantity:payloadItem.quantity,note:payloadItem.note}
-  //     ];
-  //   }
-
-  //   else {
-  //     return [...prev]
-  //   }})
-
-  //   resetInput()
-  //   setTotal(prev => prev + payloadItem.quantity*mealPrice)
-  // };
+  
 
   const addItemsToOrder = () => {
   const data = {

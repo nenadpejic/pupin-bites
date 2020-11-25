@@ -17,15 +17,19 @@ export const SingleOrderCreate = () => {
   const [profile, setProfile] = useState("");
   const [pollCreator, setPollCreator] = useState(true);
   const [restaurants, setRestaurants] = useState([]);
-  const [selectedRestaurantId, setSelectedRestaurantId] = useState("");
+  const [selectedRestaurantId, setSelectedRestaurantId] = useState(undefined);
   const [selectedRestaurantName, setSelectedRestaurantName] = useState("");
   const [page, setPage] = useState(0);
   const [filterInput, setFilterInput] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const pollId = localStorage.getItem("orderPollId");
-  const restaurantId = localStorage.getItem("orderRestaurantId");
+  const [pollId,setPollId] = useState(localStorage.getItem("orderPollId") ? localStorage.getItem("orderPollId") : '')
+  const [restaurantId,setRestaurantId] = useState(localStorage.getItem("orderRestaurantId") ? localStorage.getItem("orderRestaurantId") : undefined)
   useEffect(() => {
-    getOneRestaurant(restaurantId).then((res) => {
+   restaurantId && getOneRestaurant(restaurantId).then((res) => {
+      console.log(res);
+      setRestaurantInfo(res.data);
+    });
+    selectedRestaurantId && getOneRestaurant(selectedRestaurantId).then((res) => {
       console.log(res);
       setRestaurantInfo(res.data);
     });
@@ -38,12 +42,13 @@ export const SingleOrderCreate = () => {
       setRestaurants(res.data);
     });
 
-  }, []);
+  }, [restaurantId,selectedRestaurantId]);
 
   useEffect(() => {
     if (profile !== "")
       getCheckData().then((res) => {
         console.log(res.data);
+        console.log(pollId)
         let handleCheckData = (el) =>
           el.email === profile.email && el.poll === pollId;
         console.log(res.data.some(handleCheckData) + " done");
@@ -51,7 +56,12 @@ export const SingleOrderCreate = () => {
         res.data.some(handleCheckData)
           ? setPollCreator(true)
           : setPollCreator(false);
-      });
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+
+        setPollCreator(false)
+      });;
   }, [profile]);
 
   useEffect(() => {
