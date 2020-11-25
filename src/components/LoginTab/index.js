@@ -3,7 +3,7 @@ import './style.css';
 
 const LoginTab = ({children})=>{
     return(
-        <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/sandwich.jpg"}`}}>
+        <div className="wrapperLogin" style={{backgroundImage: `url(${"/img/photos/sandwich.jpg"}`}}>
             <div className="loginTab">
                 <img src="/img/icons/logo.png" alt="logo"/>
                 <div>{children}</div>

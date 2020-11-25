@@ -1,34 +1,21 @@
-import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { formatDate } from "../../utilities/utilities";
 
-const PollsItem = ({ data }) => {
-  const [createdFormater, setCreatedFormater] = useState("");
+const PollsItem = ({ poll }) => {
   const history = useHistory();
 
   const handlePollVote = (e) => {
     history.push(`/poll-vote/${e}`);
   };
 
-  useEffect(() => {
-    setCreatedFormater(formatDate(data.created));
-  }, []);
-
   return (
-    <li key={data.id} prop={data.id} onClick={() => handlePollVote(data.id)}>
-      <p>
-        <span>Label:</span> {data.label}
-      </p>
-      <p>
-        <span>ID:</span> {data.id}
-      </p>
-      <p>
-        <span>Created:</span> {createdFormater}
-      </p>
-      <p>
-        <span>Active:</span> {data.active}
-      </p>
-    </li>
+    <tr key={poll.id} onClick={() => handlePollVote(poll.id)}>
+      <td>{poll.label}</td>
+      <td>{formatDate(poll.created)}</td>
+      <td>{
+        // formatDate(???)
+      }</td>
+    </tr>
   );
 };
 

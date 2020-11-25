@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { formatDate } from "../../utilities/utilities";
 
-const ActiveOrderItem = ({ data }) => {
+const ActiveOrderItem = ({ order }) => {
   const history = useHistory();
 
   const handleActiveOrder = (e) => {
@@ -9,13 +9,11 @@ const ActiveOrderItem = ({ data }) => {
   };
 
   return (
-    <li key={data.id} onClick={() => handleActiveOrder(data.id)}>
-      <p>{data.active.toString()}</p>
-      <p>{formatDate(data.created)}</p>
-      <p>{data.id}</p>
-      <p>{data.label}</p>
-      <p>{data.restaurantId}</p>
-    </li>
+    <tr key={order.id} onClick={() => handleActiveOrder(order.id)}>
+      <td>{order.label}</td>
+      <td>{formatDate(order.created)}</td>
+      {/* <td>{order.active.toString()}</td> */}
+    </tr>
   );
 };
 

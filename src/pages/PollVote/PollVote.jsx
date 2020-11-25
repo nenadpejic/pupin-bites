@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { getOnePoll, createVote } from '../../services/services'
-import { Redirect, useParams } from 'react-router-dom'
+import { Redirect, useHistory, useParams } from 'react-router-dom'
 import Main from '../../components/Main'
 import PollInfo from '../../components/PollInfo'
 import RestaurantItem from "../../components/RestaurantItem"
@@ -8,11 +8,17 @@ import "./PollVote.css"
 
 const PollVote = () => {
     const [poll, setPoll] = useState([])
-    const [voted, setVoted] = useState(false)
     const [restaurants, setRestaurants] = useState([])
     const [votes, SetVotes] = useState([])
     const { slug } = useParams()
     const [id, setId] = useState('')
+
+    //Local Storige Ref
+    const createdVoteRef = useRef(localStorage.getItem("votes") ? localStorage.getItem("votes").split(',') : null)
+    const createdVote = new Array(createdVoteRef.current)
+
+    // Redirect
+    const history = useHistory()
 
     useEffect(() => {
         getOnePoll(slug).then(res => {
@@ -39,12 +45,16 @@ const PollVote = () => {
             "restaurantId": id
         }
         createVote(slug, data)
-        setVoted(true)
+        let vote = []
+        vote.push(localStorage.getItem('votes'))
+        vote.push(slug)
+        localStorage.setItem('votes', vote)
+        history.push(`/poll-complete/${slug}`)
     }
 
     return (
         <Main>
-            {voted ? <Redirect to={`/poll-complete/${slug}`} /> : null}
+            {createdVote[0] ? (createdVote[0].includes(slug) ? <Redirect to={`/poll-complete/${slug}`} /> : null) : null}
             <h1>Poll Vote</h1>
             <PollInfo poll={poll} />
             <div className="restaurantList">

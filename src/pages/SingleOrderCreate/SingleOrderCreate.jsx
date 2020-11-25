@@ -5,6 +5,7 @@ import {
   getOneRestaurant,
   getProfile,
   getAllRestaurants,
+ 
 } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
@@ -17,16 +18,19 @@ export const SingleOrderCreate = () => {
   const [profile, setProfile] = useState("");
   const [pollCreator, setPollCreator] = useState(true);
   const [restaurants, setRestaurants] = useState([]);
-  const [selectedRestaurantId, setSelectedRestaurantId] = useState("");
+  const [selectedRestaurantId, setSelectedRestaurantId] = useState(undefined);
   const [selectedRestaurantName, setSelectedRestaurantName] = useState("");
   const [page, setPage] = useState(0);
   const [filterInput, setFilterInput] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const pollId = "001a1b51-6c18-47ca-a2c5-81a3c8d354ef";
-  const restaurantId = "07b560b2-4cab-4bc4-a04b-8c8190ae018d";
-
+  const [pollId,setPollId] = useState(localStorage.getItem("orderPollId") ? localStorage.getItem("orderPollId") : '')
+  const [restaurantId,setRestaurantId] = useState(localStorage.getItem("orderRestaurantId") ? localStorage.getItem("orderRestaurantId") : undefined)
   useEffect(() => {
-    getOneRestaurant(restaurantId).then((res) => {
+   restaurantId && getOneRestaurant(restaurantId).then((res) => {
+      console.log(res);
+      setRestaurantInfo(res.data);
+    });
+    selectedRestaurantId && getOneRestaurant(selectedRestaurantId).then((res) => {
       console.log(res);
       setRestaurantInfo(res.data);
     });
@@ -38,12 +42,14 @@ export const SingleOrderCreate = () => {
       console.log(res);
       setRestaurants(res.data);
     });
-  }, []);
+
+  }, [restaurantId,selectedRestaurantId]);
 
   useEffect(() => {
     if (profile !== "")
       getCheckData().then((res) => {
         console.log(res.data);
+        console.log(pollId)
         let handleCheckData = (el) =>
           el.email === profile.email && el.poll === pollId;
         console.log(res.data.some(handleCheckData) + " done");
@@ -51,7 +57,12 @@ export const SingleOrderCreate = () => {
         res.data.some(handleCheckData)
           ? setPollCreator(true)
           : setPollCreator(false);
-      });
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+
+        setPollCreator(false)
+      });;
   }, [profile]);
 
   useEffect(() => {
@@ -82,6 +93,7 @@ export const SingleOrderCreate = () => {
     const data = { restaurantId: selectedRestaurantId, label: orderInput };
     createOrder(data).then((res) => {
       console.log(res.data.id);
+      localStorage.setItem("orderId", res.data.id);
       // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
       history.push(`/single-order-add/${res.data.id}`);
     });
@@ -92,7 +104,7 @@ export const SingleOrderCreate = () => {
     const data = { restaurantId: restaurantId, label: orderInput };
     createOrder(data).then((res) => {
       console.log(res);
-
+      localStorage.setItem("orderId", res.data.id);
       history.push(`/single-order-add/${res.data.id}`);
     });
   };

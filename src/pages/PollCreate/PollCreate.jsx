@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { map, uniqBy } from 'lodash'
 import Main from '../../components/Main'
-import Footer from '../../components/Footer'
+import RestaurantItem from '../../components/RestaurantItem'
+import { getProfile, postCheckData } from '../../services/services'
 
 //Css
 import './PollCreate.css'
 
 // Services
 import { getAllRestaurants, createPoll } from '../../services/services.js'
+import { useHistory } from 'react-router-dom'
 
 const PollCreate = () => {
     const [change, setChange] = useState('')
@@ -15,19 +17,27 @@ const PollCreate = () => {
     const [selected, setSelected] = useState([])
     const [restaurants, setRestaurants] = useState([])
     const [pollName, setPollName] = useState('')
+    const [email, setEmail] = useState('')
 
     // States for time calculation
-    const [hours, setHours] = useState(0)
-    const [minutes, setMinutes] = useState(15)
+    const [time, setTime] = useState('')
+    const [hoursToEnd, setHoursToEnd] = useState(0)
+    const [minutesToEnd, setMinutesToEnd] = useState(15)
     const [duration, setDuration] = useState(15)
     // Token
     const tokenRef = useRef(localStorage.getItem("Token"))
     const token = tokenRef.current
 
+    // Redirect
+    const history = useHistory()
+
     useEffect(() => {
         getAllRestaurants(token).then(res => {
             let tmp = res.data
             setRestaurants(map(uniqBy(tmp, 'name')))
+        })
+        getProfile().then(res => {
+            setEmail(res.data.email)
         })
     }, [token])
 
@@ -37,12 +47,17 @@ const PollCreate = () => {
         let value = e.target.value
 
         if (name === 'hours') {
-            (value > 24) ? setHours(e.target.value) : setHours(value)
+            (value > 24) ? setHoursToEnd(e.target.value) : setHoursToEnd(value)
         }
         else if (name === 'minutes') {
-            value > 59 ? setMinutes(e.target.value) : setMinutes(value)
+            value > 59 ? setMinutesToEnd(e.target.value) : setMinutesToEnd(value)
         }
-        setDuration(Number(hours) * 60 + Number(minutes))
+        setDuration(Number(hoursToEnd) * 60 + Number(minutesToEnd))
+
+        let timer = new Date()
+        timer.setHours(timer.getHours() + parseInt(hoursToEnd))
+        timer.setMinutes(timer.getMinutes() + parseInt(minutesToEnd))
+        setTime(timer.toString(','))
     }
     // Handeling input change
     const handleChange = (e) => {
@@ -69,56 +84,73 @@ const PollCreate = () => {
             "label": pollName,
             "restaurants": selected.map(el => el.id)
         }
+        let currentPoll
         createPoll(data).then(res => {
-            console.log(res.data)
+            currentPoll = res.data.id
+            let pollId = []
+            pollId.push(localStorage.getItem('createPoll'))
+            pollId.push(res.data.id)
+            localStorage.setItem('createPoll', pollId)
+
+            let info = {
+                'email': email,
+                'poll': currentPoll,
+                'date': time
+            }
+            postCheckData(info)
+            return history.push(`/poll-vote/${currentPoll}`)
         })
+
+        // //Redirect on click
+        // setTimeout(() => {
+        // }, 1500)
     }
+    const displayResults = selected.length === 0 ? "none" : "block";
 
     return (
         <>
             <Main>
                 <div>
-                    <h3>Create Poll</h3>
+                    <h1>Create Poll</h1>
                     <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required />
                     <div className="pollDuration">
                         <div className="title">Set Duration</div>
                         <div className="hours">
-                            <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={(e) => handleTime(e)} required />
+                            <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={handleTime} required />
                         </div>
-                        <div className="between">:</div>
                         <div className="minutes">
-                            <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={(e) => handleTime(e)} required />
+                            <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={handleTime} required />
                         </div>
                     </div>
+                    <input type="text" placeholder="Search Restaurant" onChange={handleChange} />
 
-                    <label>Search Restaurants<br /></label>
-                    <input type="text" placeholder="..search" onChange={handleChange} />
-
-                    {change.length === 0 ? restaurants.map((restaurant) =>
-                        //Complete list
-                        <div key={restaurant.id}>
-                            <div>{restaurant.name}</div>
-                            <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>Add Restaurant</button>
-                        </div>)
-                        : filter.map((restaurant) =>
-                            //Filtered list
-                            <div key={restaurant.id}>
-                                <div>{restaurant.name}</div>
-                                <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>Add Restaurant</button>
-                            </div>)}
+                    <div className="restaurant-list">
+                        {change.length === 0 ? restaurants.map((restaurant) => (
+                            //Complete list
+                            <div className="item" key={restaurant.id}>
+                                <div><RestaurantItem restaurant={restaurant} /></div>
+                                <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>+ </button>
+                            </div>))
+                            : filter.map((restaurant) => (
+                                //Filtered list
+                                <div className="item" key={restaurant.id}>
+                                    <div><RestaurantItem restaurant={restaurant} /></div>
+                                    <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>+ </button>
+                                </div>))}
+                    </div>
                 </div>
 
-                <div>
-                    <h3>Restaurants</h3>
-                    {selected.map((restaurant) =>
-                        <div key={restaurant.id} >
-                            <div>{restaurant.name}</div>
-                            <button onClick={(e) => handleClickRemove(e)} id={restaurant.id}>X</button>
-                        </div>)}
-
-                </div>
-                <div>
-                    <button type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
+                <div style={{ display: `${displayResults}` }}>
+                    <div className="selected-list">
+                        {selected.map((restaurant) => (
+                            <div className="selected-item" key={restaurant.id} >
+                                <div className="restaurant-name">{restaurant.name}</div>
+                                <div className="delete"><button onClick={(e) => handleClickRemove(e)} id={restaurant.id}>X</button></div>
+                            </div>))}
+                    </div>
+                    <div >
+                        <button className="bigButton" type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
+                    </div>
                 </div>
             </Main>
         </>

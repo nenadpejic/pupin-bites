@@ -5,6 +5,9 @@
     text-align: center;
     padding-top: 10px;
     margin-top: 0px;
+    position: fixed;
+    bottom:0;
+    right: 0;
   }
   .footer>small{
       color:lightgrey;

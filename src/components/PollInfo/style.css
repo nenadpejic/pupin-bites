@@ -8,4 +8,5 @@ table.pollInfo,tr,th{
 table.pollInfo{ 
     margin:auto;
     text-align: center; 
+    width:350px;
 }
