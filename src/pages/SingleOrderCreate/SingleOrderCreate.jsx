@@ -8,6 +8,7 @@ import {
 } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
+import "./singleOrderCreate.css"
 
 export const SingleOrderCreate = () => {
   const history = useHistory();
@@ -97,7 +98,7 @@ export const SingleOrderCreate = () => {
   };
 
   return (
-    <div>
+    <div className="div-order">
       {pollCreator ? (
         <div>
           <div>{restaurantInfo.name}</div>

@@ -1,0 +1,60 @@
+body{
+    text-align: center;
+}
+
+.div-order{
+    margin: 0 auto;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 300px;
+    padding: 25px;
+}
+
+.single-restaurant{
+    margin: 10px auto;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: #f7f6ed;
+}
+
+input{
+    border-radius: 5px;
+    background-color:rgb(245, 245, 245);
+}
+input:hover{
+    background-color:rgb(235, 235, 235);
+}
+input[type="submit"]{
+    background-color: rgb(90,172,68);
+    margin-top: 15px;
+    font-size: 1em;
+}
+input[type="submit"]:hover{
+    color: white;
+}
+p{
+    padding: 5px 0;
+}
+hr{
+    color: transparent;
+}
+
+.pagination-buttons{
+    margin: 15px auto;
+}
+
+.page-btn{
+    border-radius: 5px;
+    background-color: #e6e6e6;
+    color: #4d4d4d;
+    border: #666666;
+}
+.page-btn:hover{
+    background-color: #737373;
+    color:  #e6e6e6;  
+}
+.page-btn-selected{
+    background-color: #b3b3b3;
+    color: #666666;
+    border-color: #737373;
+}

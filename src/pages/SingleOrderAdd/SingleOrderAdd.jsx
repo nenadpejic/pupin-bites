@@ -147,14 +147,14 @@ const SingleOrderAdd = () => {
       </div>
 
       <div>
-        {orderedMeal.map(el,idx=>
+        {/* {orderedMeal.map(el,idx=>
           <div className='orderedItems ' key={idx}>
             <p>Name: {el.name}</p>
             <p>Price: {el.price}</p>
         <p>Quantity: {el.quantity}</p>
         <hr/>
           </div>
-        )}
+        )} */}
       </div>
       <div>
         <button onClick={addItemsToOrder}>Make Your Order</button>
