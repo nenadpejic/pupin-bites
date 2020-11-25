@@ -12,9 +12,7 @@ const PollsItem = ({ poll }) => {
     <tr key={poll.id} onClick={() => handlePollVote(poll.id)}>
       <td>{poll.label}</td>
       <td>{formatDate(poll.created)}</td>
-      <td>{
-        // formatDate(???)
-      }</td>
+      {/* <td>{formatDate(???)}</td> */}
     </tr>
   );
 };

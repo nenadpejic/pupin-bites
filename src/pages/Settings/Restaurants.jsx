@@ -77,7 +77,7 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
       <form onSubmit={newRestaurant}>
         
         <div className="user-box">
-          <input type="text" onChange={handleRestaurantInput} value={restaurantInput.name} name="name" className="restaurantInput" placeholder="Enter Restaurant Name"/>
+          <input   type="text" onChange={handleRestaurantInput} value={restaurantInput.name} name="name" className="restaurantInput" placeholder="Enter Restaurant Name"/>
         </div>
         <div className='user-box'>
           <input type="text" onChange={handleRestaurantInput} value={restaurantInput.address} placeholder="Enter Restaurant Address" name="address" className="restaurantInput"/>
@@ -85,8 +85,8 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
         <button
           type="submit"
           value="Add Restaurant"
-          className="restaurant-btn"
-        > <span></span>
+          className="restaurant-btn"> 
+          <span></span>
         <span></span>
         <span></span>
         <span></span>

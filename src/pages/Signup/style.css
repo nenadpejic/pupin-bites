@@ -1,0 +1,13 @@
+.err {
+  height: 1rem;
+  color: red;
+}
+
+#signup .bigButton {
+  margin-top: 0.5rem;
+}
+
+#signup p {
+  width: auto !important;
+  margin: 20px auto;
+}

@@ -89,7 +89,11 @@ const Home = () => {
               />
               <table>
                 <thead>
-                  <tr><th>Poll Name</th><th>Poll Start</th><th>Poll End</th></tr>
+                  <tr>
+                    <th>Poll Name</th>
+                    <th>Poll Started</th>
+                    {/* <th>Poll End</th> */}
+                  </tr>
                 </thead>
                 <tbody>
                   {!pollSearch.length
@@ -109,7 +113,10 @@ const Home = () => {
               />
               <table>
                 <thead>
-                  <tr><th>Order Name</th><th>Order Start</th></tr>
+                  <tr>
+                    <th>Order Name</th>
+                    <th>Order Started</th>
+                  </tr>
                 </thead>
                 <tbody>
                   {!orderSearch.length
