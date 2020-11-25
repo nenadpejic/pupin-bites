@@ -108,7 +108,9 @@ const Home = () => {
                 placeholder="Search for order..."
               />
               <table>
-                <thead><tr><th>Status</th><th>Time</th><th>Poll Name</th></tr></thead>
+                <thead>
+                  <tr><th>Order Name</th><th>Order Start</th></tr>
+                </thead>
                 <tbody>
                   {!orderSearch.length
                     ? orders?.map((order) => (
