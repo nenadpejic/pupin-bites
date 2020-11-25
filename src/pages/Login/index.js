@@ -1,7 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Link, useLocation, Redirect } from "react-router-dom"
-import { login } from "../../services/services.js"
+import { login, getProfile } from "../../services/services.js"
 import LoginTab from "../../components/LoginTab"
+import { AuthContext } from "../../contexts/AuthContext"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ const Login = () => {
   const [error, setError] = useState();
   const [redirect, setRedirect] = useState(false);
   const { state } = useLocation();
+  const auth = useContext(AuthContext);
 
   const handleUser = (e) => {
     const value = e.target.value;
@@ -30,6 +32,11 @@ const Login = () => {
       .then(res => {
         const token = res.data.access_token;
         localStorage.setItem("Token", token);
+        return getProfile()
+      })
+      .then((res) => {
+        const data = res.data;
+        auth.user = data;
         setRedirect(true);
       })
       .catch(err => {

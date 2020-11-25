@@ -1,23 +1,10 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
-import { getProfile } from "../../services/services";
 
 const NavBar = () => {
-  const [user, setUser] = useState({});
   const auth = useContext(AuthContext);
-
-  useEffect(() => {
-    getProfile()
-      .then((res) => {
-        const data = res.data;
-        setUser(data);
-        // console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const { user } = auth;
 
   const handleClick = () => {
     if (auth.isAuth()) {
@@ -40,16 +27,16 @@ const NavBar = () => {
           </button>
         </>
       ) : (
-        <>
-          <p>Logo</p>
-          <button>
-            <Link to="/login">Log In</Link>
-          </button>
-          <button>
-            <Link to="/signup">Sign Up</Link>
-          </button>
-        </>
-      )}
+          <>
+            <p>Logo</p>
+            <button>
+              <Link to="/login">Log In</Link>
+            </button>
+            <button>
+              <Link to="/signup">Sign Up</Link>
+            </button>
+          </>
+        )}
     </nav>
   );
 };
