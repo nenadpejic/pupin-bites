@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/services";
 import { OrderedMeal } from "./OrderedMeal";
@@ -12,13 +12,13 @@ const SingleOrderAdd = () => {
   const [meals, setMeals] = useState(undefined);
   const [profile, setProfile] = useState(undefined);
   const [payload,setPayload] = useState([]);
-  const [payloadItem, setPayloadItem] = useState({ quantity: 0, mealId: "", note: "" });
+  // const [payloadItem, setPayloadItem] = useState({ quantity: 0, mealId: "", note: "" });
   const [orderedMeal,setOrderedMeal] = useState([]);
   const { slug } = useParams();
   const restaurantId = order && order.restaurantId;
   const [valid,setValid] = useState(true);
   const [total,setTotal] = useState(0);
-
+  const history = useHistory()
   useEffect(() => {
 
     getOneOrder(slug)
@@ -48,14 +48,14 @@ const SingleOrderAdd = () => {
     
   }, []);
 
-  const deleteItem = (name, quantity, note, price) => {
-    let index = orderedMeal.findIndex(
-      el => el.name === name 
-            && el.note === note 
-            && el.quantity === quantity);
-    orderedMeal.splice(index, 1);
-    setTotal(prev => prev - price * quantity);
-  };
+  // const deleteItem = (name, quantity, note, price) => {
+  //   let index = orderedMeal.findIndex(
+  //     el => el.name === name 
+  //           && el.note === note 
+  //           && el.quantity === quantity);
+  //   orderedMeal.splice(index, 1);
+  //   setTotal(prev => prev - price * quantity);
+  // };
 
   const handlesValidation = () => {
     setValid(false)
@@ -64,59 +64,59 @@ const SingleOrderAdd = () => {
     }, 2000);
   };
 
-  const handlePayload = (e) => {
-    const { name, value } = e.target;
+  // const handlePayload = (e) => {
+  //   const { name, value } = e.target;
 
-    setPayloadItem((prevRes) => {
-      return {
-        ...prevRes,
-        [name]: value,
-      };
-    });
-  };
+  //   setPayloadItem((prevRes) => {
+  //     return {
+  //       ...prevRes,
+  //       [name]: value,
+  //     };
+  //   });
+  // };
 
-  const resetInput = () => {
-    setPayloadItem({
-      quantity: 0,
-      mealId: "",
-      note: "",
-    });
-  };
+  // const resetInput = () => {
+  //   setPayloadItem({
+  //     quantity: 0,
+  //     mealId: "",
+  //     note: "",
+  //   });
+  // };
 
-  const addItem = (mealId,mealName,mealPrice) => {
+  // const addItem = (mealId,mealName,mealPrice) => {
    
-    if (payloadItem.quantity >= 1) {
-      payloadItem.quantity = Number(payloadItem.quantity);
-      payloadItem.mealId = mealId;
-      setPayload(prev => {
-        return [
-          ...prev,
-          payloadItem
-        ]
-      });
-    }
+  //   if (payloadItem.quantity >= 1) {
+  //     payloadItem.quantity = Number(payloadItem.quantity);
+  //     payloadItem.mealId = mealId;
+  //     setPayload(prev => {
+  //       return [
+  //         ...prev,
+  //         payloadItem
+  //       ]
+  //     });
+  //   }
 
-    else setPayload(prev=>{
-      return[
-        ...prev
-      ]
-    });
+  //   else setPayload(prev=>{
+  //     return[
+  //       ...prev
+  //     ]
+  //   });
     
-    setOrderedMeal(prev=>{
-      if(payloadItem.quantity >= 1) {
-      return [
-        ...prev,
-        {name:mealName,price:mealPrice,quantity:payloadItem.quantity,note:payloadItem.note}
-      ];
-    }
+  //   setOrderedMeal(prev=>{
+  //     if(payloadItem.quantity >= 1) {
+  //     return [
+  //       ...prev,
+  //       {name:mealName,price:mealPrice,quantity:payloadItem.quantity,note:payloadItem.note}
+  //     ];
+  //   }
 
-    else {
-      return [...prev]
-    }})
+  //   else {
+  //     return [...prev]
+  //   }})
 
-    resetInput()
-    setTotal(prev => prev + payloadItem.quantity*mealPrice)
-  };
+  //   resetInput()
+  //   setTotal(prev => prev + payloadItem.quantity*mealPrice)
+  // };
 
   const addItemsToOrder = () => {
   const data = {
@@ -128,6 +128,7 @@ const SingleOrderAdd = () => {
 
    addOrderItem(data,slug).then(res => {
      console.log(res)
+    history.push(`/single-order-view/${slug}`)
    })}
 
    else handlesValidation()
