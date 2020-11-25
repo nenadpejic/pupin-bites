@@ -4,7 +4,6 @@ import './style.css';
 
 const Welcome = () => {
   return (
-  <>
     <div className="wrapper">
       <NavBar/>
       <div className="welcome">
@@ -16,11 +15,11 @@ const Welcome = () => {
             <p><b>Which restaurant?</b></p>
             <p>Decide democratically! This app can help you.</p>
           </div>
-          <div className="image" style={{ backgroundImage: `url(${"/img/photos/lunch.webp"}` }} />
-        </div>
 
-        <div className="section2">
-            <h2 className="title">More than <span style={{color:"green"}}>156</span> restaurants</h2>
+          <div className="section2">
+            <h2 className="title">
+              More than <span style={{ color: "green" }}>156</span> restaurants
+            </h2>
             <div className="gallery">
                 <div>
                   <img src="/img/restaurants/McDonalds.webp" alt="McDonalds"/>
@@ -51,7 +50,7 @@ const Welcome = () => {
                   </div>
                 </div> 
             </div>
-       
+
             <h2 className="title">More than a hundred dishes</h2>
             <div className="gallery">
                 <div><img src="/img/dishes/pizza.webp" alt="pizza" title="pizza"/></div>
@@ -63,14 +62,11 @@ const Welcome = () => {
                 <div><img src="/img/dishes/donut.webp" alt="donut" title="donut"/></div>
                 <div><img src="/img/dishes/pancakes.webp" alt="pancakes" title="pancakes"/></div> 
             </div>
-
           </div>
-
-
       </div>
       <Footer/>
     </div>
-</>
+</div>
 )
 }
 

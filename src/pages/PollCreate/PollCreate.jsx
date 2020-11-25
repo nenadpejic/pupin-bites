@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { map, uniqBy } from 'lodash'
 import Main from '../../components/Main'
 import RestaurantItem from '../../components/RestaurantItem'
+import { getProfile, postCheckData } from '../../services/services'
+
 //Css
 import './PollCreate.css'
 
 // Services
 import { getAllRestaurants, createPoll } from '../../services/services.js'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const PollCreate = () => {
     const [change, setChange] = useState('')
@@ -15,10 +17,12 @@ const PollCreate = () => {
     const [selected, setSelected] = useState([])
     const [restaurants, setRestaurants] = useState([])
     const [pollName, setPollName] = useState('')
+    const [email, setEmail] = useState('')
 
     // States for time calculation
-    const [hours, setHours] = useState(0)
-    const [minutes, setMinutes] = useState(15)
+    const [time, setTime] = useState('')
+    const [hoursToEnd, setHoursToEnd] = useState(0)
+    const [minutesToEnd, setMinutesToEnd] = useState(15)
     const [duration, setDuration] = useState(15)
     // Token
     const tokenRef = useRef(localStorage.getItem("Token"))
@@ -32,6 +36,9 @@ const PollCreate = () => {
             let tmp = res.data
             setRestaurants(map(uniqBy(tmp, 'name')))
         })
+        getProfile().then(res => {
+            setEmail(res.data.email)
+        })
     }, [token])
 
     // Handeling hours
@@ -40,12 +47,17 @@ const PollCreate = () => {
         let value = e.target.value
 
         if (name === 'hours') {
-            (value > 24) ? setHours(e.target.value) : setHours(value)
+            (value > 24) ? setHoursToEnd(e.target.value) : setHoursToEnd(value)
         }
         else if (name === 'minutes') {
-            value > 59 ? setMinutes(e.target.value) : setMinutes(value)
+            value > 59 ? setMinutesToEnd(e.target.value) : setMinutesToEnd(value)
         }
-        setDuration(Number(hours) * 60 + Number(minutes))
+        setDuration(Number(hoursToEnd) * 60 + Number(minutesToEnd))
+
+        let timer = new Date()
+        timer.setHours(timer.getHours() + parseInt(hoursToEnd))
+        timer.setMinutes(timer.getMinutes() + parseInt(minutesToEnd))
+        setTime(timer.toString(','))
     }
     // Handeling input change
     const handleChange = (e) => {
@@ -80,28 +92,34 @@ const PollCreate = () => {
             pollId.push(res.data.id)
             localStorage.setItem('createPoll', pollId)
 
-        })
-        setTimeout(() => {
+            let info = {
+                'email': email,
+                'poll': currentPoll,
+                'date': time
+            }
+            postCheckData(info)
             return history.push(`/poll-vote/${currentPoll}`)
-        }, 1000)
+        })
+
+        // //Redirect on click
+        // setTimeout(() => {
+        // }, 1500)
     }
     const displayResults = selected.length === 0 ? "none" : "block";
-
 
     return (
         <>
             <Main>
                 <div>
-
                     <h1>Create Poll</h1>
                     <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required />
                     <div className="pollDuration">
                         <div className="title">Set Duration</div>
                         <div className="hours">
-                            <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={(e) => handleTime(e)} required />
+                            <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={handleTime} required />
                         </div>
                         <div className="minutes">
-                            <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={(e) => handleTime(e)} required />
+                            <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={handleTime} required />
                         </div>
                     </div>
                     <input type="text" placeholder="Search Restaurant" onChange={handleChange} />
@@ -134,8 +152,6 @@ const PollCreate = () => {
                         <button className="bigButton" type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
                     </div>
                 </div>
-
-
             </Main>
         </>
     )

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import PrivateRoute from "./routes/PrivateRoute";
 import Welcome from "./pages/Welcome";
@@ -11,14 +11,27 @@ import PollComplete from "./pages/PollComplete/PollComplete";
 import { SingleOrderCreate } from "./pages/SingleOrderCreate/SingleOrderCreate";
 import SingleOrderAdd from "./pages/SingleOrderAdd/SingleOrderAdd";
 import { Settings } from "./pages/Settings/Settings";
+import { getProfile } from "./services/services";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
 import "./App.css";
-
+import { SingleOrderView } from "./pages/SingleOrderView/SingleOrderView";
 
 const App = () => {
   const auth = useContext(AuthContext);
+
+  useEffect(() => {
+    localStorage.getItem("Token") &&
+      getProfile()
+        .then((res) => {
+          const data = res.data;
+          auth.user = data;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+  }, [auth]);
 
   return (
     <Router>
@@ -67,6 +80,10 @@ const App = () => {
 
       <PrivateRoute exact path="/settings">
         <Settings />
+      </PrivateRoute>
+
+      <PrivateRoute exact path="/single-order-view/:slug">
+        <SingleOrderView />
       </PrivateRoute>
     </Router>
   );
