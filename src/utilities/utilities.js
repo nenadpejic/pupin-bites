@@ -14,17 +14,18 @@ export const formatDate = (string) => {
   const date = new Date(string);
   let year = date.getFullYear();
   let month = date.getMonth();
-  let day = date.getDay();
+  let day = date.getDate();
   let hours = date.getHours();
   let minutes = date.getMinutes();
   let seconds = date.getSeconds();
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   if (day < 10) {
     day = "0" + day;
   }
-  if (month < 10) {
-    month = "0" + month;
-  }
+  // if (month < 10) {
+  //   month = "0" + month;
+  // }
   if (hours < 10) {
     hours = "0" + hours;
   }
@@ -34,5 +35,5 @@ export const formatDate = (string) => {
   if (seconds < 10) {
     seconds = "0" + seconds;
   }
-  return `${day}.${month}.${year} - ${hours}:${minutes}:${seconds}`;
+  return `${day}. ${monthNames[month]} ${year} - ${hours}:${minutes}:${seconds}`;
 };

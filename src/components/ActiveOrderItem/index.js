@@ -10,9 +10,9 @@ const ActiveOrderItem = ({ order }) => {
 
   return (
     <tr key={order.id} onClick={() => handleActiveOrder(order.id)}>
-      <td>{order.active.toString()}</td>
-      <td>{formatDate(order.created)}</td>
       <td>{order.label}</td>
+      <td>{formatDate(order.created)}</td>
+      {/* <td>{order.active.toString()}</td> */}
     </tr>
   );
 };
