@@ -104,45 +104,27 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
   return (
     <div className="meals">
       <h1>Manage Meals</h1>
-      <label>Restaurant Name:</label>
-      <input
-        type="text"
-        name="name"
-        value={restaurantInput}
-        onChange={handleFilter}
-      />
+      <input style={{height:"20px"}} type="text" name="name" placeholder="Restaurant Name" value={restaurantInput} onChange={handleFilter} />
+
       <div className="restaurantFilter">
-        {restaurantInput.length !== 0 &&
+        <table>
+        <tbody>
+          {restaurantInput.length !== 0 &&
           filteredRestaurant.slice(0,6).map((restaurant) => (
-            <div
-              key={restaurant.id}
-              onClick={() =>{ getRestaurantInfo(restaurant.id, restaurant.name);setRestaurantInput("");toggleEnableInput()}}
-              
-            >
-              <div>{restaurant.name}</div>
-              <hr />
-            </div>
+            <tr key={restaurant.id} onClick={() =>{ getRestaurantInfo(restaurant.id, restaurant.name);setRestaurantInput("");toggleEnableInput()}}>
+              <td>{restaurant.name}</td>
+            </tr>
           ))}
+          </tbody>
+          </table>
       </div>
-      <div>{restaurantName}</div>
+
+      <div class="selectedRestaraunt">{restaurantName}</div>
+      
       <form onSubmit={newMeal}>
-      <label>Meal Name:</label>
-        <input
-          type="text"
-          onChange={handleMealInput}
-          value={mealInput.name}
-          name="name"
-          disabled={enableInput ===false ? 'disabled' : false}
-        />
-        <label>Meal Price:</label>
-        <input
-          type="number"
-          onChange={handleMealInput}
-          value={mealInput.price}
-          name="price"
-          disabled={enableInput ===false ?'disabled' : false  }
-        />
-        <input type="submit" value="Add Meal"/>
+        <input type="text" onChange={handleMealInput} value={mealInput.name} name="name" placeholder="Meal Name" disabled={enableInput ===false ? 'disabled' : false}/>
+        <input type="number" onChange={handleMealInput} value={mealInput.price} name="price" disabled={enableInput ===false ?'disabled' : false  } placeholder="Meal Price"/>
+        <button type="submit" value="Add Meal" className="bigButton"> Add Meal </button>
         {valid ? null : <p>Please provide valid restaurant name and price.</p>}
       </form>
 

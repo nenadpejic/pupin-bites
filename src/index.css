@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&family=Gorditas&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,11 +8,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+code{font-family: 'Gorditas', cursive;}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/*****BUTTONS******/
 
 button{
   border:0px;
@@ -20,6 +20,7 @@ button{
   margin: 0px;
   outline: none;
 }
+
 button.bigButton{
 	display:block;
 	width:200px;
@@ -34,11 +35,10 @@ button.bigButton{
 	cursor:pointer;
 }
 
-/****** BUTTON *******/
-
 button.bigButton:hover{
     background-color:rgb(86,188,64); 
 }
+
 
 /****************/
 

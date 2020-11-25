@@ -130,7 +130,7 @@ const Home = () => {
 
         </div>
       </Main>
-
+/*
   const handlePollSearch = (e) => {
     setPollSearch(e.target.value);
     setSearchPolls(polls.filter((elem) => elem.label.includes(e.target.value)));
@@ -145,7 +145,7 @@ const Home = () => {
 
   return (
     <div id="home">
-      {/* Main */}
+      
       <NavBar />
       <h1>Home</h1>
       <button onClick={handleCreatePoll}>Create Poll</button>
@@ -180,6 +180,8 @@ const Home = () => {
       </ul>
       <Footer />
     </div>
+    */
   );
+
 };
 export default Home;

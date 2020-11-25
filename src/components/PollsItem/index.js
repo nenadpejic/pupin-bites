@@ -38,10 +38,10 @@ const PollsItem = ({ poll }) => {
   //       <span>Active:</span> {data.active}
   //     </p>
   //   </li>
-
+<>
 <tr key={poll.id} onClick={() => handlePollVote(poll.id)}><td>{poll.label}</td><td>{showTime(poll.created)}</td><td>{showTime(poll.actived)}</td></tr>
 
-    <li key={data.id} prop={data.id} onClick={() => handlePollVote(data.id)}>
+    {/* <li key={data.id} prop={data.id} onClick={() => handlePollVote(data.id)}>
       <p>
         <span>Label:</span> {data.label}
       </p>
@@ -54,7 +54,8 @@ const PollsItem = ({ poll }) => {
       <p>
         <span>Active:</span> {data.active.toString()}
       </p>
-    </li>
+    </li> */}
+    </>
   );
 };
 
