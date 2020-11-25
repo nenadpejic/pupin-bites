@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/services";
+import { OrderedMeal } from "./OrderedMeal";
+import { SingleMeal } from "./SingleMeal";
 import "./singleOrderAdd.css";
 
 const SingleOrderAdd = () => {
@@ -137,39 +139,17 @@ const SingleOrderAdd = () => {
       <div className="meals">
         {meals &&
           meals.map((el) => (
-            <div className="singleMeal" key={el.id}>
-              <p>{el.name}</p>
-              <p>{el.price} USD </p>
-              <form>
-                <label>Add your note:</label>
-                <input
-                  type="textBox"
-                  onChange={handlePayload}
-                  name="note"
-                />
-                <label>Add quantity:</label>
-                <input
-                  type="number"
-                  onChange={handlePayload}
-                  name="quantity"
-                  min="1"
-                  step="1"
-                />
-              </form>
-              <button onClick={()=>addItem(el.id,el.name,el.price,el.note)}>Add Item</button>
-            </div>
+            <SingleMeal meal={el} setPayload={setPayload} key={el.id} setOrderedMeal={setOrderedMeal} setTotal={setTotal}/>
+     
           ))}
       </div>
 
       <div>
         {orderedMeal.map((el,idx) =>
+          
           <div className='orderedItems ' key={idx}>
-            <p>Name: {el.name}</p>
-            <p>Price: {el.price} USD</p>
-            <p>Quantity: {el.quantity}</p>
-            <p>Note: {el.note}</p>
-            <button onClick={() => deleteItem(el.name, el.quantity, el.note, el.price)}>X</button>
-            <hr/>
+            <OrderedMeal ordered={el} orderedMeal={orderedMeal} payload={payload} setTotal={setTotal}/>
+        
           </div>
         )}
       </div>

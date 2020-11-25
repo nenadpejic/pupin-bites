@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 
-export const SingleMeal = ({meal,setPayload})=>{
+export const SingleMeal = ({meal,setPayload,setOrderedMeal,setTotal})=>{
 
     const [payloadItem,setPayloadItem] = useState({
         quantity: 0,
         mealId: "",
         note: "",
       })
-    const [orderedMeal,setOrderedMeal] = useState([])
+      const resetInput = () => {
+        setPayloadItem({
+          quantity: 0,
+          mealId: "",
+          note: "",
+        });
+      };
 
     const handlePayloadItem = (e) => {
         const { name, value } = e.target;
@@ -20,29 +26,41 @@ export const SingleMeal = ({meal,setPayload})=>{
         });
       };
 
-      const addOrder = (mealId, mealName, mealPrice) => {
-        if (
-          payloadItem.quantity !== "0" &&
-          payloadItem.quantity !== "" &&
-          payloadItem.quantity !== 0
-        ) {
-          //to check if input is valid
+    const addItem = (mealId,mealName,mealPrice) => {
+   
+        if (payloadItem.quantity >= 1) {
           payloadItem.quantity = Number(payloadItem.quantity);
           payloadItem.mealId = mealId;
-          setPayload((prev) => {
-            return [...prev, payloadItem];
+          setPayload(prev => {
+            return [
+              ...prev,
+              payloadItem
+            ]
           });
-        } else
-          setPayload((prev) => {
-            return [...prev];
-          });
+
+
+        }
     
-        setOrderedMeal((prev) => {
+        else setPayload(prev=>{
+          return[
+            ...prev
+          ]
+        });
+        
+        setOrderedMeal(prev=>{
+          if(payloadItem.quantity >= 1) {
           return [
             ...prev,
-            { name: mealName, price: mealPrice, quantity: payloadItem.quantity }
+            {name:mealName,price:mealPrice,quantity:payloadItem.quantity,note:payloadItem.note,mealId:mealId}
           ];
-        });
+        }
+    
+        else {
+          return [...prev]
+        }})
+    
+        resetInput()
+        setTotal(prev => prev + payloadItem.quantity*mealPrice)
       };
 
 
@@ -66,7 +84,7 @@ export const SingleMeal = ({meal,setPayload})=>{
                   placeholder="Add quantity"
                 />
               </form>
-              <button onClick={() => addOrder(meal.id, meal.name, meal.price)}>
+              <button onClick={() => addItem(meal.id, meal.name, meal.price)}>
                 Add Item
               </button>
         </div>
