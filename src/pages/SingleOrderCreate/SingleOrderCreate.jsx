@@ -5,6 +5,7 @@ import {
   getOneRestaurant,
   getProfile,
   getAllRestaurants,
+ 
 } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
@@ -21,9 +22,8 @@ export const SingleOrderCreate = () => {
   const [page, setPage] = useState(0);
   const [filterInput, setFilterInput] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const pollId = "001a1b51-6c18-47ca-a2c5-81a3c8d354ef";
-  const restaurantId = "07b560b2-4cab-4bc4-a04b-8c8190ae018d";
-
+  const pollId = localStorage.getItem("orderPollId");
+  const restaurantId = localStorage.getItem("orderRestaurantId");
   useEffect(() => {
     getOneRestaurant(restaurantId).then((res) => {
       console.log(res);
@@ -37,6 +37,7 @@ export const SingleOrderCreate = () => {
       console.log(res);
       setRestaurants(res.data);
     });
+
   }, []);
 
   useEffect(() => {
@@ -81,6 +82,7 @@ export const SingleOrderCreate = () => {
     const data = { restaurantId: selectedRestaurantId, label: orderInput };
     createOrder(data).then((res) => {
       console.log(res.data.id);
+      localStorage.setItem("orderId", res.data.id);
       // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
       history.push(`/single-order-add/${res.data.id}`);
     });
@@ -91,7 +93,7 @@ export const SingleOrderCreate = () => {
     const data = { restaurantId: restaurantId, label: orderInput };
     createOrder(data).then((res) => {
       console.log(res);
-
+      localStorage.setItem("orderId", res.data.id);
       history.push(`/single-order-add/${res.data.id}`);
     });
   };

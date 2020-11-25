@@ -15,6 +15,7 @@ import { Settings } from "./pages/Settings/Settings";
 import { AuthContext } from "./contexts/AuthContext";
 // style
 import "./App.css";
+import { SingleOrderView } from "./pages/SingleOrderView/SingleOrderView";
 
 
 const App = () => {
@@ -67,6 +68,10 @@ const App = () => {
 
       <PrivateRoute exact path="/settings">
         <Settings />
+      </PrivateRoute>
+
+      <PrivateRoute exact path="/single-order-view/:slug">
+        <SingleOrderView/>
       </PrivateRoute>
     </Router>
   );
