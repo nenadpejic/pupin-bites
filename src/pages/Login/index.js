@@ -24,7 +24,6 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // username: "admin@hungryherceg.com",
     const data = {
       username: email,
       password: password,
@@ -49,34 +48,34 @@ const Login = () => {
   return redirect ? (
     <Redirect to={state?.from || "/home"} />
   ) : (
-    <div id="login">
-      <LoginTab>
-        <p>Log in to Pupin Bites</p>
-        <form onSubmit={handleSubmit}>
-          <div className="err">{error}</div>
-          <input
-            onChange={handleUser}
-            type="email"
-            placeholder="Enter email"
-            value={email}
-          />
-          <input
-            onChange={handleUser}
-            type="password"
-            placeholder="Enter password"
-            value={password}
-          />
-          <button className="bigButton" type="submit">
-            Login
+      <div id="login">
+        <LoginTab>
+          <p>Log in to Pupin Bites</p>
+          <form onSubmit={handleSubmit}>
+            <div className="err">{error}</div>
+            <input
+              onChange={handleUser}
+              type="email"
+              placeholder="Enter email"
+              value={email}
+            />
+            <input
+              onChange={handleUser}
+              type="password"
+              placeholder="Enter password"
+              value={password}
+            />
+            <button className="bigButton" type="submit">
+              Login
           </button>
-        </form>
-        <span>
-          Need an account? <br></br>
-          <Link to="/signup">Sign Up</Link>
-        </span>
-      </LoginTab>
-    </div>
-  );
+          </form>
+          <span>
+            Need an account? <br></br>
+            <Link to="/signup">Sign Up</Link>
+          </span>
+        </LoginTab>
+      </div>
+    );
 };
 
 export default Login;

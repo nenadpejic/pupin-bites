@@ -44,6 +44,9 @@
   background-color: rgb(76,175,80);
   margin-bottom: 1rem;
 }
+#home > button:hover {
+  cursor: pointer;
+}
 #home > button:not(:first-child) {
   margin-left: 2rem;
 }

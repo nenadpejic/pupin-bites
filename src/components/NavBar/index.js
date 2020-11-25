@@ -18,25 +18,25 @@ const NavBar = () => {
     <nav className="navBar">
       {auth.isAuth() ? (
         <>
-          <div className="logo"><Link to="/home"><img src="/img/icons/logo.png"/></Link></div>
+          <div className="logo"><Link to="/home"><img src="/img/icons/logo.png" alt="logo" /></Link></div>
           <div className="user dropdown">
             <div className="userName">{user?.firstName + " " + user?.lastName}</div>
             <div className="dropdown-content">
-              <button class="settings"><Link to="/settings">Settings</Link></button>
-              <hr/>
-              <button class="logout" onClick={handleClick}>Logout </button>
+              <button className="settings"><Link to="/settings">Settings</Link></button>
+              <hr />
+              <button className="logout" onClick={handleClick}>Logout </button>
             </div>
           </div>
         </>
       ) : (
-        <>
-          <div className="logo"><Link to="/home"><img src="/img/icons/logo.png"/></Link></div>
-          <div className="user loggedOut">
-            <button><Link to="/login">Log In</Link></button>
-            <button><Link to="/signup">Sign Up</Link></button>
-          </div>
-        </>
-      )}
+          <>
+            <div className="logo"><Link to="/home"><img src="/img/icons/logo.png" alt="logo" /></Link></div>
+            <div className="user loggedOut">
+              <button><Link to="/login">Log In</Link></button>
+              <button><Link to="/signup">Sign Up</Link></button>
+            </div>
+          </>
+        )}
     </nav>
   );
 };
