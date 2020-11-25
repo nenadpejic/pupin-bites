@@ -90,11 +90,15 @@ export const SingleOrderCreate = () => {
   const submitOrderCreateHome = (e) => {
     e.preventDefault();
     const data = { restaurantId: selectedRestaurantId, label: orderInput };
-    createOrder(data).then((res) => {
+    createOrder(data)
+    .then((res) => {
       console.log(res.data.id);
       localStorage.setItem("orderId", res.data.id);
       // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
       history.push(`/single-order-add/${res.data.id}`);
+    })
+    .catch((err) => {
+      history.push(`/single-order-create`);
     });
   };
 
@@ -121,7 +125,7 @@ export const SingleOrderCreate = () => {
               autoComplete="on"
             />
 
-            <input type="submit" />
+            <input type="submit" value = 'Create Your Order' />
           </form>
         </div>
       ) : (
@@ -200,7 +204,7 @@ export const SingleOrderCreate = () => {
                 value={orderInput.label}
                 autoComplete="on"
               />
-              <input type="submit" />
+              <input type="submit" value='Create your Order'/>
             </form>
           </div>
         </div>
