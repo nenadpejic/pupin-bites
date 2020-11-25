@@ -14,26 +14,29 @@ export const formatDate = (string) => {
   const date = new Date(string);
   let year = date.getFullYear();
   let month = date.getMonth();
-  let day = date.getDate();
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let seconds = date.getSeconds();
-  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let day = date.getDate().toString();
+  let hours = date.getHours().toString();
+  let minutes = date.getMinutes().toString();
+  let seconds = date.getSeconds().toString();
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-  if (day < 10) {
-    day = "0" + day;
-  }
-  // if (month < 10) {
-  //   month = "0" + month;
-  // }
-  if (hours < 10) {
-    hours = "0" + hours;
-  }
-  if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-  if (seconds < 10) {
-    seconds = "0" + seconds;
-  }
-  return `${day}. ${monthNames[month]} ${year} - ${hours}:${minutes}:${seconds}`;
+  return `${day.padStart(2, "0")}. ${
+    monthNames[month]
+  } ${year} - ${hours.padStart(2, "0")}:${minutes.padStart(
+    2,
+    "0"
+  )}:${seconds.padStart(2, "0")}`;
 };
