@@ -15,7 +15,10 @@ const Welcome = () => {
             <p><b>Which restaurant?</b></p>
             <p>Decide democratically! This app can help you.</p>
           </div>
-
+          <div className="image" style={{backgroundImage:`url(${"/img/photos/lunch.webp"})`}}>
+            
+          </div>
+        </div>
           <div className="section2">
             <h2 className="title">
               More than <span style={{ color: "green" }}>156</span> restaurants
@@ -64,8 +67,8 @@ const Welcome = () => {
             </div>
           </div>
       </div>
-      <Footer/>
-    </div>
+    
+    <Footer/>
 </div>
 )
 }
