@@ -27,7 +27,7 @@ export const SingleOrderView = ()=>{
     useEffect(()=>{
 
         restaurantId && getMeals(restaurantId).then(res=>{
-            console.log(res.data)
+           
             setMeals(res.data.filter(el=>el.available === true))
         })
     
@@ -66,13 +66,13 @@ export const SingleOrderView = ()=>{
     return (
         <div>
             {orderedItems&&orderedItems.map(order=>
-                <div key={order.id}>
+                <div key={order}>
                     <p>{order.consumer}</p>
                     {order.payloads.map(el=>
                         <div key={el.id}>
-                            <p>{el.mealId}</p>
-                            <p>{el.note}</p>
-                             <p>{el.quantity}</p>
+                            <p>Meal: {meals&& meals.filter(meal=>el.mealId===meal.id)[0].name}</p>
+                            <p>Note : {el.note}</p>
+                             <p>quantity : {el.quantity}</p>
                         </div>)}
                         <hr/>
                 </div>)}
