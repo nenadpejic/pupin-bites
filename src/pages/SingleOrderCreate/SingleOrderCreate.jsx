@@ -56,6 +56,7 @@ export const SingleOrderCreate = () => {
         res.data.some(handleCheckData)
           ? setPollCreator(true)
           : setPollCreator(false);
+          pollId && setPollCreator(true)
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
@@ -96,8 +97,10 @@ export const SingleOrderCreate = () => {
       localStorage.setItem("orderId", res.data.id);
       // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
       history.push(`/single-order-add/${res.data.id}`);
+
     })
     .catch((err) => {
+      console.log(err)
       history.push(`/single-order-create`);
     });
   };
@@ -113,9 +116,9 @@ export const SingleOrderCreate = () => {
   };
 
   return (
-    <div>
+    <div className='createOrder'>
       {pollCreator ? (
-        <div>
+        <div className='oneRestaurant'>
           <div>{restaurantInfo.name}</div>
           <form onSubmit={submitOrderCreate}>
             <input
@@ -129,8 +132,8 @@ export const SingleOrderCreate = () => {
           </form>
         </div>
       ) : (
-        <div>
-          <div>
+        <div className='createPageFromHome'>
+          <div className='allRestaurants'>
             <form>
               <input
                 type="text"

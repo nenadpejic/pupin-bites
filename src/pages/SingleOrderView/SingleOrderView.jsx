@@ -50,7 +50,6 @@ export const SingleOrderView = () => {
   }, [restaurantId]);
 
   useEffect(() => {
-    console.log(profile + " setovan profil");
     profile &&
       orderedItems &&
       setYourOrderItems(
@@ -72,14 +71,14 @@ export const SingleOrderView = () => {
     // }
     let data = {
         active:false,
-        label: orderInfo.label + '|finished'
+        label: 'done'
     }
     updateOrder(data,orderInfo.id).then(res=>{
-        console.log(res)
+      localStorage.removeItem("orderPollId");
     })
   }
 
-
+  
   return (
     <div>
       <div>
