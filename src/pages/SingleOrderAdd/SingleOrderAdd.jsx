@@ -78,7 +78,7 @@ const SingleOrderAdd = () => {
     history.push(`/single-order-view/${slug}`)
   }
   return (
-    <>
+    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
     <NavBar />
     <div id="single-order-create">
       
@@ -99,22 +99,22 @@ const SingleOrderAdd = () => {
           </div>
         )} 
       </div>
-      <div>
+      <div className="make-order">
         <button onClick={addItemsToOrder}>Make Your Order</button>
         {valid ? null : <p>This order is not active anymore or you did not pick any meal to order.</p>}
       </div>
       <hr/>
-      <div>
+      <div className="make-order">
         <h2>Price:</h2>
         <p>{total} USD</p>
       </div>
-      <div>
+      <div className="make-order">
         <label>Already ordered?</label>
         <button onClick={handleOrderView}>Go to Your Order</button>
       </div>
     </div>
     <Footer />
-    </>
+    </div>
   );
 };
 
