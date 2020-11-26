@@ -1,7 +1,7 @@
 /* SHOW TABS */
 /* Style the tab */
- #home .tab {
-  overflow: hidden; 
+#home .tab {
+  overflow: hidden;
   background-color: #f1f1f1;
 }
 
@@ -12,11 +12,11 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px; 
-} 
+  padding: 14px 16px;
+}
 
-#home .tab button.activeButton{
-  background-color:#4CAF50;
+#home .tab button.activeButton {
+  background-color: #4caf50;
   color: #fff;
 }
 
@@ -30,11 +30,11 @@
 #home .tabcontent {
   border: 1px solid #ccc;
   border-top: none;
-} 
+}
 
 /*******/
-#home .pollItem{
-  margin-bottom:15px;
+#home .pollItem {
+  margin-bottom: 15px;
 }
 
 #home input {
@@ -43,7 +43,7 @@
 }
 
 #home > button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   margin-bottom: 1rem;
   color: #fff;
 }
@@ -72,4 +72,11 @@
 
 #home th {
   cursor: default;
+}
+
+#home img {
+  width: 1rem;
+  margin-left: 0.5rem;
+  filter: invert();
+  float: right;
 }
