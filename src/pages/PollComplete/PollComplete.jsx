@@ -27,12 +27,14 @@ const PollInProgress = () => {
                 setPoll(res.data)
                 SetVotes(votes.length === 0 ? res.data.votes : null)
                 setRestaurants(res.data.restaurants.map(el => Object.assign(el, { vote: [...votes.filter(vote => vote.restaurantId === el.id)] })))
-                setWinner((restaurants.filter(el => Math.max(el.vote.length) ? el : null)))
             }
         }).catch((err) => {
         })
         return () => { isMounted = false };
     }, [votes])
+    useEffect(() => {
+        setWinner(restaurants.filter(el => Math.max(el.vote.length) ? el : null))
+    }, [restaurants])
 
     const handleClickFinish = () => {
         let data = {
@@ -67,8 +69,12 @@ const PollInProgress = () => {
             </div>
 
             {createdPolls[0] ? (createdPolls[0].includes(slug) ?
-                <button onClick={handleClickFinish} className="button">Finish Poll</button> :
-                <button onClick={handleClickHome} className="button">Back To Home</button>) : null}
+                (winner === true && winner.length === 1 ? <button onClick={handleClickFinish} className="button">Finish Poll</button> :
+                    <div>
+                        <button onClick={handleClickFinish} className="button">Finish Poll</button>
+                        <div>asdasdsad</div>
+                    </div>)
+                : <button onClick={handleClickHome} className="button">Back To Home</button>) : null}
         </Main>
     )
 }

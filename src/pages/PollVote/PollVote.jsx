@@ -73,7 +73,7 @@ const PollVote = () => {
                     </div>
                 )}
             </div>
-            <button className="bigButton" type="submit" onClick={handleClick}>Glasaj</button>
+            <button className="bigButton" type="submit" onClick={handleClick}>Vote</button>
         </Main>
     )
 }
