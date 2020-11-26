@@ -9,7 +9,7 @@
     width: 200px;
     margin: 15px auto;
     padding: 10px;
-    background-color: #f7f6ed;
+    background-color: #f1f1f1;
 }
 .single-meal>form>input[type="textBox"]{
     width: 150px;
@@ -51,7 +51,7 @@
 
 div>.orderedItems{
     color: rgb(20, 5, 5);
-    background-color: #f7f6ed;
+    background-color: #f1f1f1;
     width: 60%;
     margin: 15px auto;
     padding: 15px;
@@ -79,7 +79,7 @@ div>.orderedItems{
 
 .price{
     border: 0.6px solid grey;
-    background-color: #f7f6ed;
+    background-color: #f1f1f1;
     width: 200px;
     margin: 0 auto;
 }
