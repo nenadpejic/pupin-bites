@@ -16,12 +16,7 @@ import { getProfile, updatePoll, getAllPolls } from "./services/services";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
-<<<<<<< HEAD
-//import "./App.css";
-import { SingleOrderView } from "./pages/SingleOrderView/SingleOrderView";
-=======
 import "./App.css";
->>>>>>> 500108cf313fbfa7fcdc9111ef753c1d71514cfb
 
 const App = () => {
   const auth = useContext(AuthContext);

@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { getMeals, getOneOrder, getOrderItems } from '../../services/services'
-import Main from '../../components/Main'
-import './style.css'
-=======
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import {
@@ -18,8 +11,6 @@ import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import { CSVLink } from "react-csv";
 import "./singleOrderView.css"
->>>>>>> 500108cf313fbfa7fcdc9111ef753c1d71514cfb
-
 export const SingleOrderView = () => {
   
   const [orderedItems, setOrderedItems] = useState(undefined);
@@ -149,33 +140,6 @@ export const SingleOrderView = () => {
         )}
       </div>
 
-<<<<<<< HEAD
-    return (
-        <Main>   
-        <div className="singleOrderview">
-            <h2 className="page-title" >Customer Orders</h2>
-        {orderedItems&&orderedItems.map(order=>
-            <div key={order}>
-                <h3>{order.consumer}</h3>
-                <table>
-                <thead><tr><th>Meals</th><th>Notes</th><th>Quantities</th></tr></thead>
-                <tbody>
-                {order.payloads.map(el=>
-                    <tr key={el.id}>
-                        <td> {meals&& meals.filter(meal=>el.mealId===meal.id)[0].name}</td>
-                        <td> {el.note}</td>
-                        <td> {el.quantity}</td>
-                    </tr>)} 
-                </tbody>
-                </table> 
-            </div>)}      
-        </div>  
-        </Main>
-    )
-}
-
- 
-=======
       {storage && (
         <div className="order-view-all">
             <h3>Food ordered by all:</h3>
@@ -212,4 +176,3 @@ export const SingleOrderView = () => {
     </div>
   );
 };
->>>>>>> 500108cf313fbfa7fcdc9111ef753c1d71514cfb

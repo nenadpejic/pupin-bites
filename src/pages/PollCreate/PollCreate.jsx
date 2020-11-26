@@ -123,15 +123,9 @@ const PollCreate = () => {
         <>
             <Main>
                 <div>
-<<<<<<< HEAD
                     <h2 className="page-title">Create Poll</h2>
                     <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required />
                     <div className="pollDuration">
-=======
-                    <h1>Create Poll</h1>
-                    <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required /><br></br>
-                    {/* <div className="pollDuration">
->>>>>>> 500108cf313fbfa7fcdc9111ef753c1d71514cfb
                         <div className="title">Set Duration</div>
                         <div className="hours">
                             <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={handleTime} required />
@@ -139,7 +133,8 @@ const PollCreate = () => {
                         <div className="minutes">
                             <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={handleTime} required />
                         </div>
-                    </div> */}
+                    </div> 
+                    
                     <input type="text" placeholder="Search Restaurant" onChange={handleChange} />
                     <div className="info">Poll duration time is <b>30</b> min</div>
 
