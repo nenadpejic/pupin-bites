@@ -77,8 +77,10 @@ const SingleOrderAdd = () => {
     history.push(`/single-order-view/${slug}`)
   }
   return (
+    <>
+    <NavBar />
     <div id="single-order-create">
-      <NavBar />
+      
       <div className="meal">
         {meals &&
           meals.map((el) => (
@@ -110,6 +112,7 @@ const SingleOrderAdd = () => {
         <button onClick={handleOrderView}>Go to Your Order</button>
       </div>
     </div>
+    </>
   );
 };
 
