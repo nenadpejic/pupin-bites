@@ -1,10 +1,76 @@
-body {
-  text-align: center;
+.restaurantList {
+  margin: 40px auto;
+  width: 400px;
 }
-.poll {
-  width: 300px;
-  height: 70px;
-  border: 2px solid black;
+.restaurantList > div {
+  margin-bottom: 10px;
+}
+.restaurantList > input[type="radio"] {
+  display: none;
+}
+input[type="radio"]:checked + label > .restaurant {
+  border: 1px solid green;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(25, 182, 51, 0.19);
+}
+/*
+.restaurant{
+  cursor: pointer;
+}
+.restaurant:hover{
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+} 
+*/
+.restaurant {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: auto auto;
+  gap: 0px 0px;
+  grid-template-areas:
+    "icon name"
+    "icon address";
+  width: 400px;
+  max-width: 500px;
+  height: 80px;
   margin: 10px auto;
-  text-align: center;
+  border: 1px solid lightgray;
+  text-align: start;
+}
+
+.restaurant > .icon {
+  grid-area: icon;
+  margin: auto;
+}
+.restaurant > .icon > img {
+  line-height: 0px;
+  width: 100px;
+  height: 80px;
+}
+.name {
+  grid-area: name;
+  padding-top: 0.8em;
+  padding-left: 10px;
+  overflow: hidden;
+}
+.address {
+  grid-area: address;
+  padding-top: 0.6em;
+  overflow: hidden;
+  padding-left: 10px;
+}
+.vote {
+  display: inline;
+  position: relative;
+  top: -54px;
+  left: 370px;
+  font-size: 20px;
+  color: #4caf50;
+  font-weight: 800;
+}
+.button {
+  padding: 15px 40px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
 }
