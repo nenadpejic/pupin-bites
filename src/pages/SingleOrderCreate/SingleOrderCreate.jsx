@@ -9,6 +9,8 @@ import {
 } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 import "./singleOrderCreate.css"
 
 export const SingleOrderCreate = () => {
@@ -118,6 +120,7 @@ export const SingleOrderCreate = () => {
 
   return (
     <>
+    <NavBar />
     <div className='createOrder'>
       {pollCreator ? (
         <div className='oneRestaurant'>
@@ -215,6 +218,7 @@ export const SingleOrderCreate = () => {
         </div>
       )}
     </div>
+    <Footer />
     </>
   );
 };
