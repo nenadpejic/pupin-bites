@@ -10,7 +10,7 @@ import {
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
 import Main from '../../components/Main';
-import "./singleOrderCreate.css";
+import "./SingleOrderCreate.css";
 import RestaurantItem from '../../components/RestaurantItem';
 
 export const SingleOrderCreate = () => {
