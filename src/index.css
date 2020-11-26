@@ -10,9 +10,17 @@ body {
 }
 code{font-family: 'Gorditas', cursive;}
 
-/*****BUTTONS******/
 
-button{
+/*********** HEADING **************/
+h2.page-title{
+  margin:20px auto 20px auto;
+  font-size: 2em;
+}
+
+
+/************ BUTTONS ***********/
+
+button, input[type="submit"]{
   border:0px;
   text-decoration: none;
   background-color: transparent;
@@ -20,31 +28,30 @@ button{
   margin: 0px;
   outline: none;
 }
-
-button.bigButton{
+button.bigButton, input[type="submit"]{
 	display:block;
 	width:200px;
 	height:40px;
 	background-color:rgb(90,172,68);
 	border:1px solid grey;
 	margin:auto;
-	margin-top:40px;
-	margin-bottom:40px;
+	margin-top:30px;
+	margin-bottom:30px;
 	color:white;
 	font-size:22px;
 	cursor:pointer;
 }
-
-button.bigButton:hover{
-    background-color:rgb(86,188,64); 
+button.bigButton:hover, input[type="submit"]:hover{
+  background-color:rgb(86,188,64); 
 }
 
 
-/****************/
+
+/***********************************/
 
 
 
-/***** TABLE *****/
+/************* TABLE *****************/
 table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -68,3 +75,35 @@ table th {
   color: white;
 }
 /*****************/
+
+
+/******** PAGINATINO **********/
+.pagination{
+  width:400px;
+  height:auto;
+  margin:auto; 
+}
+.singleOrderCreate .pagination button{
+  padding:10px;
+  border:1px solid transparent;
+  border-radius: 3px;
+}
+.singleOrderCreate .pagination button:hover{
+ border: 1px solid rgb(202, 202, 202);
+ cursor:pointer;
+ background-color: rgb(240, 240, 240);
+}
+/********************************/
+
+
+/************* INPUT *************/
+input[type="text"]{
+  width:100px;
+  height:30px;
+  outline:none;  
+  padding-left:10px;
+}
+input[type="text"]:hover{ 
+  background-color: rgb(245, 245, 245);
+ }
+

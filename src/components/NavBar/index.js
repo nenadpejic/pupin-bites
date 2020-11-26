@@ -23,7 +23,7 @@ const NavBar = () => {
             <div className="userName">{user?.firstName + " " + user?.lastName}</div>
             <div className="dropdown-content">
               <button className="settings"><Link to="/settings">Settings</Link></button>
-              <hr />
+              <hr/>
               <button className="logout" onClick={handleClick}>Logout </button>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/
 import { OrderedMeal } from "./OrderedMeal";
 import { SingleMeal } from "./SingleMeal";
 import "./singleOrderAdd.css";
+import Main from "../../components/Main"
 
 const SingleOrderAdd = () => {
 
@@ -77,44 +78,43 @@ const SingleOrderAdd = () => {
   const handleOrderView = ()=>{
     history.push(`/single-order-view/${slug}`)
   }
-  return (
-    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
-    <NavBar />
-    <div id="single-order-create">
-      
-      <div className="meal">
-        {meals &&
-          meals.map((el) => (
+  return ( 
+    <div className="single-order-create">
+      <Main>
+        <h2 className="page-title">Create Order</h2>
+      <div className="meals">
+        {meals && meals.map((el) => (
             <SingleMeal meal={el} setPayload={setPayload} key={el.id} setOrderedMeal={setOrderedMeal} setTotal={setTotal}/>
-     
           ))}
       </div>
 
+      <hr/>
+
       <div>
         {orderedMeal.map((el,idx) =>
-          
           <div className='orderedItems ' key={idx}>
             <OrderedMeal ordered={el} orderedMeal={orderedMeal} payload={payload} setTotal={setTotal}/>
-        
           </div>
         )} 
       </div>
-      <div className="make-order">
-        <button onClick={addItemsToOrder}>Make Your Order</button>
-        {valid ? null : <p>This order is not active anymore or you did not pick any meal to order.</p>}
-      </div>
-      <hr/>
-      <div className="make-order price">
-        <h2>Price:</h2>
-        <p>{total} USD</p>
-      </div>
-      <div className="make-order">
+      
+       {orderedMeal.length>0 &&  
+        <>
+        <div>
+          <h2>Total: {total} USD</h2>
+        </div>
+        <div>
+          <button className="bigButton" onClick={addItemsToOrder}>Make Your Order</button>
+          {valid ? null : <p>This order is not active anymore or you did not pick any meal to order.</p>}
+        </div> 
+        <div className="make-order">
         <label>Already ordered?</label>
         <button onClick={handleOrderView}>Go to Your Order</button>
-      </div>
-    </div>
-    <Footer />
-    </div>
+      </div> 
+        </>
+      } 
+      </Main>
+  </div>
   );
 };
 
