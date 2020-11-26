@@ -7,6 +7,8 @@ import {
   getProfile,
   updateOrder,
 } from "../../services/services";
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 import { CSVLink } from "react-csv";
 import "./singleOrderView.css"
 
@@ -104,6 +106,8 @@ export const SingleOrderView = () => {
 
   
   return (
+    <>
+    <NavBar />
     <div className="order-div">
       <div>
           <h3>Food you ordered:</h3>
@@ -166,5 +170,7 @@ export const SingleOrderView = () => {
         
       )}
     </div>
+    <Footer />
+    </>
   );
 };
