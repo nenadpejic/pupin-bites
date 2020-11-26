@@ -25,8 +25,21 @@ export const SingleOrderCreate = () => {
   const [page, setPage] = useState(0);
   const [filterInput, setFilterInput] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [pollId,setPollId] = useState(localStorage.getItem("orderPollId") ? localStorage.getItem("orderPollId") : '')
-  const [restaurantId,setRestaurantId] = useState(localStorage.getItem("orderRestaurantId") ? localStorage.getItem("orderRestaurantId") : undefined)
+  // eslint-disable-next-line
+  const [pollId,setPollId] = 
+    useState(localStorage.getItem("orderPollId") 
+    ? 
+    localStorage.getItem("orderPollId") 
+    : 
+    '');
+    // eslint-disable-next-line
+  const [restaurantId,setRestaurantId] = 
+      useState(localStorage.getItem("orderRestaurantId") 
+      ? 
+      localStorage.getItem("orderRestaurantId") 
+      : 
+      undefined);
+  
   useEffect(() => {
    restaurantId && getOneRestaurant(restaurantId).then((res) => {
       console.log(res);
@@ -65,7 +78,8 @@ export const SingleOrderCreate = () => {
         console.log("AXIOS ERROR: ", err);
 
         setPollCreator(false)
-      });;
+      });
+  // eslint-disable-next-line
   }, [profile]);
 
   useEffect(() => {
@@ -118,6 +132,12 @@ export const SingleOrderCreate = () => {
     });
   };
 
+  const handleValidation = () => {
+    if (orderInput.trim() === '') {
+      
+    }
+  };
+
   return (
     <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
     <NavBar />
@@ -125,7 +145,7 @@ export const SingleOrderCreate = () => {
       {pollCreator ? (
         <div className='oneRestaurant'>
           <div className='titleWrapper'>
-          <div className='restaurantInfo'>Make Your Order for : </div>
+          <div className='restaurantInfo'>Make your order for: </div>
           <div className='restaurantInfo'><strong><h3>{restaurantInfo.name}</h3></strong></div>
           <div className='restaurantInfo'>Visit us at:  {restaurantInfo.address}</div>
           </div>
@@ -217,8 +237,9 @@ export const SingleOrderCreate = () => {
                 onChange={handleOrderInput}
                 value={orderInput.label}
                 autoComplete="on"
+                required="yes"
               /><br></br>
-              <input type="submit" />
+              <input type="submit" onClick={handleValidation()}/>
             </form>
           </div>
         </div>
