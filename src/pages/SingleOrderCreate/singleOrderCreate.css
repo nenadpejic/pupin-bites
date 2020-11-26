@@ -76,3 +76,10 @@ hr{
     color: #666666;
     border-color: #737373;
 }
+
+.titleWrapper{
+    margin-bottom: 2rem;
+}
+.restaurantInfo{
+    margin-bottom: 0.6rem;
+}
