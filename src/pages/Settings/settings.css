@@ -1,4 +1,4 @@
-
+/*
 .Settings{
     display:flex;
     justify-content: space-around;
@@ -24,12 +24,10 @@
 
 /* kopirana forma */
 
+/*
 
 
-
-.login-box {
- 
-  
+.login-box { 
   padding: 40px;
   width: 100%;
   background: rgba(0,0,0,.5);
@@ -192,7 +190,7 @@
     outline:none;
 }
 
-/*  */
+  */
 
 
 
@@ -202,6 +200,7 @@
     background-color: blanchedalmond;
   } */
   
+  /*
   .page-btn{
     color: rgb(238, 241, 223);
     background-color: rgb(74, 84, 87);
@@ -216,3 +215,4 @@
     background-color: rgb(48, 48, 47);
   }
 
+*/

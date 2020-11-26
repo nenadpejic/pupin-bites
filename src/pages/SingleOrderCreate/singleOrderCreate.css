@@ -1,0 +1,78 @@
+body{
+    text-align: center;
+}
+
+.div-order{
+    margin: 0 auto;
+    border: 1px solid grey;
+    width: 60%;
+    padding-top: 35px;
+    padding-bottom: 50px;
+}
+
+.single-restaurant{
+    margin: 10px auto;
+    border: 1px solid grey;
+    background-color: #f7f6ed;
+    width: 220px;
+}
+.single-restaurant:hover{
+    cursor: pointer;
+}
+
+.rest-info{
+    background-color: #f7f6ed;
+    border: 1px solid grey;
+    margin: 10px auto;
+    padding: 10px;
+    width: 250px;
+}
+.rest-info-submit{
+    width: 100px;
+}
+
+input{
+   
+    background-color:rgb(245, 245, 245);
+}
+input:hover{
+    background-color:rgb(235, 235, 235);
+}
+input[type="submit"]{
+    background-color: rgb(90,172,68);
+    margin: 10px auto;
+    font-size: 1em;
+    cursor: pointer;
+    width: 350px;
+}
+input[type="submit"]:hover{
+    color: white;
+    cursor: pointer;
+}
+p{
+    padding: 5px 0;
+}
+hr{
+    color: transparent;
+}
+
+.pagination-buttons{
+    margin: 15px auto;
+}
+
+.page-btn{
+    
+    background-color: #e6e6e6;
+    color: #4d4d4d;
+    border: #666666;
+}
+.page-btn:hover{
+    background-color: #737373;
+    color:  #e6e6e6;  
+    cursor: pointer;
+}
+.page-btn-selected{
+    background-color: #b3b3b3;
+    color: #666666;
+    border-color: #737373;
+}

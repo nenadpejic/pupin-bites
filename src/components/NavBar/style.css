@@ -1,55 +1,97 @@
-a, button{
-    border:none;
-    background-color: transparent;
-    text-decoration: none; 
-    padding:0px;
-} 
-
-.navigation{
-    height:60px;
+.navBar{
+    height:50px;
     width:100%;
     background-color:rgb(253,181,28);
     position:sticky;
     top:0px; 
-}
-.navigation>.logo{
+    overflow: hidden;
+} 
+
+.navBar>.logo{
     float:left;
     box-sizing: border-box;
     padding: 5px 0 0 15px;
 }
-.navigation img{
-    width:50px;
+.navBar img{
+    width:40px;
 }
 
-.navigation>.status{
-    padding-top: 5px;
+.navBar>.user{
     float:right;
-    overflow: hidden;
-}
-.navigation>.status>.loggedOut>button>*{
-    float:left;
-    margin-right:10px;
-    margin-top:8px;
-    border:1px solid rgb(120,75,0);
-    color:rgb(120,75,0);
-    padding: 8px 20px; 
+    margin-right:20px; 
+} 
+
+.navBar>.user.loggedOut>button>a{ 
+    display: inline-block;  
+    color:white;
     font-weight: bold;
+    text-decoration: none;
+    padding:17px 20px;
+    font-size: 1.2em;
+    text-shadow: 1px 1px 1px grey;
 }
-.navigation>.status>.loggedOut>button>*:hover{
-    background-color: white; 
+.navBar>.user.loggedOut>button>a:hover{
+    color:rgb(253,181,28);
+    text-shadow: none;
+
+}
+.navBar>.user.loggedOut>button>*:hover{ 
+    background-color:white; 
     box-sizing: border-box;
     cursor: pointer;
+    
 }
 
+.dropdown { 
+    display: block;
+  }
+.dropdown:hover { 
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    position:fixed;
+    top:50px;
+    right:20px;
+    display: none;
+    z-index: 2;
+    height:auto;
+    background-color: rgba(255, 255, 255, 0.61);
+  }
+  .dropdown-content>button{ 
+      font-size: 1em;
+      color:rgb(0, 0, 0); 
+  } 
+  .dropdown:hover .settings>a{
+      display: block;
+      color: block;
+      padding:15px 40px;
+  }
+  .dropdown-content .logout{
+    padding:15px 45px;
+  }
+  .dropdown-content>button>a{
+    color:black; 
+    text-decoration: none;
+  }
+  .dropdown-content>button:hover{
+      background-color: white;
+      cursor:pointer
+  }
+  .userName{
+      padding:16px;
+  }
+  .dropdown:hover{
+      background-color: white;
+  }
+  
+  .dropdown:hover>.dropdown-content {
+    display: block;
+  }
 
-.navigation>.status>.loggedIn{
-    margin-right:40px;
-
-}
-.navigation>.status>.loggedIn>*{
-    float:left;
-    margin-right:10px;
-}
-.navigation>.status>.loggedIn>div{
-    margin-top:15px;
+  @media screen and (max-width: 768px){
+    .dropdown-content{
+        border:1px solid grey;
+        background-color: white;
+    }
 }
