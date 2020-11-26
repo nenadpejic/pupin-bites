@@ -21,17 +21,20 @@ const PollInProgress = () => {
 
 
     useEffect(() => {
+        let isMounted = true
         getOnePoll(slug).then(res => {
-            setPoll(res.data)
-            SetVotes(res.data.votes)
-            setRestaurants(res.data.restaurants.map(el => Object.assign(el, { vote: [...votes.filter(vote => vote.restaurantId === el.id)] })))
-            setWinner((restaurants.filter(el => Math.max(el.vote.length) ? el : null)))
+            if (isMounted) {
+                setPoll(res.data)
+                SetVotes(votes.length === 0 ? res.data.votes : null)
+                setRestaurants(res.data.restaurants.map(el => Object.assign(el, { vote: [...votes.filter(vote => vote.restaurantId === el.id)] })))
+                setWinner((restaurants.filter(el => Math.max(el.vote.length) ? el : null)))
+            }
         }).catch((err) => {
-            console.log(err);
         })
-    }, [slug, votes])
+        return () => { isMounted = false };
+    }, [votes])
 
-    const handleClick = () => {
+    const handleClickFinish = () => {
         let data = {
             "active": false
         }
@@ -41,10 +44,13 @@ const PollInProgress = () => {
         localStorage.setItem('orderRestaurantId', tmp.toString())
         history.push(`/single-order-create/`)
     }
+    const handleClickHome = () => {
+        history.push(`/`)
+    }
 
     return (
         <Main>
-            <h1>Poll Vote</h1>
+            <h1>Poll Status</h1>
             <PollInfo poll={poll} />
 
             <div className="restaurantList">
@@ -60,7 +66,9 @@ const PollInProgress = () => {
                 )}
             </div>
 
-            {createdPolls[0] ? (createdPolls[0].includes(slug) ? <button onClick={handleClick} className="button">Finish Poll</button> : null) : null}
+            {createdPolls[0] ? (createdPolls[0].includes(slug) ?
+                <button onClick={handleClickFinish} className="button">Finish Poll</button> :
+                <button onClick={handleClickHome} className="button">Back To Home</button>) : null}
         </Main>
     )
 }

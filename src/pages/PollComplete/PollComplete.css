@@ -36,6 +36,21 @@ input[type="radio"]:checked + label > .restaurant {
   border: 1px solid lightgray;
   text-align: start;
 }
+.restaurant-winner {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: auto auto;
+  gap: 0px 0px;
+  grid-template-areas:
+    "icon name"
+    "icon address";
+  width: 400px;
+  max-width: 500px;
+  height: 80px;
+  margin: 10px auto;
+  border: 1px solid red;
+  text-align: start;
+}
 
 .restaurant > .icon {
   grid-area: icon;
