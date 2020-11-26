@@ -25,8 +25,21 @@ export const SingleOrderCreate = () => {
   const [page, setPage] = useState(0);
   const [filterInput, setFilterInput] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [pollId,setPollId] = useState(localStorage.getItem("orderPollId") ? localStorage.getItem("orderPollId") : '')
-  const [restaurantId,setRestaurantId] = useState(localStorage.getItem("orderRestaurantId") ? localStorage.getItem("orderRestaurantId") : undefined)
+  // eslint-disable-next-line
+  const [pollId,setPollId] = 
+    useState(localStorage.getItem("orderPollId") 
+    ? 
+    localStorage.getItem("orderPollId") 
+    : 
+    '');
+    // eslint-disable-next-line
+  const [restaurantId,setRestaurantId] = 
+      useState(localStorage.getItem("orderRestaurantId") 
+      ? 
+      localStorage.getItem("orderRestaurantId") 
+      : 
+      undefined);
+  
   useEffect(() => {
    restaurantId && getOneRestaurant(restaurantId).then((res) => {
       console.log(res);
@@ -49,22 +62,25 @@ export const SingleOrderCreate = () => {
 
   useEffect(() => {
     if (profile !== "")
-      getCheckData().then((res) => {
-        console.log(res.data);
-        console.log(pollId)
-        let handleCheckData = (el) =>
-          el.email === profile.email && el.poll === pollId;
-        console.log(res.data.some(handleCheckData) + " done");
+      // getCheckData().then((res) => {
+      //   console.log(res.data);
+      //   console.log(pollId)
+      //   let handleCheckData = (el) =>
+      //     el.email === profile.email && el.poll === pollId;
+      //   console.log(res.data.some(handleCheckData) + " done");
 
-        res.data.some(handleCheckData)
-          ? setPollCreator(true)
-          : setPollCreator(false);
-      })
-      .catch((err) => {
-        console.log("AXIOS ERROR: ", err);
+      //   res.data.some(handleCheckData)
+      //     ? setPollCreator(true)
+      //     : setPollCreator(false);
+      //     pollId && setPollCreator(true)
+      // })
+      // .catch((err) => {
+      //   console.log("AXIOS ERROR: ", err);
 
-        setPollCreator(false)
-      });;
+        
+      // });
+      restaurantId ? setPollCreator(true) : setPollCreator(false)
+  // eslint-disable-next-line
   }, [profile]);
 
   useEffect(() => {
@@ -93,11 +109,17 @@ export const SingleOrderCreate = () => {
   const submitOrderCreateHome = (e) => {
     e.preventDefault();
     const data = { restaurantId: selectedRestaurantId, label: orderInput };
-    createOrder(data).then((res) => {
+    createOrder(data)
+    .then((res) => {
       console.log(res.data.id);
       localStorage.setItem("orderId", res.data.id);
       // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
       history.push(`/single-order-add/${res.data.id}`);
+
+    })
+    .catch((err) => {
+      console.log(err)
+      history.push(`/single-order-create`);
     });
   };
 
@@ -111,21 +133,31 @@ export const SingleOrderCreate = () => {
     });
   };
 
+  const handleValidation = () => {
+    if (orderInput.trim() === '') {
+      
+    }
+  };
+
   return (
     <Main>
     <h2 className="page-title">Select Restaurant</h2>
     <div className="singleOrderCreate">
       {pollCreator ? (
-        <div>
-          <div>{restaurantInfo.name}</div>
+        <div className='oneRestaurant'>
+          <div className='titleWrapper'>
+          <div className='restaurantInfo'>Make your order for: </div>
+          <div className='restaurantInfo'><strong><h3>{restaurantInfo.name}</h3></strong></div>
+          <div className='restaurantInfo'>Visit us at:  {restaurantInfo.address}</div>
+          </div>
           <form onSubmit={submitOrderCreate}>
-            <input type="text" onChange={handleOrderInput} value={orderInput.label} autoComplete="on"/>
-            <input type="submit" />
+            <input type="text" onChange={handleOrderInput} value={orderInput.label} autoComplete="on" placeholder='Add Order Name'/>
+            <input type="submit" value = 'Create Your Order'/>
           </form>
         </div>
       ) : (
-        <div>
-          <div>
+        <div className='createPageFromHome'>
+          <div className='allRestaurants'>
             <form>
               <input type="text" placeholder="Search Restaurant by Name" name="name" value={filterInput.name} onChange={handleFilter} className="restaurantInput"/>
             </form>
@@ -166,13 +198,15 @@ export const SingleOrderCreate = () => {
           <div>
             <h3 style={{marginBottom:"10px"}}>{selectedRestaurantName}</h3>
             <form onSubmit={submitOrderCreateHome}>
+              
               <input
                 type="text"
                 onChange={handleOrderInput}
                 value={orderInput.label}
                 autoComplete="on"
+                placeholder='Enter Order Name'
+                required="yes"
                 className="submitOrderCreateHome"
-                placeholder="Enter your name"
               />
               <input type="submit" className="bigButton submitOrderCreateHome" value="Next"/>
             </form>

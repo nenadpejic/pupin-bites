@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/services";
 import { OrderedMeal } from "./OrderedMeal";
 import { SingleMeal } from "./SingleMeal";
@@ -64,7 +65,7 @@ const SingleOrderAdd = () => {
     payloads:payload
   };
 
-  if(order.active === true) {
+  if(order.active === true && payload.length!==0) {
 
    addOrderItem(data,slug).then(res => {
      console.log(res)
@@ -74,7 +75,10 @@ const SingleOrderAdd = () => {
    else handlesValidation()
   };
 
-  return (
+  const handleOrderView = ()=>{
+    history.push(`/single-order-view/${slug}`)
+  }
+  return ( 
     <div className="single-order-create">
       <Main>
         <h2 className="page-title">Create Order</h2>
@@ -91,7 +95,7 @@ const SingleOrderAdd = () => {
           <div className='orderedItems ' key={idx}>
             <OrderedMeal ordered={el} orderedMeal={orderedMeal} payload={payload} setTotal={setTotal}/>
           </div>
-        )}
+        )} 
       </div>
       
        {orderedMeal.length>0 &&  
@@ -101,12 +105,16 @@ const SingleOrderAdd = () => {
         </div>
         <div>
           <button className="bigButton" onClick={addItemsToOrder}>Make Your Order</button>
-          {valid ? null : <p>This order is not active anymore.</p>}
-        </div>  
+          {valid ? null : <p>This order is not active anymore or you did not pick any meal to order.</p>}
+        </div> 
+        <div className="make-order">
+        <label>Already ordered?</label>
+        <button onClick={handleOrderView}>Go to Your Order</button>
+      </div> 
         </>
-      }
+      } 
       </Main>
-    </div>
+  </div>
   );
 };
 

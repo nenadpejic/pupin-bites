@@ -1,0 +1,32 @@
+.order-div{
+    width: 60%;
+    margin: 0 auto;
+    border: 0.6px solid grey;
+    background-color: #fff;
+    padding: 5px;
+}
+.order-view{
+    width: 220px;
+    margin: 5px auto;
+}
+.order-view>p{
+    background-color: #d9d9d9;
+}
+
+.order-view>div{
+    background-color: #f1f1f1;
+}
+.order-view-all{
+    width: 220px;
+    margin: 5px auto;
+}
+.order-view-all>div{
+    background-color: #f1f1f1;
+    margin: 10px auto;
+}
+h3{
+    margin: 10px auto;
+}
+.order-consumer>p{
+    background-color: #d9d9d9;
+}

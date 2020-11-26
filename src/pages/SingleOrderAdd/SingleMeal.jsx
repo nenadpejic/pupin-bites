@@ -60,6 +60,7 @@ export const SingleMeal = ({meal,setPayload,setOrderedMeal,setTotal})=>{
         }})
     
         resetInput()
+        if(payloadItem.quantity*mealPrice > 0)
         setTotal(prev => prev + payloadItem.quantity*mealPrice)
       };
 

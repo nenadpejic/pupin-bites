@@ -101,3 +101,101 @@
     color:white;
   }
  
+  /*
+.meal{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 10px;
+}
+
+.single-meal{
+    
+    width: 200px;
+    margin: 15px auto;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+.single-meal>form>input[type="textBox"]{
+    width: 150px;
+    margin: 5px auto;
+}
+.single-meal>button{
+    cursor: pointer;
+    background-color: rgb(76,175,80); 
+    color: #fff;
+    padding: 5px;
+}
+.single-meal>button:hover{
+    background-color:rgb(86,188,64);
+}
+.singleMeal{
+    height: 200px;
+    width: 200px;
+}
+
+#single-order-create{
+    width: 60%;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+#single-order-create>div>button{
+    cursor:pointer;
+    background-color: rgb(76,175,80);
+    color: #fff; 
+}
+#single-order-create>div>button{
+    font-size: 1em;
+    padding: 5px;
+  
+}
+#single-order-create>div>button:hover{
+    background-color:rgb(86,188,64);
+}
+
+div>.orderedItems{
+    color: rgb(20, 5, 5);
+    background-color: #f1f1f1;
+    width: 60%;
+    margin: 15px auto;
+    padding: 15px;
+    border: 1px solid grey;
+    clear: both;
+}
+
+
+.orderedItems>div>button{
+    font-size: 1em;
+    background-color: rgb(204, 204, 204); 
+    border:1px solid  rgb(204, 204, 204);
+    color: #fff;
+}
+.orderedItems>div>button:hover{
+    cursor: pointer;
+    background-color:rgb(86,188,64); 
+}
+
+.make-order{
+    
+    margin: 5px;
+    padding: 5px;
+}
+
+.price{
+    border: 0.6px solid grey;
+    background-color: #f1f1f1;
+    width: 200px;
+    margin: 0 auto;
+}
+
+label{
+    margin-bottom: 5px;
+  
+}
+
+p{
+    font-size: 0.8em;
+}
+
+*/
+

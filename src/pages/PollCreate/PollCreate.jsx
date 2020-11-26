@@ -21,9 +21,10 @@ const PollCreate = () => {
 
     // States for time calculation
     const [time, setTime] = useState('')
-    const [hoursToEnd, setHoursToEnd] = useState(0)
-    const [minutesToEnd, setMinutesToEnd] = useState(15)
-    const [duration, setDuration] = useState(15)
+    // const [hoursToEnd, setHoursToEnd] = useState(0)
+    // const [minutesToEnd, setMinutesToEnd] = useState(15)
+    // const [duration, setDuration] = useState(15)
+
     // Token
     const tokenRef = useRef(localStorage.getItem("Token"))
     const token = tokenRef.current
@@ -42,23 +43,23 @@ const PollCreate = () => {
     }, [token])
 
     // Handeling hours
-    const handleTime = (e) => {
-        let name = e.target.name
-        let value = e.target.value
+    // const handleTime = (e) => {
+    //     let name = e.target.name
+    //     let value = e.target.value
 
-        if (name === 'hours') {
-            (value > 24) ? setHoursToEnd(e.target.value) : setHoursToEnd(value)
-        }
-        else if (name === 'minutes') {
-            value > 59 ? setMinutesToEnd(e.target.value) : setMinutesToEnd(value)
-        }
-        setDuration(Number(hoursToEnd) * 60 + Number(minutesToEnd))
+    //     if (name === 'hours') {
+    //         (value > 24) ? setHoursToEnd(e.target.value) : setHoursToEnd(value)
+    //     }
+    //     else if (name === 'minutes') {
+    //         value > 59 ? setMinutesToEnd(e.target.value) : setMinutesToEnd(value)
+    //     }
+    //     setDuration(Number(hoursToEnd) * 60 + Number(minutesToEnd))
 
-        let timer = new Date()
-        timer.setHours(timer.getHours() + parseInt(hoursToEnd))
-        timer.setMinutes(timer.getMinutes() + parseInt(minutesToEnd))
-        setTime(timer.toString(','))
-    }
+    //     let timer = new Date()
+    //     timer.setHours(timer.getHours() + parseInt(hoursToEnd))
+    //     timer.setMinutes(timer.getMinutes() + parseInt(minutesToEnd))
+    //     setTime(timer.toString(','))
+    // }
     // Handeling input change
     const handleChange = (e) => {
         setChange(e.target.value)
@@ -78,32 +79,43 @@ const PollCreate = () => {
         setRestaurants(restaurants.concat(selected.filter(el => el.id === id)))
         setFilter(filter.concat(selected.filter(el => el.id === id)))
     }
+    //Handle Time
+    const handleTime = () => {
+        let timer = new Date()
+        timer.setHours(timer.getHours() + 30)
+        timer.setMinutes(timer.getMinutes() + 30)
+        setTime(timer.toString(','))
+    }
     // Submit button
     const handleSubmit = () => {
-        let data = {
-            "label": pollName,
-            "restaurants": selected.map(el => el.id)
-        }
-        let currentPoll
-        createPoll(data).then(res => {
-            currentPoll = res.data.id
-            let pollId = []
-            pollId.push(localStorage.getItem('createPoll'))
-            pollId.push(res.data.id)
-            localStorage.setItem('createPoll', pollId)
-
-            let info = {
-                'email': email,
-                'poll': currentPoll,
-                'date': time
+        if (pollName !== '') {
+            let data = {
+                "label": pollName,
+                "restaurants": selected.map(el => el.id)
             }
-            postCheckData(info)
-            return history.push(`/poll-vote/${currentPoll}`)
-        })
+            handleTime()
+            let currentPoll
+            createPoll(data).then(res => {
+                currentPoll = res.data.id
+                let pollId = []
+                pollId.push(localStorage.getItem('createPoll'))
+                pollId.push(res.data.id)
+                localStorage.setItem('createPoll', pollId)
 
-        // //Redirect on click
-        // setTimeout(() => {
-        // }, 1500)
+                let info = {
+                    'email': email,
+                    'poll': currentPoll,
+                    'date': time
+                }
+                postCheckData(info)
+                return history.push(`/poll-vote/${currentPoll}`)
+            })
+        }
+        else {
+            alert("Please add poll name!");
+            return;
+        }
+
     }
     const displayResults = selected.length === 0 ? "none" : "block";
 
@@ -111,9 +123,15 @@ const PollCreate = () => {
         <>
             <Main>
                 <div>
+<<<<<<< HEAD
                     <h2 className="page-title">Create Poll</h2>
                     <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required />
                     <div className="pollDuration">
+=======
+                    <h1>Create Poll</h1>
+                    <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required /><br></br>
+                    {/* <div className="pollDuration">
+>>>>>>> 500108cf313fbfa7fcdc9111ef753c1d71514cfb
                         <div className="title">Set Duration</div>
                         <div className="hours">
                             <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={handleTime} required />
@@ -121,8 +139,9 @@ const PollCreate = () => {
                         <div className="minutes">
                             <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={handleTime} required />
                         </div>
-                    </div>
+                    </div> */}
                     <input type="text" placeholder="Search Restaurant" onChange={handleChange} />
+                    <div className="info">Poll duration time is <b>30</b> min</div>
 
                     <div className="restaurant-list">
                         {change.length === 0 ? restaurants.map((restaurant) => (

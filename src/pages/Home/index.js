@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getAllPolls, getAllOrders } from "../../services/services";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PollsItem from "../../components/PollsItem";
 import ActiveOrderItem from "../../components/ActiveOrderItem";
 import Main from "../../components/Main";
 import "./style.css";
 
 const Home = () => {
-  const history = useHistory();
   const [activeButton, setActiveButton] = useState(0);
   // Polls
   const [polls, setPolls] = useState([]);
@@ -17,20 +16,35 @@ const Home = () => {
   const [orders, setOrders] = useState([]);
   const [searchOrders, setSearchOrders] = useState([]);
   const [orderSearch, setOrderSearch] = useState("");
+  // Sorting
+  const [direction, setDirection] = useState(true);
 
-  const handleCreatePoll = () => {
-    history.push("/poll-create");
-  };
+  function compare(a, b) {
+    if (a.label.toLowerCase() < b.label.toLowerCase()) {
+      return -1;
+    }
+    if (a.label.toLowerCase() > b.label.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  }
 
-  const handleCreateOrder = () => {
-    history.push("/single-order-create");
-  };
+  const handleSortName = (param) => {
+    setDirection(!direction);
+    if (param === "poll") {
+      setPolls(polls?.reverse());
+    } else if (param === "order") {
+      setOrders(orders?.reverse());
+    }
+  }
 
   // Hvatam listu anketa iz baze
   useEffect(() => {
     getAllPolls()
       .then((res) => {
-        const data = res.data;
+        let data = res.data;
+        data = data.filter(poll => poll.active);
+        data.sort(compare);
         setPolls(data);
       })
       .catch((err) => {
@@ -38,11 +52,13 @@ const Home = () => {
       });
   }, []);
 
-  // Hvatam listu ordere iz baze
+  // Hvatam listu ordera iz baze
   useEffect(() => {
     getAllOrders()
       .then((res) => {
-        const data = res.data;
+        let data = res.data;
+        data = data.filter(order => order.active);
+        data.sort(compare);
         setOrders(data);
       })
       .catch((err) => {
@@ -57,16 +73,14 @@ const Home = () => {
 
   const handleOrderSearch = (e) => {
     setOrderSearch(e.target.value);
-    setSearchOrders(
-      orders.filter((elem) => elem.label.includes(e.target.value))
-    );
+    setSearchOrders(orders.filter((elem) => elem.label.includes(e.target.value)));
   };
 
   return (
     <Main>
       <div id="home">
-        <button onClick={handleCreatePoll}>Create Poll</button>
-        <button onClick={handleCreateOrder}>Create Order</button>
+        <button><Link to="/poll-create">Create Poll</Link></button>
+        <button><Link to="/single-order-create">Create Order</Link></button>
 
         <div className="tab">
           <button className={activeButton === 0 ? "activeButton" : ""}
@@ -86,17 +100,22 @@ const Home = () => {
                 type="search"
                 onChange={e => handlePollSearch(e)}
                 // value={pollSearch}
-                placeholder="Search for poll..."
+                placeholder="Search by poll name..."
               />
               </div>
               <table>
                 <thead>
-                  <tr><th>Poll Name</th><th>Poll Start</th><th>Poll End</th></tr>
+                  <tr>
+                    <th onClick={() => handleSortName("poll")}>Poll Name</th>
+                    <th>Poll Started</th>
+                    <th>Poll End</th>
+                  </tr>
                 </thead>
                 <tbody>
-                  {!pollSearch.length
-                    ? polls.map((poll) => <PollsItem key={poll.id} poll={poll} />)
-                    : searchPolls.map((poll) => <PollsItem key={poll.id} poll={poll} />)}
+                  {pollSearch.length
+                    ? searchPolls.map((poll) => <PollsItem key={poll.id} poll={poll} />)
+                    : polls.map((poll) => <PollsItem key={poll.id} poll={poll} />)
+                  }
                 </tbody>
               </table>
             </div>
@@ -108,12 +127,15 @@ const Home = () => {
                 type="search"
                 onChange={e => handleOrderSearch(e)}
                 // vaule={orderSearch}
-                placeholder="Search for order..."
+                placeholder="Search by order name..."
               />
               </div>
               <table>
                 <thead>
-                  <tr><th>Order Name</th><th>Order Start</th></tr>
+                  <tr>
+                    <th onClick={() => handleSortName("order")}>Order Name</th>
+                    <th>Order Started</th>
+                  </tr>
                 </thead>
                 <tbody>
                   {!orderSearch.length

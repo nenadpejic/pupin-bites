@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { getOnePoll, updatePoll } from '../../services/services'
 import Main from '../../components/Main'
 import PollInfo from '../../components/PollInfo'
+import { getOnePoll, updatePoll } from '../../services/services'
 import './PollComplete.css'
 
 const PollInProgress = () => {
@@ -21,17 +21,22 @@ const PollInProgress = () => {
 
 
     useEffect(() => {
+        let isMounted = true
         getOnePoll(slug).then(res => {
-            setPoll(res.data)
-            SetVotes(res.data.votes)
-            setRestaurants(res.data.restaurants.map(el => Object.assign(el, { vote: [...votes.filter(vote => vote.restaurantId === el.id)] })))
-            setWinner((restaurants.filter(el => Math.max(el.vote.length) ? el : null)))
+            if (isMounted) {
+                setPoll(res.data)
+                SetVotes(votes.length === 0 ? res.data.votes : null)
+                setRestaurants(res.data.restaurants.map(el => Object.assign(el, { vote: [...votes.filter(vote => vote.restaurantId === el.id)] })))
+            }
         }).catch((err) => {
-            console.log(err);
         })
-    }, [slug, votes])
+        return () => { isMounted = false };
+    }, [votes])
+    useEffect(() => {
+        setWinner(restaurants.filter(el => Math.max(el.vote.length) ? el : null))
+    }, [restaurants])
 
-    const handleClick = () => {
+    const handleClickFinish = () => {
         let data = {
             "active": false
         }
@@ -44,6 +49,9 @@ const PollInProgress = () => {
  
     
     const totalVotes = restaurants.map(r=>r.vote.length).reduce((a,b)=>a+b, 0);
+    const handleClickHome = () => {
+        history.push(`/`)
+    }
 
     return (
         <Main>
@@ -66,15 +74,27 @@ const PollInProgress = () => {
 
             {/* <div>
 
+            <div className="restaurantList">
                 {restaurants.map(restaurant =>
-                    <div key={restaurant.id} id={restaurant.id} className="poll">
-                        <div>{restaurant.name}</div>
-                        <div>{restaurant.address}</div>
-                        <div value={restaurant.vote.length}>Votes: {restaurant.vote.length}</div>
+                    <div key={restaurant.id} id={restaurant.id} className="restaurant">
+                        <div className="icon">
+                            <img src={`https://source.unsplash.com/random/400x400/?restaurant/${restaurant.id}`} alt="restaurant-icon" />
+                        </div>
+                        <div className="name">{restaurant.name}</div>
+                        <div className="address">{restaurant.address}</div>
+                        <div value={restaurant.vote.length} className="vote">{restaurant.vote.length}</div>
                     </div>
                 )}
-            </div> */}
-            {createdPolls[0] ? (createdPolls[0].includes(slug) ? <button className="bigButton" onClick={handleClick}>Finish Poll</button> : null) : null} 
+            </div>
+            */}
+            {createdPolls[0] ? (createdPolls[0].includes(slug) ?
+                (winner === true && winner.length === 1 ? <button onClick={handleClickFinish} className="button">Finish Poll</button> :
+                    <div>
+                        <button onClick={handleClickFinish} className="button">Finish Poll</button>
+                        <button>X</button>
+                    </div>)
+                : <button onClick={handleClickHome} className="button">Back To Home</button>) : null}
+            
         </Main>
     )
 }

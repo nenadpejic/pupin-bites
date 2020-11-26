@@ -18,7 +18,7 @@ const NavBar = () => {
     <nav className="navBar">
       {auth.isAuth() ? (
         <>
-          <div className="logo"><Link to="/home"><img src="/img/icons/logo.png"/></Link></div>
+          <div className="logo"><Link to="/home"><img src="/img/icons/logo.png" alt="logo" /></Link></div>
           <div className="user dropdown">
             <div className="userName">{user?.firstName + " " + user?.lastName}</div>
             <div className="dropdown-content">
@@ -29,14 +29,14 @@ const NavBar = () => {
           </div>
         </>
       ) : (
-        <>
-          <div className="logo"><Link to="/home"><img src="/img/icons/logo.png"/></Link></div>
-          <div className="user loggedOut">
-            <button><Link to="/login">Log In</Link></button>
-            <button><Link to="/signup">Sign Up</Link></button>
-          </div>
-        </>
-      )}
+          <>
+            <div className="logo"><Link to="/home"><img src="/img/icons/logo.png" alt="logo" /></Link></div>
+            <div className="user loggedOut">
+              <button><Link to="/login">Log In</Link></button>
+              <button><Link to="/signup">Sign Up</Link></button>
+            </div>
+          </>
+        )}
     </nav>
   );
 };
