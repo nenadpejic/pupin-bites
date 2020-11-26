@@ -117,6 +117,7 @@ export const SingleOrderCreate = () => {
   };
 
   return (
+    <>
     <div className='createOrder'>
       {pollCreator ? (
         <div className='oneRestaurant'>
@@ -214,5 +215,6 @@ export const SingleOrderCreate = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
