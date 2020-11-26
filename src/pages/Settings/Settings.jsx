@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getAllRestaurants } from "../../services/services";
 import { Meals } from "./Meals";
 import { Restaurants } from "./Restaurants";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
 import "./settings.css";
 export const Settings = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -22,8 +20,7 @@ export const Settings = () => {
 
 
   return (
-    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
-    <NavBar />
+    <>
       <div className="Settings">
         <div className='Restaurants'>
           <Restaurants
@@ -41,7 +38,6 @@ export const Settings = () => {
           />
         </div>
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };

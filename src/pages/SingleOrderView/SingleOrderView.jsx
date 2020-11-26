@@ -13,16 +13,11 @@ import { CSVLink } from "react-csv";
 import "./singleOrderView.css"
 
 export const SingleOrderView = () => {
+  
   const [orderedItems, setOrderedItems] = useState(undefined);
   const [yourOrderItems, setYourOrderItems] = useState(undefined);
   const [profile, setProfile] = useState(undefined);
   const [orderInfo, setOrderInfo] = useState([]);
-  // const [sortedMeals, setSortedMeals] = useState([]);
-  // const [consumer, setConsumer] = useState({
-  //   consumerName: "",
-  //   mealName: "",
-  //   mealPrice: "",
-  // });
   const [data, setData] = useState([]);
   const [restaurantId, setRestaurantId] = useState("");
   const [meals, setMeals] = useState(undefined);
@@ -41,17 +36,21 @@ export const SingleOrderView = () => {
       setOrderInfo(res.data);
       setRestaurantId(res.data.restaurantId);
     });
+
     getOrderItems(slug).then((res) => {
       console.log(res);
       setOrderedItems(res.data);
     });
+
   }, [slug]);
 
   useEffect(() => {
+
     restaurantId &&
       getMeals(restaurantId).then((res) => {
         setMeals(res.data.filter((el) => el.available === true));
       });
+
   }, [restaurantId]);
 
   useEffect(() => {
@@ -91,14 +90,17 @@ export const SingleOrderView = () => {
             Consumer: order.consumer, 
             Meals: 
               order.payloads.map((el) => (
-                      meals.filter((meal) => el.mealId === meal.id)[0].name)),
+                      meals
+                      .filter((meal) => el.mealId === meal.id)[0].name)),
             Note: 
               order.payloads.map((el) => (el.note)),
             Quantity: 
               order.payloads.map((el) => (el.quantity)),
             Price: 
               order.payloads.map((el) => (
-                meals.filter((meal) => el.mealId === meal.id)[0].price)).reduce((acc,cur) => acc+cur,0) + " USD"
+                meals
+                .filter((meal) => el.mealId === meal.id)[0].price))
+                .reduce((acc,cur) => acc+cur,0) + " USD"
           }]})))
         }
   }, [orderedItems, meals]);
@@ -154,7 +156,7 @@ export const SingleOrderView = () => {
                         meals.filter((meal) => el.mealId === meal.id)[0].name}
                     </p>
                     <p>Note : {el.note}</p>
-                    <p>quantity : {el.quantity}</p>
+                    <p>Quantity : {el.quantity}</p>
                     <hr />
                   </div>
                 ))}
@@ -163,9 +165,9 @@ export const SingleOrderView = () => {
             ))}
             <CSVLink 
             onClick={handleOrderFinish}
-            filename={orderInfo.label + ".csv"}
+            filename={orderInfo.label + " "  + slug + ".csv"}
             data={data}  
-            >Finish Order and Export to XML</CSVLink>
+            >Finish Order and Export to Excel</CSVLink>
         </div>
         
       )}
