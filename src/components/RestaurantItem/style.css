@@ -36,3 +36,6 @@
     padding-left: 10px;
   }
   
+  .restaurant:hover{
+    background-color: rgb(240, 240, 240);
+  }

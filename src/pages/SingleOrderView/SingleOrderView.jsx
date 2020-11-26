@@ -11,7 +11,6 @@ import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import { CSVLink } from "react-csv";
 import "./singleOrderView.css"
-
 export const SingleOrderView = () => {
   
   const [orderedItems, setOrderedItems] = useState(undefined);

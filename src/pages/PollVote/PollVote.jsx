@@ -61,7 +61,7 @@ const PollVote = () => {
     return (
         <Main>
             {createdVote[0] ? (createdVote[0].includes(slug) ? <Redirect to={`/poll-complete/${slug}`} /> : null) : null}
-            <h1>Poll Vote</h1>
+            <h2 className="page-title">Poll Vote</h2>
             <PollInfo poll={poll} />
             <div className="restaurantList">
                 {restaurants.map(restaurant =>
