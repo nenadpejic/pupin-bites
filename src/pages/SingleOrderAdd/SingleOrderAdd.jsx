@@ -104,7 +104,7 @@ const SingleOrderAdd = () => {
         {valid ? null : <p>This order is not active anymore or you did not pick any meal to order.</p>}
       </div>
       <hr/>
-      <div className="make-order">
+      <div className="make-order price">
         <h2>Price:</h2>
         <p>{total} USD</p>
       </div>

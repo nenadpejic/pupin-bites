@@ -2,12 +2,13 @@ body{
     text-align: center;
 }
 
-.div-order{
+.createOrder{
     margin: 0 auto;
     border: 1px solid grey;
     width: 60%;
     padding-top: 35px;
     padding-bottom: 50px;
+    background-color: #fff;
 }
 
 .single-restaurant{
