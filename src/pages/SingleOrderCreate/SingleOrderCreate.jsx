@@ -62,23 +62,24 @@ export const SingleOrderCreate = () => {
 
   useEffect(() => {
     if (profile !== "")
-      getCheckData().then((res) => {
-        console.log(res.data);
-        console.log(pollId)
-        let handleCheckData = (el) =>
-          el.email === profile.email && el.poll === pollId;
-        console.log(res.data.some(handleCheckData) + " done");
+      // getCheckData().then((res) => {
+      //   console.log(res.data);
+      //   console.log(pollId)
+      //   let handleCheckData = (el) =>
+      //     el.email === profile.email && el.poll === pollId;
+      //   console.log(res.data.some(handleCheckData) + " done");
 
-        res.data.some(handleCheckData)
-          ? setPollCreator(true)
-          : setPollCreator(false);
-          pollId && setPollCreator(true)
-      })
-      .catch((err) => {
-        console.log("AXIOS ERROR: ", err);
+      //   res.data.some(handleCheckData)
+      //     ? setPollCreator(true)
+      //     : setPollCreator(false);
+      //     pollId && setPollCreator(true)
+      // })
+      // .catch((err) => {
+      //   console.log("AXIOS ERROR: ", err);
 
-        setPollCreator(false)
-      });
+        
+      // });
+      restaurantId ? setPollCreator(true) : setPollCreator(false)
   // eslint-disable-next-line
   }, [profile]);
 
@@ -232,15 +233,16 @@ export const SingleOrderCreate = () => {
           <div>
             <div>{selectedRestaurantName}</div>
             <form onSubmit={submitOrderCreateHome}>
-              <label>Order Name:</label>
+              
               <input
                 type="text"
                 onChange={handleOrderInput}
                 value={orderInput.label}
                 autoComplete="on"
+                placeholder='Enter Order Name'
                 required="yes"
               /><br></br>
-              <input type="submit" onClick={handleValidation()}/>
+              <input type="submit" value = 'Create Your Order' />
             </form>
           </div>
         </div>

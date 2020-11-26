@@ -78,8 +78,9 @@ export const SingleOrderView = () => {
         label: 'done'
     }
     updateOrder(data,orderInfo.id).then(res=>{
-      localStorage.removeItem("orderPollId");
+      localStorage.removeItem("orderRestaurantId");
     })
+    
     history.push(`/home`);
   };
 
