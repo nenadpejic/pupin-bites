@@ -161,7 +161,7 @@ const Home = () => {
                 <thead>
                   <tr>
                     <th onClick={() => handleSortName("order")}>
-                      Order Name{" "}
+                      Order Name
                       <img
                         src={"/img/icons/arrow-down.svg"}
                         alt="arrow-down"

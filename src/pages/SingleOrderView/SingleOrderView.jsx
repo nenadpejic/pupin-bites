@@ -11,7 +11,6 @@ import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import { CSVLink } from "react-csv";
 import "./singleOrderView.css"
-
 export const SingleOrderView = () => {
   
   const [orderedItems, setOrderedItems] = useState(undefined);
@@ -78,8 +77,9 @@ export const SingleOrderView = () => {
         label: 'done'
     }
     updateOrder(data,orderInfo.id).then(res=>{
-      localStorage.removeItem("orderPollId");
+      localStorage.removeItem("orderRestaurantId");
     })
+    
     history.push(`/home`);
   };
 
@@ -108,7 +108,7 @@ export const SingleOrderView = () => {
 
   
   return (
-    <>
+    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
     <NavBar />
     <div className="order-div">
       <div>
@@ -141,12 +141,12 @@ export const SingleOrderView = () => {
       </div>
 
       {storage && (
-        <div>
+        <div className="order-view-all">
             <h3>Food ordered by all:</h3>
           {orderedItems &&
             orderedItems.length > 0 &&
             orderedItems.map((order) => (
-              <div key={order.id}>
+              <div className="order-consumer" key={order.id}>
                 <p>{order.consumer}</p>
                 {order.payloads.map((el) => (
                   <div key={el.id}>
@@ -164,7 +164,7 @@ export const SingleOrderView = () => {
               </div>
             ))}
             <CSVLink 
-            onClick={handleOrderFinish}
+            className="csv-button" onClick={handleOrderFinish}
             filename={orderInfo.label + " "  + slug + ".csv"}
             data={data}  
             >Finish Order and Export to Excel</CSVLink>
@@ -173,6 +173,6 @@ export const SingleOrderView = () => {
       )}
     </div>
     <Footer />
-    </>
+    </div>
   );
 };

@@ -9,9 +9,9 @@ import {
 } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
-import "./singleOrderCreate.css"
+import Main from '../../components/Main';
+import "./singleOrderCreate.css";
+import RestaurantItem from '../../components/RestaurantItem';
 
 export const SingleOrderCreate = () => {
   const history = useHistory();
@@ -25,8 +25,21 @@ export const SingleOrderCreate = () => {
   const [page, setPage] = useState(0);
   const [filterInput, setFilterInput] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [pollId,setPollId] = useState(localStorage.getItem("orderPollId") ? localStorage.getItem("orderPollId") : '')
-  const [restaurantId,setRestaurantId] = useState(localStorage.getItem("orderRestaurantId") ? localStorage.getItem("orderRestaurantId") : undefined)
+  // eslint-disable-next-line
+  const [pollId,setPollId] = 
+    useState(localStorage.getItem("orderPollId") 
+    ? 
+    localStorage.getItem("orderPollId") 
+    : 
+    '');
+    // eslint-disable-next-line
+  const [restaurantId,setRestaurantId] = 
+      useState(localStorage.getItem("orderRestaurantId") 
+      ? 
+      localStorage.getItem("orderRestaurantId") 
+      : 
+      undefined);
+  
   useEffect(() => {
    restaurantId && getOneRestaurant(restaurantId).then((res) => {
       console.log(res);
@@ -49,23 +62,25 @@ export const SingleOrderCreate = () => {
 
   useEffect(() => {
     if (profile !== "")
-      getCheckData().then((res) => {
-        console.log(res.data);
-        console.log(pollId)
-        let handleCheckData = (el) =>
-          el.email === profile.email && el.poll === pollId;
-        console.log(res.data.some(handleCheckData) + " done");
+      // getCheckData().then((res) => {
+      //   console.log(res.data);
+      //   console.log(pollId)
+      //   let handleCheckData = (el) =>
+      //     el.email === profile.email && el.poll === pollId;
+      //   console.log(res.data.some(handleCheckData) + " done");
 
-        res.data.some(handleCheckData)
-          ? setPollCreator(true)
-          : setPollCreator(false);
-          pollId && setPollCreator(true)
-      })
-      .catch((err) => {
-        console.log("AXIOS ERROR: ", err);
+      //   res.data.some(handleCheckData)
+      //     ? setPollCreator(true)
+      //     : setPollCreator(false);
+      //     pollId && setPollCreator(true)
+      // })
+      // .catch((err) => {
+      //   console.log("AXIOS ERROR: ", err);
 
-        setPollCreator(false)
-      });;
+        
+      // });
+      restaurantId ? setPollCreator(true) : setPollCreator(false)
+  // eslint-disable-next-line
   }, [profile]);
 
   useEffect(() => {
@@ -118,90 +133,62 @@ export const SingleOrderCreate = () => {
     });
   };
 
+  const handleValidation = () => {
+    if (orderInput.trim() === '') {
+      
+    }
+  };
+
   return (
-    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
-    <NavBar />
-    <div className='createOrder'>
+    <Main>
+    <h2 className="page-title">Select Restaurant</h2>
+    <div className="singleOrderCreate">
       {pollCreator ? (
         <div className='oneRestaurant'>
           <div className='titleWrapper'>
-          <div className='restaurantInfo'>Make Your Order for : </div>
+          <div className='restaurantInfo'>Make your order for: </div>
           <div className='restaurantInfo'><strong><h3>{restaurantInfo.name}</h3></strong></div>
           <div className='restaurantInfo'>Visit us at:  {restaurantInfo.address}</div>
           </div>
           <form onSubmit={submitOrderCreate}>
-            <input
-              type="text"
-              onChange={handleOrderInput}
-              value={orderInput.label}
-              autoComplete="on"
-              placeholder='Add Order Name'
-            /><br></br>
-
-            <input type="submit" value = 'Create Your Order' />
+            <input type="text" onChange={handleOrderInput} value={orderInput.label} autoComplete="on" placeholder='Add Order Name'/>
+            <input type="submit" value = 'Create Your Order'/>
           </form>
         </div>
       ) : (
         <div className='createPageFromHome'>
           <div className='allRestaurants'>
             <form>
-              <input
-                type="text"
-                placeholder="Search Restaurant by Name"
-                name="name"
-                value={filterInput.name}
-                onChange={handleFilter}
-                className="restaurantInput"
-              />
+              <input type="text" placeholder="Search Restaurant by Name" name="name" value={filterInput.name} onChange={handleFilter} className="restaurantInput"/>
             </form>
             {filterInput.length === 0 &&
             paginate(restaurants)[page] !== undefined ? (
               paginate(restaurants)[page].map((el) => (
-                <div
-                  key={el.id}
-                  className="single-restaurant"
-                  onClick={() => handleRestaurantId(el)}
-                >
-                  <p>{el.name}</p>
-                  <p>{el.address}</p>
-
-                  <hr />
+                <div key={el.id} className="single-restaurant" onClick={() => handleRestaurantId(el)}>
+                  <RestaurantItem key={el.id} restaurant={el}/>
                 </div>
               ))
             ) : (
               <div className="restaurants-wrapper">
                 {filteredRestaurants.slice(0, 4).map((el) => (
-                  <div
-                    key={el.id}
-                    className="single-restaurant"
-                    onClick={() => handleRestaurantId(el)}
-                  >
-                    <p>{el.name}</p>
-                    <p>{el.address}</p>
-
-                    <hr />
+                  <div key={el.id} className="single-restaurant" onClick={() => handleRestaurantId(el)}>
+                    <RestaurantItem key={el.id} restaurant={el}/>
                   </div>
                 ))}
               </div>
             )}
           </div>
-          <div>
+          <div className="pagination">  
             {filterInput.length === 0 &&
               paginate(restaurants)[page] !== undefined &&
               paginate(restaurants).length > 1 && (
                 <div className="pagination-buttons">
                   {/* prev */}
                   {paginate(restaurants).map((_, idx) => {
-                    return (
-                      <button
-                        onClick={() => changePage(idx)}
-                        key={idx}
-                        className={`page-btn ${
-                          page === idx && `page-btn-selected`
-                        }`}
-                      >
+                    return ( 
+                      <button  onClick={() => changePage(idx)} key={idx} className={`page-btn ${page === idx && `page-btn-selected`}`}>
                         {idx + 1}
-                      </button>
+                      </button> 
                     );
                   })}
                 </div>
@@ -209,22 +196,25 @@ export const SingleOrderCreate = () => {
           </div>
 
           <div>
-            <div>{selectedRestaurantName}</div>
+            <h3 style={{marginBottom:"10px"}}>{selectedRestaurantName}</h3>
             <form onSubmit={submitOrderCreateHome}>
-              <label>Order Name:</label>
+              
               <input
                 type="text"
                 onChange={handleOrderInput}
                 value={orderInput.label}
                 autoComplete="on"
-              /><br></br>
-              <input type="submit" />
+                placeholder='Enter Order Name'
+                required="yes"
+                className="submitOrderCreateHome"
+              />
+              <input type="submit" className="bigButton submitOrderCreateHome" value="Next"/>
             </form>
           </div>
         </div>
       )}
     </div>
-    <Footer />
-    </div>
+    </Main>
   );
 };
+ 

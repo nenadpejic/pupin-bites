@@ -27,12 +27,14 @@ const PollInProgress = () => {
                 setPoll(res.data)
                 SetVotes(votes.length === 0 ? res.data.votes : null)
                 setRestaurants(res.data.restaurants.map(el => Object.assign(el, { vote: [...votes.filter(vote => vote.restaurantId === el.id)] })))
-                setWinner((restaurants.filter(el => Math.max(el.vote.length) ? el : null)))
             }
         }).catch((err) => {
         })
         return () => { isMounted = false };
     }, [votes])
+    useEffect(() => {
+        setWinner(restaurants.filter(el => Math.max(el.vote.length) ? el : null))
+    }, [restaurants])
 
     const handleClickFinish = () => {
         let data = {
@@ -44,14 +46,33 @@ const PollInProgress = () => {
         localStorage.setItem('orderRestaurantId', tmp.toString())
         history.push(`/single-order-create/`)
     }
+ 
+    
+    const totalVotes = restaurants.map(r=>r.vote.length).reduce((a,b)=>a+b, 0);
     const handleClickHome = () => {
         history.push(`/`)
     }
 
     return (
         <Main>
-            <h1>Poll Status</h1>
-            <PollInfo poll={poll} />
+        <h2 className="page-title" style={{marginBottom:"40px"}}>Poll results</h2>
+        <div className="pollComplete">
+            <PollInfo poll={poll}/>
+            {restaurants.map(restaurant => 
+            <div key={restaurant.id} className="pollComplete-restaurant">
+                <div className=" restaurant-name"><b>{restaurant.name}</b></div>
+                <div className="restaurant-img"><img src= {`https://source.unsplash.com/random/400x400/?restaurant/${restaurant.id}`}  alt="restaurant-icon"/></div>
+                <div className="restaurant-votes" value={restaurant.vote.length}>{restaurant.vote.length}</div>
+                <div className="restaurant-chart">
+                     <div className="chart-bar" style={{
+                        width:`${(Math.ceil(restaurant.vote.length/totalVotes*300))}px`
+                    }}></div>  
+                </div>
+            </div> 
+            )}
+        </div>
+
+            {/* <div>
 
             <div className="restaurantList">
                 {restaurants.map(restaurant =>
@@ -65,10 +86,15 @@ const PollInProgress = () => {
                     </div>
                 )}
             </div>
-
+            */}
             {createdPolls[0] ? (createdPolls[0].includes(slug) ?
-                <button onClick={handleClickFinish} className="button">Finish Poll</button> :
-                <button onClick={handleClickHome} className="button">Back To Home</button>) : null}
+                (winner === true && winner.length === 1 ? <button onClick={handleClickFinish} className="button">Finish Poll</button> :
+                    <div>
+                        <button onClick={handleClickFinish} className="button">Finish Poll</button>
+                        <button>X</button>
+                    </div>)
+                : <button onClick={handleClickHome} className="button">Back To Home</button>) : null}
+            
         </Main>
     )
 }

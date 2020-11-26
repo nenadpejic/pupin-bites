@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getAllRestaurants } from "../../services/services";
 import { Meals } from "./Meals";
-import { Restaurants } from "./Restaurants";
-import "./settings.css";
+import { Restaurants } from "./Restaurants"; 
+import Main from '../../components/Main'
+import "./settings-style.css"
+
 export const Settings = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [submit, setSubmit] = useState(false);
@@ -20,9 +22,9 @@ export const Settings = () => {
 
 
   return (
-    <>
-      <div className="Settings">
-        <div className='Restaurants'>
+    <Main>
+      <div className="settings">
+        <div className='restaurants'>
           <Restaurants
             submit={submit}
             setSubmit={setSubmit}
@@ -30,7 +32,8 @@ export const Settings = () => {
             setRestaurants={setRestaurants}
           />
         </div>
-        <div className='Meals'>
+        <hr style={{marginBottom:"50px", backgroundColor:"red"}}/>
+        <div className='meals'>
           <Meals
             restaurants={restaurants}
             submit={submit}
@@ -38,6 +41,6 @@ export const Settings = () => {
           />
         </div>
       </div>
-    </>
+    </Main>
   );
 };

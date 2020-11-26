@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createMeal, deleteMeal, getMeals } from "../../services/services";
-import { paginate } from "../../utilities/utilities";
+//import {paginate} from "../../utilities/utilities";
+import "./settings-style.css";
 
 export const Meals = ({ restaurants, submit, setSubmit }) => {
   const [restaurantInput, setRestaurantInput] = useState("");
@@ -46,6 +47,8 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
       available: true,
     })
   } 
+ 
+ 
 
   useEffect(() => {
     setFilteredRestaurants( //search for restaurant
@@ -104,8 +107,8 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
   return (
     <div className="meals">
       <h1>Manage Meals</h1>
-      <input style={{height:"20px"}} type="text" name="name" placeholder="Restaurant Name" value={restaurantInput} onChange={handleFilter} />
-
+      <input style={{display:"block", height:"20px"}} type="text" name="name" placeholder="Restaurant Name" value={restaurantInput} onChange={handleFilter} />
+      
       <div className="restaurantFilter">
         <table>
         <tbody>
@@ -118,17 +121,21 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
           </tbody>
           </table>
       </div>
-
-      <div class="selectedRestaraunt">{restaurantName}</div>
+ 
+      <div className="selectedRestaraunt">{restaurantName}</div>
       
+
+
       <form onSubmit={newMeal}>
         <input type="text" onChange={handleMealInput} value={mealInput.name} name="name" placeholder="Meal Name" disabled={enableInput ===false ? 'disabled' : false}/>
         <input type="number" onChange={handleMealInput} value={mealInput.price} name="price" disabled={enableInput ===false ?'disabled' : false  } placeholder="Meal Price"/>
         <button type="submit" value="Add Meal" className="bigButton"> Add Meal </button>
         {valid ? null : <p>Please provide valid restaurant name and price.</p>}
-      </form>
+      </form> 
+<br/>
 
-      {paginate(meals)[page]!==undefined && paginate(meals)[page].map((meal) => (
+<hr/><hr/><hr/><hr/><hr/>
+      {/* {paginate(meals)[page]!==undefined && paginate(meals)[page].map((meal) => (
         <div key={meal.id}>
           <p>{meal.name}</p>
           <p>{meal.price} USD</p>
@@ -139,12 +146,13 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
           <hr />
         </div>
       ))}
-
+<br/>
       <div>
         {paginate(meals)[page] !== undefined &&
           paginate(meals).length > 1 && (
             <div className="pagination-buttons">
               {/* prev */}
+              {/*
               {paginate(meals).map((_, idx) => {
                 return (
                   <button
@@ -160,7 +168,8 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
               })}
             </div>
           )}
-      </div>
+      </div> */}
+      <hr/>
     </div>
   );
 };
