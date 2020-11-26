@@ -85,12 +85,17 @@ export const SingleOrderView = () => {
     if (orderedItems && meals) {
       orderedItems.map((order) => (
           setData(prev => {return [...prev, {
-            consumer: order.consumer, 
-            meals: 
+            Consumer: order.consumer, 
+            Meals: 
               order.payloads.map((el) => (
                       meals.filter((meal) => el.mealId === meal.id)[0].name)),
-            note: order.note,
-            quantity: order.quantity
+            Note: 
+              order.payloads.map((el) => (el.note)),
+            Quantity: 
+              order.payloads.map((el) => (el.quantity)),
+            Price: 
+              order.payloads.map((el) => (
+                meals.filter((meal) => el.mealId === meal.id)[0].price)).reduce((acc,cur) => acc+cur,0) + " USD"
           }]})))
         }
   }, [orderedItems, meals]);
