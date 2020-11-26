@@ -60,14 +60,15 @@ export const SingleMeal = ({meal,setPayload,setOrderedMeal,setTotal})=>{
         }})
     
         resetInput()
+        if(payloadItem.quantity*mealPrice > 0)
         setTotal(prev => prev + payloadItem.quantity*mealPrice)
       };
 
 
     return (
-        <div>
+        <div className="single-meal">
             <p>{meal.name}</p>
-              <p>{meal.price} RSD </p>
+              <p>{meal.price} USD </p>
               <form>
                 <input
                   type="textBox"

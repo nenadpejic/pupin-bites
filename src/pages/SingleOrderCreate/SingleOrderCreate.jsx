@@ -9,6 +9,9 @@ import {
 } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
+import "./singleOrderCreate.css"
 
 export const SingleOrderCreate = () => {
   const history = useHistory();
@@ -116,17 +119,24 @@ export const SingleOrderCreate = () => {
   };
 
   return (
+    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
+    <NavBar />
     <div className='createOrder'>
       {pollCreator ? (
         <div className='oneRestaurant'>
-          <div>{restaurantInfo.name}</div>
+          <div className='titleWrapper'>
+          <div className='restaurantInfo'>Make Your Order for : </div>
+          <div className='restaurantInfo'><strong><h3>{restaurantInfo.name}</h3></strong></div>
+          <div className='restaurantInfo'>Visit us at:  {restaurantInfo.address}</div>
+          </div>
           <form onSubmit={submitOrderCreate}>
             <input
               type="text"
               onChange={handleOrderInput}
               value={orderInput.label}
               autoComplete="on"
-            />
+              placeholder='Add Order Name'
+            /><br></br>
 
             <input type="submit" value = 'Create Your Order' />
           </form>
@@ -201,17 +211,20 @@ export const SingleOrderCreate = () => {
           <div>
             <div>{selectedRestaurantName}</div>
             <form onSubmit={submitOrderCreateHome}>
+              <label>Order Name:</label>
               <input
                 type="text"
                 onChange={handleOrderInput}
                 value={orderInput.label}
                 autoComplete="on"
-              />
-              <input type="submit" value='Create your Order'/>
+              /><br></br>
+              <input type="submit" />
             </form>
           </div>
         </div>
       )}
+    </div>
+    <Footer />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/services";
 import { OrderedMeal } from "./OrderedMeal";
 import { SingleMeal } from "./SingleMeal";
@@ -77,9 +78,11 @@ const SingleOrderAdd = () => {
     history.push(`/single-order-view/${slug}`)
   }
   return (
+    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
+    <NavBar />
     <div id="single-order-create">
-      <NavBar />
-      <div className="meals">
+      
+      <div className="meal">
         {meals &&
           meals.map((el) => (
             <SingleMeal meal={el} setPayload={setPayload} key={el.id} setOrderedMeal={setOrderedMeal} setTotal={setTotal}/>
@@ -94,21 +97,23 @@ const SingleOrderAdd = () => {
             <OrderedMeal ordered={el} orderedMeal={orderedMeal} payload={payload} setTotal={setTotal}/>
         
           </div>
-        )}
+        )} 
       </div>
-      <div>
+      <div className="make-order">
         <button onClick={addItemsToOrder}>Make Your Order</button>
-        {valid ? null : <p>This order is not active anymore Or you did not pick any meal to order.</p>}
+        {valid ? null : <p>This order is not active anymore or you did not pick any meal to order.</p>}
       </div>
       <hr/>
-      <div>
+      <div className="make-order price">
         <h2>Price:</h2>
         <p>{total} USD</p>
       </div>
-      <div>
+      <div className="make-order">
         <label>Already ordered?</label>
         <button onClick={handleOrderView}>Go to Your Order</button>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 };

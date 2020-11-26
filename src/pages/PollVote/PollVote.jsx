@@ -9,9 +9,9 @@ import "./PollVote.css"
 const PollVote = () => {
     const [poll, setPoll] = useState([])
     const [restaurants, setRestaurants] = useState([])
+    const [id, setId] = useState('')
     const [votes, SetVotes] = useState([])
     const { slug } = useParams()
-    const [id, setId] = useState('')
 
     //Local Storige Ref
     const createdVoteRef = useRef(localStorage.getItem("votes") ? localStorage.getItem("votes").split(',') : null)
@@ -21,35 +21,41 @@ const PollVote = () => {
     const history = useHistory()
 
     useEffect(() => {
+        let isMounted = true
         getOnePoll(slug).then(res => {
-            setPoll(res.data)
-            setRestaurants(res.data.restaurants)
-            SetVotes(res.data.votes)
+            if (isMounted) {
+                setPoll(res.data)
+                setRestaurants(res.data.restaurants)
+                SetVotes(votes.length === 0 ? res.data.votes : null)
+            }
         }).catch((err) => {
-            console.log(err);
         })
-    }, [slug])
+        return () => { isMounted = false };
+    }, [])
 
     // Handle change of poll id
     const handleChange = (e) => {
         setId(e.target.id)
-        if (id === '') {
-            alert("You didn't select a restaurant!");
-            return;
-        }
+
     }
 
     // Handle Submitt
     const handleClick = (e) => {
-        let data = {
-            "restaurantId": id
+        if (id === '') {
+            alert("You didn't select a restaurant!");
+            return;
         }
-        createVote(slug, data)
-        let vote = []
-        vote.push(localStorage.getItem('votes'))
-        vote.push(slug)
-        localStorage.setItem('votes', vote)
-        history.push(`/poll-complete/${slug}`)
+        else {
+            let data = {
+                "restaurantId": id
+            }
+            createVote(slug, data)
+            let vote = []
+            vote.push(localStorage.getItem('votes'))
+            vote.push(slug)
+            localStorage.setItem('votes', vote)
+            history.push(`/poll-complete/${slug}`)
+        }
     }
 
     return (
@@ -63,7 +69,7 @@ const PollVote = () => {
                         <label htmlFor={restaurant.id}>
                             <RestaurantItem restaurant={restaurant} />
                         </label>
-                        <input type="radio" name="chose" id={restaurant.id} onChange={handleChange} />
+                        <input type="radio" name="chose" id={restaurant.id} onChange={handleChange} className="radio" />
                     </div>
                 )}
             </div>
