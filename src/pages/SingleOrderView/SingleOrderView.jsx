@@ -167,7 +167,7 @@ export const SingleOrderView = () => {
               </div>
             ))}
             <CSVLink 
-            onClick={handleOrderFinish}
+            className="csv-button" onClick={handleOrderFinish}
             filename={orderInfo.label + " "  + slug + ".csv"}
             data={data}  
             >Finish Order and Export to Excel</CSVLink>
