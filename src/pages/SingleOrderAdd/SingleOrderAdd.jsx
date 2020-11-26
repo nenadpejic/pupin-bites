@@ -101,7 +101,7 @@ const SingleOrderAdd = () => {
       </div>
       <div>
         <button onClick={addItemsToOrder}>Make Your Order</button>
-        {valid ? null : <p>This order is not active anymore Or you did not pick any meal to order.</p>}
+        {valid ? null : <p>This order is not active anymore or you did not pick any meal to order.</p>}
       </div>
       <hr/>
       <div>
