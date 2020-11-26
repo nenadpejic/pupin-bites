@@ -17,7 +17,9 @@
 }
 .single-meal>button{
     cursor: pointer;
-    background-color:#d9d9d9;
+    background-color: rgb(204, 204, 204); 
+    color: #fff;
+    padding: 5px;
 }
 .singleMeal{
     height: 200px;
@@ -31,8 +33,13 @@
 
 #single-order-create>div>button{
     cursor:pointer;
-    font-weight: 500;
-    background-color: #d9d9d9;
+    background-color: rgb(204, 204, 204); 
+    border:1px solid  rgb(204, 204, 204);
+    color: #fff; 
+}
+#single-order-create>div>button{
+    font-size: 1.5em;
+  color: #fff;
 }
 
 div>.orderedItems{
@@ -47,11 +54,23 @@ div>.orderedItems{
 
 
 .orderedItems>div>button{
-    background-color:  #d9d9d9;
     font-size: 1em;
+    background-color: rgb(204, 204, 204); 
+    border:1px solid  rgb(204, 204, 204);
+    color: #fff;
 }
 .orderedItems>div>button:hover{
     cursor: pointer;
+}
+
+.make-order{
+    background-color: #f7f6ed;
+    margin: 5px;
+    padding: 5px;
+}
+
+label{
+    margin-bottom: 5px;
 }
 
 p{
