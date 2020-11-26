@@ -7,18 +7,20 @@ import {
   getProfile,
   updateOrder,
 } from "../../services/services";
+import { CSVLink } from "react-csv";
 
 export const SingleOrderView = () => {
   const [orderedItems, setOrderedItems] = useState(undefined);
   const [yourOrderItems, setYourOrderItems] = useState(undefined);
   const [profile, setProfile] = useState(undefined);
   const [orderInfo, setOrderInfo] = useState([]);
-  const [sortedMeals, setSortedMeals] = useState([]);
-  const [consumer, setConsumer] = useState({
-    consumerName: "",
-    mealName: "",
-    mealPrice: "",
-  });
+  // const [sortedMeals, setSortedMeals] = useState([]);
+  // const [consumer, setConsumer] = useState({
+  //   consumerName: "",
+  //   mealName: "",
+  //   mealPrice: "",
+  // });
+  const [data, setData] = useState([]);
   const [restaurantId, setRestaurantId] = useState("");
   const [meals, setMeals] = useState(undefined);
   const { slug } = useParams();
@@ -76,7 +78,23 @@ export const SingleOrderView = () => {
     updateOrder(data,orderInfo.id).then(res=>{
       localStorage.removeItem("orderPollId");
     })
-  }
+    history.push(`/home`);
+  };
+
+  useEffect(() => {
+    if (orderedItems && meals) {
+      orderedItems.map((order) => (
+          setData(prev => {return [...prev, {
+            consumer: order.consumer, 
+            meals: 
+              order.payloads.map((el) => (
+                      meals.filter((meal) => el.mealId === meal.id)[0].name)),
+            note: order.note,
+            quantity: order.quantity
+          }]})))
+        }
+  }, [orderedItems, meals]);
+    
 
   
   return (
@@ -133,7 +151,11 @@ export const SingleOrderView = () => {
                 <hr />
               </div>
             ))}
-            <button onClick={handleOrderFinish}>Finish Order and Export to XML</button>
+            <CSVLink 
+            onClick={handleOrderFinish}
+            filename={orderInfo.label + ".csv"}
+            data={data}  
+            >Finish Order and Export to XML</CSVLink>
         </div>
         
       )}
