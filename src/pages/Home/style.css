@@ -50,3 +50,7 @@
 #home > button:not(:first-child) {
   margin-left: 2rem;
 }
+
+#home tbody:hover {
+  cursor: pointer;
+}

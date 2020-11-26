@@ -57,11 +57,9 @@ const Signup = () => {
 
   return (
     <div id="signup">
-      {complete ? (
-        <SignupComplete />
-      ) : (
-        <>
-          <LoginTab>
+      <LoginTab>
+        {complete ? <SignupComplete />
+          : <>
             <p>Sing up for your account</p>
             <form onSubmit={handleSubmit}>
               <input
@@ -98,9 +96,9 @@ const Signup = () => {
               Already have account? <br></br>
               <Link to="/login">Login</Link>
             </span>
-          </LoginTab>
-        </>
-      )}
+          </>
+        }
+      </LoginTab>
     </div>
   );
 };
