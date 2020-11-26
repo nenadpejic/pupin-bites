@@ -211,6 +211,7 @@ export const SingleOrderCreate = () => {
           <div>
             <div>{selectedRestaurantName}</div>
             <form onSubmit={submitOrderCreateHome}>
+              <label>Order Name:</label>
               <input
                 type="text"
                 onChange={handleOrderInput}
