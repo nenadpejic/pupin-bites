@@ -17,7 +17,12 @@
 }
 .single-meal>button{
     cursor: pointer;
-    background-color:#d9d9d9;
+    background-color: rgb(76,175,80); 
+    color: #fff;
+    padding: 5px;
+}
+.single-meal>button:hover{
+    background-color:rgb(86,188,64);
 }
 .singleMeal{
     height: 200px;
@@ -27,29 +32,21 @@
 #single-order-create{
     width: 60%;
     margin: 0 auto;
-    border: 1px solid grey;
-}
-#single-order-create>nav{
-    background-color:rgb(253,181,28);
-    padding: 5px;
-    text-align: left;
+    background-color: #fff;
 }
 
-#single-order-create>nav>button{
-    margin: 0 5px;
-    color:rgb(120,75,0);
-    font-size: 1em;
-    float: right;
-    cursor: pointer;
-}
-#single-order-create>nav>button>a{
-    text-decoration: none;
-    color:rgb(120,75,0);
-}
 #single-order-create>div>button{
     cursor:pointer;
-    font-weight: 500;
-    background-color: #d9d9d9;
+    background-color: rgb(76,175,80);
+    color: #fff; 
+}
+#single-order-create>div>button{
+    font-size: 1em;
+    padding: 5px;
+  
+}
+#single-order-create>div>button:hover{
+    background-color:rgb(86,188,64);
 }
 
 div>.orderedItems{
@@ -64,11 +61,32 @@ div>.orderedItems{
 
 
 .orderedItems>div>button{
-    background-color:  #d9d9d9;
     font-size: 1em;
+    background-color: rgb(204, 204, 204); 
+    border:1px solid  rgb(204, 204, 204);
+    color: #fff;
 }
 .orderedItems>div>button:hover{
     cursor: pointer;
+    background-color:rgb(86,188,64); 
+}
+
+.make-order{
+    
+    margin: 5px;
+    padding: 5px;
+}
+
+.price{
+    border: 0.6px solid grey;
+    background-color: #f7f6ed;
+    width: 200px;
+    margin: 0 auto;
+}
+
+label{
+    margin-bottom: 5px;
+  
 }
 
 p{
