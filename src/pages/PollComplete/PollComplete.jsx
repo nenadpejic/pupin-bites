@@ -72,7 +72,7 @@ const PollInProgress = () => {
                 (winner === true && winner.length === 1 ? <button onClick={handleClickFinish} className="button">Finish Poll</button> :
                     <div>
                         <button onClick={handleClickFinish} className="button">Finish Poll</button>
-                        <div>asdasdsad</div>
+                        <button>X</button>
                     </div>)
                 : <button onClick={handleClickHome} className="button">Back To Home</button>) : null}
         </Main>

@@ -109,7 +109,7 @@ export const SingleOrderView = () => {
 
   
   return (
-    <>
+    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
     <NavBar />
     <div className="order-div">
       <div>
@@ -142,12 +142,12 @@ export const SingleOrderView = () => {
       </div>
 
       {storage && (
-        <div>
+        <div className="order-view-all">
             <h3>Food ordered by all:</h3>
           {orderedItems &&
             orderedItems.length > 0 &&
             orderedItems.map((order) => (
-              <div key={order.id}>
+              <div className="order-consumer" key={order.id}>
                 <p>{order.consumer}</p>
                 {order.payloads.map((el) => (
                   <div key={el.id}>
@@ -174,6 +174,6 @@ export const SingleOrderView = () => {
       )}
     </div>
     <Footer />
-    </>
+    </div>
   );
 };
