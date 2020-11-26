@@ -27,26 +27,8 @@
 #single-order-create{
     width: 60%;
     margin: 0 auto;
-    border: 1px solid grey;
-}
-#single-order-create>nav{
-    background-color:rgb(253,181,28);
-    width: 100%;
-    padding: 5px;
-    text-align: left;
 }
 
-#single-order-create>nav>button{
-    margin: 0 5px;
-    color:rgb(120,75,0);
-    font-size: 1em;
-    float: right;
-    cursor: pointer;
-}
-#single-order-create>nav>button>a{
-    text-decoration: none;
-    color:rgb(120,75,0);
-}
 #single-order-create>div>button{
     cursor:pointer;
     font-weight: 500;

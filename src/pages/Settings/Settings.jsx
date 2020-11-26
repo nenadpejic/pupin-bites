@@ -22,7 +22,7 @@ export const Settings = () => {
 
 
   return (
-    <>
+    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
     <NavBar />
       <div className="Settings">
         <div className='Restaurants'>
@@ -42,6 +42,6 @@ export const Settings = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };

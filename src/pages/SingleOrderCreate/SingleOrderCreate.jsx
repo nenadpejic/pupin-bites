@@ -119,7 +119,7 @@ export const SingleOrderCreate = () => {
   };
 
   return (
-    <>
+    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
     <NavBar />
     <div className='createOrder'>
       {pollCreator ? (
@@ -219,6 +219,6 @@ export const SingleOrderCreate = () => {
       )}
     </div>
     <Footer />
-    </>
+    </div>
   );
 };

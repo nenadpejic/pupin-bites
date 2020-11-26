@@ -78,7 +78,7 @@ const SingleOrderAdd = () => {
     history.push(`/single-order-view/${slug}`)
   }
   return (
-    <>
+    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
     <NavBar />
     <div id="single-order-create">
       
@@ -114,7 +114,7 @@ const SingleOrderAdd = () => {
       </div>
     </div>
     <Footer />
-    </>
+    </div>
   );
 };
 
