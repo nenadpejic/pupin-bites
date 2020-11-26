@@ -45,15 +45,21 @@ input:hover{
     background-color:rgb(235, 235, 235);
 }
 input[type="submit"]{
-    background-color: rgb(90,172,68);
-    margin: 10px auto;
-    font-size: 1em;
-    cursor: pointer;
-    width: 350px;
+    display:block;
+	width:200px;
+	height:40px;
+	background-color:rgb(90,172,68);
+	border:1px solid grey;
+	margin:auto;
+	margin-top:40px;
+	margin-bottom:40px;
+	color:white;
+	font-size:22px;
+	cursor:pointer;
 }
+
 input[type="submit"]:hover{
-    color: white;
-    cursor: pointer;
+    background-color:rgb(86,188,64); 
 }
 p{
     padding: 5px 0;
