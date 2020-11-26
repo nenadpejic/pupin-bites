@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/services";
 import { OrderedMeal } from "./OrderedMeal";
 import { SingleMeal } from "./SingleMeal";
@@ -112,6 +113,7 @@ const SingleOrderAdd = () => {
         <button onClick={handleOrderView}>Go to Your Order</button>
       </div>
     </div>
+    <Footer />
     </>
   );
 };
