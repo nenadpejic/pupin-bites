@@ -3,7 +3,14 @@ import React from "react";
 export const AuthContext = React.createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const user = {};
+  const user = {
+    email: "",
+    firstName: "",
+    lastName: "",
+    id: "",
+    password: "",
+  };
+
   const isAuth = () => {
     const token = localStorage.getItem("Token");
     return token !== null && token !== "";
