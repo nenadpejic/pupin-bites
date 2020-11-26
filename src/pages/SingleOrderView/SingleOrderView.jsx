@@ -84,6 +84,8 @@ export const SingleOrderView = () => {
     history.push(`/home`);
   };
 
+  // [{consumer: Nevena, [Meal:ime , Note: Poruka , quantity:kolicina , price:cena]}]
+
   useEffect(() => {
     if (orderedItems && meals) {
       orderedItems.map((order) => (
@@ -103,6 +105,7 @@ export const SingleOrderView = () => {
                 .filter((meal) => el.mealId === meal.id)[0].price))
                 .reduce((acc,cur) => acc+cur,0) + " USD"
           }]})))
+          console.log(data)
         }
   }, [orderedItems, meals]);
     
