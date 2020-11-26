@@ -63,7 +63,7 @@ const SingleOrderAdd = () => {
     payloads:payload
   };
 
-  if(order.active === true) {
+  if(order.active === true && payload.length!==0) {
 
    addOrderItem(data,slug).then(res => {
      console.log(res)
@@ -73,6 +73,9 @@ const SingleOrderAdd = () => {
    else handlesValidation()
   };
 
+  const handleOrderView = ()=>{
+    history.push(`/single-order-view/${slug}`)
+  }
   return (
     <div id="single-order-create">
       <NavBar />
@@ -95,12 +98,16 @@ const SingleOrderAdd = () => {
       </div>
       <div>
         <button onClick={addItemsToOrder}>Make Your Order</button>
-        {valid ? null : <p>This order is not active anymore.</p>}
+        {valid ? null : <p>This order is not active anymore Or you did not pick any meal to order.</p>}
       </div>
       <hr/>
       <div>
         <h2>Price:</h2>
         <p>{total} RSD</p>
+      </div>
+      <div>
+        <label>Already ordered?</label>
+        <button onClick={handleOrderView}>Go to Your Order</button>
       </div>
     </div>
   );

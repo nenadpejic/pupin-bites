@@ -67,7 +67,7 @@ export const SingleMeal = ({meal,setPayload,setOrderedMeal,setTotal})=>{
     return (
         <div className="single-meal">
             <p>{meal.name}</p>
-              <p>price: {meal.price} RSD </p>
+              <p>{meal.price} USD </p>
               <form>
                 <input
                   type="textBox"

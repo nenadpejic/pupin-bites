@@ -57,6 +57,7 @@ export const SingleOrderCreate = () => {
         res.data.some(handleCheckData)
           ? setPollCreator(true)
           : setPollCreator(false);
+          pollId && setPollCreator(true)
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
@@ -91,11 +92,17 @@ export const SingleOrderCreate = () => {
   const submitOrderCreateHome = (e) => {
     e.preventDefault();
     const data = { restaurantId: selectedRestaurantId, label: orderInput };
-    createOrder(data).then((res) => {
+    createOrder(data)
+    .then((res) => {
       console.log(res.data.id);
       localStorage.setItem("orderId", res.data.id);
       // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
       history.push(`/single-order-add/${res.data.id}`);
+
+    })
+    .catch((err) => {
+      console.log(err)
+      history.push(`/single-order-create`);
     });
   };
 
@@ -110,10 +117,10 @@ export const SingleOrderCreate = () => {
   };
 
   return (
-    <div className="div-order">
+    <div className='createOrder'>
       {pollCreator ? (
-        <div>
-          <div className ="rest-info">{restaurantInfo.name}</div>
+        <div className='oneRestaurant'>
+          <div>{restaurantInfo.name}</div>
           <form onSubmit={submitOrderCreate}>
             <input
               type="text"
@@ -122,12 +129,12 @@ export const SingleOrderCreate = () => {
               autoComplete="on"
             /><br></br>
 
-            <input class="rest-info-submit" type="submit" />
+            <input type="submit" value = 'Create Your Order' />
           </form>
         </div>
       ) : (
-        <div>
-          <div>
+        <div className='createPageFromHome'>
+          <div className='allRestaurants'>
             <form>
               <input
                 type="text"

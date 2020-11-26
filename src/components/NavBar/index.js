@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import './style.css';
 
 const NavBar = () => {
   const auth = useContext(AuthContext);
@@ -14,27 +15,26 @@ const NavBar = () => {
   };
 
   return (
-    <nav>
+    <nav className="navBar">
       {auth.isAuth() ? (
         <>
-          <p>
-            <Link to="/home">Logo</Link>
-          </p>
-          <span>User: {user?.firstName + " " + user?.lastName}</span>
-          <button onClick={handleClick}>Logout</button>
-          <button>
-            <Link to="/settings">Settins</Link>
-          </button>
+          <div className="logo"><Link to="/home"><img src="/img/icons/logo.png" alt="logo" /></Link></div>
+          <div className="user dropdown">
+            <div className="userName">{user?.firstName + " " + user?.lastName}</div>
+            <div className="dropdown-content">
+              <button className="settings"><Link to="/settings">Settings</Link></button>
+              <hr />
+              <button className="logout" onClick={handleClick}>Logout </button>
+            </div>
+          </div>
         </>
       ) : (
           <>
-            <p>Logo</p>
-            <button>
-              <Link to="/login">Log In</Link>
-            </button>
-            <button>
-              <Link to="/signup">Sign Up</Link>
-            </button>
+            <div className="logo"><Link to="/home"><img src="/img/icons/logo.png" alt="logo" /></Link></div>
+            <div className="user loggedOut">
+              <button><Link to="/login">Log In</Link></button>
+              <button><Link to="/signup">Sign Up</Link></button>
+            </div>
           </>
         )}
     </nav>

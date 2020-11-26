@@ -7,6 +7,7 @@
 - react-router-dom ^5.2.0
 - lodash ^4.17.20
 - axios ^0.21.0
+- react-csv
 
 ## Installation
 

@@ -1,6 +1,6 @@
 .wrapper{
     height: 100%;
-    width:100vw;
+    width:100%;
     background-position: center;
     background-repeat: no-repeat; 
     background-attachment: fixed; 
@@ -15,9 +15,9 @@
     background-color: white;
     margin:auto; 
     padding-top: 35px;
-    padding-bottom: 50px;
-    min-height:100vh;
-    margin-bottom:40px;
+    padding-bottom:50px;
+    min-height: 100vh;
+    margin-bottom:0;
 }
 
 @media screen and (max-width: 768px){
