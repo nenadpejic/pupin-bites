@@ -155,7 +155,8 @@ export const SingleOrderCreate = () => {
               onChange={handleOrderInput}
               value={orderInput.label}
               autoComplete="on"
-              placeholder='Add Order Name'
+              placeholder="Add Order Name"
+              required="yes"
             /><br></br>
 
             <input type="submit" value = 'Create Your Order' />
