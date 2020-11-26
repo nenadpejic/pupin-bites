@@ -23,8 +23,8 @@ const PollInfo = (props)=>{
             <tr style={{height:"2em"}}><th colSpan="3" style={{textAlign:"center"}}>{pollName}</th></tr>
             </thead>
             <tbody>
-            <tr><th>Start</th><td colSpan="2">{showTime(pollCreated)} </td></tr>
-            <tr><th>End</th><td colSpan="2">{showTime(pollEnds)}</td></tr>
+            <tr><td><b>Start</b></td><td colSpan="2">{showTime(pollCreated)} </td></tr>
+            <tr><td><b>End</b></td><td colSpan="2">{showTime(pollEnds)}</td></tr>
             </tbody>
         </table> 
     )  

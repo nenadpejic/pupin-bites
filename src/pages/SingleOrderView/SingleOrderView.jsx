@@ -6,11 +6,10 @@ import {
   getOrderItems,
   getProfile,
   updateOrder,
-} from "../../services/services";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
+} from "../../services/services"; 
 import { CSVLink } from "react-csv";
 import "./singleOrderView.css"
+import Main from "../../components/Main"
 export const SingleOrderView = () => {
   
   const [orderedItems, setOrderedItems] = useState(undefined);
@@ -108,8 +107,8 @@ export const SingleOrderView = () => {
 
   
   return (
-    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
-    <NavBar />
+    
+   <Main>
     <div className="order-div">
       <div>
           <h3>Food you ordered:</h3>
@@ -171,8 +170,7 @@ export const SingleOrderView = () => {
         </div>
         
       )}
-    </div>
-    <Footer />
-    </div>
+    </div> 
+    </Main>
   );
 };

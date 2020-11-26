@@ -71,29 +71,13 @@ const PollInProgress = () => {
             </div> 
             )}
         </div>
-
-            {/* <div>
-
-            <div className="restaurantList">
-                {restaurants.map(restaurant =>
-                    <div key={restaurant.id} id={restaurant.id} className="restaurant">
-                        <div className="icon">
-                            <img src={`https://source.unsplash.com/random/400x400/?restaurant/${restaurant.id}`} alt="restaurant-icon" />
-                        </div>
-                        <div className="name">{restaurant.name}</div>
-                        <div className="address">{restaurant.address}</div>
-                        <div value={restaurant.vote.length} className="vote">{restaurant.vote.length}</div>
-                    </div>
-                )}
-            </div>
-            */}
             {createdPolls[0] ? (createdPolls[0].includes(slug) ?
                 (winner === true && winner.length === 1 ? <button onClick={handleClickFinish} className="button">Finish Poll</button> :
                     <div>
-                        <button onClick={handleClickFinish} className="button">Finish Poll</button>
+                        <button onClick={handleClickFinish} className="bigButton">Finish Poll</button>
                         <button>X</button>
                     </div>)
-                : <button onClick={handleClickHome} className="button">Back To Home</button>) : null}
+                : <button onClick={handleClickHome} className="bigButton">Back To Home</button>) : null}
             
         </Main>
     )
