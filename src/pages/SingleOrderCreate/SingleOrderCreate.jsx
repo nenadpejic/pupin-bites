@@ -123,7 +123,7 @@ export const SingleOrderCreate = () => {
     <NavBar />
     <div className='createOrder'>
       {pollCreator ? (
-        <div className='oneRestaurant'>
+        <div className='one-restaurant'>
           <div>{restaurantInfo.name}</div>
           <form onSubmit={submitOrderCreate}>
             <input

@@ -19,6 +19,12 @@ body{
 .single-restaurant:hover{
     cursor: pointer;
 }
+.one-restaurant>div{
+    background-color: #fff;
+    width: 250px;
+    margin: 15px auto;
+    padding: 5px;
+}
 
 .rest-info{
     background-color: #f7f6ed;
