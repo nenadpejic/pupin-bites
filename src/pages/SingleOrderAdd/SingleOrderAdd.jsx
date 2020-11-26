@@ -105,7 +105,7 @@ const SingleOrderAdd = () => {
       <hr/>
       <div>
         <h2>Price:</h2>
-        <p>{total} RSD</p>
+        <p>{total} USD</p>
       </div>
       <div>
         <label>Already ordered?</label>

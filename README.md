@@ -15,6 +15,7 @@ Previously required the installation of NodeJS (v12.14.0 or newer).
 
 - Clone git repository
 - Run "npm install" command in NodeJS
+- Run "npm install react-csv"
 
 ## Starting the project
 
