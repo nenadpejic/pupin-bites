@@ -22,9 +22,9 @@ const NavBar = () => {
           <div className="user dropdown">
             <div className="userName">{user?.firstName + " " + user?.lastName}</div>
             <div className="dropdown-content">
-              <button class="settings"><Link to="/settings">Settings</Link></button>
+              <button className="settings"><Link to="/settings">Settings</Link></button>
               <hr/>
-              <button class="logout" onClick={handleClick}>Logout </button>
+              <button className="logout" onClick={handleClick}>Logout </button>
             </div>
           </div>
         </>

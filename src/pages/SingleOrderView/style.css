@@ -1,0 +1,12 @@
+.singleOrderview{
+    margin:30px; 
+}
+.singleOrderview>h2{
+    margin-bottom:30px; 
+}
+.singleOrderview table{
+    margin:10px auto 30px auto;
+}
+.singleOrderview table tr{
+    height:10px;
+}

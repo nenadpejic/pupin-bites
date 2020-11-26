@@ -9,6 +9,9 @@ import {
 } from "../../services/services";
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
+import Main from '../../components/Main';
+import "./SingleOrderCreate.css";
+import RestaurantItem from '../../components/RestaurantItem';
 
 export const SingleOrderCreate = () => {
   const history = useHistory();
@@ -109,18 +112,14 @@ export const SingleOrderCreate = () => {
   };
 
   return (
-    <div>
+    <Main>
+    <h2 className="page-title">Select Restaurant</h2>
+    <div className="singleOrderCreate">
       {pollCreator ? (
         <div>
           <div>{restaurantInfo.name}</div>
           <form onSubmit={submitOrderCreate}>
-            <input
-              type="text"
-              onChange={handleOrderInput}
-              value={orderInput.label}
-              autoComplete="on"
-            />
-
+            <input type="text" onChange={handleOrderInput} value={orderInput.label} autoComplete="on"/>
             <input type="submit" />
           </form>
         </div>
@@ -128,63 +127,36 @@ export const SingleOrderCreate = () => {
         <div>
           <div>
             <form>
-              <input
-                type="text"
-                placeholder="Search Restaurant by Name"
-                name="name"
-                value={filterInput.name}
-                onChange={handleFilter}
-                className="restaurantInput"
-              />
+              <input type="text" placeholder="Search Restaurant by Name" name="name" value={filterInput.name} onChange={handleFilter} className="restaurantInput"/>
             </form>
             {filterInput.length === 0 &&
             paginate(restaurants)[page] !== undefined ? (
               paginate(restaurants)[page].map((el) => (
-                <div
-                  key={el.id}
-                  className="single-restaurant"
-                  onClick={() => handleRestaurantId(el)}
-                >
-                  <p>{el.name}</p>
-                  <p>{el.address}</p>
-
-                  <hr />
+                <div key={el.id} className="single-restaurant" onClick={() => handleRestaurantId(el)}>
+                  <RestaurantItem key={el.id} restaurant={el}/>
                 </div>
               ))
             ) : (
               <div className="restaurants-wrapper">
                 {filteredRestaurants.slice(0, 4).map((el) => (
-                  <div
-                    key={el.id}
-                    className="single-restaurant"
-                    onClick={() => handleRestaurantId(el)}
-                  >
-                    <p>{el.name}</p>
-                    <p>{el.address}</p>
-
-                    <hr />
+                  <div key={el.id} className="single-restaurant" onClick={() => handleRestaurantId(el)}>
+                    <RestaurantItem key={el.id} restaurant={el}/>
                   </div>
                 ))}
               </div>
             )}
           </div>
-          <div>
+          <div className="pagination">  
             {filterInput.length === 0 &&
               paginate(restaurants)[page] !== undefined &&
               paginate(restaurants).length > 1 && (
                 <div className="pagination-buttons">
                   {/* prev */}
                   {paginate(restaurants).map((_, idx) => {
-                    return (
-                      <button
-                        onClick={() => changePage(idx)}
-                        key={idx}
-                        className={`page-btn ${
-                          page === idx && `page-btn-selected`
-                        }`}
-                      >
+                    return ( 
+                      <button  onClick={() => changePage(idx)} key={idx} className={`page-btn ${page === idx && `page-btn-selected`}`}>
                         {idx + 1}
-                      </button>
+                      </button> 
                     );
                   })}
                 </div>
@@ -192,19 +164,23 @@ export const SingleOrderCreate = () => {
           </div>
 
           <div>
-            <div>{selectedRestaurantName}</div>
+            <h3 style={{marginBottom:"10px"}}>{selectedRestaurantName}</h3>
             <form onSubmit={submitOrderCreateHome}>
               <input
                 type="text"
                 onChange={handleOrderInput}
                 value={orderInput.label}
                 autoComplete="on"
+                className="submitOrderCreateHome"
+                placeholder="Enter your name"
               />
-              <input type="submit" />
+              <input type="submit" className="bigButton submitOrderCreateHome" value="Next"/>
             </form>
           </div>
         </div>
       )}
     </div>
+    </Main>
   );
 };
+ 

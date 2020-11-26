@@ -65,8 +65,39 @@ export const SingleMeal = ({meal,setPayload,setOrderedMeal,setTotal})=>{
 
 
     return (
-        <div>
-            <p>{meal.name}</p>
+<>
+<div className="singleMeal">
+  <div className="meal-img"><img src= {`https://source.unsplash.com/random/400x400/?burger&pizza&kebab&sandwich/${meal.id}`}  alt="restaurant-icon"/>
+</div>
+  <div className="meal-name">{meal.name}</div>
+  <div className="meal-price">{meal.price}.00$</div>
+  <div className="meal-form">
+    <form>
+    <input
+        type="textBox"
+        id="single-order-note"
+        onChange={handlePayloadItem}
+        value={payloadItem.note}
+        name="note"
+        placeholder="Add your Note"
+    />
+    <input
+        type="number"
+        id="single-order-quantity"
+        onChange={handlePayloadItem}
+        value={payloadItem.quantity}
+        name="quantity"
+        placeholder="Add quantity"
+      />
+    </form>
+  </div>
+  <div className="meal-add">
+    <button onClick={() => addItem(meal.id, meal.name, meal.price)}>Add </button>
+  </div>
+</div>
+
+
+        {/* <div> <p>{meal.name}</p>
               <p>{meal.price} RSD </p>
               <form>
                 <input
@@ -87,6 +118,7 @@ export const SingleMeal = ({meal,setPayload,setOrderedMeal,setTotal})=>{
               <button onClick={() => addItem(meal.id, meal.name, meal.price)}>
                 Add Item
               </button>
-        </div>
+        </div> */}
+        </>
     )
 }

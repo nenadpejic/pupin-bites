@@ -8,6 +8,7 @@
     -webkit-background-size: cover;
     -o-background-size: cover;
     background-size: cover; 
+    color:rgb(160, 160, 160);
 }
 .container{ 
     box-sizing: border-box; 

@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { getOnePoll, updatePoll } from '../../services/services'
+import Main from '../../components/Main'
+import PollInfo from '../../components/PollInfo'
+import './PollComplete.css'
 
 const PollInProgress = () => {
     const [poll, setPoll] = useState([])
@@ -38,15 +41,30 @@ const PollInProgress = () => {
         localStorage.setItem('orderRestaurantId', tmp.toString())
         history.push(`/single-order-create/`)
     }
+ 
+    
+    const totalVotes = restaurants.map(r=>r.vote.length).reduce((a,b)=>a+b, 0);
 
     return (
-        <section>
-            <div key={poll.id}>
-                <h3>Poll Name: {poll.label}</h3>
-                <h3>Poll Created: {poll.created}</h3>
-                <h3>Poll Ends at: </h3>
-            </div>
-            <div>
+        <Main>
+        <h2 className="page-title" style={{marginBottom:"40px"}}>Poll results</h2>
+        <div className="pollComplete">
+            <PollInfo poll={poll}/>
+            {restaurants.map(restaurant => 
+            <div key={restaurant.id} className="pollComplete-restaurant">
+                <div className=" restaurant-name"><b>{restaurant.name}</b></div>
+                <div className="restaurant-img"><img src= {`https://source.unsplash.com/random/400x400/?restaurant/${restaurant.id}`}  alt="restaurant-icon"/></div>
+                <div className="restaurant-votes" value={restaurant.vote.length}>{restaurant.vote.length}</div>
+                <div className="restaurant-chart">
+                     <div className="chart-bar" style={{
+                        width:`${(Math.ceil(restaurant.vote.length/totalVotes*300))}px`
+                    }}></div>  
+                </div>
+            </div> 
+            )}
+        </div>
+
+            {/* <div>
 
                 {restaurants.map(restaurant =>
                     <div key={restaurant.id} id={restaurant.id} className="poll">
@@ -54,11 +72,10 @@ const PollInProgress = () => {
                         <div>{restaurant.address}</div>
                         <div value={restaurant.vote.length}>Votes: {restaurant.vote.length}</div>
                     </div>
-
                 )}
-            </div>
-            {createdPolls[0] ? (createdPolls[0].includes(slug) ? <button onClick={handleClick}>Finish Poll</button> : null) : null}
-        </section>
+            </div> */}
+            {createdPolls[0] ? (createdPolls[0].includes(slug) ? <button className="bigButton" onClick={handleClick}>Finish Poll</button> : null) : null} 
+        </Main>
     )
 }
 export default PollInProgress

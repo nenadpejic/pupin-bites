@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getMeals, getOneOrder, getOrderItems } from '../../services/services'
+import Main from '../../components/Main'
+import './style.css'
 
 export const SingleOrderView = ()=>{
 
@@ -64,19 +66,27 @@ export const SingleOrderView = ()=>{
   
 
     return (
-        <div>
-            {orderedItems&&orderedItems.map(order=>
-                <div key={order}>
-                    <p>{order.consumer}</p>
-                    {order.payloads.map(el=>
-                        <div key={el.id}>
-                            <p>Meal: {meals&& meals.filter(meal=>el.mealId===meal.id)[0].name}</p>
-                            <p>Note : {el.note}</p>
-                             <p>quantity : {el.quantity}</p>
-                        </div>)}
-                        <hr/>
-                </div>)}
-            
-        </div>
+        <Main>   
+        <div className="singleOrderview">
+            <h2 className="page-title" >Customer Orders</h2>
+        {orderedItems&&orderedItems.map(order=>
+            <div key={order}>
+                <h3>{order.consumer}</h3>
+                <table>
+                <thead><tr><th>Meals</th><th>Notes</th><th>Quantities</th></tr></thead>
+                <tbody>
+                {order.payloads.map(el=>
+                    <tr key={el.id}>
+                        <td> {meals&& meals.filter(meal=>el.mealId===meal.id)[0].name}</td>
+                        <td> {el.note}</td>
+                        <td> {el.quantity}</td>
+                    </tr>)} 
+                </tbody>
+                </table> 
+            </div>)}      
+        </div>  
+        </Main>
     )
 }
+
+ 

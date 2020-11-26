@@ -18,14 +18,15 @@ export const OrderedMeal = ({ordered,orderedMeal,payload,setTotal})=>{
                   && el.quantity === quantity);
           payload.splice(itemIndex, 1);
       };
-    return (
-        <div>
-            <p>Name: {ordered.name}</p>
-            <p>Price: {ordered.price} USD</p>
-            <p>Quantity: {ordered.quantity}</p>
-            <p>Note: {ordered.note}</p>
-            <button onClick={() => deleteItem(ordered.name, ordered.quantity, ordered.note, ordered.price,ordered.mealId)}>Delete</button>
-            <hr/> 
-        </div>
+    return ( 
+<div className="ordered-meal">
+  <div className="ordered-name">{ordered.name}</div>
+  <div className="ordered-p">{ordered.price}.00$ </div>
+  <div className="ordered-q">{ordered.quantity}{ordered.quantity>1 ? " pieces" : " piece"}</div>
+    <div className="ordered-note">{ordered.note}{ordered.note=="" ? (<i>note</i>) : ordered.note}</div>
+  <div className="ordered-delete"><button onClick={() => deleteItem(ordered.name, ordered.quantity, ordered.note, ordered.price,ordered.mealId)}>Delete</button></div>
+</div> 
+        
+
     )
 }

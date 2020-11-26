@@ -111,7 +111,7 @@ const PollCreate = () => {
         <>
             <Main>
                 <div>
-                    <h1>Create Poll</h1>
+                    <h2 className="page-title">Create Poll</h2>
                     <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required />
                     <div className="pollDuration">
                         <div className="title">Set Duration</div>

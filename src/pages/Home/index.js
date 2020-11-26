@@ -81,12 +81,14 @@ const Home = () => {
         {!activeButton
           ? <div id="Polls" className="tabcontent">
             <div className="pollList" >
+              <div className="polls-orders-search">
               <input
                 type="search"
                 onChange={e => handlePollSearch(e)}
                 // value={pollSearch}
                 placeholder="Search for poll..."
               />
+              </div>
               <table>
                 <thead>
                   <tr><th>Poll Name</th><th>Poll Start</th><th>Poll End</th></tr>
@@ -101,12 +103,14 @@ const Home = () => {
           </div>
           : <div id="Orders" className="tabcontent">
             <div className="orders">
+            <div className="polls-orders-search">
               <input
                 type="search"
                 onChange={e => handleOrderSearch(e)}
                 // vaule={orderSearch}
                 placeholder="Search for order..."
               />
+              </div>
               <table>
                 <thead>
                   <tr><th>Order Name</th><th>Order Start</th></tr>

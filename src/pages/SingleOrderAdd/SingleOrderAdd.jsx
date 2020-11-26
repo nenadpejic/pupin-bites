@@ -5,6 +5,7 @@ import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/
 import { OrderedMeal } from "./OrderedMeal";
 import { SingleMeal } from "./SingleMeal";
 import "./singleOrderAdd.css";
+import Main from "../../components/Main"
 
 const SingleOrderAdd = () => {
 
@@ -74,34 +75,37 @@ const SingleOrderAdd = () => {
   };
 
   return (
-    <div id="single-order-create">
-      <NavBar />
+    <div className="single-order-create">
+      <Main>
+        <h2 className="page-title">Create Order</h2>
       <div className="meals">
-        {meals &&
-          meals.map((el) => (
+        {meals && meals.map((el) => (
             <SingleMeal meal={el} setPayload={setPayload} key={el.id} setOrderedMeal={setOrderedMeal} setTotal={setTotal}/>
-     
           ))}
       </div>
 
+      <hr/>
+
       <div>
         {orderedMeal.map((el,idx) =>
-          
           <div className='orderedItems ' key={idx}>
             <OrderedMeal ordered={el} orderedMeal={orderedMeal} payload={payload} setTotal={setTotal}/>
-        
           </div>
         )}
       </div>
-      <div>
-        <button onClick={addItemsToOrder}>Make Your Order</button>
-        {valid ? null : <p>This order is not active anymore.</p>}
-      </div>
-      <hr/>
-      <div>
-        <h2>Price:</h2>
-        <p>{total} USD</p>
-      </div>
+      
+       {orderedMeal.length>0 &&  
+        <>
+        <div>
+          <h2>Total: {total} USD</h2>
+        </div>
+        <div>
+          <button className="bigButton" onClick={addItemsToOrder}>Make Your Order</button>
+          {valid ? null : <p>This order is not active anymore.</p>}
+        </div>  
+        </>
+      }
+      </Main>
     </div>
   );
 };

@@ -15,7 +15,7 @@ import { getProfile } from "./services/services";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
-import "./App.css";
+//import "./App.css";
 import { SingleOrderView } from "./pages/SingleOrderView/SingleOrderView";
 
 const App = () => {
