@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import Main from '../../components/Main'
+import PollInfo from '../../components/PollInfo'
 import { getOnePoll, updatePoll } from '../../services/services'
+import './PollComplete.css'
 
 const PollInProgress = () => {
     const [poll, setPoll] = useState([])
@@ -40,25 +43,25 @@ const PollInProgress = () => {
     }
 
     return (
-        <section>
-            <div key={poll.id}>
-                <h3>Poll Name: {poll.label}</h3>
-                <h3>Poll Created: {poll.created}</h3>
-                <h3>Poll Ends at: </h3>
-            </div>
-            <div>
+        <Main>
+            <h1>Poll Vote</h1>
+            <PollInfo poll={poll} />
 
+            <div className="restaurantList">
                 {restaurants.map(restaurant =>
-                    <div key={restaurant.id} id={restaurant.id} className="poll">
-                        <div>{restaurant.name}</div>
-                        <div>{restaurant.address}</div>
-                        <div value={restaurant.vote.length}>Votes: {restaurant.vote.length}</div>
+                    <div key={restaurant.id} id={restaurant.id} className="restaurant">
+                        <div className="icon">
+                            <img src={`https://source.unsplash.com/random/400x400/?restaurant/${restaurant.id}`} alt="restaurant-icon" />
+                        </div>
+                        <div className="name">{restaurant.name}</div>
+                        <div className="address">{restaurant.address}</div>
+                        <div value={restaurant.vote.length} className="vote">{restaurant.vote.length}</div>
                     </div>
-
                 )}
             </div>
-            {createdPolls[0] ? (createdPolls[0].includes(slug) ? <button onClick={handleClick}>Finish Poll</button> : null) : null}
-        </section>
+
+            {createdPolls[0] ? (createdPolls[0].includes(slug) ? <button onClick={handleClick} className="button">Finish Poll</button> : null) : null}
+        </Main>
     )
 }
 export default PollInProgress
