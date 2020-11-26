@@ -23,7 +23,7 @@
 /* Change background color of buttons on hover */
 #home .tab button:hover {
   color: #fff;
-  background-color: #3e8f3f;
+  /* background-color: #3e8f3f; */
 }
 
 /* Style the tab content */
@@ -55,7 +55,7 @@
   background-color: #3e8f3f;
 }
 #home button:hover {
-  background-color: rgb(83, 194, 86);
+  /* background-color: rgb(83, 194, 86); */
   cursor: pointer;
 }
 
@@ -81,7 +81,8 @@
   text-shadow: 1px 1px grey;
 }
 #home .tab > button:hover {
-  background-color: rgba(76, 175, 79, 0.527);
+  /* background-color: rgba(76, 175, 79, 0.527); */
+  background-color: #3e8f3f;
 }
 
 #home tbody:hover {
