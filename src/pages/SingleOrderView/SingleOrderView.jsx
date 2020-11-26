@@ -78,6 +78,7 @@ export const SingleOrderView = () => {
     updateOrder(data,orderInfo.id).then(res=>{
       localStorage.removeItem("orderPollId");
     })
+    history.push(`/home`);
   };
 
   useEffect(() => {
