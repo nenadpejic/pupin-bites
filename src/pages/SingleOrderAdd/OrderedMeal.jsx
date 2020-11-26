@@ -19,7 +19,7 @@ export const OrderedMeal = ({ordered,orderedMeal,payload,setTotal})=>{
           payload.splice(itemIndex, 1);
       };
     return (
-        <div>
+        <div >
             <p>Name: {ordered.name}</p>
             <p>Price: {ordered.price} USD</p>
             <p>Quantity: {ordered.quantity}</p>

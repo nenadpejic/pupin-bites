@@ -76,7 +76,7 @@ const SingleOrderAdd = () => {
   return (
     <div id="single-order-create">
       <NavBar />
-      <div className="meals">
+      <div className="meal">
         {meals &&
           meals.map((el) => (
             <SingleMeal meal={el} setPayload={setPayload} key={el.id} setOrderedMeal={setOrderedMeal} setTotal={setTotal}/>
@@ -100,7 +100,7 @@ const SingleOrderAdd = () => {
       <hr/>
       <div>
         <h2>Price:</h2>
-        <p>{total} USD</p>
+        <p>{total} RSD</p>
       </div>
     </div>
   );

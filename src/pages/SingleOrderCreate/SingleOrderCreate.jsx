@@ -113,16 +113,16 @@ export const SingleOrderCreate = () => {
     <div className="div-order">
       {pollCreator ? (
         <div>
-          <div>{restaurantInfo.name}</div>
+          <div className ="rest-info">{restaurantInfo.name}</div>
           <form onSubmit={submitOrderCreate}>
             <input
               type="text"
               onChange={handleOrderInput}
               value={orderInput.label}
               autoComplete="on"
-            />
+            /><br></br>
 
-            <input type="submit" />
+            <input class="rest-info-submit" type="submit" />
           </form>
         </div>
       ) : (
@@ -200,7 +200,7 @@ export const SingleOrderCreate = () => {
                 onChange={handleOrderInput}
                 value={orderInput.label}
                 autoComplete="on"
-              />
+              /><br></br>
               <input type="submit" />
             </form>
           </div>

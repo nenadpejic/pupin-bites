@@ -1,12 +1,79 @@
-.meals{
+.meal{
     display: flex;
-    height:200px;
+    flex-wrap: wrap;
+    margin: 0 10px;
+}
+
+.single-meal{
+    
+    width: 200px;
+    margin: 15px auto;
+    padding: 10px;
+    background-color: #f7f6ed;
+}
+.single-meal>form>input[type="textBox"]{
+    width: 150px;
+    margin: 5px auto;
+}
+.single-meal>button{
+    cursor: pointer;
+    background-color:#d9d9d9;
 }
 .singleMeal{
     height: 200px;
     width: 200px;
 }
-.orderedItems{
-    color: rgb(20, 5, 5);
-    background-color: rgb(138, 130, 130);
+
+#single-order-create{
+    width: 60%;
+    margin: 0 auto;
+    border: 1px solid grey;
 }
+#single-order-create>nav{
+    background-color:rgb(253,181,28);
+    padding: 5px;
+    text-align: left;
+}
+
+#single-order-create>nav>button{
+    margin: 0 5px;
+    color:rgb(120,75,0);
+    font-size: 1em;
+    float: right;
+    cursor: pointer;
+}
+#single-order-create>nav>button>a{
+    text-decoration: none;
+    color:rgb(120,75,0);
+}
+#single-order-create>div>button{
+    cursor:pointer;
+    font-weight: 500;
+    background-color: #d9d9d9;
+}
+
+div>.orderedItems{
+    color: rgb(20, 5, 5);
+    background-color: #f7f6ed;
+    width: 60%;
+    margin: 15px auto;
+    padding: 15px;
+    border: 1px solid grey;
+    clear: both;
+}
+
+
+.orderedItems>div>button{
+    background-color:  #d9d9d9;
+    font-size: 1em;
+}
+.orderedItems>div>button:hover{
+    cursor: pointer;
+}
+
+p{
+    font-size: 0.8em;
+}
+
+
+

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getMeals, getOneOrder, getOrderItems } from '../../services/services'
+import "./singleOrderView.css"
 
 export const SingleOrderView = ()=>{
 
@@ -64,9 +65,9 @@ export const SingleOrderView = ()=>{
   
 
     return (
-        <div>
+        <div className="order-div">
             {orderedItems&&orderedItems.map(order=>
-                <div key={order}>
+                <div className="order-view" key={order}>
                     <p>{order.consumer}</p>
                     {order.payloads.map(el=>
                         <div key={el.id}>
