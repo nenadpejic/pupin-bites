@@ -123,14 +123,19 @@ export const SingleOrderCreate = () => {
     <NavBar />
     <div className='createOrder'>
       {pollCreator ? (
-        <div className='one-restaurant'>
-          <div>{restaurantInfo.name}</div>
+        <div className='oneRestaurant'>
+          <div className='titleWrapper'>
+          <div className='restaurantInfo'>Make Your Order for : </div>
+          <div className='restaurantInfo'><strong><h3>{restaurantInfo.name}</h3></strong></div>
+          <div className='restaurantInfo'>Visit us at:  {restaurantInfo.address}</div>
+          </div>
           <form onSubmit={submitOrderCreate}>
             <input
               type="text"
               onChange={handleOrderInput}
               value={orderInput.label}
               autoComplete="on"
+              placeholder='Add Order Name'
             /><br></br>
 
             <input type="submit" value = 'Create Your Order' />

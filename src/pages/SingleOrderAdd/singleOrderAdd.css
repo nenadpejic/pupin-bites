@@ -64,13 +64,17 @@ div>.orderedItems{
 }
 
 .make-order{
-    background-color: #f7f6ed;
+    color: #fff;
     margin: 5px;
     padding: 5px;
+}
+.make-order h2, .make-order p{
+    color: #fff;
 }
 
 label{
     margin-bottom: 5px;
+    color: #fff;
 }
 
 p{
