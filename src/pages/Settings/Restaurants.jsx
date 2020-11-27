@@ -78,11 +78,11 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
       
       <form onSubmit={newRestaurant}>        
         <div className="user-box">
-          <input type="text" onChange={handleRestaurantInput} value={restaurantInput.name} name="name" className="restaurantInput" placeholder="Enter Restaurant Name"/>
+          <input type="text" onChange={handleRestaurantInput} value={restaurantInput.name} name="name" className="restaurantInput" required placeholder="Enter Restaurant Name"/>
         </div>
 
         <div className='user-box'>
-          <input type="text" onChange={handleRestaurantInput} value={restaurantInput.address} placeholder="Enter Restaurant Address" name="address" className="restaurantInput"/>
+          <input type="text" onChange={handleRestaurantInput} value={restaurantInput.address} placeholder="Enter Restaurant Address" required name="address" className="restaurantInput"/>
         </div>
         <button
           type="submit"
@@ -110,11 +110,11 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
           paginate(restaurants)[page].map((el) => (
             <div key={el.id} className="single-restaurant  pagination">
               
-              <p>{el.name}</p>
-              <p>{el.address}</p>
+              <div className='restaurantInfo'><p>{el.name}</p></div>
+              <div className='restaurantInfo'><p>{el.address}</p></div>
               <button
                 onClick={() => restaurantDelete(el.id)}
-                className="pagination-buttons"
+                className="deleteButton"
               >
                 Delete
               </button>
@@ -123,18 +123,18 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
           ))
         ) : (
           <div className="pagination">
-            {filteredRestaurants.slice(0, 4).map((el) => (
+            {filteredRestaurants.slice(0, 4).map((el,idx) => (
               <div key={el.id} className="single-restaurant">
                 
-                <p>{el.name}</p>
-                <p>{el.address}</p>
+                <div className='restaurantInfo'><p>{el.name}</p></div>
+              <div className='restaurantInfo'><p>{el.address}</p></div>
                 <button
                   onClick={() => restaurantDelete(el.id)}
                   className="deleteButton"
                 >
                   Delete
                 </button>
-                <hr />
+                {idx!==3 &&<hr />}
               </div>
             ))}
           </div>

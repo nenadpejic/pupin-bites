@@ -6,10 +6,12 @@ import {
   getOrderItems,
   getProfile,
   updateOrder,
-} from "../../services/services"; 
+} from "../../services/services";
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 import { CSVLink } from "react-csv";
 import "./singleOrderView.css"
-import Main from "../../components/Main"
+
 export const SingleOrderView = () => {
   
   const [orderedItems, setOrderedItems] = useState(undefined);
@@ -82,36 +84,31 @@ export const SingleOrderView = () => {
     history.push(`/home`);
   };
 
-  // [{consumer: Nevena, [Meal:ime , Note: Poruka , quantity:kolicina , price:cena]}]
-
   useEffect(() => {
     if (orderedItems && meals) {
-      orderedItems.map((order) => (
-          setData(prev => {return [...prev, {
-            Consumer: order.consumer, 
-            Meals: 
-              order.payloads.map((el) => (
-                      meals
-                      .filter((meal) => el.mealId === meal.id)[0].name)),
-            Note: 
-              order.payloads.map((el) => (el.note)),
-            Quantity: 
-              order.payloads.map((el) => (el.quantity)),
-            Price: 
-              order.payloads.map((el) => (
-                meals
-                .filter((meal) => el.mealId === meal.id)[0].price))
-                .reduce((acc,cur) => acc+cur,0) + " USD"
-          }]})))
-          console.log(data)
-        }
-  }, [orderedItems, meals]);
+
+      orderedItems.forEach(order=>{
+        console.log(order)
+        order.payloads.forEach(payload=>{
+          setData(prev=>{
+            return [...prev,{
+              consumer:order.consumer,
+              mealName: meals.find(el=>el.id===payload.mealId).name,
+              quantity: payload.quantity,
+              mealPrice: meals.find(el=>el.id===payload.mealId).price*payload.quantity + '$',
+              note: payload.note,
+            }];
+          });
+        });
+      });
+  };
+}, [orderedItems, meals]);
     
 
   
   return (
-    
-   <Main>
+    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
+    <NavBar />
     <div className="order-div">
       <div>
           <h3>Food you ordered:</h3>
@@ -137,7 +134,7 @@ export const SingleOrderView = () => {
         ) : (
           <div>
             <h3>Sorry but You haven't ordered yet.</h3>
-            <button onClick={handleBack}>back</button>
+            <button onClick={handleBack} className='bigButton'>back</button>
           </div>
         )}
       </div>
@@ -168,12 +165,14 @@ export const SingleOrderView = () => {
             <CSVLink 
             className="csv-button" onClick={handleOrderFinish}
             filename={orderInfo.label + " "  + slug + ".csv"}
+
             data={data}  
             >Finish Order and Export to Excel</CSVLink>
         </div>
         
       )}
-    </div> 
-    </Main>
+    </div>
+    <Footer />
+    </div>
   );
 };

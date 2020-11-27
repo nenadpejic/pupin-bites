@@ -3,7 +3,6 @@ import { map, uniqBy } from 'lodash'
 import Main from '../../components/Main'
 import RestaurantItem from '../../components/RestaurantItem'
 import { getProfile, postCheckData } from '../../services/services'
-
 //Css
 import './PollCreate.css'
 
@@ -12,10 +11,7 @@ import { getAllRestaurants, createPoll } from '../../services/services.js'
 import { useHistory } from 'react-router-dom'
 // context
 import { AuthContext } from "../../contexts/AuthContext";
-// Icons 
-import { MdDelete } from 'react-icons/md'
-
-
+ 
 
 
 const PollCreate = () => {
@@ -128,11 +124,11 @@ const PollCreate = () => {
     const displayResults = selected.length === 0 ? "none" : "block";
 
     return (
-            <Main>
-                <div>
-                    <h2 className="page-title">Create Poll</h2>
-                    <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required /><br></br>
-                    {/* <div className="pollDuration">
+        <Main>
+            <div>
+                <h2 className="page-title">Create Poll</h2>
+                <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required /><br></br>
+                {/* <div className="pollDuration">
                         <div className="title">Set Duration</div>
                         <div className="hours">
                             <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={handleTime} required />
@@ -141,27 +137,27 @@ const PollCreate = () => {
                             <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={handleTime} required />
                         </div>
                     </div> */}
-                    <input type="text" placeholder="Search Restaurant" onChange={handleChange} />
-                    <div className="info">Poll duration time is <b>{`${auth.time}`}</b> min</div>
+                <input type="text" placeholder="Search Restaurant" onChange={handleChange} />
+                <div className="info">Poll duration time is <b>{`${auth.time}`}</b> min</div>
 
                 <div className="restaurant-list">
-                {change.length === 0 ? restaurants.map((restaurant) => (
-                    //Complete list
-                    <div className="item" key={restaurant.id}>
-                        <div><RestaurantItem restaurant={restaurant} /></div>
-                        <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>+ </button>
-                    </div>))
-                    : filter.map((restaurant) => (
-                        //Filtered list
+                    {change.length === 0 ? restaurants.map((restaurant) => (
+                        //Complete list
                         <div className="item" key={restaurant.id}>
                             <div><RestaurantItem restaurant={restaurant} /></div>
                             <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>+ </button>
-                        </div>))}
+                        </div>))
+                        : filter.map((restaurant) => (
+                            //Filtered list
+                            <div className="item" key={restaurant.id}>
+                                <div><RestaurantItem restaurant={restaurant} /></div>
+                                <button onClick={(e) => handleClickAdd(restaurant, e)} id={restaurant.id}>+ </button>
+                            </div>))}
                 </div>
-                </div> 
-                <div style={{ display: `${displayResults}` }}>
-                    <div className="selected-list">
-                        <table>
+            </div>
+            <div style={{ display: `${displayResults}` }}>
+                <div className="selected-list">
+                    <table>
                         <thead><tr><th colSpan="2">Selected Restaurants</th></tr></thead>
                         <tbody>
                         {selected.map((restaurant) => ( 
@@ -175,8 +171,8 @@ const PollCreate = () => {
                     <div >
                         <button className="bigButton" type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
                     </div>
-                </div>
-            </Main>   
+                </div> 
+        </Main>
     )
 }
 export default PollCreate

@@ -16,6 +16,9 @@ const PollInProgress = () => {
     const createdPollsRef = useRef(localStorage.getItem("createPoll") ? localStorage.getItem("createPoll").split(',') : null)
     const createdPolls = new Array(createdPollsRef.current)
 
+    const createdVoteRef = useRef(localStorage.getItem("votes") ? localStorage.getItem("votes").split(',') : null)
+    const createdVote = new Array(createdVoteRef.current)
+
     // Redirect
     const history = useHistory()
 
@@ -31,9 +34,14 @@ const PollInProgress = () => {
         }).catch((err) => {
         })
         return () => { isMounted = false };
-    }, [votes])
+    }, [votes, slug])
+
+
     useEffect(() => {
-        setWinner(restaurants.filter(el => Math.max(el.vote.length) ? el : null))
+        let tmpArr = []
+        restaurants.map(el => tmpArr.push(el.vote.length))
+        let maxNum = Math.max.apply(Math, tmpArr)
+        setWinner(restaurants.filter((el => el.vote.length === maxNum ? el : null)))
     }, [restaurants])
 
     const handleClickFinish = () => {
@@ -46,12 +54,16 @@ const PollInProgress = () => {
         localStorage.setItem('orderRestaurantId', tmp.toString())
         history.push(`/single-order-create/`)
     }
- 
-    
-    const totalVotes = restaurants.map(r=>r.vote.length).reduce((a,b)=>a+b, 0);
     const handleClickHome = () => {
         history.push(`/`)
     }
+    const handleSuspend = () => {
+        let susspend = createdVote[0].filter(el => el !== slug)
+        localStorage.setItem('votes', susspend)
+        history.push(`/poll-vote/${slug}`)
+    }
+
+    const totalVotes = restaurants.map(r => r.vote.length).reduce((a, b) => a + b, 0);
 
     return (
         <Main>
@@ -72,13 +84,17 @@ const PollInProgress = () => {
             )}
         </div>
             {createdPolls[0] ? (createdPolls[0].includes(slug) ?
-                (winner === true && winner.length === 1 ? <button onClick={handleClickFinish} className="button">Finish Poll</button> :
+                (!winner ? null : (winner.length === 1 ? <button onClick={handleClickFinish} className="button">Finish Poll</button> :
                     <div>
-                        <button onClick={handleClickFinish} className="bigButton">Finish Poll</button>
-                        <button>X</button>
-                    </div>)
-                : <button onClick={handleClickHome} className="bigButton">Back To Home</button>) : null}
-            
+                        <button onClick={handleClickFinish} className="button">Finish Poll</button>
+                        <div className="tsd-wrapper">
+                            <button onClick={handleSuspend} className="button-suspend">TSD</button>
+                            <p>Apparently there are two or more restaurants with an equal amount of votes, use "The Suspend Democracy" button to be the judge</p>
+                        </div>
+                    </div>))
+                : <button onClick={handleClickHome} className="button">Back To Home</button>)
+                : null}
+
         </Main>
     )
 }
