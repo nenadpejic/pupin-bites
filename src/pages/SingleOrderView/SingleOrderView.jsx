@@ -94,9 +94,9 @@ export const SingleOrderView = () => {
             return [...prev,{
               consumer:order.consumer,
               mealName: meals.find(el=>el.id===payload.mealId).name,
+              quantity: payload.quantity,
               mealPrice: meals.find(el=>el.id===payload.mealId).price*payload.quantity + '$',
               note: payload.note,
-              quantity: payload.quantity
             }];
           });
         });
