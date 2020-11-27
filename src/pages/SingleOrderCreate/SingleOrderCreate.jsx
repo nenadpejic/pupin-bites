@@ -97,7 +97,8 @@ export const SingleOrderCreate = () => {
 
   const handleOrderInput = (e) => {
     if (e.target.value.trim() !== '') {
-      setOrderInput(e.target.value)}
+      setOrderInput(e.target.value)
+    }
     else {
       alert("Please add order name!");
     }
@@ -113,131 +114,121 @@ export const SingleOrderCreate = () => {
   const submitOrderCreateHome = (e) => {
     e.preventDefault();
     if (orderInput.trim() !== '') {
-    const data = { restaurantId: selectedRestaurantId, label: orderInput };
-    createOrder(data)
-      .then((res) => {
-        console.log(res.data.id);
-        localStorage.setItem("orderId", res.data.id);
-        // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
-        history.push(`/single-order-add/${res.data.id}`);
+      const data = { restaurantId: selectedRestaurantId, label: orderInput };
+      createOrder(data)
+        .then((res) => {
+          console.log(res.data.id);
+          localStorage.setItem("orderId", res.data.id);
+          // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
+          history.push(`/single-order-add/${res.data.id}`);
 
-<<<<<<< HEAD
-    })
-    .catch((err) => {
-      console.log(err)
-      history.push(`/single-order-create`);
-    })}
-    else {
-      alert("Please add order name!");
-      return;
-    }
-=======
-      })
-      .catch((err) => {
-        console.log(err)
-        history.push(`/single-order-create`);
-      });
->>>>>>> d83f575adcbaf73b9e1547a4ff5497092f00a375
-  };
+        })
+        .catch((err) => {
+          console.log(err)
+          history.push(`/single-order-create`);
+        });
+    };
 
-  const submitOrderCreate = (e) => {
-    e.preventDefault();
-    if (orderInput.trim() !== '') {
-    const data = { restaurantId: restaurantId, label: orderInput };
-    createOrder(data).then((res) => {
-      console.log(res);
-      localStorage.setItem("orderId", res.data.id);
-      history.push(`/single-order-add/${res.data.id}`);
-    })}
-    else {
-      alert("Please add order name!");
-      return;
-    }
-  };
+    const submitOrderCreate = (e) => {
+      e.preventDefault();
+      if (orderInput.trim() !== '') {
+        const data = { restaurantId: restaurantId, label: orderInput };
+        createOrder(data).then((res) => {
+          console.log(res);
+          localStorage.setItem("orderId", res.data.id);
+          history.push(`/single-order-add/${res.data.id}`);
+        })
+      }
+      else {
+        alert("Please add order name!");
+        return;
+      }
+    };
 
-  return (
-    <Main>
-      <h2 className="page-title">Select Restaurant</h2>
-      <div className="singleOrderCreate">
-        {pollCreator ? (
-          <div className='oneRestaurant'>
-            <div className='titleWrapper'>
-              <div className='restaurantInfo'>Make your order for: </div>
-              <div className='restaurantInfo'><strong><h3>{restaurantInfo.name}</h3></strong></div>
-              <div className='restaurantInfo'>Visit us at:  {restaurantInfo.address}</div>
+    return (
+      <Main>
+        <h2 className="page-title">Select Restaurant</h2>
+        <div className="singleOrderCreate">
+          {pollCreator ? (
+            <div className='oneRestaurant'>
+              <div className='titleWrapper'>
+                <div className='restaurantInfo'>Make your order for: </div>
+                <div className='restaurantInfo'><strong><h3>{restaurantInfo.name}</h3></strong></div>
+                <div className='restaurantInfo'>Visit us at:  {restaurantInfo.address}</div>
+              </div>
+              <form onSubmit={submitOrderCreate}>
+                <input
+                  type="text"
+                  onChange={handleOrderInput}
+                  value={orderInput.label}
+                  autoComplete="on"
+                  placeholder="Add Order Name"
+                  required="yes"
+                /><br></br>
+
+                <input type="submit" value='Create Your Order' />
+              </form>
             </div>
-            <form onSubmit={submitOrderCreate}>
-              <input
-                type="text"
-                onChange={handleOrderInput}
-                value={orderInput.label}
-                autoComplete="on"
-                placeholder="Add Order Name"
-                required="yes"
-              /><br></br>
-
-              <input type="submit" value='Create Your Order' />
-            </form>
-          </div>
-        ) : (
-            <div className='createPageFromHome'>
-              <div className='allRestaurants'>
-                <form>
-                  <input type="text" placeholder="Search Restaurant by Name" name="name" value={filterInput.name} onChange={handleFilter} className="restaurantInput" />
-                </form>
-                {filterInput.length === 0 &&
-                  paginate(restaurants)[page] !== undefined ? (
-                    paginate(restaurants)[page].map((el) => (
-                      <div key={el.id} className="single-restaurant" onClick={() => handleRestaurantId(el)}>
-                        <RestaurantItem key={el.id} restaurant={el} />
-                      </div>
-                    ))
-                  ) : (
-                    <div className="restaurants-wrapper">
-                      {filteredRestaurants.slice(0, 4).map((el) => (
+          ) : (
+              <div className='createPageFromHome'>
+                <div className='allRestaurants'>
+                  <form>
+                    <input type="text" placeholder="Search Restaurant by Name" name="name" value={filterInput.name} onChange={handleFilter} className="restaurantInput" />
+                  </form>
+                  {filterInput.length === 0 &&
+                    paginate(restaurants)[page] !== undefined ? (
+                      paginate(restaurants)[page].map((el) => (
                         <div key={el.id} className="single-restaurant" onClick={() => handleRestaurantId(el)}>
                           <RestaurantItem key={el.id} restaurant={el} />
                         </div>
-                      ))}
-                    </div>
-                  )}
-              </div>
-              <div className="pagination">
-                {filterInput.length === 0 &&
-                  paginate(restaurants)[page] !== undefined &&
-                  paginate(restaurants).length > 1 && (
-                    <div className="pagination-buttons">
-                      {/* prev */}
-                      {paginate(restaurants).map((_, idx) => {
-                        return (
-                          <button onClick={() => changePage(idx)} key={idx} className={`page-btn ${page === idx && `page-btn-selected`}`}>
-                            {idx + 1}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
-              </div>
+                      ))
+                    ) : (
+                      <div className="restaurants-wrapper">
+                        {filteredRestaurants.slice(0, 4).map((el) => (
+                          <div key={el.id} className="single-restaurant" onClick={() => handleRestaurantId(el)}>
+                            <RestaurantItem key={el.id} restaurant={el} />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                </div>
+                <div className="pagination">
+                  {filterInput.length === 0 &&
+                    paginate(restaurants)[page] !== undefined &&
+                    paginate(restaurants).length > 1 && (
+                      <div className="pagination-buttons">
+                        {/* prev */}
+                        {paginate(restaurants).map((_, idx) => {
+                          return (
+                            <button onClick={() => changePage(idx)} key={idx} className={`page-btn ${page === idx && `page-btn-selected`}`}>
+                              {idx + 1}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                </div>
 
-              <div>
-                <h3 style={{ marginBottom: "10px" }}>{selectedRestaurantName}</h3>
-                <form onSubmit={submitOrderCreateHome}>
+                <div>
+                  <h3 style={{ marginBottom: "10px" }}>{selectedRestaurantName}</h3>
+                  <form onSubmit={submitOrderCreateHome}>
 
-                  <input
-                    type="text"
-                    onChange={handleOrderInput}
-                    value={orderInput.label}
-                    autoComplete="on"
-                    placeholder='Enter Order Name'
-                    required="yes"
-                    className="submitOrderCreateHome"
-                  />
-                  <input type="submit" className="bigButton submitOrderCreateHome" value="Next" />
-                </form>
+                    <input
+                      type="text"
+                      onChange={handleOrderInput}
+                      value={orderInput.label}
+                      autoComplete="on"
+                      placeholder='Enter Order Name'
+                      required="yes"
+                      className="submitOrderCreateHome"
+                    />
+                    <input type="submit" className="bigButton submitOrderCreateHome" value="Next" />
+                  </form>
+                </div>
               </div>
-            </div>
-          )}
-      </div>
-    </Main>
-  );
-};
+            )}
+        </div>
+      </Main>
+    );
+  }
+}
