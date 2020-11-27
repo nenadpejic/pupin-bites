@@ -89,6 +89,10 @@ const SingleOrderAdd = () => {
       </div>
 
       <hr/>
+      {orderedMeal.length===0&&<div className="make-order">
+        <div className='label'><label>Already ordered?</label></div>
+        <button className="bigButton-label" onClick={handleOrderView}>Go to Your Order</button>
+      </div>}
 
       <div>
         {orderedMeal.map((el,idx) =>
@@ -107,10 +111,7 @@ const SingleOrderAdd = () => {
           <button className="bigButton" onClick={addItemsToOrder}>Make Your Order</button>
           {valid ? null : <p>This order is not active anymore or you did not pick any meal to order.</p>}
         </div> 
-        <div className="make-order">
-        <label>Already ordered?</label>
-        <button onClick={handleOrderView}>Go to Your Order</button>
-      </div> 
+       
         </>
       } 
       </Main>

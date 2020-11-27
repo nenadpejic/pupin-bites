@@ -199,4 +199,25 @@ p{
 }
 
 */
-
+.make-order{
+  padding: 2rem;
+}
+.bigButton-label{
+  display:block;
+	width:200px;
+	height:40px;
+	background-color:rgb(90,172,68);
+	border:1px solid grey;
+	margin:auto;
+	
+	margin-bottom:30px;
+	color:white;
+	font-size:22px;
+	cursor:pointer;
+}
+.bigButton-label:hover{
+  background-color:rgb(86,188,64); 
+}
+.label{
+  font-size: 0.8rem;
+}
