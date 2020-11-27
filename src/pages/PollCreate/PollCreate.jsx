@@ -90,7 +90,7 @@ const PollCreate = () => {
     }
     // Submit button
     const handleSubmit = () => {
-        if (pollName !== '') {
+        if (pollName.trim() !== '') {
             let data = {
                 "label": pollName,
                 "restaurants": selected.map(el => el.id)
