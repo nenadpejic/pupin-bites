@@ -25,7 +25,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
   };
 
   const handlesValidation = () => {
-    mealInput.name.trim() !== "" || mealInput.price !== 0 ? setValid(true) : setValid(false);
+    mealInput.name.trim() !== "" && mealInput.price > 0  ? setValid(true) : setValid(false);
     setTimeout(() => {
       setValid(true)
     }, 2000);
@@ -72,7 +72,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
   const newMeal = (e) => {
     e.preventDefault();
 
-    if (mealInput.name.trim() !== "" && mealInput.price >= 0) { //to check if input is valid
+    if (mealInput.name.trim() !== "" && mealInput.price > 0) { //to check if input is valid
       mealInput.price = Number(mealInput.price);
       createMeal(mealInput, restaurantId)
         .then((res) => {

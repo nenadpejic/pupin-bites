@@ -13,8 +13,8 @@ export const Settings = () => {
   useEffect(() => {
 
     getAllRestaurants().then((res) => {
-      let tmp = res.data
-      setRestaurants(map(uniqBy(tmp, 'name')))
+      let tmp = res.data;
+      setRestaurants(map(uniqBy(tmp, 'name')));
     });
     
 

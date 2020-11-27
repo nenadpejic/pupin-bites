@@ -96,7 +96,11 @@ export const SingleOrderCreate = () => {
   };
 
   const handleOrderInput = (e) => {
-    setOrderInput(e.target.value);
+    if (e.target.value.trim() !== '') {
+      setOrderInput(e.target.value)}
+    else {
+      alert("Please add order name!");
+    }
   };
 
   const changePage = (index) => {
@@ -108,6 +112,7 @@ export const SingleOrderCreate = () => {
   };
   const submitOrderCreateHome = (e) => {
     e.preventDefault();
+    if (orderInput.trim() !== '') {
     const data = { restaurantId: selectedRestaurantId, label: orderInput };
     createOrder(data)
       .then((res) => {
@@ -116,21 +121,38 @@ export const SingleOrderCreate = () => {
         // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
         history.push(`/single-order-add/${res.data.id}`);
 
+<<<<<<< HEAD
+    })
+    .catch((err) => {
+      console.log(err)
+      history.push(`/single-order-create`);
+    })}
+    else {
+      alert("Please add order name!");
+      return;
+    }
+=======
       })
       .catch((err) => {
         console.log(err)
         history.push(`/single-order-create`);
       });
+>>>>>>> d83f575adcbaf73b9e1547a4ff5497092f00a375
   };
 
   const submitOrderCreate = (e) => {
     e.preventDefault();
+    if (orderInput.trim() !== '') {
     const data = { restaurantId: restaurantId, label: orderInput };
     createOrder(data).then((res) => {
       console.log(res);
       localStorage.setItem("orderId", res.data.id);
       history.push(`/single-order-add/${res.data.id}`);
-    });
+    })}
+    else {
+      alert("Please add order name!");
+      return;
+    }
   };
 
   return (
