@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import Main from "../../components/Main";
 import { createMeal, deleteMeal, getMeals } from "../../services/services";
-//import {paginate} from "../../utilities/utilities";
+import {paginate} from "../../utilities/utilities";
 import "./settings-style.css";
 
 export const Meals = ({ restaurants, submit, setSubmit }) => {
@@ -105,6 +106,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
   };
 
   return (
+    
     <div className="meals">
       <h1>Manage Meals</h1>
       <input style={{display:"block", height:"20px"}} type="text" name="name" placeholder="Restaurant Name" value={restaurantInput} onChange={handleFilter} />
@@ -135,7 +137,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
 <br/>
 
 <hr/><hr/><hr/><hr/><hr/>
-      {/* {paginate(meals)[page]!==undefined && paginate(meals)[page].map((meal) => (
+      {paginate(meals)[page]!==undefined && paginate(meals)[page].map((meal) => (
         <div key={meal.id}>
           <p>{meal.name}</p>
           <p>{meal.price} USD</p>
@@ -152,7 +154,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
           paginate(meals).length > 1 && (
             <div className="pagination-buttons">
               {/* prev */}
-              {/*
+              
               {paginate(meals).map((_, idx) => {
                 return (
                   <button
@@ -168,8 +170,9 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
               })}
             </div>
           )}
-      </div> */}
+      </div>
       <hr/>
     </div>
+   
   );
 };

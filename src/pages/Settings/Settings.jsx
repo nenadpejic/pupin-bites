@@ -3,7 +3,7 @@ import { getAllRestaurants } from "../../services/services";
 import { Meals } from "./Meals";
 import { Restaurants } from "./Restaurants"; 
 import Main from '../../components/Main'
-import "./settings-style.css"
+import "./settings-style.css";
 
 export const Settings = () => {
   const [restaurants, setRestaurants] = useState([]);

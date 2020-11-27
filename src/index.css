@@ -45,6 +45,14 @@ button.bigButton:hover, input[type="submit"]:hover{
   background-color:rgb(86,188,64); 
 }
 
+/********** LINKS *************/
+button.smallLink{
+  color:blue;
+  
+}
+button.smallLink:hover{
+  text-decoration: underline;
+}
 
 
 /***********************************/

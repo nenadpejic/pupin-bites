@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createRestaurant, deleteRestaurant } from "../../services/services";
-//import { paginate } from "../../utilities/utilities";
+import { paginate } from "../../utilities/utilities";
 import "./settings-style.css";
 
 export const Restaurants = ({ restaurants, submit, setSubmit }) => {
@@ -74,7 +74,8 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
     
     <div className="">
       <div className='login-box'>
-      <h2>Manage Restaurants</h2>
+        <div className='manageRestaurants'><h2>Manage Restaurants</h2></div>
+      
       <form onSubmit={newRestaurant}>        
         <div className="user-box">
           <input type="text" onChange={handleRestaurantInput} value={restaurantInput.name} name="name" className="restaurantInput" placeholder="Enter Restaurant Name"/>
@@ -86,7 +87,7 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
         <button
           type="submit"
           value="Add Restaurant"
-          className="restaurant-btn"> 
+          className="bigButton"> 
         Create Restaurant</button>
       </form>
       </div>
@@ -104,16 +105,16 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
        
 
 <hr/>
-        {/* {filterInput.length === 0 &&
+        {filterInput.length === 0 &&
         paginate(restaurants)[page] !== undefined ? (
           paginate(restaurants)[page].map((el) => (
-            <div key={el.id} className="single-restaurant">
+            <div key={el.id} className="single-restaurant  pagination">
               
               <p>{el.name}</p>
               <p>{el.address}</p>
               <button
                 onClick={() => restaurantDelete(el.id)}
-                className="restaurant-btn"
+                className="pagination-buttons"
               >
                 Delete
               </button>
@@ -121,7 +122,7 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
             </div>
           ))
         ) : (
-          <div className="restaurants-wrapper">
+          <div className="pagination">
             {filteredRestaurants.slice(0, 4).map((el) => (
               <div key={el.id} className="single-restaurant">
                 
@@ -129,7 +130,7 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
                 <p>{el.address}</p>
                 <button
                   onClick={() => restaurantDelete(el.id)}
-                  className="restaurant-btn"
+                  className="deleteButton"
                 >
                   Delete
                 </button>
@@ -144,15 +145,15 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
         {filterInput.length === 0 &&
           paginate(restaurants)[page] !== undefined &&
           paginate(restaurants).length > 1 && (
-            <div className="pagination-buttons">
+            <div className="pagination">
               {/* prev */}
-              {/*
+              
               {paginate(restaurants).map((_, idx) => {
                 return (
                   <button
                     onClick={() => changePage(idx)}
                     key={idx}
-                    className={`page-btn ${
+                    className={`pagination-buttons ${
                       page === idx && `page-btn-selected`
                     }`}
                   >
@@ -162,9 +163,9 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
               })}
             </div>
           )}
-      </div> */}
+      </div>
     </div>
-    </div>
+    // </div>
   
   );
 };

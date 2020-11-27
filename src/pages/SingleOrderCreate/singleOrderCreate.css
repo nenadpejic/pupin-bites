@@ -1,4 +1,7 @@
-body{
+<<<<<<< HEAD
+ 
+=======
+/*body{
     text-align: center;
 }
 
@@ -45,6 +48,7 @@ input{
 input:hover{
     background-color:rgb(235, 235, 235);
 }
+*/
 input[type="submit"]{
     display:block;
 	width:200px;
@@ -62,6 +66,7 @@ input[type="submit"]{
 input[type="submit"]:hover{
     background-color:rgb(86,188,64); 
 }
+/*
 p{
     padding: 5px 0;
 }
@@ -99,3 +104,5 @@ hr{
     margin-bottom: 0.6rem;
     
 }
+*/
+>>>>>>> 2a79862b86066d742b3765eae55bc3986b012563
