@@ -4,6 +4,7 @@ import { Meals } from "./Meals";
 import { Restaurants } from "./Restaurants"; 
 import Main from '../../components/Main'
 import "./settings-style.css";
+import { map, uniqBy } from 'lodash';
 
 export const Settings = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -12,8 +13,8 @@ export const Settings = () => {
   useEffect(() => {
 
     getAllRestaurants().then((res) => {
-      // console.log(res)
-      setRestaurants(res.data);
+      let tmp = res.data
+      setRestaurants(map(uniqBy(tmp, 'name')))
     });
     
 
