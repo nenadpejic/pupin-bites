@@ -12,6 +12,8 @@ import { useHistory } from 'react-router-dom'
 // context
 import { AuthContext } from "../../contexts/AuthContext";
 
+
+
 const PollCreate = () => {
     const auth = useContext(AuthContext);
     const [change, setChange] = useState('')
@@ -90,7 +92,7 @@ const PollCreate = () => {
     }
     // Submit button
     const handleSubmit = () => {
-        if (pollName !== '') {
+        if (pollName.trim() !== '') {
             let data = {
                 "label": pollName,
                 "restaurants": selected.map(el => el.id)
@@ -160,7 +162,7 @@ const PollCreate = () => {
                         <tbody>
                             {selected.map((restaurant) => (
                                 <tr><td>{restaurant.name}</td>
-                                    <td><button onClick={(e) => handleClickRemove(e)} id={restaurant.id}>X</button></td>
+                                    <td><i onClick={(e) => handleClickRemove(e)} id={restaurant.id} className="material-icons"> delete</i></td>
                                 </tr>
                             ))}
                         </tbody>

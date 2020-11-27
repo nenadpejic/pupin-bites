@@ -35,6 +35,9 @@
     overflow: hidden;  
     padding-left: 10px;
   }
+  .address>i{
+    font-size: 1em;
+  }
   
   .restaurant:hover{
     background-color: rgb(240, 240, 240);

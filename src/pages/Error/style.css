@@ -1,0 +1,9 @@
+#error h2 {
+  margin-bottom: 1rem;
+}
+#error a {
+  text-decoration: none;
+}
+#error a:hover {
+  text-decoration: underline;
+}
