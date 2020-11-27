@@ -11,6 +11,8 @@ export const AuthContextProvider = ({ children }) => {
     password: "",
   };
 
+  const time = 30;
+
   const isAuth = () => {
     const token = localStorage.getItem("Token");
     return token !== null && token !== "";
@@ -18,7 +20,8 @@ export const AuthContextProvider = ({ children }) => {
 
   const auth = {
     isAuth,
-    user
+    user,
+    time
   };
 
   return (

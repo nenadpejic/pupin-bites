@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 import { map, uniqBy } from 'lodash'
 import Main from '../../components/Main'
 import RestaurantItem from '../../components/RestaurantItem'
@@ -10,8 +10,11 @@ import './PollCreate.css'
 // Services
 import { getAllRestaurants, createPoll } from '../../services/services.js'
 import { useHistory } from 'react-router-dom'
+// context
+import { AuthContext } from "../../contexts/AuthContext";
 
 const PollCreate = () => {
+    const auth = useContext(AuthContext);
     const [change, setChange] = useState('')
     const [filter, setFilter] = useState([])
     const [selected, setSelected] = useState([])
@@ -82,8 +85,8 @@ const PollCreate = () => {
     //Handle Time
     const handleTime = () => {
         let timer = new Date()
-        timer.setHours(timer.getHours() + 30)
-        timer.setMinutes(timer.getMinutes() + 30)
+        timer.setHours(timer.getHours() + auth.time)
+        timer.setMinutes(timer.getMinutes() + auth.time)
         setTime(timer.toString(','))
     }
     // Submit button
@@ -122,10 +125,19 @@ const PollCreate = () => {
     return (
             <Main>
                 <div>
-                <h2 className="page-title">Create Poll</h2>
-                <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required /><br></br>
-                <input type="text" placeholder="Search Restaurant" onChange={handleChange} />
-                <div className="info">Poll duration time is <b>30</b> min</div>
+                    <h2 className="page-title">Create Poll</h2>
+                    <input type="text" placeholder="Poll Name" onChange={(e) => setPollName(e.target.value)} required /><br></br>
+                    {/* <div className="pollDuration">
+                        <div className="title">Set Duration</div>
+                        <div className="hours">
+                            <input type="number" placeholder="h" name="hours" min="0" max="24" onChange={handleTime} required />
+                        </div>
+                        <div className="minutes">
+                            <input type="number" placeholder="m" name="minutes" min="10" max="59" size="100" onChange={handleTime} required />
+                        </div>
+                    </div> */}
+                    <input type="text" placeholder="Search Restaurant" onChange={handleChange} />
+                    <div className="info">Poll duration time is <b>{`${auth.time}`}</b> min</div>
 
                 <div className="restaurant-list">
                 {change.length === 0 ? restaurants.map((restaurant) => (

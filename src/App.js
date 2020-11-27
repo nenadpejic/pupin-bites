@@ -42,7 +42,7 @@ const App = () => {
         data.forEach(poll => {
           const currentDate = new Date();
           const endDate = new Date(poll.created);
-          endDate.setMinutes(endDate.getMinutes() + 30);
+          endDate.setMinutes(endDate.getMinutes() + auth.time);
           if (currentDate >= endDate) {
             updatePoll(poll.id, {
               "active": false
