@@ -8,7 +8,7 @@ const Main = ({ children }) => {
     return (
         <div className="wrapper" style={{ backgroundImage: `url(${"/img/photos/wallpaper.jpg"}` }}>
             <NavBar />
-            <Loader type="Rings" color="#4CAF50" height={80} width={80} timeout={1000} className="loader" />
+            <Loader type="Rings" color="#4CAF50" height={200} width={200} timeout={1000} className="loader" />
             <div className="container" >
                 {children}
             </div>
