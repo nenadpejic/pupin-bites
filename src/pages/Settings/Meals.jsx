@@ -19,6 +19,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
     available: true,
   });
   
+  
   const toggleEnableInput = () => { //enables creating meal after choosing restaurant
     setEnableInput(!enableInput)
   };
@@ -108,8 +109,9 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
   return (
     
     <div className="meals">
-      <h1>Manage Meals</h1>
-      <input style={{display:"block", height:"20px"}} type="text" name="name" placeholder="Restaurant Name" value={restaurantInput} onChange={handleFilter} />
+      
+      <div className='manageRestaurants'><h2>Manage Meals</h2></div>
+      <input  type="text" name="name" placeholder="Search by Restaurant Name" value={restaurantInput} onChange={handleFilter} className='restaurantSearch' />
       
       <div className="restaurantFilter">
         <table>
@@ -117,7 +119,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
           {restaurantInput.length !== 0 &&
           filteredRestaurant.slice(0,6).map((restaurant) => (
             <tr key={restaurant.id} onClick={() =>{ getRestaurantInfo(restaurant.id, restaurant.name);setRestaurantInput("");toggleEnableInput()}}>
-              <td>{restaurant.name}</td>
+              <td className='restaurantTd'>{restaurant.name}</td>
             </tr>
           ))}
           </tbody>
@@ -127,32 +129,36 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
       <div className="selectedRestaraunt">{restaurantName}</div>
       
 
-
+      <div className='mealInfo'>
       <form onSubmit={newMeal}>
-        <input type="text" onChange={handleMealInput} value={mealInput.name} name="name" placeholder="Meal Name" disabled={enableInput ===false ? 'disabled' : false}/>
-        <input type="number" onChange={handleMealInput} value={mealInput.price} name="price" disabled={enableInput ===false ?'disabled' : false  } placeholder="Meal Price"/>
+        <input type="text" onChange={handleMealInput} value={mealInput.name} name="name" placeholder="Meal Name" disabled={enableInput ===false ? 'disabled' : false} className='mealName'/>
+        <input type="number" onChange={handleMealInput} value={mealInput.price} name="price" disabled={enableInput ===false ?'disabled' : false  } placeholder="Meal Price" className='mealPrice'/>
         <button type="submit" value="Add Meal" className="bigButton"> Add Meal </button>
         {valid ? null : <p>Please provide valid restaurant name and price.</p>}
       </form> 
+      </div>
+      
 <br/>
 
-<hr/><hr/><hr/><hr/><hr/>
       {paginate(meals)[page]!==undefined && paginate(meals)[page].map((meal) => (
         <div key={meal.id}>
-          <p>{meal.name}</p>
-          <p>{meal.price} USD</p>
-          <p>{meal.available ? "Available" : "Unavailable"}</p>
-          <button onClick={() => mealDelete(restaurantId, meal.id)}>
+          
+          <div className='restaurantInfo'><p>{meal.name}</p></div>
+         
+          <div className='restaurantInfo'><p>{meal.price} USD</p></div>
+          
+          <div className={meal.available?"restaurantInfo available" : "restaurantInfo unavailable"}>{meal.available ? "Available" : "Unavailable"}</div>
+          <button onClick={() => mealDelete(restaurantId, meal.id)} className='deleteButton'>
             delete
           </button>
           <hr />
         </div>
       ))}
 <br/>
-      <div>
+      <div className='pagination'>
         {paginate(meals)[page] !== undefined &&
           paginate(meals).length > 1 && (
-            <div className="pagination-buttons">
+            <div className="pagination">
               {/* prev */}
               
               {paginate(meals).map((_, idx) => {
@@ -160,7 +166,7 @@ export const Meals = ({ restaurants, submit, setSubmit }) => {
                   <button
                     onClick={() => changePage(idx)}
                     key={idx}
-                    className={`page-btn ${
+                    className={`pagination-buttons ${
                       page === idx && `page-btn-selected`
                     }`}
                   >
