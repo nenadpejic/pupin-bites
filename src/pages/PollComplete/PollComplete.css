@@ -14,18 +14,9 @@
   margin: 20px auto;
   align-items: center;
   align-content: center;
-}
-.button {
-  padding: 15px 40px;
-  background-color: #4caf50;
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-}
-.restaurant-name {
-  grid-area: restaurant-name;
-  padding-right: 30px;
-}
+} 
+
+.restaurant-name { grid-area: restaurant-name; padding-left: 20px; padding-bottom:10px;}
 
 .restaurant-img {
   grid-area: restaurant-img;
