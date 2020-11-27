@@ -23,7 +23,13 @@ const NavBar = () => {
             <div className="userName"><i className="material-icons">face</i> {user?.firstName + " " + user?.lastName}</div>
             <div className="dropdown-content">
               <button className="settings"><Link to="/settings"><i className="material-icons">settings</i> Settings</Link></button>
-              <hr/>
+              <hr />
+              <button className="logout">
+                <Link to="/about">
+                  <i className="material-icons">info</i> About
+                </Link>
+              </button>
+              <hr />
               <button className="logout" onClick={handleClick}><i className="material-icons">logout</i> Logout </button>
             </div>
           </div>

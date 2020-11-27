@@ -14,6 +14,7 @@ import { SingleOrderView } from "./pages/SingleOrderView/SingleOrderView";
 import { Settings } from "./pages/Settings/Settings";
 import { getProfile, updatePoll, getAllPolls } from "./services/services";
 import Error from "./pages/Error";
+import About from "./pages/About";
 // context
 import { AuthContext } from "./contexts/AuthContext";
 // style
@@ -108,6 +109,10 @@ const App = () => {
 
         <PrivateRoute exact path="/single-order-view/:slug">
           <SingleOrderView />
+        </PrivateRoute>
+
+        <PrivateRoute path="/about">
+          <About />
         </PrivateRoute>
 
         <Error path="*" />
