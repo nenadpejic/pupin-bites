@@ -89,31 +89,24 @@ export const SingleOrderView = () => {
   useEffect(() => {
     if (orderedItems && meals) {
 
-      orderedItems.map(order=>{
+      orderedItems.forEach(order=>{
+        console.log(order)
+        order.payloads.forEach(payload=>{
+          setData(prev=>{
+            return [...prev,{
+              consumer:order.consumer,
+              mealName: meals.find(el=>el.id===payload.mealId).name,
+              mealPrice: meals.find(el=>el.id===payload.mealId).price,
+              note: payload.note,
+              quintity: payload.quantity
 
+            }]
+          })
+        })
       })
 
-      orderedItems.map((order) => (
-          setData(prev => {return [...prev, {
-          
-            Consumer: order.consumer, 
-            Meals: 
-              order.payloads.forEach((el) => (
-                      meals
-                      .filter((meal) => el.mealId === meal.id)[0].name)),
-            Note: 
-              order.payloads.forEach((el) => (el.note)),
-            Quantity: 
-              order.payloads.forEach((el) => (el.quantity)),
-            Price: 
-              order.payloads.forEach((el) => (
-                meals
-                .filter((meal) => el.mealId === meal.id)[0].price))
-                .reduce((acc,cur) => acc+cur,0) + " USD"
-          }]})))
-          console.log(data)
-        }
-  }, [orderedItems, meals]);
+  }
+}, [orderedItems, meals]);
     
 
   
@@ -174,8 +167,9 @@ export const SingleOrderView = () => {
               </div>
             ))}
             <CSVLink 
-            onClick={handleOrderFinish}
+            className="csv-button" onClick={handleOrderFinish}
             filename={orderInfo.label + " "  + slug + ".csv"}
+
             data={data}  
             >Finish Order and Export to Excel</CSVLink>
         </div>

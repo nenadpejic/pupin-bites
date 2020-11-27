@@ -133,12 +133,6 @@ export const SingleOrderCreate = () => {
     });
   };
 
-  const handleValidation = () => {
-    if (orderInput.trim() === '') {
-      
-    }
-  };
-
   return (
     <Main>
     <h2 className="page-title">Select Restaurant</h2>
@@ -151,8 +145,16 @@ export const SingleOrderCreate = () => {
           <div className='restaurantInfo'>Visit us at:  {restaurantInfo.address}</div>
           </div>
           <form onSubmit={submitOrderCreate}>
-            <input type="text" onChange={handleOrderInput} value={orderInput.label} autoComplete="on" placeholder='Add Order Name'/>
-            <input type="submit" value = 'Create Your Order'/>
+            <input
+              type="text"
+              onChange={handleOrderInput}
+              value={orderInput.label}
+              autoComplete="on"
+              placeholder="Add Order Name"
+              required="yes"
+            /><br></br>
+
+            <input type="submit" value = 'Create Your Order' />
           </form>
         </div>
       ) : (
