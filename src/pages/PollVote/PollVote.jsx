@@ -36,7 +36,6 @@ const PollVote = () => {
     // Handle change of poll id
     const handleChange = (e) => {
         setId(e.target.id)
-
     }
 
     // Handle Submitt
@@ -54,14 +53,16 @@ const PollVote = () => {
             vote.push(localStorage.getItem('votes'))
             vote.push(slug)
             localStorage.setItem('votes', vote)
-            history.push(`/poll-complete/${slug}`)
+            setTimeout(() => {
+                history.push(`/poll-complete/${slug}`)
+            }, 500)
         }
     }
 
     return (
         <Main>
             {createdVote[0] ? (createdVote[0].includes(slug) ? <Redirect to={`/poll-complete/${slug}`} /> : null) : null}
-            <h2 className="page-title">Poll Vote</h2>
+            <h1>Poll Vote</h1>
             <PollInfo poll={poll} />
             <div className="restaurantList">
                 {restaurants.map(restaurant =>

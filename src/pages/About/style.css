@@ -1,0 +1,16 @@
+#about button {
+  background-color: #4caf50;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+}
+#about button:hover {
+  background-color: #3e8f3f;
+  cursor: pointer;
+}
+#about button:not(:first-child) {
+  margin-left: 2rem;
+}
+
+#about img {
+  width: 100px;
+}

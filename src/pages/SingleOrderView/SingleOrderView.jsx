@@ -7,12 +7,12 @@ import {
   getProfile,
   updateOrder,
 } from "../../services/services";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
 import { CSVLink } from "react-csv";
 import "./singleOrderView.css"
+import Main from "../../components/Main";
+
 export const SingleOrderView = () => {
-  
+
   const [orderedItems, setOrderedItems] = useState(undefined);
   const [yourOrderItems, setYourOrderItems] = useState(undefined);
   const [profile, setProfile] = useState(undefined);
@@ -25,7 +25,7 @@ export const SingleOrderView = () => {
   const history = useHistory();
 
   useEffect(() => {
-    
+
     getProfile().then((res) => {
       setProfile(res.data);
     });
@@ -66,113 +66,112 @@ export const SingleOrderView = () => {
     history.push(`/single-order-add/${slug}`);
   };
 
-  const handleOrderFinish = ()=>{
+  const handleOrderFinish = () => {
     // Data example:
     // let data = {
     //  "active": true,
     //  "label": "Radna Nedelja"
     // }
     let data = {
-        active:false,
-        label: 'done'
+      active: false,
+      label: 'done'
     }
-    updateOrder(data,orderInfo.id).then(res=>{
+    updateOrder(data, orderInfo.id).then(res => {
       localStorage.removeItem("orderRestaurantId");
     })
-    
+
     history.push(`/home`);
   };
 
   useEffect(() => {
     if (orderedItems && meals) {
-      orderedItems.map((order) => (
-          setData(prev => {return [...prev, {
-            Consumer: order.consumer, 
-            Meals: 
-              order.payloads.map((el) => (
-                      meals
-                      .filter((meal) => el.mealId === meal.id)[0].name)),
-            Note: 
-              order.payloads.map((el) => (el.note)),
-            Quantity: 
-              order.payloads.map((el) => (el.quantity)),
-            Price: 
-              order.payloads.map((el) => (
-                meals
-                .filter((meal) => el.mealId === meal.id)[0].price))
-                .reduce((acc,cur) => acc+cur,0) + " USD"
-          }]})))
-        }
-  }, [orderedItems, meals]);
-    
 
-  
+      orderedItems.forEach(order => {
+        console.log(order)
+        order.payloads.forEach(payload => {
+          setData(prev => {
+            return [...prev, {
+              consumer: order.consumer,
+              mealName: meals.find(el => el.id === payload.mealId).name,
+              quantity: payload.quantity,
+              mealPrice: meals.find(el => el.id === payload.mealId).price * payload.quantity + '$',
+              note: payload.note,
+            }];
+          });
+        });
+      });
+    };
+  }, [orderedItems, meals]);
+
+
+
   return (
-    <div className="wrapper" style={{backgroundImage: `url(${"/img/photos/wallpaper.jpg"}`}}>
-    <NavBar />
-    <div className="order-div">
-      <div>
-          <h3>Food you ordered:</h3>
-        {yourOrderItems && yourOrderItems.length > 0 ? (
-          yourOrderItems.map((order) => (
-            <div className="order-view" key={order.id}>
-              <p>{order.consumer}</p>
-              {order.payloads.map((el) => (
-                <div key={el.id}>
-                  <p>
-                    Meal:{" "}
-                    {meals &&
-                      meals.filter((meal) => el.mealId === meal.id)[0].name}
-                  </p>
-                  <p>Note : {el.note}</p>
-                  <p>quantity : {el.quantity}</p>
+    <div className="wrapper" style={{ backgroundImage: `url(${"/img/photos/wallpaper.jpg"}` }}>
+      <Main>
+        <div className="order-div">
+          <div>
+            <h3>Food you ordered:</h3>
+            {yourOrderItems && yourOrderItems.length > 0 ? (
+              yourOrderItems.map((order) => (
+                <div className="order-view" key={order.id}>
+                  <p>{order.consumer}</p>
+                  {order.payloads.map((el) => (
+                    <div key={el.id}>
+                      <p>
+                        Meal:{" "}
+                        {meals &&
+                          meals.filter((meal) => el.mealId === meal.id)[0].name}
+                      </p>
+                      <p>Note : {el.note}</p>
+                      <p>quantity : {el.quantity}</p>
+                      <hr />
+                    </div>
+                  ))}
                   <hr />
                 </div>
-              ))}
-              <hr />
-            </div>
-          ))
-        ) : (
-          <div>
-            <h3>Sorry but You haven't ordered yet.</h3>
-            <button onClick={handleBack}>back</button>
+              ))
+            ) : (
+                <div>
+                  <h3>Sorry but You haven't ordered yet.</h3>
+                  <button onClick={handleBack} className='bigButton'>back</button>
+                </div>
+              )}
           </div>
-        )}
-      </div>
 
-      {storage && (
-        <div className="order-view-all">
-            <h3>Food ordered by all:</h3>
-          {orderedItems &&
-            orderedItems.length > 0 &&
-            orderedItems.map((order) => (
-              <div className="order-consumer" key={order.id}>
-                <p>{order.consumer}</p>
-                {order.payloads.map((el) => (
-                  <div key={el.id}>
-                    <p>
-                      Meal:{" "}
-                      {meals &&
-                        meals.filter((meal) => el.mealId === meal.id)[0].name}
-                    </p>
-                    <p>Note : {el.note}</p>
-                    <p>Quantity : {el.quantity}</p>
+          {storage && (
+            <div className="order-view-all">
+              <h3>Food ordered by all:</h3>
+              {orderedItems &&
+                orderedItems.length > 0 &&
+                orderedItems.map((order) => (
+                  <div className="order-consumer" key={order.id}>
+                    <p>{order.consumer}</p>
+                    {order.payloads.map((el) => (
+                      <div key={el.id}>
+                        <p>
+                          Meal:{" "}
+                          {meals &&
+                            meals.filter((meal) => el.mealId === meal.id)[0].name}
+                        </p>
+                        <p>Note : {el.note}</p>
+                        <p>Quantity : {el.quantity}</p>
+                        <hr />
+                      </div>
+                    ))}
                     <hr />
                   </div>
                 ))}
-                <hr />
-              </div>
-            ))}
-            <CSVLink 
-            className="csv-button" onClick={handleOrderFinish}
-            filename={orderInfo.label + " "  + slug + ".csv"}
-            data={data}  
-            >Finish Order and Export to Excel</CSVLink>
+              <CSVLink
+                className="csv-button" onClick={handleOrderFinish}
+                filename={orderInfo.label + " " + slug + ".csv"}
+
+                data={data}
+              >Finish Order and Export to Excel</CSVLink>
+            </div>
+
+          )}
         </div>
-        
-      )}
-    </div>
-    <Footer />
+      </Main>
     </div>
   );
 };

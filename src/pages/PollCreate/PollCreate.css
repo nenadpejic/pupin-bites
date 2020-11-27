@@ -3,7 +3,7 @@ body {
 }
 h1 {
   padding: 30px 0;
-}
+} 
 input[type="text"] {
   width: 200px;
   margin-bottom: 10px;
@@ -36,7 +36,7 @@ div.pollDuration {
   justify-content: center;
   align-content: center;
   align-items: center;
-}
+} 
 div.title {
   grid-area: title;
   width: 100px;
@@ -70,29 +70,29 @@ div.minutes {
 .restaurant-list > .item {
   overflow: hidden;
   height: 100px;
-  background-color: white;
+  background-color: white; 
 }
 .restaurant-list > .item > div:hover {
   cursor: default;
 }
 .restaurant-list button {
-  background-color: rgb(204, 204, 204);
+  background-color: rgb(230, 230, 230);
   width: 40px;
   display: block;
   margin-left: 0px;
   outline: none;
   height: 82px;
   margin: 10px auto;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid rgb(226, 226, 226);
   border-left: 0px;
-  border-radius: 0px 15px 15px 0px;
+  border-radius: 0px 10px 10px 0px;
 }
 .restaurant-list button {
   font-size: 2em;
   color: white;
 }
 .restaurant-list button:hover {
-  background-color: rgb(175, 175, 175);
+  background-color: rgb(136, 211, 133);
 }
 .restaurant-list > .item:hover * {
   border-color: grey;
@@ -135,6 +135,21 @@ div.minutes {
 }
 .delete > button:hover {
   cursor: pointer;
+}
+
+.selected-list>table{
+  width:470px;
+  margin:auto;
+}
+.selected-list>table>thead th{
+  text-align: center;
+}
+.selected-list>table i{
+  color:rgb(94, 94, 94);
+}
+.selected-list>table i:hover{  
+  cursor: pointer;
+  color:red;
 }
 
 @media screen and (max-width: 600px) {

@@ -4,7 +4,9 @@
   overflow: hidden;
   background-color: #f1f1f1;
 }
-
+#home  .tabcontent  .search, #home  .tabcontent  .search{
+  background-color: #4caf50;
+}
 /* Style the buttons that are used to open the tab content */
 #home .tab button {
   background-color: inherit;
@@ -73,12 +75,11 @@
   outline: none;
 }
 
-#home .tab > button {
-  width: 200px;
-  /* font-weight: bold; */
-  font-size: 1.2em;
-  /* color:rgb(253,181,28); */
-  text-shadow: 1px 1px grey;
+#home .tab>button{
+ width:200px;
+ font-weight: bold;
+ font-size:1.2em;
+ color:grey
 }
 #home .tab > button:hover {
   /* background-color: rgba(76, 175, 79, 0.527); */

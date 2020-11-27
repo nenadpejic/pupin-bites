@@ -11,8 +11,8 @@ const RestaurantItem = (props)=>{
             <div className="icon">
                 <img src= {`https://source.unsplash.com/random/400x400/?restaurant/${restaurant.id}`}  alt="restaurant-icon"/>
             </div>
-            <div className="name">{restaurant.name}</div>
-            <div className="address">{restaurant.address}</div>
+            <div className="name"><b>{restaurant.name}</b></div>
+            <div className="address"><i className="material-icons">location_on</i> {restaurant.address}</div>
         </div>
     )  
 }

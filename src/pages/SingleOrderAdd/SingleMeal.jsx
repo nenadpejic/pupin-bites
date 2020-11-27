@@ -93,7 +93,8 @@ export const SingleMeal = ({meal,setPayload,setOrderedMeal,setTotal})=>{
     </form>
   </div>
   <div className="meal-add">
-    <button onClick={() => addItem(meal.id, meal.name, meal.price)}>Add </button>
+    <i className="material-icons" onClick={() => addItem(meal.id, meal.name, meal.price)}>add_shopping_cart
+</i> 
   </div>
 </div>
 
