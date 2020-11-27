@@ -10,7 +10,7 @@ import {
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
 import Main from '../../components/Main';
-import "./singleOrderCreate.css";
+import "./SingleOrderCreate.css";
 import RestaurantItem from '../../components/RestaurantItem';
 import { map, uniqBy } from 'lodash';
 export const SingleOrderCreate = () => {
@@ -96,7 +96,12 @@ export const SingleOrderCreate = () => {
   };
 
   const handleOrderInput = (e) => {
-    setOrderInput(e.target.value);
+    if (e.target.value.trim() !== '') {
+      setOrderInput(e.target.value)
+    }
+    else {
+      alert("Please add order name!");
+    }
   };
 
   const changePage = (index) => {
@@ -108,29 +113,41 @@ export const SingleOrderCreate = () => {
   };
   const submitOrderCreateHome = (e) => {
     e.preventDefault();
-    const data = { restaurantId: selectedRestaurantId, label: orderInput };
-    createOrder(data)
-      .then((res) => {
-        console.log(res.data.id);
-        localStorage.setItem("orderId", res.data.id);
-        // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
-        history.push(`/single-order-add/${res.data.id}`);
+    if (orderInput.trim() !== '') {
+      const data = { restaurantId: selectedRestaurantId, label: orderInput };
+      createOrder(data)
+        .then((res) => {
+          console.log(res.data.id);
+          localStorage.setItem("orderId", res.data.id);
+          // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
+          history.push(`/single-order-add/${res.data.id}`);
 
-      })
-      .catch((err) => {
-        console.log(err)
-        history.push(`/single-order-create`);
-      });
+        })
+        .catch((err) => {
+          console.log(err)
+          history.push(`/single-order-create`);
+        })
+    }
+    else {
+      alert("Please add order name!");
+      return;
+    }
   };
 
   const submitOrderCreate = (e) => {
     e.preventDefault();
-    const data = { restaurantId: restaurantId, label: orderInput };
-    createOrder(data).then((res) => {
-      console.log(res);
-      localStorage.setItem("orderId", res.data.id);
-      history.push(`/single-order-add/${res.data.id}`);
-    });
+    if (orderInput.trim() !== '') {
+      const data = { restaurantId: restaurantId, label: orderInput };
+      createOrder(data).then((res) => {
+        console.log(res);
+        localStorage.setItem("orderId", res.data.id);
+        history.push(`/single-order-add/${res.data.id}`);
+      })
+    }
+    else {
+      alert("Please add order name!");
+      return;
+    }
   };
 
   return (

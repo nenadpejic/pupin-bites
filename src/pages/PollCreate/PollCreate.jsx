@@ -11,7 +11,7 @@ import { getAllRestaurants, createPoll } from '../../services/services.js'
 import { useHistory } from 'react-router-dom'
 // context
 import { AuthContext } from "../../contexts/AuthContext";
- 
+
 
 
 const PollCreate = () => {
@@ -92,7 +92,7 @@ const PollCreate = () => {
     }
     // Submit button
     const handleSubmit = () => {
-        if (pollName.trim() !== '') {
+        if (pollName.trim() !== '' && selected.length >= 2) {
             let data = {
                 "label": pollName,
                 "restaurants": selected.map(el => el.id)
@@ -116,7 +116,7 @@ const PollCreate = () => {
             })
         }
         else {
-            alert("Please add poll name!");
+            alert("Please add poll name and select two or more restaurants!");
             return;
         }
 
@@ -160,18 +160,18 @@ const PollCreate = () => {
                     <table>
                         <thead><tr><th colSpan="2">Selected Restaurants</th></tr></thead>
                         <tbody>
-                        {selected.map((restaurant) => ( 
-                        <tr><td>{restaurant.name}</td>
-                        <td><i onClick={(e) => handleClickRemove(e)} id={restaurant.id} className="material-icons"> delete</i></td>
-                        </tr>
-                        ))}
-                        </tbody> 
-                        </table>
-                    </div>
-                    <div >
-                        <button className="bigButton" type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
-                    </div>
-                </div> 
+                            {selected.map((restaurant) => (
+                                <tr><td>{restaurant.name}</td>
+                                    <td><i onClick={(e) => handleClickRemove(e)} id={restaurant.id} className="material-icons"> delete</i></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div >
+                    <button className="bigButton" type="submit" onClick={(e) => handleSubmit(e)}>Create Poll</button>
+                </div>
+            </div>
         </Main>
     )
 }

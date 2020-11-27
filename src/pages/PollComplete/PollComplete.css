@@ -14,9 +14,13 @@
   margin: 20px auto;
   align-items: center;
   align-content: center;
-} 
+}
 
-.restaurant-name { grid-area: restaurant-name; padding-left: 20px; padding-bottom:10px;}
+.restaurant-name {
+  grid-area: restaurant-name;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
 
 .restaurant-img {
   grid-area: restaurant-img;
@@ -67,4 +71,11 @@
 .restaurant-chart > .chart-bar {
   height: 25px;
   background-color: rgb(253, 181, 28);
+}
+.button {
+  font-size: 16px;
+  background-color: #4caf50;
+  padding: 15px 20px;
+  color: #fff;
+  margin: 20px 0;
 }

@@ -67,22 +67,22 @@ const PollInProgress = () => {
 
     return (
         <Main>
-        <h2 className="page-title" style={{marginBottom:"40px"}}>Poll results</h2>
-        <div className="pollComplete">
-            <PollInfo poll={poll}/>
-            {restaurants.map(restaurant => 
-            <div key={restaurant.id} className="pollComplete-restaurant">
-                <div className=" restaurant-name"><i className="material-icons">restaurant</i> <b>{restaurant.name}</b></div>
-                <div className="restaurant-img"><img src= {`https://source.unsplash.com/random/400x400/?restaurant/${restaurant.id}`}  alt="restaurant-icon"/></div>
-                <div className="restaurant-votes" value={restaurant.vote.length}>{restaurant.vote.length}</div>
-                <div className="restaurant-chart">
-                     <div className="chart-bar" style={{
-                        width:`${(Math.ceil(restaurant.vote.length/totalVotes*300))}px`
-                    }}></div>  
-                </div>
-            </div> 
-            )}
-        </div>
+            <h2 className="page-title" style={{ marginBottom: "40px" }}>Poll results</h2>
+            <div className="pollComplete">
+                <PollInfo poll={poll} />
+                {restaurants.map(restaurant =>
+                    <div key={restaurant.id} className="pollComplete-restaurant">
+                        <div className=" restaurant-name"><i className="material-icons">restaurant</i> <b>{restaurant.name}</b></div>
+                        <div className="restaurant-img"><img src={`https://source.unsplash.com/random/400x400/?restaurant/${restaurant.id}`} alt="restaurant-icon" /></div>
+                        <div className="restaurant-votes" value={restaurant.vote.length}>{restaurant.vote.length}</div>
+                        <div className="restaurant-chart">
+                            <div className="chart-bar" style={{
+                                width: `${(Math.ceil(restaurant.vote.length / totalVotes * 300))}px`
+                            }}></div>
+                        </div>
+                    </div>
+                )}
+            </div>
             {createdPolls[0] ? (createdPolls[0].includes(slug) ?
                 (!winner ? null : (winner.length === 1 ? <button onClick={handleClickFinish} className="button">Finish Poll</button> :
                     <div>

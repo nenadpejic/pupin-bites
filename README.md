@@ -47,7 +47,7 @@ Application has:
  #### Private routes
 - Home - for viewing active polls and orders, search by name, creating a poll or creating order without a poll
 - Poll-create - all users can create a poll
-- Poll-complete - for all users after voting, the creator can finish poll on this page by clicking the Finish poll button
+- Poll-complete - for all users after voting, the creator can finish poll on this page by clicking the Finish poll button, if not, it will end after 30 minutes
 - Single-order-create - all users can create order, if redirected from a poll, the restaurant is already chosen, if redirected from home page - you can choose a restaurant
 - Single-order-add - every user can add items to an active order
 - Single-order-view - all users can view their order here, the creator can see list of all items here and finish order + export to .csv file (can be opened by Excel)
