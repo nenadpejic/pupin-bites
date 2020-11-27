@@ -92,7 +92,7 @@ const PollCreate = () => {
     }
     // Submit button
     const handleSubmit = () => {
-        if (pollName.trim() !== '') {
+        if (pollName.trim() !== '' && selected.length >= 2) {
             let data = {
                 "label": pollName,
                 "restaurants": selected.map(el => el.id)
@@ -116,7 +116,7 @@ const PollCreate = () => {
             })
         }
         else {
-            alert("Please add poll name!");
+            alert("Please add poll name and select two or more restaurants!");
             return;
         }
 

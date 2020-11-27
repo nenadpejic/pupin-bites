@@ -10,7 +10,7 @@ import {
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
 import Main from '../../components/Main';
-import "./singleOrderCreate.css";
+import "./SingleOrderCreate.css";
 import RestaurantItem from '../../components/RestaurantItem';
 import { map, uniqBy } from 'lodash';
 export const SingleOrderCreate = () => {
@@ -121,11 +121,15 @@ export const SingleOrderCreate = () => {
         // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
         history.push(`/single-order-add/${res.data.id}`);
 
-      })
-      .catch((err) => {
-        console.log(err)
-        history.push(`/single-order-create`);
-      });
+    })
+    .catch((err) => {
+      console.log(err)
+      history.push(`/single-order-create`);
+    })}
+    else {
+      alert("Please add order name!");
+      return;
+    }
   };
 
   const submitOrderCreate = (e) => {
