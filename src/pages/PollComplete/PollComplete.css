@@ -23,14 +23,15 @@
 .restaurant-votes { grid-area: restaurant-votes; }
 
 .restaurant-chart { grid-area: restaurant-chart;}
- 
+
+
 .pollComplete>.pollComplete-restaurant img{
   display: block;
   width:100px;
   border-radius: 10px;
+  box-shadow: 1px 0px 8px 2px rgba(0,0,0,0.37);
 }
-
 .restaurant-chart>.chart-bar{
   height:25px;
-  background-color:red;
+  background-color:rgb(253,181,28);
 }

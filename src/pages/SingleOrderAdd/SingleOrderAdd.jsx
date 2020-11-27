@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
+import { useHistory, useParams } from "react-router-dom"; 
 import { addOrderItem, getMeals, getOneOrder, getProfile } from "../../services/services";
 import { OrderedMeal } from "./OrderedMeal";
 import { SingleMeal } from "./SingleMeal";
@@ -78,9 +76,11 @@ const SingleOrderAdd = () => {
   const handleOrderView = ()=>{
     history.push(`/single-order-view/${slug}`)
   }
-  return ( 
+  
+  return (  
+  <Main> 
     <div className="single-order-create">
-      <Main>
+     
         <h2 className="page-title">Create Order</h2>
       <div className="meals">
         {meals && meals.map((el) => (
@@ -111,11 +111,15 @@ const SingleOrderAdd = () => {
           <button className="bigButton" onClick={addItemsToOrder}>Make Your Order</button>
           {valid ? null : <p>This order is not active anymore or you did not pick any meal to order.</p>}
         </div> 
-       
+        <div className="make-order">
+        <label>Already ordered?</label>
+        <button onClick={handleOrderView} className="smallLink">Go to Your Order</button>
+      </div> 
         </>
       } 
-      </Main>
-  </div>
+     
+  </div> 
+  </Main>
   );
 };
 
