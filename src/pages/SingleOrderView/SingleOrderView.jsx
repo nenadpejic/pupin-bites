@@ -84,8 +84,6 @@ export const SingleOrderView = () => {
     history.push(`/home`);
   };
 
-  // [{consumer: Nevena, [Meal:ime , Note: Poruka , quantity:kolicina , price:cena]}]
-
   useEffect(() => {
     if (orderedItems && meals) {
 
@@ -96,16 +94,14 @@ export const SingleOrderView = () => {
             return [...prev,{
               consumer:order.consumer,
               mealName: meals.find(el=>el.id===payload.mealId).name,
-              mealPrice: meals.find(el=>el.id===payload.mealId).price,
+              mealPrice: meals.find(el=>el.id===payload.mealId).price*payload.quantity + '$',
               note: payload.note,
-              quintity: payload.quantity
-
-            }]
-          })
-        })
-      })
-
-  }
+              quantity: payload.quantity
+            }];
+          });
+        });
+      });
+  };
 }, [orderedItems, meals]);
     
 
