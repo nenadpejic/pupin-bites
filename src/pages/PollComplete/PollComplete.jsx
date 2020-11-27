@@ -60,7 +60,7 @@ const PollInProgress = () => {
             <PollInfo poll={poll}/>
             {restaurants.map(restaurant => 
             <div key={restaurant.id} className="pollComplete-restaurant">
-                <div className=" restaurant-name"><b>{restaurant.name}</b></div>
+                <div className=" restaurant-name"><i className="material-icons">restaurant</i> <b>{restaurant.name}</b></div>
                 <div className="restaurant-img"><img src= {`https://source.unsplash.com/random/400x400/?restaurant/${restaurant.id}`}  alt="restaurant-icon"/></div>
                 <div className="restaurant-votes" value={restaurant.vote.length}>{restaurant.vote.length}</div>
                 <div className="restaurant-chart">

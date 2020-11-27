@@ -16,7 +16,7 @@
   align-content: center;
 } 
 
-.restaurant-name { grid-area: restaurant-name; padding-right: 30px; }
+.restaurant-name { grid-area: restaurant-name; padding-left: 20px; padding-bottom:10px;}
 
 .restaurant-img { grid-area: restaurant-img;   }
 

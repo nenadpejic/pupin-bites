@@ -12,6 +12,11 @@ import { getAllRestaurants, createPoll } from '../../services/services.js'
 import { useHistory } from 'react-router-dom'
 // context
 import { AuthContext } from "../../contexts/AuthContext";
+// Icons 
+import { MdDelete } from 'react-icons/md'
+
+
+
 
 const PollCreate = () => {
     const auth = useContext(AuthContext);
@@ -161,7 +166,7 @@ const PollCreate = () => {
                         <tbody>
                         {selected.map((restaurant) => ( 
                         <tr><td>{restaurant.name}</td>
-                        <td><button onClick={(e) => handleClickRemove(e)} id={restaurant.id}>X</button></td>
+                        <td><i onClick={(e) => handleClickRemove(e)} id={restaurant.id} className="material-icons"> delete</i></td>
                         </tr>
                         ))}
                         </tbody> 
