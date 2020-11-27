@@ -20,11 +20,11 @@ const NavBar = () => {
         <>
           <div className="logo"><Link to="/home"><img src="/img/icons/logo.png" alt="logo" /></Link></div>
           <div className="user dropdown">
-            <div className="userName">{user?.firstName + " " + user?.lastName}</div>
+            <div className="userName"><i className="material-icons">face</i> {user?.firstName + " " + user?.lastName}</div>
             <div className="dropdown-content">
-              <button className="settings"><Link to="/settings">Settings</Link></button>
+              <button className="settings"><Link to="/settings"><i className="material-icons">settings</i> Settings</Link></button>
               <hr/>
-              <button className="logout" onClick={handleClick}>Logout </button>
+              <button className="logout" onClick={handleClick}><i className="material-icons">logout</i> Logout </button>
             </div>
           </div>
         </>
