@@ -1,3 +1,107 @@
+.single-order-create .meals{
+  margin-bottom: 70px;
+}
+.singleMeal {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "meal-img meal-name meal-name meal-price"
+      "meal-img meal-form meal-form meal-add";
+    
+    margin:10px auto;
+    max-width:600px;
+    border:1px solid rgb(209, 209, 209);
+    align-items: center;
+    padding:8px 8px 4px 8px ;
+  }
+  
+  .meal-img { grid-area: meal-img; }
+  
+  .meal-name { grid-area: meal-name; font-size:1.3rem}
+  
+  .meal-price { grid-area: meal-price;  font-size:1.5rem}
+  
+  .meal-form { grid-area: meal-form; }
+  
+  .meal-add>button{ 
+    grid-area: meal-add; 
+    padding:15px;
+    border: 2px solid rgb(90, 172, 69);
+    border-radius: 5px;  
+  }
+  .meal-add>button:hover{
+    cursor: pointer;
+    background-color: rgba(90, 172, 69, 0.514);
+    color:white;
+    font-weight: bold;
+  }
+
+  .singleMeal>.meal-img>img{width:170px;  }
+  .singleMeal:hover{background-color: rgb(243, 243, 243);}
+  .singleMeal:hover  #single-order-quantity{
+    background-color: rgb(243, 243, 243);
+  }
+  #single-order-quantity{
+    font-size: 1.2em;
+    display: block;
+    float:right;
+
+  }
+  #single-order-note{ 
+    display: block;
+    float:left;
+    margin-left:30px;
+  } 
+
+
+/**************** ORDERED MEAL **********************/
+
+
+  .ordered-meal {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows:auto auto auto; 
+    grid-template-areas:
+      "ordered-name ordered-name ordered-name ordered-name ordered-delete"
+      "ordered-p ordered-p ordered-q ordered-q ordered-delete"
+      "ordered-note ordered-note ordered-note ordered-note ordered-delete";
+    width:400px;   
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin:10px auto;
+    border-bottom: 1px solid rgb(209, 209, 209);
+  }  
+  .ordered-meal:hover{
+     background-color: rgb(243, 243, 243); 
+  }
+
+  .ordered-meal>*{
+    padding:5px;
+  }
+  .ordered-name { grid-area: ordered-name; font-weight: bold;  }
+  .ordered-p { grid-area: ordered-p; text-align:end}
+  .ordered-q { grid-area: ordered-q;  text-align:start}
+  .ordered-note { grid-area: ordered-note; }
+  .ordered-delete { grid-area: ordered-delete;}
+
+  .ordered-note>i{
+    color:rgb(187, 187, 187)
+  }
+
+  .ordered-delete>button{
+    padding:7px;
+    border:1px solid rgba(255, 0, 0, 0.589);
+    cursor: pointer;
+  }
+  .ordered-delete>button:hover{ 
+    background-color:  rgba(255, 0, 0, 0.589);
+    color:white;
+  }
+ 
+  /*
 .meal{
     display: flex;
     flex-wrap: wrap;
@@ -93,5 +197,5 @@ p{
     font-size: 0.8em;
 }
 
-
+*/
 

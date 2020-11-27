@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createRestaurant, deleteRestaurant } from "../../services/services";
-
-import { paginate } from "../../utilities/utilities";
+//import { paginate } from "../../utilities/utilities";
+import "./settings-style.css";
 
 export const Restaurants = ({ restaurants, submit, setSubmit }) => {
   const [restaurantInput, setRestaurantInput] = useState({
@@ -71,14 +71,15 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
   };
 
   return (
+    
     <div className="">
       <div className='login-box'>
       <h2>Manage Restaurants</h2>
-      <form onSubmit={newRestaurant}>
-        
+      <form onSubmit={newRestaurant}>        
         <div className="user-box">
-          <input   type="text" onChange={handleRestaurantInput} value={restaurantInput.name} name="name" className="restaurantInput" placeholder="Enter Restaurant Name"/>
+          <input type="text" onChange={handleRestaurantInput} value={restaurantInput.name} name="name" className="restaurantInput" placeholder="Enter Restaurant Name"/>
         </div>
+
         <div className='user-box'>
           <input type="text" onChange={handleRestaurantInput} value={restaurantInput.address} placeholder="Enter Restaurant Address" name="address" className="restaurantInput"/>
         </div>
@@ -86,10 +87,6 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
           type="submit"
           value="Add Restaurant"
           className="restaurant-btn"> 
-          <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
         Create Restaurant</button>
       </form>
       </div>
@@ -104,7 +101,10 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
             className="restaurantInput"
           />
         </form>
-        {filterInput.length === 0 &&
+       
+
+<hr/>
+        {/* {filterInput.length === 0 &&
         paginate(restaurants)[page] !== undefined ? (
           paginate(restaurants)[page].map((el) => (
             <div key={el.id} className="single-restaurant">
@@ -139,12 +139,14 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
           </div>
         )}
       </div>
+
       <div>
         {filterInput.length === 0 &&
           paginate(restaurants)[page] !== undefined &&
           paginate(restaurants).length > 1 && (
             <div className="pagination-buttons">
               {/* prev */}
+              {/*
               {paginate(restaurants).map((_, idx) => {
                 return (
                   <button
@@ -160,7 +162,9 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
               })}
             </div>
           )}
-      </div>
+      </div> */}
     </div>
+    </div>
+  
   );
 };

@@ -11,7 +11,6 @@ import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import { CSVLink } from "react-csv";
 import "./singleOrderView.css"
-
 export const SingleOrderView = () => {
   
   const [orderedItems, setOrderedItems] = useState(undefined);
@@ -90,18 +89,17 @@ export const SingleOrderView = () => {
           setData(prev => {return [...prev, {
             Consumer: order.consumer, 
             Meals: 
-              order.payloads.map((el) => (
+            '*' + order.payloads.map((el) => (
                       meals
-                      .filter((meal) => el.mealId === meal.id)[0].name)),
+                      .filter((meal) => el.mealId === meal.id)[0].name)).toString().replace(/,/g, '\n*'),
             Note: 
-              order.payloads.map((el) => (el.note)),
+            '*' + order.payloads.map((el) => (el.note)).toString().replace(/,/g, '\n*'),
             Quantity: 
-              order.payloads.map((el) => (el.quantity)),
+              '*' + order.payloads.map((el) => (el.quantity)).toString().replace(/,/g, '\n*'),
             Price: 
               order.payloads.map((el) => (
                 meals
-                .filter((meal) => el.mealId === meal.id)[0].price))
-                .reduce((acc,cur) => acc+cur,0) + " USD"
+                .filter((meal) => el.mealId === meal.id)[0].price*el.quantity)).toString().replace(/,/g, '$\n') + '$'
           }]})))
         }
   }, [orderedItems, meals]);
@@ -166,7 +164,7 @@ export const SingleOrderView = () => {
             ))}
             <CSVLink 
             onClick={handleOrderFinish}
-            filename={orderInfo.label + " "  + slug + ".csv"}
+            filename={orderInfo.label + " "  + orderInfo.created + ".csv"}
             data={data}  
             >Finish Order and Export to Excel</CSVLink>
         </div>
