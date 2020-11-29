@@ -1,6 +1,6 @@
 # Pupin Bites
 
-https://pupin-bites.netlify.app/home
+https://pupin-bites.netlify.app
 
 ## Technologies:
 

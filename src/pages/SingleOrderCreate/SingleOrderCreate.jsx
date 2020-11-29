@@ -10,7 +10,7 @@ import {
 import { paginate } from "../../utilities/utilities";
 import { useHistory } from "react-router-dom";
 import Main from '../../components/Main';
-import "./SingleOrderCreate.css";
+import "./singleOrderCreate.css";
 import RestaurantItem from '../../components/RestaurantItem';
 import { map, uniqBy } from 'lodash';
 export const SingleOrderCreate = () => {

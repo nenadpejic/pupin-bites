@@ -14,3 +14,7 @@
 #about img {
   width: 100px;
 }
+
+#about ul {
+  list-style: none;
+}
