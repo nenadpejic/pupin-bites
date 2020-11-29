@@ -6,8 +6,8 @@ export const Register = ()=> {
     const [newUser,setNewUser] = useState({
         email: "",
         password: "",
-        firstName:"",
-        lastName:""
+        firstName: "", // dodati input polje
+        lastName: "" // dodati input polje
       })
     
       const handleUserInput = (e) => {

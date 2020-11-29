@@ -1,0 +1,180 @@
+*{
+    padding:0;
+    margin:0;
+    color:#323232;
+    font-family: arial;
+}
+.welcome{
+    padding-bottom: 80px;
+}
+.wrapper>.navBar{
+    z-index: 2;
+}
+
+.welcome .welcomeButton{ 
+    z-index:0; 
+    position: relative;
+    margin-top: 0;
+    top:300px;
+    width:350px;
+    border-radius: 10px;
+    border:0;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.welcome>.section1>.text>h1{
+    font-family: Gorditas; 
+    font-size: 2.8em;
+    margin-bottom: 1em;
+    text-align: center;
+}
+.welcome>.section1>.text>p{
+    color:grey;
+    font-stretch:ultra-expanded;
+    line-height:1.5em;
+    letter-spacing: 1px;
+}
+.welcome>.section1>img{
+    display:inline-block; 
+}   
+ 
+.welcome>.section1{
+    display: grid; 
+    grid-template-rows: 0.5fr 1.5fr;
+    grid-template-areas: 
+    "text"
+    "image";
+    align-content: center;
+    justify-content: center; 
+}
+
+.welcome>.section1>.image{
+    /**/
+    grid-area:image;
+    background-repeat:no-repeat;
+    background-position: center; 
+    margin:0 10px;
+}
+.welcome>.section1>.text{
+    grid-area:text; 
+    text-align: center;
+    margin:0 20px 10px;
+}
+.welcome>.section1>.text>h1{    
+    margin-top: 20px;   
+}
+.welcome>.section2>.gallery .text>p{
+    font-size: 0.8em;
+    line-height: 17px;
+}
+
+ /**/
+ 
+.welcome .gallery>div{
+    text-align: center;
+}
+.welcome>*>h2{
+    margin:100px 0 50px;
+}
+
+.welcome .gallery{
+    display: grid; 
+    grid-template-columns: auto ;  
+    justify-content: center; 
+    gap:30px;
+    color:grey;
+}
+.welcome .gallery>div>img{ 
+    height:auto;
+    text-align: center; 
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width:240px;
+    border-radius: 6px;
+}
+.welcome .gallery>div>.text{
+    width:240px;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    text-align: start;
+} 
+.welcome .gallery>div>.text>h4{
+    margin:5px 0;
+}
+
+
+
+
+@media screen and (min-width:600px){
+    .welcome>.section1{
+        display: grid;
+        grid-template-rows:1fr 2fr;  
+        grid-template-areas: 
+            "text"
+            "image"
+            ;    
+        height:calc(100vh - 60px);    
+    }
+    .welcome .welcomeButton{
+        position: static;
+        margin-top: 40px;
+        width:350px;
+        border-radius: 10px;
+        border:0;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .welcome>.section1>.image{
+        grid-area: image;  
+        background-repeat: no-repeat;
+		background-position: center;
+        background-size: cover;   
+    }
+    .welcome>.section1>.text{
+        grid-area: text;
+        margin-top:20px;
+        padding:20px;
+    } 
+    .welcome .gallery{
+        display: grid; 
+        grid-template-columns:   auto auto ;  
+        justify-content: center; 
+        gap:30px;
+    }
+}
+
+@media screen and (min-width:1000px){
+    .welcome>.section1{
+        display: grid;
+        grid-template-columns:1fr 1fr; 
+        grid-template-areas: 
+            "text image";   
+        background-color: rgb(247,247,247); 
+        height:calc(100vh - 50px);    
+    }
+    .welcome .welcomeButton{
+        position: static;
+        margin-top: 100px;
+        width:350px;
+        border-radius: 10px;
+        border:0;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .welcome>.section1>.image{
+        grid-area: image;  
+        background-repeat: no-repeat;
+		background-position: center;
+        background-size: cover;
+        height:calc(100vh - 50px);
+        margin:0;
+    }
+    .welcome>.section1>.text{
+        grid-area: text;
+        margin-top:50px;
+        padding:40px;
+    } 
+    .welcome .gallery{
+        display: grid; 
+        grid-template-columns: auto auto auto auto ;  
+        justify-content: center; 
+        gap:30px;
+    }
+}

@@ -1,0 +1,44 @@
+.restaurant {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto auto; 
+    gap: 0px 0px; 
+    grid-template-areas:
+      "icon name"
+      "icon address";    
+    width:400px;
+    max-width:500px;
+    height:80px;
+    margin:10px auto; 
+    border:1px solid lightgray;
+    text-align: start;
+  }
+  
+  .restaurant>.icon{
+    grid-area: icon;  
+    margin:auto;   
+  }
+  .restaurant>.icon>img{
+    line-height: 0px;
+    width:100px;
+    height:80px;
+  } 
+  .name{
+    grid-area: name;
+    padding-top: 0.8em;
+    padding-left: 10px;   
+    overflow: hidden;
+  } 
+  .address{
+    grid-area: address;
+    padding-top: 0.6em; 
+    overflow: hidden;  
+    padding-left: 10px;
+  }
+  .address>i{
+    font-size: 1em;
+  }
+  
+  .restaurant:hover{
+    background-color: rgb(240, 240, 240);
+  }

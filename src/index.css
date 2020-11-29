@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&family=Gorditas&display=swap');
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
+    url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
+    url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,8 +18,135 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+code{font-family: 'Gorditas', cursive;}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+/*********** HEADING **************/
+h2.page-title{
+  margin:20px auto 20px auto;
+  font-size: 2em;
+}
+
+
+/************ BUTTONS ***********/
+
+button, input[type="submit"]{
+  border:0px;
+  text-decoration: none;
+  background-color: transparent;
+  padding:0px;
+  margin: 0px;
+  outline: none;
+}
+button.bigButton, input[type="submit"]{
+	display:block;
+	width:200px;
+	height:40px;
+	background-color:rgb(90,172,68);
+	border:1px solid grey;
+	margin:auto;
+	margin-top:30px;
+	margin-bottom:30px;
+	color:white;
+	font-size:22px;
+	cursor:pointer;
+}
+button.bigButton:hover, input[type="submit"]:hover{
+  background-color:rgb(86,188,64); 
+}
+
+/********** LINKS *************/
+button.smallLink{
+  color:blue;
+  
+}
+button.smallLink:hover{
+  text-decoration: underline;
+}
+
+
+/***********************************/
+
+
+
+/************* TABLE *****************/
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+/*****************/
+
+
+/******** PAGINATINO **********/
+.pagination{
+  width:400px;
+  height:auto;
+  margin:auto; 
+}
+.singleOrderCreate .pagination button{
+  padding:10px;
+  border:1px solid transparent;
+  border-radius: 3px;
+}
+.singleOrderCreate .pagination button:hover{
+ border: 1px solid rgb(202, 202, 202);
+ cursor:pointer;
+ background-color: rgb(240, 240, 240);
+}
+/********************************/
+
+
+/************* INPUT *************/
+input[type="text"]{
+  width:100px;
+  height:30px;
+  outline:none;  
+  padding-left:10px;
+}
+input[type="text"]:hover{ 
+  background-color: rgb(245, 245, 245);
+ }
+
+/*Icons*/
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }

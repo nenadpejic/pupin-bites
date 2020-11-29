@@ -1,0 +1,219 @@
+.single-order-create .meals{
+  margin-bottom: 70px;
+}
+.singleMeal {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "meal-img meal-name meal-name meal-price"
+      "meal-img meal-form meal-form meal-add";
+    
+    margin:10px auto;
+    max-width:600px;
+    border:1px solid rgb(209, 209, 209);
+    align-items: center;
+    padding:8px 8px 4px 8px ;
+  }
+  
+  .meal-img { grid-area: meal-img; }
+  
+  .meal-name { grid-area: meal-name; font-size:1.3rem}
+  
+  .meal-price { grid-area: meal-price;  font-size:1.5rem}
+  
+  .meal-form { grid-area: meal-form; }
+  
+  .meal-add>i{ 
+    grid-area: meal-add; 
+    font-size: 2rem; 
+  }
+  .meal-add>i:hover{
+    cursor: pointer;
+     color: rgb(40, 202, 0);
+     
+    font-weight: bold;
+  }
+
+  .singleMeal>.meal-img>img{width:170px;  }
+  .singleMeal:hover{background-color: rgb(243, 243, 243);}
+  .singleMeal:hover  #single-order-quantity{
+    background-color: rgb(243, 243, 243);
+  }
+  #single-order-quantity{
+    font-size: 1.2em;
+    display: block;
+    float:right;
+
+  }
+  #single-order-note{ 
+    display: block;
+    float:left;
+    margin-left:20px;
+  } 
+
+
+/**************** ORDERED MEAL **********************/
+
+
+  .ordered-meal {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows:auto auto auto; 
+    grid-template-areas:
+      "ordered-name ordered-name ordered-name ordered-name ordered-delete"
+      "ordered-p ordered-p ordered-q ordered-q ordered-delete"
+      "ordered-note ordered-note ordered-note ordered-note ordered-delete";
+    width:400px;   
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin:10px auto;
+    border-bottom: 1px solid rgb(209, 209, 209);
+  }  
+  .ordered-meal:hover{
+     background-color: rgb(243, 243, 243); 
+  }
+
+  .ordered-meal>*{
+    padding:5px;
+  }
+  .ordered-name { grid-area: ordered-name; font-weight: bold;  }
+  .ordered-p { grid-area: ordered-p; text-align:end}
+  .ordered-q { grid-area: ordered-q;  text-align:start}
+  .ordered-note { grid-area: ordered-note; }
+  .ordered-delete { grid-area: ordered-delete;}
+
+  .ordered-note>i{
+    color:rgb(187, 187, 187)
+  }
+
+  .ordered-delete>button{
+    padding:7px;
+    border:1px solid rgba(255, 0, 0, 0.589);
+    cursor: pointer;
+  }
+  .ordered-delete>button:hover{ 
+    background-color:  rgba(255, 0, 0, 0.589);
+    color:white;
+  } 
+  .singleMeal form input[type="textBox"]{
+    width: 150px; 
+}
+
+  /*
+.meal{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 10px;
+}
+.single-meal{
+    width: 200px;
+    margin: 15px auto;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+.single-meal>form>input[type="textBox"]{
+    width: 150px;
+    margin: 5px auto;
+}
+.single-meal>button{
+    cursor: pointer;
+    background-color: rgb(76,175,80); 
+    color: #fff;
+    padding: 5px;
+}
+.single-meal>button:hover{
+    background-color:rgb(86,188,64);
+}
+
+.singleMeal{
+    height: 200px;
+    width: 200px;
+}
+#single-order-create{
+    width: 60%;
+    margin: 0 auto;
+    background-color: #fff;
+}
+#single-order-create>div>button{
+    cursor:pointer;
+    background-color: rgb(76,175,80);
+    color: #fff; 
+}
+#single-order-create>div>button{
+    font-size: 1em;
+    padding: 5px;
+}
+#single-order-create>div>button:hover{
+    background-color:rgb(86,188,64);
+}
+
+
+div>.orderedItems{
+    color: rgb(20, 5, 5);
+    background-color: #f1f1f1;
+    width: 60%;
+    margin: 15px auto;
+    padding: 15px;
+    border: 1px solid grey;
+    clear: both;
+}
+.orderedItems>div>button{
+    font-size: 1em;
+    background-color: rgb(204, 204, 204); 
+    border:1px solid  rgb(204, 204, 204);
+    color: #fff;
+}*
+.orderedItems>div>button:hover{
+    cursor: pointer;
+    background-color:rgb(86,188,64); 
+}
+*/
+/*
+.make-order{
+    
+    margin: 5px;
+    padding: 5px;
+}
+
+.price{
+    border: 0.6px solid grey;
+    background-color: #f1f1f1;
+    width: 200px;
+    margin: 0 auto;
+}
+
+label{
+    margin-bottom: 5px;
+  
+}
+
+p{
+    font-size: 0.8em;
+}
+
+*/
+.make-order{
+  padding: 2rem;
+}
+.bigButton-label{
+  display:block;
+	width:200px;
+	height:40px;
+	background-color:rgb(90,172,68);
+	border:1px solid grey;
+	margin:auto;
+	
+	margin-bottom:30px;
+	color:white;
+	font-size:22px;
+	cursor:pointer;
+}
+.bigButton-label:hover{
+  background-color:rgb(86,188,64); 
+}
+.label{
+  font-size: 0.8rem;
+}

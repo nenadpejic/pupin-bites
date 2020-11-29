@@ -1,0 +1,159 @@
+body {
+  text-align: center;
+}
+h1 {
+  padding: 30px 0;
+} 
+input[type="text"] {
+  width: 200px;
+  margin-bottom: 10px;
+}
+input[type="number"] {
+  margin-bottom: 0;
+  display: inline-block;
+  width: 35px;
+  padding: 5px;
+  font-size: 14px;
+  outline: none;
+  border: 0px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+div.pollDuration {
+  display: grid;
+  width: 220px;
+  margin: 0 auto 10px;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "title title"
+    "hours minutes";
+  border: 0.6px solid grey;
+  background-color: white;
+  padding-top: 10px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+} 
+div.title {
+  grid-area: title;
+  width: 100px;
+  padding-bottom: 5px;
+  color: rgb(125, 125, 125);
+  font-weight: 200;
+  font-size: 0.9em;
+}
+div.hours {
+  grid-area: hours;
+  width: 50px;
+}
+div.minutes {
+  grid-area: minutes;
+  width: 50px;
+}
+.info {
+  padding: 10px 0;
+}
+
+/*LISTA*/
+
+.restaurant-list {
+  width: 470px;
+  margin: auto;
+  margin-bottom: 40px;
+  max-height: 400px;
+  min-height: 100px;
+  overflow: auto;
+}
+.restaurant-list > .item {
+  overflow: hidden;
+  height: 100px;
+  background-color: white; 
+}
+.restaurant-list > .item > div:hover {
+  cursor: default;
+}
+.restaurant-list button {
+  background-color: rgb(230, 230, 230);
+  width: 40px;
+  display: block;
+  margin-left: 0px;
+  outline: none;
+  height: 82px;
+  margin: 10px auto;
+  border: 1px solid rgb(226, 226, 226);
+  border-left: 0px;
+  border-radius: 0px 10px 10px 0px;
+}
+.restaurant-list button {
+  font-size: 2em;
+  color: white;
+}
+.restaurant-list button:hover {
+  background-color: rgb(136, 211, 133);
+}
+.restaurant-list > .item:hover * {
+  border-color: grey;
+}
+.restaurant-list button:hover {
+  cursor: pointer;
+}
+.restaurant-list > .item > * {
+  float: left;
+}
+
+.selected-item {
+  border: 1px solid grey;
+  border-bottom: none;
+  display: grid;
+  width: 470px;
+  padding: 5px;
+  margin: auto;
+  background-color: white;
+  grid-template-columns: 7fr 1fr;
+  grid-template-areas: "restaurant-name delete";
+}
+
+.selected-list > .selected-item:last-child {
+  border-bottom: 1px solid grey;
+}
+
+.restaurant-name {
+  grid-area: restaurant-name;
+  text-align: start;
+}
+.delete {
+  grid-area: delete;
+}
+.delete > button {
+  font-weight: bold;
+  font-weight: bolder;
+  font-size: 1.2em;
+  color: red;
+}
+.delete > button:hover {
+  cursor: pointer;
+}
+
+.selected-list>table{
+  width:470px;
+  margin:auto;
+}
+.selected-list>table>thead th{
+  text-align: center;
+}
+.selected-list>table i{
+  color:rgb(94, 94, 94);
+}
+.selected-list>table i:hover{  
+  cursor: pointer;
+  color:red;
+}
+
+@media screen and (max-width: 600px) {
+  .restaurant-list button {
+    margin-left: -6px;
+  }
+}

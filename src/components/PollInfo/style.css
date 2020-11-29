@@ -1,0 +1,12 @@
+table.pollInfo,tr,td,th{
+    padding:6px;
+}
+table.pollInfo,tr,th{
+    border:1px solid grey;
+    border-collapse: collapse;
+}
+table.pollInfo{ 
+    margin:auto;
+    text-align: center; 
+    width:350px;
+}

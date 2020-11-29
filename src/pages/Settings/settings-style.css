@@ -1,0 +1,73 @@
+.pagination-buttons{
+    padding:10px;
+    border:1px solid transparent;
+    border-radius: 3px;
+}
+.pagination{
+  width:400px;
+  height:auto;
+  margin:auto; 
+}
+
+.page-btn-selected{
+    padding:5px;
+    border:1px solid transparent;
+    border-radius: 3px;
+    background-color: lavender;
+}
+.pagination-buttons:hover,
+.page-btn-selected:hover{
+    cursor: pointer;
+}
+.pagination-buttons:hover {
+    border: 1px solid rgb(202, 202, 202);
+ cursor:pointer;
+ background-color: rgb(240, 240, 240);
+}
+.deleteButton{
+    padding:7px;
+    border:1px solid rgba(255, 0, 0, 0.589);
+    width: 80px;
+    cursor: pointer;
+    margin:  0.5rem 0;
+}
+.deleteButton:hover{
+    background-color:  rgba(255, 0, 0, 0.589);
+    color:white;
+    
+}
+.manageRestaurants{
+    padding: 2rem;
+}
+.restaurantInfo{
+    padding: 0.3rem;
+    margin-top: 5px;
+}
+.restaurantTd{
+    cursor: pointer;
+}
+.restaurantSearch{
+    width: 275px !important;
+    height: 30px;
+}
+
+.mealName{
+    width: 175px !important;
+}
+.mealPrice{
+    width: 75px !important;
+    height: 35px !important;
+    border:1px solid rgb(44, 46, 42)  !important ;
+    margin: 10px;
+}
+.selectedRestaraunt{
+    padding: 1.5rem;
+    font-size: 2rem;
+}
+
+.available{
+    color: rgb(124, 211, 37);
+}
+.unavailable{
+    color: rgb(226, 6, 6);
+}

@@ -1,0 +1,35 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: rgb(160, 160, 160);
+}
+.loader {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  margin-top: 15%;
+}
+.container {
+  box-sizing: border-box;
+  width: 60%;
+  background-color: white;
+  margin: auto;
+  padding-top: 35px;
+  padding-bottom: 50px;
+  min-height: 100vh;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
