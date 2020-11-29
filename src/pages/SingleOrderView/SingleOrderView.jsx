@@ -110,7 +110,10 @@ export const SingleOrderView = () => {
       <Main>
         <div className="order-div">
           <div>
+            <div className='order-title'>
             <h3>Food you ordered:</h3>
+            <p>(Food ordered by all can be viewed only by Order Creator)</p>
+            </div>
             {yourOrderItems && yourOrderItems.length > 0 ? (
               yourOrderItems.map((order) => (
                 <div className="order-view" key={order.id}>
@@ -138,7 +141,7 @@ export const SingleOrderView = () => {
               )}
           </div>
 
-          {storage && (
+          {storage &&storage ===slug && (
             <div className="order-view-all">
               <h3>Food ordered by all:</h3>
               {orderedItems &&
