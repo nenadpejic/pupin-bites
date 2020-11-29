@@ -97,7 +97,8 @@ export const SingleOrderCreate = () => {
 
   const handleOrderInput = (e) => {
     if (e.target.value.trim() !== '') {
-      setOrderInput(e.target.value)}
+      setOrderInput(e.target.value)
+    }
     else {
       alert("Please add order name!");
     }
@@ -113,19 +114,20 @@ export const SingleOrderCreate = () => {
   const submitOrderCreateHome = (e) => {
     e.preventDefault();
     if (orderInput.trim() !== '') {
-    const data = { restaurantId: selectedRestaurantId, label: orderInput };
-    createOrder(data)
-      .then((res) => {
-        console.log(res.data.id);
-        localStorage.setItem("orderId", res.data.id);
-        // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
-        history.push(`/single-order-add/${res.data.id}`);
+      const data = { restaurantId: selectedRestaurantId, label: orderInput };
+      createOrder(data)
+        .then((res) => {
+          console.log(res.data.id);
+          localStorage.setItem("orderId", res.data.id);
+          // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
+          history.push(`/single-order-add/${res.data.id}`);
 
-    })
-    .catch((err) => {
-      console.log(err)
-      history.push(`/single-order-create`);
-    })}
+        })
+        .catch((err) => {
+          console.log(err)
+          history.push(`/single-order-create`);
+        })
+    }
     else {
       alert("Please add order name!");
       return;
@@ -135,12 +137,13 @@ export const SingleOrderCreate = () => {
   const submitOrderCreate = (e) => {
     e.preventDefault();
     if (orderInput.trim() !== '') {
-    const data = { restaurantId: restaurantId, label: orderInput };
-    createOrder(data).then((res) => {
-      console.log(res);
-      localStorage.setItem("orderId", res.data.id);
-      history.push(`/single-order-add/${res.data.id}`);
-    })}
+      const data = { restaurantId: restaurantId, label: orderInput };
+      createOrder(data).then((res) => {
+        console.log(res);
+        localStorage.setItem("orderId", res.data.id);
+        history.push(`/single-order-add/${res.data.id}`);
+      })
+    }
     else {
       alert("Please add order name!");
       return;
