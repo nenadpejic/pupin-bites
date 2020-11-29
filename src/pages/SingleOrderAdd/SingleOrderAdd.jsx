@@ -83,9 +83,11 @@ const SingleOrderAdd = () => {
      
         <h2 className="page-title">Create Order</h2>
       <div className="meals">
-        {meals && meals.map((el) => (
+        {meals && meals.length>0 ? meals.map((el) => (
             <SingleMeal meal={el} setPayload={setPayload} key={el.id} setOrderedMeal={setOrderedMeal} setTotal={setTotal}/>
-          ))}
+          ))
+        : <div><h3>We are sorry , but Restaurant you have picked , haven't add meals to this app yet.</h3>
+        <h4>Please, go to your Order , close it , and pick another restaurant. </h4></div> }
       </div>
 
       <hr/>
