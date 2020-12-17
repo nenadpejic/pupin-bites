@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import {
   getMeals,
@@ -21,7 +21,8 @@ export const SingleOrderView = () => {
   const [restaurantId, setRestaurantId] = useState("");
   const [meals, setMeals] = useState(undefined);
   const { slug } = useParams();
-  const storage = localStorage.getItem("orderId");
+  const [storage,setStorage] =useState(JSON.parse(localStorage.getItem("orderId")));
+  const [isCreator,setIsCreator] = useState(false)
   const history = useHistory();
 
   useEffect(() => {
@@ -31,16 +32,17 @@ export const SingleOrderView = () => {
     });
 
     getOneOrder(slug).then((res) => {
-      console.log(res);
+      
       setOrderInfo(res.data);
       setRestaurantId(res.data.restaurantId);
     });
 
     getOrderItems(slug).then((res) => {
-      console.log(res);
+      
       setOrderedItems(res.data);
     });
 
+    storage && storage.some(el=>el===slug) && setIsCreator(true)
   }, [slug]);
 
   useEffect(() => {
@@ -87,7 +89,7 @@ export const SingleOrderView = () => {
     if (orderedItems && meals) {
 
       orderedItems.forEach(order => {
-        console.log(order)
+        
         order.payloads.forEach(payload => {
           setData(prev => {
             return [...prev, {
@@ -111,8 +113,8 @@ export const SingleOrderView = () => {
         <div className="order-div">
           <div>
             <div className='order-title'>
-            <h3>Food you ordered:</h3>
             <p>(Food ordered by all can be viewed only by Order Creator)</p>
+            <h3>Food you ordered:</h3>
             </div>
             {yourOrderItems && yourOrderItems.length > 0 ? (
               yourOrderItems.map((order) => (
@@ -141,7 +143,7 @@ export const SingleOrderView = () => {
               )}
           </div>
 
-          {storage &&storage ===slug && (
+          {isCreator && (
             <div className="order-view-all">
               <h3>Food ordered by all:</h3>
               {orderedItems &&
@@ -165,7 +167,7 @@ export const SingleOrderView = () => {
                   </div>
                 ))}
 
-              {storage && storage ===slug && <CSVLink
+              {isCreator &&  <CSVLink
                 className="csv-button" onClick={handleOrderFinish}
                 filename={orderInfo.label + " " + slug + ".csv"}
 

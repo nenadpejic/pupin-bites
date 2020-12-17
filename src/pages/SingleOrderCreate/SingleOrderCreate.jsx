@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   createOrder,
   getCheckData,
@@ -25,32 +25,32 @@ export const SingleOrderCreate = () => {
   const [page, setPage] = useState(0);
   const [filterInput, setFilterInput] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  // eslint-disable-next-line
-  const [pollId, setPollId] =
-    useState(localStorage.getItem("orderPollId")
+  
+  const orderId =
+    useRef(localStorage.getItem("orderId")
       ?
-      localStorage.getItem("orderPollId")
+      JSON.parse(localStorage.getItem("orderId"))
       :
-      '');
-  // eslint-disable-next-line
+      []);
+  
   const [restaurantId, setRestaurantId] =
     useState(localStorage.getItem("orderRestaurantId")
       ?
       localStorage.getItem("orderRestaurantId")
       :
-      undefined);
+      '');
 
   useEffect(() => {
     restaurantId && getOneRestaurant(restaurantId).then((res) => {
-      console.log(res);
+      
       setRestaurantInfo(res.data);
     });
     selectedRestaurantId && getOneRestaurant(selectedRestaurantId).then((res) => {
-      console.log(res);
+      
       setRestaurantInfo(res.data);
     });
     getProfile().then((res) => {
-      console.log(res.data);
+      
       setProfile(res.data);
     });
     getAllRestaurants().then((res) => {
@@ -117,9 +117,10 @@ export const SingleOrderCreate = () => {
       const data = { restaurantId: selectedRestaurantId, label: orderInput };
       createOrder(data)
         .then((res) => {
-          console.log(res.data.id);
-          localStorage.setItem("orderId", res.data.id);
-          // setTimeout(function(){ history.push(`/single-order-create/${res.data.id}`); }, 2000);
+          
+          orderId.current.push(res.data.id)
+          
+          localStorage.setItem("orderId", JSON.stringify(orderId.current));
           history.push(`/single-order-add/${res.data.id}`);
 
         })
@@ -139,8 +140,8 @@ export const SingleOrderCreate = () => {
     if (orderInput.trim() !== '') {
       const data = { restaurantId: restaurantId, label: orderInput };
       createOrder(data).then((res) => {
-        console.log(res);
-        localStorage.setItem("orderId", res.data.id);
+        orderId.current.push(res.data.id)
+        localStorage.setItem("orderId", JSON.stringify(orderId.current));
         history.push(`/single-order-add/${res.data.id}`);
       })
     }
