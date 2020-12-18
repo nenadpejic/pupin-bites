@@ -21,7 +21,7 @@ export const SingleOrderView = () => {
   const [restaurantId, setRestaurantId] = useState("");
   const [meals, setMeals] = useState(undefined);
   const { slug } = useParams();
-  const [storage,setStorage] =useState(localStorage.getItem("orderId")[0]==='[' ? JSON.parse(localStorage.getItem("orderId")):[]);
+  const [storage,setStorage] =useState(localStorage.getItem("orderId")!==null && localStorage.getItem("orderId")[0]==='[' ? JSON.parse(localStorage.getItem("orderId")):[]);
   const [isCreator,setIsCreator] = useState(false)
   const history = useHistory();
 

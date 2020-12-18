@@ -27,7 +27,7 @@ export const SingleOrderCreate = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   
   const orderId =
-    useRef(localStorage.getItem("orderId")&&localStorage.getItem("orderId")[0]==='['
+    useRef(localStorage.getItem("orderId")!==null && localStorage.getItem("orderId")[0]==='['
       ?
       JSON.parse(localStorage.getItem("orderId"))
       :
@@ -80,7 +80,7 @@ export const SingleOrderCreate = () => {
 
       // });
       restaurantId ? setPollCreator(true) : setPollCreator(false)
-      console.log(localStorage.getItem("orderId")[0],orderId.current)
+      
   }, [profile]);
 
   useEffect(() => {
