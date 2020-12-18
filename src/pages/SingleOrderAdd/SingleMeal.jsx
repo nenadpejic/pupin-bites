@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 export const SingleMeal = ({meal,setPayload,setOrderedMeal,setTotal})=>{
 
     const [payloadItem,setPayloadItem] = useState({
-        quantity: 0,
+        quantity: 1,
         mealId: "",
         note: "",
       })
       const resetInput = () => {
         setPayloadItem({
-          quantity: 0,
+          quantity: 1,
           mealId: "",
           note: "",
         });
