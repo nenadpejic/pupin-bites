@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 import Main from '../../components/Main';
 import "./singleOrderCreate.css";
 import RestaurantItem from '../../components/RestaurantItem';
-import { map, uniqBy } from 'lodash';
+import { isArray, map, uniqBy } from 'lodash';
 export const SingleOrderCreate = () => {
   const history = useHistory();
   const [restaurantInfo, setRestaurantInfo] = useState("");
@@ -27,7 +27,7 @@ export const SingleOrderCreate = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   
   const orderId =
-    useRef(localStorage.getItem("orderId")
+    useRef(localStorage.getItem("orderId")&&localStorage.getItem("orderId")[0]==='['
       ?
       JSON.parse(localStorage.getItem("orderId"))
       :
@@ -80,7 +80,7 @@ export const SingleOrderCreate = () => {
 
       // });
       restaurantId ? setPollCreator(true) : setPollCreator(false)
-    // eslint-disable-next-line
+      console.log(localStorage.getItem("orderId")[0],orderId.current)
   }, [profile]);
 
   useEffect(() => {
