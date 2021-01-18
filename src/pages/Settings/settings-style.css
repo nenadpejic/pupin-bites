@@ -3,10 +3,10 @@
     border:1px solid transparent;
     border-radius: 3px;
 }
-.pagination{
-  width:400px;
-  height:auto;
-  margin:auto; 
+.pagination-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .page-btn-selected{
@@ -70,4 +70,16 @@
 }
 .unavailable{
     color: rgb(226, 6, 6);
+}
+.single-restaurant{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.singleMeal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

@@ -170,6 +170,7 @@ export const SingleOrderCreate = () => {
                 autoComplete="on"
                 placeholder="Add Order Name"
                 required="yes"
+                className='orderNameInput'
               /><br></br>
 
               <input type="submit" value='Create Your Order' />

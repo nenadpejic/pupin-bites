@@ -42,3 +42,24 @@
   .restaurant:hover{
     background-color: rgb(240, 240, 240);
   }
+
+  @media screen and (max-width: 600px){
+
+    .name{
+      grid-area: name;
+      padding-top: 1rem;
+      padding-left: 10px;   
+      overflow: hidden;
+      font-size: 0.7rem;
+    } 
+    .address{
+      grid-area: address;
+      padding-top: 0.1rem; 
+      overflow: hidden;  
+      padding-left: 10px;
+      font-size: 0.55rem;
+    }
+    .address>i{
+      font-size: 1em;
+    }
+  }

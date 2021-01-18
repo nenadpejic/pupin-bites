@@ -8,7 +8,7 @@
    
 }
 .order-view{
-    width: 220px;
+    width: 100%;
     margin: 5px auto;
 }
 .order-view>p{
@@ -19,7 +19,7 @@
     background-color: #f1f1f1;
 }
 .order-view-all{
-    width: 220px;
+    width: 100%;
     margin: 5px auto;
 }
 .order-view-all>div{
@@ -44,6 +44,8 @@ h3{
 .order-div>.order-view-all>.csv-button{
     cursor:pointer;
     background-color: rgb(76,175,80);
+    width: 80%;
+    height: 2rem;
     color: #fff; 
     font-size: 0.9em;
     font-weight: 500;
@@ -52,9 +54,19 @@ h3{
     margin: 15px auto;
     
 }
+.csv-txt{
+    color: #fff; 
+    font-size: 0.9em;
+    font-weight: 600;
+    text-decoration: none;
+}
 .order-div>.order-view-all>.csv-button:hover{
     background-color:rgb(86,188,64);
 }
 .order-title{
     margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 570px){
+
 }

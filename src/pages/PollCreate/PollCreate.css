@@ -60,16 +60,16 @@ div.minutes {
 /*LISTA*/
 
 .restaurant-list {
-  width: 470px;
+  width: 29rem;
   margin: auto;
-  margin-bottom: 40px;
-  max-height: 400px;
-  min-height: 100px;
+  margin-bottom: 2.5rem;
+  max-height: 25rem;
+  min-height: 6.25rem;
   overflow: auto;
 }
 .restaurant-list > .item {
   overflow: hidden;
-  height: 100px;
+  height: 6.25rem;
   background-color: white; 
 }
 .restaurant-list > .item > div:hover {
@@ -77,7 +77,7 @@ div.minutes {
 }
 .restaurant-list button {
   background-color: rgb(230, 230, 230);
-  width: 40px;
+  width: 2.5rem;
   display: block;
   margin-left: 0px;
   outline: none;
@@ -108,7 +108,7 @@ div.minutes {
   border: 1px solid grey;
   border-bottom: none;
   display: grid;
-  width: 470px;
+  width: 29rem;
   padding: 5px;
   margin: auto;
   background-color: white;
@@ -138,7 +138,7 @@ div.minutes {
 }
 
 .selected-list>table{
-  width:470px;
+  width:29rem;
   margin:auto;
 }
 .selected-list>table>thead th{
@@ -154,6 +154,106 @@ div.minutes {
 
 @media screen and (max-width: 600px) {
   .restaurant-list button {
-    margin-left: -6px;
+    margin-left: -6px; 
   }
+  .restaurant{
+    width: 16rem;
+    margin-left: 10px;
+  }
+  .restaurant-list {
+    font-size: 0.5rem;
+    width: 20rem;
+    margin: auto;
+    margin-bottom: 2rem;
+    max-height: 25rem;
+    min-height: 6.25rem;
+    overflow: hidden;
+  }
+  .restaurant-list > .item {
+    overflow: hidden;
+    height: 6.25rem;
+    background-color: white; 
+  }
+
+  .restaurant-list > .item > div:hover {
+    cursor: default;
+  }
+  .restaurant-list button {
+    background-color: rgb(230, 230, 230);
+    width: 2rem;
+    display: block;
+    margin-left: 0px;
+    outline: none;
+    height: 82px;
+    margin: 10px auto;
+    margin-right: 10px;
+    border: 1px solid rgb(226, 226, 226);
+    border-left: 0px;
+    border-radius: 0px 10px 10px 0px;
+  }
+  .restaurant-list button {
+    font-size: 2em;
+    color: white;
+  }
+  .restaurant-list button:hover {
+    background-color: rgb(136, 211, 133);
+  }
+  .restaurant-list > .item:hover * {
+    border-color: grey;
+  }
+  .restaurant-list button:hover {
+    cursor: pointer;
+  }
+  .restaurant-list > .item > * {
+    float: left;
+  }
+  
+  .selected-item {
+    border: 1px solid grey;
+    border-bottom: none;
+    display: grid;
+    width: 29rem;
+    padding: 5px;
+    margin: auto;
+    background-color: white;
+    grid-template-columns: 7fr 1fr;
+    grid-template-areas: "restaurant-name delete";
+  }
+  
+  .selected-list > .selected-item:last-child {
+    border-bottom: 1px solid grey;
+  }
+  
+  .restaurant-name {
+    grid-area: restaurant-name;
+    text-align: start;
+  }
+  .delete {
+    grid-area: delete;
+  }
+  .delete > button {
+    font-weight: bold;
+    font-weight: bolder;
+    font-size: 2.5rem;
+    color: red;
+  }
+  .delete > button:hover {
+    cursor: pointer;
+  }
+  
+  .selected-list>table{
+    width:17rem;
+    margin:auto;
+  }
+  .selected-list>table>thead th{
+    text-align: center;
+  }
+  .selected-list>table i{
+    color:rgb(94, 94, 94);
+  }
+  .selected-list>table i:hover{  
+    cursor: pointer;
+    color:red;
+  }
+
 }

@@ -71,27 +71,42 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
   };
 
   return (
-    
     <div className="">
-      <div className='login-box'>
-        <div className='manageRestaurants'><h2>Manage Restaurants</h2></div>
-      
-      <form onSubmit={newRestaurant}>        
-        <div className="user-box">
-          <input type="text" onChange={handleRestaurantInput} value={restaurantInput.name} name="name" className="restaurantInput" required placeholder="Enter Restaurant Name"/>
+      <div className="login-box">
+        <div className="manageRestaurants">
+          <h2>Manage Restaurants</h2>
         </div>
 
-        <div className='user-box'>
-          <input type="text" onChange={handleRestaurantInput} value={restaurantInput.address} placeholder="Enter Restaurant Address" required name="address" className="restaurantInput"/>
-        </div>
-        <button
-          type="submit"
-          value="Add Restaurant"
-          className="bigButton"> 
-        Create Restaurant</button>
-      </form>
+        <form onSubmit={newRestaurant}>
+          <div className="user-box">
+            <input
+              type="text"
+              onChange={handleRestaurantInput}
+              value={restaurantInput.name}
+              name="name"
+              className="restaurantInput"
+              required
+              placeholder="Enter Restaurant Name"
+            />
+          </div>
+
+          <div className="user-box">
+            <input
+              type="text"
+              onChange={handleRestaurantInput}
+              value={restaurantInput.address}
+              placeholder="Enter Restaurant Address"
+              required
+              name="address"
+              className="restaurantInput"
+            />
+          </div>
+          <button type="submit" value="Add Restaurant" className="bigButton">
+            Create Restaurant
+          </button>
+        </form>
       </div>
-      <div className='login-box'>
+      <div className="login-box">
         <form>
           <input
             type="text"
@@ -102,39 +117,46 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
             className="restaurantInput"
           />
         </form>
-       
 
-<hr/>
+        <hr />
         {filterInput.length === 0 &&
         paginate(restaurants)[page] !== undefined ? (
           paginate(restaurants)[page].map((el) => (
-            <div key={el.id} className="single-restaurant  pagination">
-              
-              <div className='restaurantInfo'><p>{el.name}</p></div>
-              <div className='restaurantInfo'><p>{el.address}</p></div>
-              <button
-                onClick={() => restaurantDelete(el.id)}
-                className="deleteButton"
-              >
-                Delete
-              </button>
-              <hr />
-            </div>
-          ))
-        ) : (
-          <div className="pagination">
-            {filteredRestaurants.slice(0, 4).map((el,idx) => (
-              <div key={el.id} className="single-restaurant">
-                
-                <div className='restaurantInfo'><p>{el.name}</p></div>
-              <div className='restaurantInfo'><p>{el.address}</p></div>
+            <div key={el.id} className="  pagination">
+              <div className='single-restaurant'>
+                <div className="restaurantInfo">
+                  <p>{el.name}</p>
+                </div>
+                <div className="restaurantInfo">
+                  <p>{el.address}</p>
+                </div>
                 <button
                   onClick={() => restaurantDelete(el.id)}
                   className="deleteButton"
                 >
                   Delete
                 </button>
-                {idx!==3 &&<hr />}
+              </div>
+              <hr />
+            </div>
+          ))
+        ) : (
+          <div className="pagination">
+            {filteredRestaurants.slice(0, 4).map((el, idx) => (
+              <div key={el.id} className="single-restaurant">
+                <div className="restaurantInfo">
+                  <p>{el.name}</p>
+                </div>
+                <div className="restaurantInfo">
+                  <p>{el.address}</p>
+                </div>
+                <button
+                  onClick={() => restaurantDelete(el.id)}
+                  className="deleteButton"
+                >
+                  Delete
+                </button>
+                {idx !== 3 && <hr />}
               </div>
             ))}
           </div>
@@ -147,7 +169,7 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
           paginate(restaurants).length > 1 && (
             <div className="pagination">
               {/* prev */}
-              
+
               {paginate(restaurants).map((_, idx) => {
                 return (
                   <button
@@ -166,6 +188,5 @@ export const Restaurants = ({ restaurants, submit, setSubmit }) => {
       </div>
     </div>
     // </div>
-  
   );
 };

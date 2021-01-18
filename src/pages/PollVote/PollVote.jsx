@@ -60,13 +60,13 @@ const PollVote = () => {
     }
 
     return (
-        <Main>
+        <Main style={{overflow: 'hidden'}}>
             {createdVote[0] ? (createdVote[0].includes(slug) ? <Redirect to={`/poll-complete/${slug}`} /> : null) : null}
             <h1>Poll Vote</h1>
             <PollInfo poll={poll} />
             <div className="restaurantList">
                 {restaurants.map(restaurant =>
-                    <div key={restaurant.id}>
+                    <div key={restaurant.id} className='restaurantInfo'>
                         <label htmlFor={restaurant.id}>
                             <RestaurantItem restaurant={restaurant} />
                         </label>

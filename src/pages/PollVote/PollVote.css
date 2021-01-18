@@ -17,6 +17,7 @@ input[type="radio"]:checked + label > .restaurant {
   position: relative;
   top: -57px;
   left: 170px;
+  outline: none;
 }
 /*
 .restaurant{
@@ -26,3 +27,25 @@ input[type="radio"]:checked + label > .restaurant {
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 } 
 */
+
+@media screen and (max-width: 500px){
+  .restaurantList {
+    width: 330px;
+    margin: 5px;
+    overflow: hidden;
+  }
+  .restaurantInfo{
+    width: 250px;
+    padding: 0;
+  }
+  .radio {
+    position: relative;
+    top: -57px;
+    left: 170px;
+    outline: none;
+  }
+  .pollCompllete-restaurant{
+    overflow: hidden;
+  }
+  
+}

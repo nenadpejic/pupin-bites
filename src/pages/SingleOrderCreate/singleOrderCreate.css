@@ -1,1 +1,9 @@
- 
+ .singleOrderCreate{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+ }
+ .orderNameInput{
+     margin-top: 10px;
+ }

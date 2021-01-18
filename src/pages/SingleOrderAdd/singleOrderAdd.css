@@ -1,7 +1,8 @@
 .single-order-create .meals{
   margin-bottom: 70px;
 }
-.singleMeal {
+.singleMeal 
+{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -216,4 +217,27 @@ p{
 }
 .label{
   font-size: 0.8rem;
+}
+
+@media screen and (max-width: 570px){
+  .singleMeal{
+    display: flex;
+    flex-direction: column;
+  }
+ .meal-name {
+   margin-bottom: 20px;
+   margin-top: 10px;
+ }
+ .meal-price,
+ .meal-form{
+   margin-bottom: 10px;
+ }
+ .meal-img{
+   object-fit: cover;
+ }
+ .ordered-meal{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+ }
 }

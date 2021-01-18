@@ -10,3 +10,11 @@ table.pollInfo{
     text-align: center; 
     width:350px;
 }
+
+@media screen and (max-width: 400px){
+    table.pollInfo{ 
+        margin:auto;
+        text-align: center; 
+        width:300px;
+    }
+}
