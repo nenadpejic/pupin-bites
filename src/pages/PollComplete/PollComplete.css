@@ -79,3 +79,35 @@
   color: #fff;
   margin: 20px 0;
 }
+
+@media screen and (max-width: 600px){
+
+  .pollComplete > .pollComplete-restaurant {
+    display: grid;
+    grid-template-columns: 100px 30px 170px;
+    grid-template-rows: 0.8fr 3fr;
+    gap: 1px 1px;
+    grid-template-areas:
+      "restaurant-name restaurant-name    restaurant-name  "
+      "restaurant-img   restaurant-votes restaurant-chart  ";
+    width: 300px;
+    height: auto;
+    margin: 20px auto;
+    align-items: center;
+    align-content: center;
+  }
+
+  .tsd-wrapper {
+    text-align: center;
+    width:200px;
+    height: auto;
+    margin: 25px auto;
+    padding: 30px;
+    background-color: rgb(231, 230, 230);
+    box-shadow: 12px 12px 2px 1px rgba(50, 50, 66, 0.2);
+  }
+  .chart-bar {
+    height: 10px;
+    background-color: red;
+  }
+}

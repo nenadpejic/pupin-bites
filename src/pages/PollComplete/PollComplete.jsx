@@ -77,7 +77,7 @@ const PollInProgress = () => {
                         <div className="restaurant-votes" value={restaurant.vote.length}>{restaurant.vote.length}</div>
                         <div className="restaurant-chart">
                             <div className="chart-bar" style={{
-                                width: `${(Math.ceil(restaurant.vote.length / totalVotes * 300))}px`
+                                width: `${(Math.ceil(restaurant.vote.length / totalVotes * 100))}%`
                             }}></div>
                         </div>
                     </div>
